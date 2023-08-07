@@ -5,6 +5,7 @@ import ProductList from '../screens/ProductScreen/ProductList';
 import ProductItem from '../screens/ProductScreen/ProductItem';
 import { Appbar } from 'react-native-paper';
 import { DrawerActions } from '@react-navigation/native';
+import CategoryList from '../screens/CategoryListScreen/CategoryList';
 
 
 const Stack= createStackNavigator();
@@ -21,6 +22,7 @@ export default function ProductStackScreen({navigation}: any) {
 </View>
 
    <Stack.Navigator initialRouteName='ProductList'>
+    {/* <Stack.Screen name="Category List " component={CategoryList} /> */}
   <Stack.Screen name=" " component={ProductList} />
     <Stack.Screen name='ProductItem' component={ProductItem} />
 </Stack.Navigator>
