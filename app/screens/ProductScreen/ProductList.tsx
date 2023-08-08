@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScrollView, View} from 'react-native';
 import ProductItem from './ProductItem';
+import CategoryList from '../CategoryListScreen/CategoryList';
 
 const Products = [
   {
@@ -25,7 +26,7 @@ const Products = [
     rating: 5,
   },
   {
-    title: 'Sandwich',
+    title: 'Sandwich SandwichvvSandwichSandwichvvSandwichSandwichvvSandwichSandwichvvSandwich ',
     description: 'product info',
     img: 'https://insanelygoodrecipes.com/wp-content/uploads/2021/03/Homemade-Grilled-Cheese-Sandwich-with-Tomatoes-500x375.png',
     price: 40,
@@ -79,6 +80,7 @@ export default function ProductList() {
 
   return (
     <ScrollView>
+      <CategoryList/>
       <View style={{flex: 1, padding: 16, backgroundColor: '#F7F7F7'}}>
         {rows}
       </View>
