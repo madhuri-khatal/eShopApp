@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, View} from 'react-native';
 import ProductItem from './ProductItem';
 import CategoryList from '../CategoryListScreen/CategoryList';
+import {ProductApi} from '../../api/ProductApi';
 
 const Products = [
   {
@@ -48,7 +49,17 @@ const Products = [
     rating: 1,
   },
 ];
+
 export default function ProductList() {
+
+  useEffect(() => {
+    (async () => {
+      const {result, err} = await ProductApi.getProductList();
+      err && console.log('error', err);
+
+    })();
+  }, []);
+
   const rows = [];
   let rowIndex = 0;
 
