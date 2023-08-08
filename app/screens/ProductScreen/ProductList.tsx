@@ -55,7 +55,6 @@ export default function ProductList() {
   useEffect(() => {
     (async () => {
       const {result, err} = await ProductApi.getProductList();
-      result && console.log('data for product============', result);
       err && console.log('error', err);
 
     })();
