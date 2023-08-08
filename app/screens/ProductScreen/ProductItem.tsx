@@ -4,6 +4,7 @@ import {Button, Card, Text} from 'react-native-paper';
 import Rating from '../../components/ui/RatingComponent';
 import CurrencyComponent from '../../components/ui/Currencycomponent';
 import Icon from 'react-native-paper/lib/typescript/components/Icon';
+import { useNavigation } from '@react-navigation/native';
 
 interface IProps {
   title: any;
@@ -19,11 +20,13 @@ export default function ProductItem({
   price,
   rating,
 }: IProps) {
+  const navigation:any=useNavigation();
   return (
     <>
       <View style={{flex: 1, padding: 3}}>
      
         <Card
+        onPress={()=>navigation.navigate("ProductDetailsScreen")}
           style={{
             backgroundColor: '#ffffff',
             width: '100%',
