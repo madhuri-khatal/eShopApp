@@ -6,25 +6,20 @@ import ProductItem from '../screens/ProductScreen/ProductItem';
 import { Appbar } from 'react-native-paper';
 import { DrawerActions } from '@react-navigation/native';
 import CategoryList from '../screens/CategoryListScreen/CategoryList';
+import { ProductsScreen } from '../screens/ProductScreen/ProductsScreen';
+import { ProductDetailsScreen } from '../screens/ProductScreen/ProductDetailsScreen/ProductDetailsScreen';
 
 
 const Stack= createStackNavigator();
 export default function ProductStackScreen({navigation}: any) {
-
-  const _handleMore = () => navigation .dispatch(DrawerActions.toggleDrawer());
   return (
     <>  
-<View>
-<Appbar.Header>
-          <Appbar.Content title="ProductList" />
-          <Appbar.Action icon="menu" onPress={_handleMore} />
-   </Appbar.Header>
-</View>
-
-   <Stack.Navigator initialRouteName='ProductList'>
-    {/* <Stack.Screen name="Category List " component={CategoryList} /> */}
-  <Stack.Screen name=" " component={ProductList} />
-    <Stack.Screen name='ProductItem' component={ProductItem} />
+   <Stack.Navigator screenOptions={{
+    headerShown:false
+   }} initialRouteName='ProductScreen'>
+  <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
+  <Stack.Screen name="ProductDetailsScreen" component={ProductDetailsScreen} />
+  
 </Stack.Navigator>
 </>
   )
