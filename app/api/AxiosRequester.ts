@@ -1,6 +1,6 @@
 import axios, {AxiosRequestConfig } from "axios"
 
-import { consumer_key,consumer_secret,baseUrl } from "@env"
+import { consumer_key,consumer_secret,API_URL } from "@env"
 import { btoa } from 'react-native-quick-base64';
 import Response from "./Response"
 export abstract class RequestDefaults {
@@ -30,7 +30,7 @@ export const Get = async <T>(path: string, json?: AxiosRequestConfig<any> | unde
        const header = { 'headers' : {
         'Authorization': `Basic ${btoa(`${consumer_key}:${consumer_secret}`)}`,
       }};
-      response.result = ((await axios.get(`${baseUrl}${path}`, header))) as T
+      response.result = ((await axios.get(`${API_URL}${path}`, header))) as T
   
   } catch (e:any) {
     response.err = parseError(e.text)
@@ -43,7 +43,7 @@ export const Get = async <T>(path: string, json?: AxiosRequestConfig<any> | unde
 export const Post = async <T>(path: string, json?: any) => {
   let response: Response<T> = {}
   try {
-    response.result = (await axios.post(`${baseUrl}${path}`, json)) as T
+    response.result = (await axios.post(`${API_URL}${path}`, json)) as T
   } catch (e: any) {
     response.err = parseError(e.text)
     response.status = e.status
@@ -54,7 +54,7 @@ export const Post = async <T>(path: string, json?: any) => {
 export const Login = async <T>(path: any, json?: any) => {
   let response: Response<T> = {}
   try {
-    response.result = (await axios.post(`${baseUrl}${path}`, json)) as T
+    response.result = (await axios.post(`${API_URL}${path}`, json)) as T
   } catch (e: any) {
     response.err = parseError(e.text)
     response.status = e.status
@@ -65,7 +65,7 @@ export const Login = async <T>(path: any, json?: any) => {
 export const Patch = async <T>(path: string, json?: any) => {
   let response: Response<T> = {}
   try {
-    response.result = (await axios.patch(`${baseUrl}${path}`, json)) as T
+    response.result = (await axios.patch(`${API_URL}${path}`, json)) as T
   } catch (e: any) {
     response.err = parseError(e.text)
     response.status = e.status
@@ -78,7 +78,7 @@ export const UploadFile = async <T>(path: string, json?: any) => {
   try {
     const formData = new FormData()
     formData.append("file", json)
-    response.result = (await axios.post(`${baseUrl}${path}`, formData, {
+    response.result = (await axios.post(`${API_URL}${path}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
