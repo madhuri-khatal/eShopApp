@@ -12,15 +12,13 @@ interface IProps {
 export default function CategoryItem({ icon, title }: IProps) {
    
   return (
-    <View style={{ flexDirection: 'row',display:'flex'}}>
-
+    // <View style={{ flexDirection: 'row',display:'flex'}}>
     <Chip
-      icon={() => <Image source={{ uri: icon }} style={{ width: 24, height: 24 }} />} // Render the image as icon
-      onPress={() => console.log('Pressed')}
-      mode='flat'
-    >
+      icon={() => <Image source={{ uri: icon }} style={{ width: 24, height: 24 }} />} 
+          style={{marginLeft:10,padding:5,marginTop:5, backgroundColor:'#f77239'}}
+          >
       {title}
     </Chip>
-  </View>
+  // </View>
   );
 }
