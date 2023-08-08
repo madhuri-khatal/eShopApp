@@ -26,7 +26,8 @@ const Products = [
     rating: 5,
   },
   {
-    title: 'Sandwich SandwichvvSandwichSandwichvvSandwichSandwichvvSandwichSandwichvvSandwich ',
+    title:
+      'Sandwich SandwichvvSandwichSandwichvvSandwichSandwichvvSandwichSandwichvvSandwich ',
     description: 'product info',
     img: 'https://insanelygoodrecipes.com/wp-content/uploads/2021/03/Homemade-Grilled-Cheese-Sandwich-with-Tomatoes-500x375.png',
     price: 40,
@@ -79,8 +80,10 @@ export default function ProductList() {
   }
 
   return (
-    <ScrollView>
-      <CategoryList/>
+    <ScrollView style={{flex: 1}}>
+      <View style={{flex: 1}}>
+        <CategoryList />
+      </View>
       <View style={{flex: 1, padding: 16, backgroundColor: '#F7F7F7'}}>
         {rows}
       </View>

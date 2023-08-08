@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     
   },
   iconContainer: {
-    margin: 5,
+    margin: 1,
     },
 });
 
