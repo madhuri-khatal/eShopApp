@@ -51,12 +51,10 @@ const Products = [
 ];
 
 export default function ProductList() {
-
   useEffect(() => {
     (async () => {
       const {result, err} = await ProductApi.getProductList();
       err && console.log('error', err);
-
     })();
   }, []);
 
