@@ -9,9 +9,11 @@ const Drawer = createDrawerNavigator();
 export default function DrawerStackNavigator() {
   return (
     <Drawer.Navigator
+    
       screenOptions={{
         drawerPosition: 'right',
         headerShown: false,
+      
       }}>
       <Drawer.Screen
         name="bottomTab "

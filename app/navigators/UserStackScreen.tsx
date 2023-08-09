@@ -8,7 +8,9 @@ const Stack = createStackNavigator();
 export default function UserStackScreen() {
   return (
     <Stack.Navigator screenOptions={{
-      headerShown:false
+      
+      headerShown:false,
+    
     }} initialRouteName="ProfileScreen">
       <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
       <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />

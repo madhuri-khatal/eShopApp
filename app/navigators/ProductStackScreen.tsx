@@ -14,7 +14,7 @@ const Stack= createStackNavigator();
 export default function ProductStackScreen({navigation}: any) {
   return (
     <>  
-   <Stack.Navigator screenOptions={{
+   <Stack.Navigator  screenOptions={{
     headerShown:false
    }} initialRouteName='ProductScreen'>
   <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
