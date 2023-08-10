@@ -11,6 +11,7 @@ interface RatingProps {
   iconStyle?: object;
   editable?: boolean;
   onRatingChange?: (newRating: number) => void;
+  
 }
 
 const Rating: React.FC<RatingProps> = ({

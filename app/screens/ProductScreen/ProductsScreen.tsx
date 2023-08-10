@@ -3,13 +3,11 @@ import ProductList from './ProductList';
 import {HeaderBar} from '../../components/ui/HeaderBar';
 import {DrawerActions} from '@react-navigation/native';
 import {View} from 'react-native';
-import CategoryList from '../CategoryListScreen/CategoryList';
+import CategoryList from '../WeightListScreen/WeightList';
 import React from 'react';
 import FilterMenu from '../FilterScreen/FilterMenu';
 import MainCategory from '../FilterScreen/FiltersMenu';
 import FilterMenu1 from '../../screens/FilterScreen/FilterMenu1';
-
-
 
 export const ProductsScreen = (props: any) => {
   const {navigation} = props;
@@ -33,8 +31,7 @@ export const ProductsScreen = (props: any) => {
         }}>
         {/* <CategoryList /> */}
 
-<FilterMenu1/>
-      
+        <FilterMenu1 />
       </View>
       <View style={{marginTop: 20}}>
         <ProductList />
