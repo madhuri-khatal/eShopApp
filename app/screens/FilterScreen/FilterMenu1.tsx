@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FiltersMenu from './FiltersMenu';
+// import FiltersMenu from './FiltersMenu';
 
 const FilterMenu1 = () => {
     const [isFilterMenuVisible, setIsFilterMenuVisible] = useState(false);

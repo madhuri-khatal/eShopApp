@@ -10,7 +10,9 @@ export default function WishlistComponent() {
   };
 
   return (
-    <Button onPress={toggleLike} style={{position: 'absolute', zIndex: 10}}>
+    <Button
+      onPress={toggleLike}
+      style={{position: 'absolute', zIndex: 10}}>
       <AntDesign
         name={isLiked ? 'heart' : 'hearto'}
         color={isLiked ? '#e03f1f' : 'gray'}
