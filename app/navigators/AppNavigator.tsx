@@ -5,13 +5,9 @@ import DrawerStackNavigator from './DrawerStackNavigator';
 import {adaptNavigationTheme} from 'react-native-paper';
 
 export default function AppNavigator({theme}: any) {
-  const {LightTheme} = adaptNavigationTheme({
-    reactNavigationLight: theme,
-  });
-
   return (
-    <NavigationContainer theme={LightTheme}>
-      <DrawerStackNavigator  />
+    <NavigationContainer theme={theme}>
+      <DrawerStackNavigator />
     </NavigationContainer>
   );
 }

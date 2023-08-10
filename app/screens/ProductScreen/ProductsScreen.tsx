@@ -16,7 +16,9 @@ export const ProductsScreen = (props: any) => {
     <ScrollView style={{backgroundColor: '#F7F7F7'}}>
       <HeaderBar
         title="Product Screen"
-        right1Action={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+        right1Action={() =>
+          navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
+        }
         icon1="menu"
       />
       <View
