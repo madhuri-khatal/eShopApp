@@ -9,7 +9,7 @@ import FilterMenu from '../FilterScreen/FilterMenu';
 import MainCategory from '../FilterScreen/FiltersMenu';
 import FilterMenu1 from '../../screens/FilterScreen/FilterMenu1';
 
-// import FilterStack from 'navigators/FilterStack';
+
 
 export const ProductsScreen = (props: any) => {
   const {navigation} = props;

@@ -1,68 +1,36 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, View} from 'react-native';
 import ProductItem from './ProductItem';
-
 import {ProductApi} from '../../api/ProductApi';
 
-const Products = [
-  {
-    title: 'Pizza',
-    description: 'product info',
-    img: 'https://kauveryhospital.com/blog/wp-content/uploads/2021/04/pizza-5179939_960_720.jpg',
-    price: 404,
-    rating: 3,
-  },
-  {
-    title: 'Momos',
-    description: 'product info',
-    img: 'https://1.bp.blogspot.com/-hCGGuFvXTLE/XigrScfUq5I/AAAAAAAAAwA/pBoBiGByyYgCLqJgI_gIJO_5SuGt7jJ1wCEwYBhgL/s1600/momos-chutney-recipe-in-hindi.jpg',
-    price: 80,
-    rating: 1,
-  },
-  {
-    title: 'Sandwich',
-    description: 'product info',
-    img: 'https://insanelygoodrecipes.com/wp-content/uploads/2021/03/Homemade-Grilled-Cheese-Sandwich-with-Tomatoes-500x375.png',
-    price: 40,
-    rating: 5,
-  },
-  {
-    title:
-      'Sandwich SandwichvvSandwichSandwichvvSandwichSandwichvvSandwichSandwichvvSandwich ',
-    description: 'product info',
-    img: 'https://insanelygoodrecipes.com/wp-content/uploads/2021/03/Homemade-Grilled-Cheese-Sandwich-with-Tomatoes-500x375.png',
-    price: 40,
-    rating: 5,
-  },
-  {
-    title: 'Pizza',
-    description: 'product info',
-    img: 'https://kauveryhospital.com/blog/wp-content/uploads/2021/04/pizza-5179939_960_720.jpg',
-    price: 404,
-    rating: 3,
-  },
-  {
-    title: 'Momos',
-    description: 'product info',
-    img: 'https://1.bp.blogspot.com/-hCGGuFvXTLE/XigrScfUq5I/AAAAAAAAAwA/pBoBiGByyYgCLqJgI_gIJO_5SuGt7jJ1wCEwYBhgL/s1600/momos-chutney-recipe-in-hindi.jpg',
-    price: 80,
-    rating: 1,
-  },
-];
-
 export default function ProductList() {
+
+  const [products, setProducts] = useState<any>([]); 
   useEffect(() => {
     (async () => {
-      const {result, err} = await ProductApi.getProductList();
-      err && console.log('error', err);
+      const {
+        result: {data},
+        err,
+      } = await ProductApi.getProductList();
+
+      if (err) {
+      } else {
+        setProducts(data); // Store fetched products in state
+      }
     })();
   }, []);
 
+  if (products.length > 0) {
+    products.forEach((product: any) => {
+      const imageSrcs = product.images[0];
+      const img = imageSrcs.src;
+    });
+  }
   const rows = [];
   let rowIndex = 0;
 
-  while (rowIndex < Products.length) {
-    const rowProducts = Products.slice(rowIndex, rowIndex + 2);
+  while (rowIndex < products.length) {
+    const rowProducts = products.slice(rowIndex, rowIndex + 2);
 
     rows.push(
       <View
@@ -72,14 +40,15 @@ export default function ProductList() {
           marginBottom: 12,
         }}
         key={rowIndex}>
-        {rowProducts.map(product => (
+        {rowProducts.map((product: any) => (
           <ProductItem
-            key={product.title}
-            title={product.title}
-            description={product.description}
-            img={product.img}
-            price={product.price}
-            rating={product.rating}
+            key={products.name}
+            name={products.name}
+            description={products.description}
+            img={products.img}
+            price={products.price}
+            rating={products.rating}
+            product={product}
           />
         ))}
       </View>,
