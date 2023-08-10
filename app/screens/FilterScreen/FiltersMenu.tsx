@@ -18,15 +18,16 @@ const FiltersMenu = ({isVisible, filterData}: any) => {
       setMainCategory(data);
     })();
   }, []);
+  
    if (!isVisible) {
     return null;
   }
 
   return (
     <ScrollView style={{}}>
-      {mainCategory.map((category: any) => (
-          <FilterCategory
-          key={category.id}
+      {mainCategory.map((category: any,id:any) => (
+          <FilterCategory     key={category?.id}
+          id={category?.id}
           name={category?.name}
                 />
       ))}

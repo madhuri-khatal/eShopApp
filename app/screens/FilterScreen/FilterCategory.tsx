@@ -5,10 +5,9 @@ import { View } from "react-native";
 import React from "react";
 import { Divider, Text } from "react-native-paper";
 import FilterSubmenu from "./FilterSubmenu";
-const FilterCategory = ({name, options}: any) => {
+const FilterCategory = ({name, options,id}: any) => {
     const [isSubMenuVisible, setIsSubMenuVisible] = useState (false);
-    console.log('NAME===========', name);
-  
+     
     const toggleSubMenu = () => {
       setIsSubMenuVisible(!isSubMenuVisible);
     };
@@ -18,16 +17,19 @@ const FilterCategory = ({name, options}: any) => {
         <TouchableOpacity onPress={toggleSubMenu}>
           <Text
             style={{
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: 'bold',
               marginLeft: 25,
               marginBottom: 5,
-            }}>
-            {name}
+              margin:8,
+              // paddingBottom:30,
+              // height:80
+                         }}>
+        {name}
           </Text>
           <Divider/>
         </TouchableOpacity>
-        {isSubMenuVisible && <FilterSubmenu options={options} />}
+        {isSubMenuVisible && <FilterSubmenu options={options} id={id} />}
       </View>
     );
   };

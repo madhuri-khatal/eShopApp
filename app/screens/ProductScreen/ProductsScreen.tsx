@@ -5,14 +5,13 @@ import {DrawerActions} from '@react-navigation/native';
 import {View} from 'react-native';
 import CategoryList from '../CategoryListScreen/CategoryList';
 import React from 'react';
-import FilterMenu from '../FilterScreen/FilterMenu';
+
 import MainCategory from '../FilterScreen/FiltersMenu';
-import FilterMenu1 from '../../screens/FilterScreen/FilterMenu1';
-
-
+import FilterMenu from '../../screens/FilterScreen/FilterMenu';
 
 export const ProductsScreen = (props: any) => {
   const {navigation} = props;
+
   return (
     <ScrollView style={{backgroundColor: 'white'}}>
       <HeaderBar
@@ -26,15 +25,12 @@ export const ProductsScreen = (props: any) => {
           top: 55,
           left: 0,
           zIndex: 9000,
-          backgroundColor: 'rgba(255, 255, 255, 0.9)', // Adjust the alpha value as needed
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
           borderRadius: 10,
-          width: '50%',
-          paddingBottom: 10,
+          width: '70%',
+          paddingBottom: 5,
         }}>
-        {/* <CategoryList /> */}
-
-<FilterMenu1/>
-      
+        <FilterMenu />
       </View>
       <View style={{marginTop: 20}}>
         <ProductList />
