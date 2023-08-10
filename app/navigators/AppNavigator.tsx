@@ -11,7 +11,7 @@ export default function AppNavigator({theme}: any) {
 
   return (
     <NavigationContainer theme={LightTheme}>
-      <DrawerStackNavigator />
+      <DrawerStackNavigator  />
     </NavigationContainer>
   );
 }

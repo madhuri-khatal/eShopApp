@@ -4,16 +4,15 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import UserStackScreen from './UserStackScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 import ProductStackScreen from './ProductStackScreen';
+import {ProductFilterDrawer} from './../screens/ProductScreen/ProductDetailsScreen/ProductFilterDrawer';
 
 const Drawer = createDrawerNavigator();
-export default function DrawerStackNavigator () {
+export default function DrawerStackNavigator() {
   return (
     <Drawer.Navigator
-    
       screenOptions={{
         drawerPosition: 'right',
         headerShown: false,
-      
       }}>
       <Drawer.Screen
         name="bottomTab "
@@ -31,13 +30,13 @@ export default function DrawerStackNavigator () {
         }}
         component={UserStackScreen}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name="profile"
         options={{
           drawerLabel: 'Product',
           title: 'Product',
         }}
-        component={ProductStackScreen}
+        component={ProductFilterDrawer}
       />
     </Drawer.Navigator>
   );

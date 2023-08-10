@@ -1,8 +1,8 @@
-import {FilterApi} from '../../api/FilterApi';
-import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, ScrollView} from 'react-native';
+
+import React, { useState} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import FiltersMenu from './FiltersMenu';
+
 import {useNavigation} from '@react-navigation/native';
 
 const FilterMenu = () => {
@@ -10,7 +10,7 @@ const FilterMenu = () => {
   const navigation: any = useNavigation();
   const toggleFilterMenu = () => {
     setIsFilterMenuVisible(!isFilterMenuVisible);
-    // navigation.getParent('LeftDrawer').openDrawer();
+    setTimeout(() => navigation.getParent('LeftDrawer')?.openDrawer(), 650);
   };
 
   return (
@@ -19,10 +19,7 @@ const FilterMenu = () => {
         flex: 1,
         zIndex: 9000,
         paddingHorizontal: 3,
-
-        // opacity:0.7,
-        backgroundColor: 'white',
-      }}>
+             }}>
       <TouchableOpacity
         onPress={toggleFilterMenu}
         style={{
@@ -33,13 +30,14 @@ const FilterMenu = () => {
         }}>
         <View style={{flex: 1, flexDirection: 'row'}}>
           <Ionicons name="filter" style={{fontSize: 25, marginRight: 10}} />
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>Filter</Text>
+          <Text
+            style={{fontSize: 18, fontWeight: 'bold'}}
+            onPress={toggleFilterMenu}>
+            Filter
+          </Text>
         </View>
       </TouchableOpacity>
-      <FiltersMenu
-        isVisible={isFilterMenuVisible}
-        onFilterToggle={toggleFilterMenu}
-      />
+    
     </View>
   );
 };
