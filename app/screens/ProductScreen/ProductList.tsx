@@ -11,7 +11,6 @@ export default function ProductList() {
         result: {data},
         err,
       } = await ProductApi.getProductList();
-      console.log('ddddddddd', err, data);
 
       if (err) {
       } else {
@@ -22,12 +21,8 @@ export default function ProductList() {
 
   if (products.length > 0) {
     products.forEach((product: any) => {
-      console.log('productproductproduct', product.images[0].src);
-
       const imageSrcs = product.images[0];
-      console.log('Image Srcs:', imageSrcs);
       const img = imageSrcs.src;
-      console.log('imag========', img);
     });
   }
   const rows = [];
