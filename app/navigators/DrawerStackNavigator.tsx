@@ -6,7 +6,7 @@ import BottomTabNavigator from './BottomTabNavigator';
 import ProductStackScreen from './ProductStackScreen';
 
 const Drawer = createDrawerNavigator();
-export default function DrawerStackNavigator() {
+export default function DrawerStackNavigator () {
   return (
     <Drawer.Navigator
     

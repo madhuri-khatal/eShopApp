@@ -4,6 +4,7 @@ import ProductItem from './ProductItem';
 import {ProductApi} from '../../api/ProductApi';
 
 export default function ProductList() {
+
   const [products, setProducts] = useState<any>([]); 
   useEffect(() => {
     (async () => {
