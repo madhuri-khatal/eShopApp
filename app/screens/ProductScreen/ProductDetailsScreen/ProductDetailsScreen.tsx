@@ -1,4 +1,4 @@
-import {Dimensions, Pressable, TouchableOpacity, View} from 'react-native';
+import {Dimensions, TouchableOpacity, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Text, Button, Divider} from 'react-native-paper';
 import {HeaderBar} from '../../../components/ui/HeaderBar';
@@ -14,6 +14,7 @@ import QuantityComponent from '../../../components/Product/QuantityComponent';
 import ReviewComponent from '../../../components/Product/ReviewComponent';
 import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
   const [index, setIndex] = useState<number>(0);
@@ -22,6 +23,7 @@ export const ProductDetailsScreen = (props: any) => {
   const handleIndex = (index: number) => {
     setIndex(index);
   };
+
   return (
     <>
       <ScrollView>
@@ -36,14 +38,9 @@ export const ProductDetailsScreen = (props: any) => {
             <View style={{flex: 1, position: 'relative'}}>
               {refWidth.current == 1 && (
                 <Button
-                  onPress={() => (refWidth.current = 0.4)}
-                  icon={{
-                    source: {
-                      uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400',
-                    },
-                    direction: 'rtl',
-                  }}>
-                  Press me
+                  style={{alignItems: 'flex-start'}}
+                  onPress={() => (refWidth.current = 0.4)}>
+                  <AntDesign name="close" style={{fontSize: 24}} />
                 </Button>
               )}
               <Carousel
@@ -57,24 +54,24 @@ export const ProductDetailsScreen = (props: any) => {
                 autoPlay={true}
                 data={[...new Array(3).keys()]}
                 scrollAnimationDuration={1000}
-                 renderItem={({index}) => (
+                renderItem={({index}) => (
                   <View
                     style={{
                       flex: 1,
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                     }}>
                     <TouchableOpacity
                       style={{}}
                       onPress={() => (refWidth.current = 1)}
-                      onPressOut={() => (refWidth.current = 0.4)}>
+                      onPressOut={() => (refWidth.current = 0.6)}>
                       <ImageComponent
                         src={{
                           uri: 'https://kauveryhospital.com/blog/wp-content/uploads/2021/04/pizza-5179939_960_720.jpg',
                         }}
                         alt={'image'}
                         width={width}
-                        height={Dimensions.get('window').height}
-                                            />
+                        height={Dimensions.get('window').height * 0.5}
+                      />
                     </TouchableOpacity>
                   </View>
                 )}
@@ -82,7 +79,7 @@ export const ProductDetailsScreen = (props: any) => {
               <View
                 style={{
                   position: 'absolute',
-                  bottom: 50,
+                  bottom: 80,
                   left: 20,
                   width: '100%',
                   height: 25,
@@ -93,7 +90,7 @@ export const ProductDetailsScreen = (props: any) => {
                   style={{
                     flex: 1,
                     position: 'absolute',
-                    bottom: responsiveWidth(-8),
+                    bottom: responsiveWidth(0),
                     left: responsiveWidth(35),
                   }}>
                   <AnimatedDotsCarousel
@@ -153,16 +150,13 @@ export const ProductDetailsScreen = (props: any) => {
             papad
           </Text>
 
-          <View>
-            <ScrollView></ScrollView>
-          </View>
           <Text
             style={{fontSize: 16, padding: 5, margin: 8, textAlign: 'justify'}}>
             Delight in the crispy and savory goodness of our papad product. Made
             from a blend of carefully selected lentil flours
           </Text>
           <View style={{display: 'flex', flexDirection: 'row'}}>
-            <View>
+            <View style={{flex: 1}}>
               <CurrencyComponent
                 value={100}
                 style={{
@@ -174,22 +168,29 @@ export const ProductDetailsScreen = (props: any) => {
                 }}
               />
             </View>
-            <View style={{flex: 1, alignItems: 'flex-end', marginRight: 5}}>
-              <Rating
-                rating={5}
-                maxRating={5}
-                iconFilled={
-                  <View style={{marginRight: 5}}>
-                    <Text style={{color: 'gold', fontSize: 30}}>★</Text>
-                  </View>
-                }
-                iconEmpty={
-                  <View style={{marginRight: 5}}>
-                    <Text style={{color: 'gold', fontSize: 30}}>☆</Text>
-                  </View>
-                }
-                iconSize={50}
-              />
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'flex-end',
+                marginRight: 5,
+              }}>
+              <TouchableOpacity>
+                <Rating
+                  rating={5}
+                  maxRating={5}
+                  iconFilled={
+                    <View style={{marginRight: 5}}>
+                      <Text style={{color: 'gold', fontSize: 30}}>★</Text>
+                    </View>
+                  }
+                  iconEmpty={
+                    <View style={{marginRight: 5}}>
+                      <Text style={{color: 'gold', fontSize: 30}}>☆</Text>
+                    </View>
+                  }
+                  iconSize={50}
+                />
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -246,7 +247,7 @@ export const ProductDetailsScreen = (props: any) => {
               style={{
                 fontWeight: 'bold',
                 justifyContent: 'center',
-                fontSize: 16,
+                fontSize: 17,
                 textTransform: 'capitalize',
                 color: '#595555',
               }}>

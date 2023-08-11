@@ -1,8 +1,7 @@
-import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {FilterApi} from './../api/FilterApi';
 import React, {
   createContext,
-  FC,
   ReactNode,
   useContext,
   useEffect,
