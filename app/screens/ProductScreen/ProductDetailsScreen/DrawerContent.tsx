@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Image, Text, Linking} from 'react-native';
-import {Divider, List, useTheme} from 'react-native-paper';
+import {Button, Divider, List, useTheme} from 'react-native-paper';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -11,27 +11,29 @@ import {Drawer} from 'react-native-paper';
 import {useProductContext} from './../../../context/ProductContext';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
 
+import AntDesign from 'react-native-vector-icons/AntDesign';
 export default function DrawerContent(props: any) {
   const [active, setActive] = useState<string>('');
   const [expanded, setExpanded] = React.useState(true);
-  const {mainCategory, getSubCategoery, subCategory, setSubCategory} =
+  const {mainCategory, getSubCategoery, subCategory, setSubCategory, onClose} =
     useProductContext();
   const handlePress = () => setExpanded(!expanded);
   const theme = useTheme();
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: theme.colors.background}}>
       <View style={{flex: 1}}>
-        {/* <View
-          style={{
-            height: responsiveHeight(10),
-            backgroundColor:'red',
-            opacity:0.6
-          }}></View> */}
         <DrawerContentScrollView {...props}>
           <List.Section
             title="All Categories"
             titleStyle={{color: '#72767B', fontSize: 20, fontWeight: 'bold'}}
             style={{backgroundColor: theme.colors.background}}>
+           <Button
+                  style={{alignItems: 'flex-start'}}
+                  onPress={() => {onClose()}}>
+                  <AntDesign name="close" style={{fontSize: 24}} />
+                  {/* Press me */}
+                </Button>
+
             {mainCategory.map((categoery: any, index: number) => (
               <List.Accordion
                 key={index}

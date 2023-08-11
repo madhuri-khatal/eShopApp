@@ -1,3 +1,4 @@
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 import {FilterApi} from './../api/FilterApi';
 import React, {
   createContext,
@@ -14,6 +15,7 @@ interface IProductContext {
   getSubCategoery: Function;
   subCategory: any[];
   setSubCategory: Function;
+  onClose: Function;
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -21,6 +23,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [data, setData] = useState<any>([1, 2, 3]);
   const [mainCategory, setMainCategory] = useState<any>([]);
   const [subCategory, setSubCategory] = useState<any>([]);
+  const [isDrawerVisible, setIsDrawerVisible] = React.useState(false);
+  const navigation = useNavigation();
   useEffect(() => {
     (async () => {
       const {
@@ -33,7 +37,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
       setMainCategory(data);
     })();
   }, []);
-
+  // SUBCATEGORY
   const getSubCategoery = async (id: number | string) => {
     try {
       const {
@@ -46,12 +50,19 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     }
   };
 
+  const onClose = async () => {
+    setIsDrawerVisible(!isDrawerVisible);
+    console.log('pressed');
+    // setClose(true)
+  };
+
   const value: IProductContext = {
     data,
     mainCategory,
     getSubCategoery,
     subCategory,
     setSubCategory,
+    onClose,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
