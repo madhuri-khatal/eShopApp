@@ -10,6 +10,12 @@
       "typeRoots": [
         "./app/types"
       ],
-    }
+       // Configure absolute import paths
+       "@components/*": ["components/*"],
+       "@screens/*": ["screens/*"],
+       "@context/*": ["./context/*"],
+       // Add more paths as needed
+    },
+    
   }
 }

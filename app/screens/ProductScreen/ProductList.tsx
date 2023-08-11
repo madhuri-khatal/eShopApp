@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {ScrollView, View} from 'react-native';
 import ProductItem from './ProductItem';
 import {ProductApi} from '../../api/ProductApi';
+import {useProductContext} from './../../context/ProductContext';
 
 export default function ProductList() {
-
-  const [products, setProducts] = useState<any>([]); 
+  const {data} = useProductContext();
+  const [products, setProducts] = useState<any>([]);
   useEffect(() => {
     (async () => {
       const {

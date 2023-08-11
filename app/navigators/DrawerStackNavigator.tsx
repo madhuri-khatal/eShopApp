@@ -4,16 +4,20 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import UserStackScreen from './UserStackScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 import ProductStackScreen from './ProductStackScreen';
+import {ProductFilterDrawer} from './../screens/ProductScreen/ProductDetailsScreen/ProductFilterDrawer';
+import {useTheme} from 'react-native-paper';
 
 const Drawer = createDrawerNavigator();
-export default function DrawerStackNavigator () {
+export default function DrawerStackNavigator() {
+  const {colors} = useTheme();
   return (
     <Drawer.Navigator
-    
+      id="main"
       screenOptions={{
         drawerPosition: 'right',
         headerShown: false,
-      
+        sceneContainerStyle: {},
+        drawerContentStyle: {backgroundColor: colors.background},
       }}>
       <Drawer.Screen
         name="bottomTab "
@@ -31,13 +35,13 @@ export default function DrawerStackNavigator () {
         }}
         component={UserStackScreen}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name="profile"
         options={{
           drawerLabel: 'Product',
           title: 'Product',
         }}
-        component={ProductStackScreen}
+        component={ProductFilterDrawer}
       />
     </Drawer.Navigator>
   );
