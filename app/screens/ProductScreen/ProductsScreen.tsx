@@ -3,10 +3,10 @@ import ProductList from './ProductList';
 import {HeaderBar} from '../../components/ui/HeaderBar';
 import {DrawerActions} from '@react-navigation/native';
 import {View} from 'react-native';
-import CategoryList from '../CategoryListScreen/CategoryList';
+import CategoryList from '../WeightListScreen/WeightList';
 import React from 'react';
 
-import MainCategory from '../FilterScreen/FiltersMenu';
+// import MainCategory from '../FilterScreen/FiltersMenu';
 import FilterMenu from '../../screens/FilterScreen/FilterMenu';
 
 export const ProductsScreen = (props: any) => {
