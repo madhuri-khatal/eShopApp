@@ -57,8 +57,7 @@ export const ProductDetailsScreen = (props: any) => {
                 autoPlay={true}
                 data={[...new Array(3).keys()]}
                 scrollAnimationDuration={1000}
-                onSnapToItem={index => console.log('current index:', index)}
-                renderItem={({index}) => (
+                 renderItem={({index}) => (
                   <View
                     style={{
                       flex: 1,
@@ -75,7 +74,7 @@ export const ProductDetailsScreen = (props: any) => {
                         alt={'image'}
                         width={width}
                         height={Dimensions.get('window').height}
-                      />
+                                            />
                     </TouchableOpacity>
                   </View>
                 )}
