@@ -4,8 +4,12 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {ProductsScreen} from '../ProductsScreen';
 import DrawerContent from './DrawerContent';
 import {ProductContextProvider} from './../../../context/ProductContext';
+import {useTheme} from 'react-native-paper';
+import ProductStackScreen from './../../../navigators/ProductStackScreen';
 const Drawer = createDrawerNavigator();
+
 export const ProductFilterDrawer = () => {
+  const {colors} = useTheme();
   return (
     <ProductContextProvider>
       <Drawer.Navigator
@@ -14,8 +18,15 @@ export const ProductFilterDrawer = () => {
         screenOptions={{
           drawerPosition: 'left',
           headerShown: false,
+          // sceneContainerStyle: {},
+          drawerContentStyle: {backgroundColor: colors.background},
+          drawerItemStyle: {backgroundColor: colors.background},
+          drawerContentContainerStyle: {backgroundColor: colors.background},
         }}>
-        <Drawer.Screen component={ProductsScreen} name="productScreen" />
+        <Drawer.Screen
+          component={ProductStackScreen}
+          name="productStackScreen"
+        />
       </Drawer.Navigator>
     </ProductContextProvider>
   );

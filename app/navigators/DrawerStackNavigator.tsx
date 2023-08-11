@@ -40,6 +40,7 @@ export default function DrawerStackNavigator() {
         options={{
           drawerLabel: 'Product',
           title: 'Product',
+          drawerContentStyle:{backgroundColor:colors.background}
         }}
         component={ProductFilterDrawer}
       />

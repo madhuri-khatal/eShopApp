@@ -20,7 +20,7 @@ const ImageComponent: React.FC<IProps> = ({
     <View>
       <Image
         source={src}
-        style={{width, height, borderRadius}}
+        style={{width, height, borderRadius, backgroundColor: 'red'}}
         resizeMode="cover"
         alt={alt}
       />
