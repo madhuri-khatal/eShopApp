@@ -38,7 +38,7 @@ export default function ProductList() {
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          marginBottom: 12,
+          marginBottom: 1,
         }}
         key={rowIndex}>
         {rowProducts.map((product: any) => (
@@ -60,7 +60,13 @@ export default function ProductList() {
 
   return (
     <ScrollView style={{flex: 1}}>
-      <View style={{flex: 1, padding: 16, backgroundColor: '#F7F7F7'}}>
+      <View
+        style={{
+          flex: 1,
+          padding: 3,
+          paddingTop: 20,
+          backgroundColor: '#F7F7F7',
+        }}>
         {rows}
       </View>
     </ScrollView>

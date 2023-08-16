@@ -32,24 +32,19 @@ export default function ProductItem({
 
   return (
     <>
-      <View style={{flex: 1, padding: 4}}>
+      <View style={{flex: 1, padding: 2}}>
         <Card
           style={{
             backgroundColor: '#ffffff',
             width: '100%',
-            borderRadius: 15,
+
             margin: 'auto',
           }}>
           <View>
             <WishlistComponent />
             <TouchableOpacity
               onPress={() => navigation.navigate('ProductDetailsScreen')}>
-              {src && (
-                <Card.Cover
-                  source={{uri: src}}
-                  style={{height: 200, margin: 5}}
-                />
-              )}
+              {src && <Card.Cover source={{uri: src}} style={{height: 200}} />}
             </TouchableOpacity>
           </View>
           <Text
@@ -58,6 +53,8 @@ export default function ProductItem({
               marginLeft: 8,
               overflow: 'hidden',
               flex: 1,
+              marginTop: 8,
+              fontWeight: '600',
             }}
             numberOfLines={1}
             ellipsizeMode="tail">
@@ -74,7 +71,7 @@ export default function ProductItem({
                 style={{
                   textDecorationLine: 'line-through',
                   marginRight: 8,
-                  fontSize: 18,
+                  fontSize: 17,
                   fontWeight: 'bold',
                   color: '#cc3a1d',
                 }}>
@@ -90,7 +87,7 @@ export default function ProductItem({
           {product.sale_price <= 1 && (
             <CurrencyComponent
               value={product.price}
-              style={{fontSize: 18, fontWeight: 'bold', marginLeft: 10}}
+              style={{fontSize: 17, fontWeight: 'bold', marginLeft: 10}}
             />
           )}
 
@@ -122,4 +119,3 @@ export default function ProductItem({
     </>
   );
 }
-// Changes
