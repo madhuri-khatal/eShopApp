@@ -16,8 +16,9 @@ export default function WeightItem({icon, title}: IProps) {
         padding: 5,
         marginTop: 15,
         marginBottom: 15,
-        borderColor: 'gray',
-        borderWidth: 0.3,
+        borderWidth: 0.5,
+        borderTopWidth: 7,
+        borderColor: '#59a30e',
         borderRadius: 5,
       }}>
       <Text>{title}</Text>
