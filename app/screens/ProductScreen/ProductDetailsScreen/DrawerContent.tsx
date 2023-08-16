@@ -27,12 +27,14 @@ export default function DrawerContent(props: any) {
             title="All Categories"
             titleStyle={{color: '#72767B', fontSize: 20, fontWeight: 'bold'}}
             style={{backgroundColor: theme.colors.background}}>
-           <Button
-                  style={{alignItems: 'flex-start'}}
-                  onPress={() => {onClose()}}>
-                  <AntDesign name="close" style={{fontSize: 24}} />
-                  {/* Press me */}
-                </Button>
+            <Button
+              style={{alignItems: 'flex-start'}}
+              onPress={() => {
+                onClose();
+              }}>
+              <AntDesign name="close" style={{fontSize: 24}} />
+              {/* Press me */}
+            </Button>
 
             {mainCategory.map((categoery: any, index: number) => (
               <List.Accordion
