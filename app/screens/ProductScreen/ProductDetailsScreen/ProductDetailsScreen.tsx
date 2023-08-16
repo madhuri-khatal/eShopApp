@@ -1,11 +1,11 @@
 import {Dimensions, TouchableOpacity, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Text, Button, Divider} from 'react-native-paper';
+import {Text, Button, Divider, Card} from 'react-native-paper';
 import {HeaderBar} from '../../../components/ui/HeaderBar';
-import {DrawerActions} from '@react-navigation/native';
+import {DrawerActions, useRoute} from '@react-navigation/native';
 import CurrencyComponent from '../../../components/ui/Currencycomponent';
 import Rating from '../../../components/ui/RatingComponent';
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import Carousel from 'react-native-reanimated-carousel';
 import ImageComponent from '../../../components/ui/Image';
 import WishlistComponent from '../../../components/Product/WishlistComponent';
@@ -15,7 +15,8 @@ import ReviewComponent from '../../../components/Product/ReviewComponent';
 import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useProductContext } from '../../../context/ProductContext';
+import {useProductContext} from '../../../context/ProductContext';
+
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
   const [index, setIndex] = useState<number>(0);
@@ -24,8 +25,15 @@ export const ProductDetailsScreen = (props: any) => {
   const handleIndex = (index: number) => {
     setIndex(index);
   };
-  const {setProductByID}=useProductContext();
-console.log("=====================NAME=======================",setProductByID?.name);
+
+  const {productById} = useProductContext();
+  
+   // For removing <p> tag
+  // function stripHtmlTags(htmlString:any) {
+  //   const div = document.createElement('div');
+  //   div.innerHTML = htmlString;
+  //   return div.textContent || div.innerText || '';
+  // }
 
   return (
     <>
@@ -46,6 +54,7 @@ console.log("=====================NAME=======================",setProductByID?.n
                   <AntDesign name="close" style={{fontSize: 24}} />
                 </Button>
               )}
+
               <Carousel
                 loop
                 mode="parallax"
@@ -55,9 +64,9 @@ console.log("=====================NAME=======================",setProductByID?.n
                 width={width}
                 height={Dimensions.get('window').height * refWidth.current}
                 autoPlay={true}
-                data={[...new Array(3).keys()]}
+                data={productById?.images ?? []}
                 scrollAnimationDuration={1000}
-                renderItem={({index}) => (
+                renderItem={({item}: any) => (
                   <View
                     style={{
                       flex: 1,
@@ -68,10 +77,8 @@ console.log("=====================NAME=======================",setProductByID?.n
                       onPress={() => (refWidth.current = 1)}
                       onPressOut={() => (refWidth.current = 0.6)}>
                       <ImageComponent
-                        src={{
-                          uri: 'https://kauveryhospital.com/blog/wp-content/uploads/2021/04/pizza-5179939_960_720.jpg',
-                        }}
-                        alt={'image'}
+                        src={{uri: item.src}}
+                        alt={item.alt}
                         width={width}
                         height={Dimensions.get('window').height * 0.5}
                       />
@@ -79,6 +86,7 @@ console.log("=====================NAME=======================",setProductByID?.n
                   </View>
                 )}
               />
+
               <View
                 style={{
                   position: 'absolute',
@@ -150,20 +158,18 @@ console.log("=====================NAME=======================",setProductByID?.n
               textTransform: 'capitalize',
               marginBottom: 5,
             }}>
-            {/* papad */}
-            {setProductByID?.name}
+              {productById?.name}
           </Text>
 
           <Text
-
             style={{fontSize: 16, padding: 5, margin: 8, textAlign: 'justify'}}>
-            Delight in the crispy and savory goodness of our papad product. Made
-            from a blend of carefully selected lentil flours
+            {productById?.short_description}
           </Text>
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               <CurrencyComponent
-                value={100}
+                value={productById?.price}
+                // value={productById?.sale_price ?? productById?.price}
                 style={{
                   alignSelf: 'flex-bottom',
                   fontSize: 28,
@@ -182,7 +188,7 @@ console.log("=====================NAME=======================",setProductByID?.n
               <TouchableOpacity>
                 <Rating
                   rating={5}
-                  maxRating={5}
+                  maxRating={productById?.rating_count}
                   iconFilled={
                     <View style={{marginRight: 5}}>
                       <Text style={{color: 'gold', fontSize: 30}}>★</Text>
@@ -199,7 +205,28 @@ console.log("=====================NAME=======================",setProductByID?.n
             </View>
           </View>
 
+          {/* <View style={{ flexDirection: 'row' }}>
+          <View
+            style={{
+              flex: 1,
+              margin: 6,
+              padding: 5,
+              marginTop: 15,
+              marginBottom: 15,
+              borderColor: 'gray',
+              borderWidth: 0.3,
+              borderRadius: 5,
+            }}
+          >
+            <Text>kkkk</Text>
+          </View>
+
+                  </View> */}
+
+
           <WeightList />
+          
+        
 
           <Text
             style={{
@@ -210,19 +237,16 @@ console.log("=====================NAME=======================",setProductByID?.n
             }}>
             Product Details
           </Text>
+          {/* <Text>{stripHtmlTags(productById?.description)}</Text>   */}
           <Text
             style={{fontSize: 16, padding: 5, margin: 8, textAlign: 'justify'}}>
-            Delight in the crispy and savory goodness of our papad product. Made
-            from a blend of carefully selected lentil flours Delight in the
-            crispy and savory goodness of our papad product. Made from a blend
-            of carefully selected lentil flours Delight in the crispy and savory
-            goodness of our papad product. Made from a blend of carefully
-            selected lentil flours Delight in the crispy and savory goodness of
-            our papad product. Made from a blend of carefully selected lentil
-            flours
+            {productById?.description}
           </Text>
         </View>
 
+       
+      
+    
         <View style={{flex: 1}}>
           <ReviewComponent />
         </View>

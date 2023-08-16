@@ -18,6 +18,7 @@ interface IProductContext {
   onClose: Function;
   setProductByID: any;
   getProductById: Function;
+  productById:any;
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -25,7 +26,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [data, setData] = useState<any>([1, 2, 3]);
   const [mainCategory, setMainCategory] = useState<any>([]);
   const [subCategory, setSubCategory] = useState<any>([]);
-  const [productId, setProductByID] = useState<any>();
+  const [productById, setProductByID] = useState<any>(null);
   const [isDrawerVisible, setIsDrawerVisible] = React.useState(false);
   const navigation = useNavigation();
   useEffect(() => {
@@ -63,11 +64,11 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const getProductById = async (id: number | string) => {
     try {
       const {
-        result,
+        result:{data},
         err,
       } = await ProductApi.getProductById(id);
-      console.log('***************************PRODUCT BY ID',result);
-      setProductByID(result);
+      setProductByID(data);
+     
     } catch (err: any) {
       console.log('Error in prodectBy ID', err);
     }
@@ -82,6 +83,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     onClose,
     setProductByID,
     getProductById,
+    productById
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>

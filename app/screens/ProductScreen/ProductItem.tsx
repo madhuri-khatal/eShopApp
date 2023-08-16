@@ -37,6 +37,11 @@ export default function ProductItem({
 
   const navigation: any = useNavigation();
 
+  const handlePress = async () => {
+    await getProductById(product.id); // Use product.id directly
+    navigation.navigate('ProductDetailsScreen', { productId: product.id });
+  };
+  
   return (
     <>
       <View style={{flex: 1, padding: 2}}>
@@ -49,12 +54,9 @@ export default function ProductItem({
           }}>
           <View>
             <WishlistComponent />
-            <TouchableOpacity
-  onPress={() => {
-    getProductById(product?.id);
-    navigation.navigate('ProductDetailsScreen');
-  }}
->
+  
+<TouchableOpacity onPress={handlePress}>
+  
               {src && <Card.Cover source={{uri: src}} style={{height: 200}} />}
             </TouchableOpacity>
           </View>

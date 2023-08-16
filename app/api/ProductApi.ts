@@ -6,7 +6,7 @@ export const ProductApi = {
 
    // Get perticular Poduct information
    getProductById:async(id:number | string)=>{
-    return await Get <any>(`/wp-json/wc/v3/products/${id}?`)
+    return await Get <any>(`/wp-json/wc/v3/products/${id}`)
   }
   
 };
