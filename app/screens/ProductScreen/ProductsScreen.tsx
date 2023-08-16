@@ -14,6 +14,7 @@ export const ProductsScreen = (props: any) => {
     <ScrollView style={{backgroundColor: '#F7F7F7'}}>
       <HeaderBar
         title="Product Screen"
+        backAction={() => navigation.goBack()}
         right1Action={() =>
           navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
         }
@@ -25,8 +26,8 @@ export const ProductsScreen = (props: any) => {
           top: 55,
           left: 0,
           zIndex: 9000,
-                 borderRadius: 10,
-                   paddingBottom: 5,
+          borderRadius: 10,
+          paddingBottom: 5,
         }}>
         <FilterMenu />
       </View>
