@@ -15,6 +15,7 @@ import ReviewComponent from '../../../components/Product/ReviewComponent';
 import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useProductContext } from '../../../context/ProductContext';
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
   const [index, setIndex] = useState<number>(0);
@@ -23,6 +24,8 @@ export const ProductDetailsScreen = (props: any) => {
   const handleIndex = (index: number) => {
     setIndex(index);
   };
+  const {setProductByID}=useProductContext();
+console.log("=====================NAME=======================",setProductByID?.name);
 
   return (
     <>
@@ -147,10 +150,12 @@ export const ProductDetailsScreen = (props: any) => {
               textTransform: 'capitalize',
               marginBottom: 5,
             }}>
-            papad
+            {/* papad */}
+            {setProductByID?.name}
           </Text>
 
           <Text
+
             style={{fontSize: 16, padding: 5, margin: 8, textAlign: 'justify'}}>
             Delight in the crispy and savory goodness of our papad product. Made
             from a blend of carefully selected lentil flours

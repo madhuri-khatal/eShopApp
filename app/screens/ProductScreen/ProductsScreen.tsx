@@ -1,19 +1,21 @@
 import {ScrollView} from 'react-native-gesture-handler';
 import ProductList from './ProductList';
 import {HeaderBar} from '../../components/ui/HeaderBar';
-import {DrawerActions} from '@react-navigation/native';
+import {DrawerActions, useTheme} from '@react-navigation/native';
 import {View} from 'react-native';
 import React from 'react';
 
 import FilterMenu from '../../screens/FilterScreen/FilterMenu';
+// import  {colors}  from '../../../assets/colors/colors';
 
 export const ProductsScreen = (props: any) => {
   const {navigation} = props;
-
+  const {colors} = useTheme();
   return (
     <ScrollView style={{backgroundColor: '#F7F7F7'}}>
       <HeaderBar
         title="Product Screen"
+        titleStyle={{ color: colors.onSecondary }}             
         right1Action={() =>
           navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
         }

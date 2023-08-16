@@ -2,7 +2,7 @@ export const lightTheme = {
   
   colors: {
     // primary: 'rgb(172, 52, 0)',
-    primary: 'rgb(255, 181, 157)',
+    primary: '#e95d2a',
     onPrimary: 'rgb(255, 255, 255)',
     primaryContainer: 'rgb(255, 219, 208)',
     onPrimaryContainer: 'rgb(57, 12, 0)',

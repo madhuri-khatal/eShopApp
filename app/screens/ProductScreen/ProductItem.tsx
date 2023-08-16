@@ -3,10 +3,12 @@ import {View} from 'react-native';
 import {Card, Text} from 'react-native-paper';
 import Rating from '../../components/ui/RatingComponent';
 import CurrencyComponent from '../../components/ui/Currencycomponent';
-import {useNavigation} from '@react-navigation/native';
+import {getPathFromState, useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import WishlistComponent from '../../components/Product/WishlistComponent';
 import CartComponent from '../../components/Product/CartComponent';
+import { useProductContext } from '../../context/ProductContext';
+
 
 interface IProps {
   name: any;
@@ -16,6 +18,8 @@ interface IProps {
   rating: any;
   product: any;
 }
+
+
 export default function ProductItem({
   name,
   description,
@@ -27,6 +31,9 @@ export default function ProductItem({
   const {
     images: [{src}],
   } = product;
+
+ 
+  const {getProductById } =useProductContext()
 
   const navigation: any = useNavigation();
 
@@ -43,7 +50,11 @@ export default function ProductItem({
           <View>
             <WishlistComponent />
             <TouchableOpacity
-              onPress={() => navigation.navigate('ProductDetailsScreen')}>
+  onPress={() => {
+    getProductById(product?.id);
+    navigation.navigate('ProductDetailsScreen');
+  }}
+>
               {src && <Card.Cover source={{uri: src}} style={{height: 200}} />}
             </TouchableOpacity>
           </View>
