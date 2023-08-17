@@ -2,7 +2,9 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {DrawerActions} from '@react-navigation/native';
 
-import {Avatar, Divider,useTheme, Appbar, Button} from 'react-native-paper';
+
+import {Avatar, Divider, Appbar,useTheme, Button} from 'react-native-paper';
+
 
 
 export default function ProfileScreen(props: any) {
