@@ -1,14 +1,12 @@
 import {ScrollView} from 'react-native-gesture-handler';
-import {Button, Card, Text} from 'react-native-paper';
+import {Card, Text} from 'react-native-paper';
 import {HeaderBar} from './../../components/ui/HeaderBar';
 import {DrawerActions} from '@react-navigation/native';
 import React from 'react';
-import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {StyleSheet} from 'react-native';
 import {View, Image} from 'react-native';
 
 export const OrderDetailScreen = ({route, navigation}: any) => {
-  const {order} = route.params;
   const orderData = {
     id: 1,
     date: '2023-08-15',
@@ -40,7 +38,7 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
           right1Action={() => navigation.dispatch(DrawerActions.toggleDrawer())}
         />
 
-        <Card style={styles.section}>
+        <View style={styles.section}>
           <Card.Content>
             <Text style={styles.sectionTitle}>View Order Details</Text>
 
@@ -53,8 +51,8 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
               <Text style={styles.text}>{orderData.id}</Text>
             </View>
             <View style={styles.paymentItem}>
-              <Text style={styles.paymentLabel}> Order Total: ₹</Text>
-              <Text style={styles.text}>{orderData.total.toFixed(2)}</Text>
+              <Text style={styles.paymentLabel}>Order Total: </Text>
+              <Text style={styles.text}>₹{orderData.total.toFixed(2)}</Text>
             </View>
 
             {/* <Button
@@ -64,7 +62,7 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
               Download Invoice
             </Button> */}
           </Card.Content>
-        </Card>
+        </View>
 
         <Card style={styles.section}>
           <Card.Content>
@@ -125,6 +123,8 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 20,
+    backgroundColor: '#fff',
+    marginTop: 10,
   },
   sectionTitle: {
     fontSize: 20,
@@ -132,7 +132,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   text: {
+    flex: 1,
     fontSize: 16,
+    alignItems: 'flex-end',
   },
   downloadButton: {
     marginTop: 10,
