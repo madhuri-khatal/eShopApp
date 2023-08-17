@@ -8,7 +8,9 @@ import {CaraouselContent} from '../../components/Product/CarouselContent';
 export default function HomeScreen({navigation}: any) {
 
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
+
     const {colors}=useTheme();
+
   const handleSearchChange = (query: any) => {
     console.log('Search query:', query);
   };
@@ -20,6 +22,8 @@ export default function HomeScreen({navigation}: any) {
 
           <Appbar.Content title="Home"  titleStyle={{ color: colors.onSecondary }}   />
            <Appbar.Action icon="menu" onPress={_handleMore} />
+
+          
 
         </Appbar.Header>
 

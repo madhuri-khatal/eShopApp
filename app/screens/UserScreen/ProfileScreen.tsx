@@ -2,7 +2,9 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {DrawerActions} from '@react-navigation/native';
 
+
 import {Avatar, Divider, Appbar,useTheme, Button} from 'react-native-paper';
+
 
 
 export default function ProfileScreen(props: any) {
@@ -12,7 +14,7 @@ export default function ProfileScreen(props: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
 
   const {colors}=useTheme();
- 
+
 
   const handleEditProfile = () => {
     // Navigate to Edit Profile screen
@@ -32,6 +34,7 @@ export default function ProfileScreen(props: any) {
     <View>
       <Appbar.Header>
         <Appbar.Content title="Profile"  titleStyle={{ color: colors.onSecondary }} />
+
         <Appbar.Action icon="magnify" onPress={_handleSearch} />
         <Appbar.Action icon="menu" onPress={_handleMore} />
       </Appbar.Header>
