@@ -3,6 +3,7 @@
   "compilerOptions": {
     "jsx": "react",
     "baseUrl": "./app",                       /* Base directory to resolve non-absolute module names. */
+    "lib": ["es6", "dom"],
     "paths": {
       "@app/*": [
         "app/*"
