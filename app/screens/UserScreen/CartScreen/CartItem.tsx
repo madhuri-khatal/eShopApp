@@ -30,7 +30,7 @@ const CartItem = ({item, onRemove}: any) => {
       </View>
       <View style={{marginRight: 15}}>
         <TouchableOpacity onPress={onRemove}>
-          <FontAwesome5 name="trash" size={24} color="#cc3a1d" />
+          <FontAwesome5 name="trash" size={24} color="#e95d2a" />
         </TouchableOpacity>
       </View>
     </View>
