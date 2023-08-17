@@ -22,7 +22,7 @@ const Categories = [
   },
 ];
 
-export default function WeightList() {
+export default function WeightList({options}:any) {
   return (
     <ScrollView
       showsHorizontalScrollIndicator={true} // Hide horizontal scroll indicator
@@ -36,3 +36,23 @@ export default function WeightList() {
     </ScrollView>
   );
 }
+
+// import React from 'react';
+// import { ScrollView, FlatList } from 'react-native-gesture-handler';
+// import WeightItem from './WeightItem';
+
+// export default function WeightList({ options }:any) {
+//   return (
+//     <ScrollView
+//       horizontal
+//       showsHorizontalScrollIndicator={false} // Hide horizontal scroll indicator
+//       style={{ flex: 1, flexDirection: 'column' }}>
+//       <FlatList
+//         horizontal
+//         data={options}
+//         renderItem={({ item }) => <WeightItem title={item} />}
+//         keyExtractor={(item, index) => index.toString()}
+//       />
+//     </ScrollView>
+//   );
+// }

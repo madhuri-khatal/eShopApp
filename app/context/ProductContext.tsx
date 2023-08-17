@@ -7,6 +7,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import {ProductApi} from './../api/ProductApi';
 
 interface IProductContext {
   data: any;
@@ -15,6 +16,9 @@ interface IProductContext {
   subCategory: any[];
   setSubCategory: Function;
   onClose: Function;
+  setProductByID: any;
+  getProductById: Function;
+  productById:any;
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -22,6 +26,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [data, setData] = useState<any>([1, 2, 3]);
   const [mainCategory, setMainCategory] = useState<any>([]);
   const [subCategory, setSubCategory] = useState<any>([]);
+  const [productById, setProductByID] = useState<any>(null);
   const [isDrawerVisible, setIsDrawerVisible] = React.useState(false);
   const navigation = useNavigation();
   useEffect(() => {
@@ -55,6 +60,20 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     // setClose(true)
   };
 
+  // PRODUCTBYID
+  const getProductById = async (id: number | string) => {
+    try {
+      const {
+        result:{data},
+        err,
+      } = await ProductApi.getProductById(id);
+      setProductByID(data);
+     
+    } catch (err: any) {
+      console.log('Error in prodectBy ID', err);
+    }
+  };
+
   const value: IProductContext = {
     data,
     mainCategory,
@@ -62,6 +81,9 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     subCategory,
     setSubCategory,
     onClose,
+    setProductByID,
+    getProductById,
+    productById
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
