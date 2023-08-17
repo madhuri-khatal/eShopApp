@@ -6,6 +6,8 @@ import BottomTabNavigator from './BottomTabNavigator';
 import ProductStackScreen from './ProductStackScreen';
 import {ProductFilterDrawer} from './../screens/ProductScreen/ProductDetailsScreen/ProductFilterDrawer';
 import {useTheme} from 'react-native-paper';
+import {OrderScreen} from './../screens/MyOrderScreen/OrderScreen';
+import OrderStackScreen from './OrderStackScreen';
 
 const Drawer = createDrawerNavigator();
 export default function DrawerStackNavigator() {
@@ -40,9 +42,18 @@ export default function DrawerStackNavigator() {
         options={{
           drawerLabel: 'Product',
           title: 'Product',
-          drawerContentStyle:{backgroundColor:colors.background}
+          drawerContentStyle: {backgroundColor: colors.background},
         }}
         component={ProductFilterDrawer}
+      />
+      <Drawer.Screen
+        name="My Order"
+        options={{
+          drawerLabel: 'My Order',
+          title: 'My Order',
+          drawerContentStyle: {backgroundColor: colors.background},
+        }}
+        component={OrderStackScreen}
       />
     </Drawer.Navigator>
   );
