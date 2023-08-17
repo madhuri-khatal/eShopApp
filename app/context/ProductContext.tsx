@@ -18,7 +18,9 @@ interface IProductContext {
   onClose: Function;
   setProductByID: any;
   getProductById: Function;
-  productById:any;
+  productById: any;
+  productByCategoryId: any[];
+  getProductByCategoryId: Function;
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -27,8 +29,10 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [mainCategory, setMainCategory] = useState<any>([]);
   const [subCategory, setSubCategory] = useState<any>([]);
   const [productById, setProductByID] = useState<any>(null);
-  const [isDrawerVisible, setIsDrawerVisible] = React.useState(false);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [productByCategoryId, setProductByCategoryId] = useState<any>([]);
   const navigation = useNavigation();
+
   useEffect(() => {
     (async () => {
       const {
@@ -64,13 +68,25 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const getProductById = async (id: number | string) => {
     try {
       const {
-        result:{data},
+        result: {data},
         err,
       } = await ProductApi.getProductById(id);
       setProductByID(data);
-     
     } catch (err: any) {
       console.log('Error in prodectBy ID', err);
+    }
+  };
+
+  // PRODUCTLIST BY CATEGORY ID
+  const getProductByCategoryId = async (id: number | string) => {
+    try {
+      const {
+        result: {data},
+        err,
+      } = await ProductApi.getProductByCategoryId(id);
+       setProductByCategoryId(data);
+    } catch (err: any) {
+      console.log('Error in Product By Cateory Id', err);
     }
   };
 
@@ -83,7 +99,9 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     onClose,
     setProductByID,
     getProductById,
-    productById
+    productById,
+    productByCategoryId,
+    getProductByCategoryId,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
