@@ -27,6 +27,7 @@ export const ProductDetailsScreen = (props: any) => {
   };
 
   const {productById} = useProductContext();
+
   
    // For removing <p> tag
   // function stripHtmlTags(htmlString:any) {

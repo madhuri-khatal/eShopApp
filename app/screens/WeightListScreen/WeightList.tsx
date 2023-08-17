@@ -1,58 +1,27 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import WeightItem from './WeightItem';
+import { useProductContext } from '../../context/ProductContext';
 
-const Categories = [
-  {
-    id: 1,
-    title: '100 gm',
-  },
-  {
-    id: 2,
-    title: '250 gm',
-  },
-  {
-    id: 3,
-    title: '500 gm',
-  },
-  {
-    id: 4,
-    title: '1 kg',
-  },
-];
-
-export default function WeightList({options}:any) {
+export default function WeightList({ options2 }: any) {
+  const { productById } = useProductContext();
+  const options1 = productById?.attributes;
+    let resolvedOptions2 = options2;
+  if (options1 && options1.length > 0) {
+    resolvedOptions2 = options1[0].options;
+    }
+  
   return (
     <ScrollView
-      showsHorizontalScrollIndicator={true} // Hide horizontal scroll indicator
-      style={{flex: 1, flexDirection: 'column'}}>
+      showsHorizontalScrollIndicator={true}
+      style={{ flex: 1, flexDirection: 'column' }}>
       <FlatList
         horizontal
-        data={Categories}
-        renderItem={({item}) => <WeightItem title={item.title} />}
+        data={resolvedOptions2}
+        renderItem={({ item }) => <WeightItem options2={item} />} 
         keyExtractor={item => String(item.id)}
       />
     </ScrollView>
   );
 }
 
-// import React from 'react';
-// import { ScrollView, FlatList } from 'react-native-gesture-handler';
-// import WeightItem from './WeightItem';
-
-// export default function WeightList({ options }:any) {
-//   return (
-//     <ScrollView
-//       horizontal
-//       showsHorizontalScrollIndicator={false} // Hide horizontal scroll indicator
-//       style={{ flex: 1, flexDirection: 'column' }}>
-//       <FlatList
-//         horizontal
-//         data={options}
-//         renderItem={({ item }) => <WeightItem title={item} />}
-//         keyExtractor={(item, index) => index.toString()}
-//       />
-//     </ScrollView>
-//   );
-// }

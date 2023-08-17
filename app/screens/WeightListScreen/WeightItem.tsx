@@ -1,14 +1,13 @@
 import React from 'react';
-import {Chip} from 'react-native-paper';
-import {Image, View} from 'react-native';
-import {Text} from 'react-native';
+import { View, Text } from 'react-native';
 
 interface IProps {
   icon?: any;
-  title: any;
+  title?: any;
+  options2: string;
 }
 
-export default function WeightItem({icon, title}: IProps) {
+export default function WeightItem({ icon, title, options2 }: IProps) {
   return (
     <View
       style={{
@@ -21,7 +20,7 @@ export default function WeightItem({icon, title}: IProps) {
         borderColor: '#59a30e',
         borderRadius: 5,
       }}>
-      <Text>{title}</Text>
+      <Text>{options2}</Text>
     </View>
   );
 }
