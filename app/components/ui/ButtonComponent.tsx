@@ -11,7 +11,7 @@ interface ButtonProps {
   textStyle?: TextStyle
   style?: ViewStyle
   type?: "primary" | "secondary" | "outlined"
-  backgroundColor?: "primary" | "secondary" | "info" | "success" | "warning" | "danger" | "purple" // Added new background colors
+  backgroundColor?: "primary" | "secondary" | "info" | "success" | "warning" | "danger" | "purple"|"green"|"orange" // Added new background colors
 }
 
 const ButtonComponent: React.FC<ButtonProps> = ({
@@ -41,6 +41,10 @@ const ButtonComponent: React.FC<ButtonProps> = ({
         return "#DC3545"
       case "purple":
         return "#800080"
+     case "green":
+        return "#76A713"
+        case "orange":
+          return "#fa5f11"
       default:
         return "#007BFF"
     }
