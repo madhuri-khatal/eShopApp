@@ -91,38 +91,43 @@ export default function ProfileScreen(props: any) {
 
         <View style={styles.addressSection}>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.sectionTitle}>Current Address</Text>
-            <MaterialCommunityIcons
-              name="pencil"
-              size={24}
-              color="gray"
-              style={{marginLeft: 25}}
-            />
+            <View style={{flex: 1, flexDirection: 'column'}}>
+              <Text style={styles.sectionTitle}>Current Address</Text>
+            </View>
+            <View>
+              <MaterialCommunityIcons
+                name="pencil"
+                size={24}
+                color="gray"
+                style={{marginLeft: 25}}
+              />
+            </View>
           </View>
           <Text style={styles.addressText}>{address}</Text>
         </View>
         <Divider />
-
-        <Divider />
         <View style={styles.addressSection}>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.sectionTitle}>Gender</Text>
-            <MaterialCommunityIcons
-              name="pencil"
-              size={24}
-              color="gray"
-              style={{marginLeft: 25}}
-            />
+            <View style={{flex: 1, flexDirection: 'column'}}>
+              <Text style={styles.sectionTitle}>Gender</Text>
+            </View>
+            <View>
+              <MaterialCommunityIcons
+                name="pencil"
+                size={24}
+                color="gray"
+                style={{marginLeft: 25}}
+              />
+            </View>
           </View>
           <Text style={styles.addressText}>Female</Text>
         </View>
         <Divider />
         <View style={styles.addressSection}>
           <View style={{flexDirection: 'row'}}>
-            <View>
+            <View style={{flex: 1, flexDirection: 'column'}}>
               <Text style={styles.sectionTitle}>Selected Language</Text>
             </View>
-
             <View>
               <MaterialCommunityIcons
                 name="pencil"
@@ -137,16 +142,19 @@ export default function ProfileScreen(props: any) {
         <Divider />
         <View style={styles.addressSection}>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.sectionTitle}>Contact Number</Text>
-            <MaterialCommunityIcons
-              name="pencil"
-              size={24}
-              color="gray"
-              style={{marginLeft: 25}}
-            />
+            <View style={{flex: 1, flexDirection: 'column'}}>
+              <Text style={styles.sectionTitle}>Contact Number</Text>
+            </View>
+            <View>
+              <MaterialCommunityIcons
+                name="pencil"
+                size={24}
+                color="gray"
+                style={{marginLeft: 25}}
+              />
+            </View>
           </View>
-
-          <Text style={styles.addressText}>98765 43210</Text>
+          <Text style={styles.addressText}>+91 90876 54321</Text>
         </View>
         <Divider />
       </View>

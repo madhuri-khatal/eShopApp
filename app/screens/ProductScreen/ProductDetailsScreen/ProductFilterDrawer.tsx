@@ -28,8 +28,8 @@ export const ProductFilterDrawer = () => {
           component={ProductStackScreen}
           name="productStackScreen"
         />
-        <Drawer.Screen component={ProductList} name='productListScreen'/>
-        </Drawer.Navigator>
+        <Drawer.Screen component={ProductList} name="ProductList" />
+      </Drawer.Navigator>
     </ProductContextProvider>
   );
 };

@@ -20,6 +20,7 @@ interface IProductContext {
   getProductById: Function;
   productById: any;
   productByCategoryId: any[];
+  setProductByCategoryId: Function;
   getProductByCategoryId: Function;
 }
 const ProductContext = createContext<IProductContext | null>(null);
@@ -30,8 +31,22 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [subCategory, setSubCategory] = useState<any>([]);
   const [productById, setProductByID] = useState<any>(null);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
-  const [productByCategoryId, setProductByCategoryId] = useState<any>([]);
-  const navigation = useNavigation();
+  const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
+  const navigation: any = useNavigation();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const {
+          result: {data},
+          err,
+        } = await ProductApi.getProductList();
+        setProductByCategoryId(data);
+      } catch (error) {
+        console.log('error', error);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -80,11 +95,12 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   // PRODUCTLIST BY CATEGORY ID
   const getProductByCategoryId = async (id: number | string) => {
     try {
-      const {
-        result: {data},
-        err,
-      } = await ProductApi.getProductByCategoryId(id);
-       setProductByCategoryId(data);
+      const {result: {data = []} = {}, err} =
+        await ProductApi.getProductByCategoryId(id);
+      console.log('data for product by category', data);
+      setProductByCategoryId(data);
+      // data?.length > 0 && setProductByCategoryId(data);
+      // data?.length == 0 || (data && setProductByCategoryId([]));
     } catch (err: any) {
       console.log('Error in Product By Cateory Id', err);
     }
@@ -102,6 +118,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     productById,
     productByCategoryId,
     getProductByCategoryId,
+    setProductByCategoryId,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
