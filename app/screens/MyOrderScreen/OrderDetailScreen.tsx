@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
     backgroundColor: '#fff',
-    marginTop: 10,
+    paddingTop: 10,
   },
   sectionTitle: {
     fontSize: 20,

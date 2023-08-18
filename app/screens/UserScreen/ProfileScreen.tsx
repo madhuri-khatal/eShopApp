@@ -1,40 +1,19 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
-import {DrawerActions} from '@react-navigation/native';
-
-
-import {Avatar, Divider, Appbar,useTheme, Button} from 'react-native-paper';
-
-
-
+import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {Avatar, Divider, Appbar, Button} from 'react-native-paper';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 export default function ProfileScreen(props: any) {
-  const {navigation} = props;
+  // const {navigation} = props;
+  const navigation: any = useNavigation();
   const _goBack = () => console.log('Went back');
   const _handleSearch = () => console.log('Searching');
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
-
-  const {colors}=useTheme();
-
-
-  const handleEditProfile = () => {
-    // Navigate to Edit Profile screen
-    navigation.navigate('EditProfile');
-  };
-
-  const handleSavedAddresses = () => {
-    // Navigate to Saved Addresses screen
-    navigation.navigate('SavedAddresses');
-  };
-
-  const handleLanguageSelection = () => {
-    // Navigate to Language Selection screen
-    navigation.navigate('LanguageSelection');
-  };
+  const address = '1234 Example Street, City, State 12345, Country';
   return (
     <View>
       <Appbar.Header>
-        <Appbar.Content title="Profile"  titleStyle={{ color: colors.onSecondary }} />
-
+        <Appbar.Content title="Profile" />
         <Appbar.Action icon="magnify" onPress={_handleSearch} />
         <Appbar.Action icon="menu" onPress={_handleMore} />
       </Appbar.Header>
@@ -93,65 +72,7 @@ export default function ProfileScreen(props: any) {
                   justifyContent: 'center',
                 }}
                 mode="contained"
-                onPress={() => navigation.navigate('CartScreen')}>
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                    justifyContent: 'center',
-                    fontSize: 17,
-                    textTransform: 'capitalize',
-                    color: '#595555',
-                  }}>
-                  My Orders
-                </Text>
-              </Button>
-            </View>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              display: 'flex',
-              flexDirection: 'row',
-              marginTop: 15,
-              marginBottom: 10,
-              justifyContent: 'center',
-            }}>
-            <View style={{alignItems: 'center', marginRight: 5}}>
-              <Button
-                style={{
-                  width: 190,
-                  height: 50,
-                  backgroundColor: '#f6d70e',
-                  borderRadius: 10,
-                  padding: 3,
-                  justifyContent: 'center',
-                }}
-                mode="contained"
-                onPress={() => navigation.navigate('CartScreen')}>
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                    justifyContent: 'center',
-                    fontSize: 17,
-                    textTransform: 'capitalize',
-                    color: '#595555',
-                  }}>
-                  WishList
-                </Text>
-              </Button>
-            </View>
-            <View style={{alignItems: 'center'}}>
-              <Button
-                style={{
-                  width: 190,
-                  height: 50,
-                  backgroundColor: '#f6d70e',
-                  borderRadius: 10,
-                  padding: 3,
-                  justifyContent: 'center',
-                }}
-                mode="contained"
-                onPress={() => navigation.navigate('CartScreen')}>
+                onPress={() => navigation.navigate('OrderScreen')}>
                 <Text
                   style={{
                     fontWeight: 'bold',
@@ -166,19 +87,68 @@ export default function ProfileScreen(props: any) {
             </View>
           </View>
         </View>
-        <Divider style={styles.divider} />
-        <TouchableOpacity style={styles.section} onPress={handleSavedAddresses}>
-          <Text style={styles.sectionTitle}>Edit Profile</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.section} onPress={handleSavedAddresses}>
-          <Text style={styles.sectionTitle}>Saved Addresses</Text>
-        </TouchableOpacity>
-        <Divider style={styles.divider} />
-        <TouchableOpacity
-          style={styles.section}
-          onPress={handleLanguageSelection}>
-          <Text style={styles.sectionTitle}>Select Language</Text>
-        </TouchableOpacity>
+        <Divider />
+
+        <View style={styles.addressSection}>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.sectionTitle}>Current Address</Text>
+            <MaterialCommunityIcons
+              name="pencil"
+              size={24}
+              color="gray"
+              style={{marginLeft: 25}}
+            />
+          </View>
+          <Text style={styles.addressText}>{address}</Text>
+        </View>
+        <Divider />
+
+        <Divider />
+        <View style={styles.addressSection}>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.sectionTitle}>Gender</Text>
+            <MaterialCommunityIcons
+              name="pencil"
+              size={24}
+              color="gray"
+              style={{marginLeft: 25}}
+            />
+          </View>
+          <Text style={styles.addressText}>Female</Text>
+        </View>
+        <Divider />
+        <View style={styles.addressSection}>
+          <View style={{flexDirection: 'row'}}>
+            <View>
+              <Text style={styles.sectionTitle}>Selected Language</Text>
+            </View>
+
+            <View>
+              <MaterialCommunityIcons
+                name="pencil"
+                size={24}
+                color="gray"
+                style={{marginLeft: 25}}
+              />
+            </View>
+          </View>
+          <Text style={styles.addressText}>English</Text>
+        </View>
+        <Divider />
+        <View style={styles.addressSection}>
+          <View style={{flexDirection: 'row'}}>
+            <Text style={styles.sectionTitle}>Contact Number</Text>
+            <MaterialCommunityIcons
+              name="pencil"
+              size={24}
+              color="gray"
+              style={{marginLeft: 25}}
+            />
+          </View>
+
+          <Text style={styles.addressText}>98765 43210</Text>
+        </View>
+        <Divider />
       </View>
     </View>
   );
@@ -205,10 +175,24 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   section: {
-    paddingVertical: 10,
+    paddingVertical: 20,
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  addressSection: {
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+  },
+  addressText: {
+    fontSize: 16,
+    marginTop: 10,
+  },
+  editProfileButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
   },
 });
