@@ -30,6 +30,14 @@ export default function ProductItem({product}: IProps) {
     navigation.navigate('ProductDetailsScreen', {productId: product.id});
   };
 
+  let productImageSrc = null;
+
+  if (product.images && product.images.length > 0) {
+    productImageSrc = product.images[0].src;
+  } else if (product.image && product.image.src) {
+    productImageSrc = product.image.src;
+  }
+
   return (
     <>
       <View style={{flex: 1, padding: 2}}>
@@ -42,9 +50,13 @@ export default function ProductItem({product}: IProps) {
           }}>
           <View>
             <WishlistComponent />
-
             <TouchableOpacity onPress={handlePress}>
-              {src && <Card.Cover source={{uri: src}} style={{height: 200}} />}
+              {productImageSrc && (
+                <Card.Cover
+                  source={{uri: productImageSrc}}
+                  style={{height: 200}}
+                />
+              )}
             </TouchableOpacity>
           </View>
           <Text
