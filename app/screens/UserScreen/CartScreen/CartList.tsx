@@ -2,6 +2,8 @@ import React from 'react';
 import {View, ScrollView} from 'react-native';
 import CartItem from './CartItem';
 
+
+
 const CartList = ({cartItems, onCartItemRemove}: any) => {
   return (
     <ScrollView>
@@ -12,6 +14,7 @@ const CartList = ({cartItems, onCartItemRemove}: any) => {
           onRemove={() => onCartItemRemove(item.id)}
         />
       ))}
+
     </ScrollView>
   );
 };
