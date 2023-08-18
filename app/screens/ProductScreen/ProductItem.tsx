@@ -3,12 +3,11 @@ import {View} from 'react-native';
 import {Card, Text} from 'react-native-paper';
 import Rating from '../../components/ui/RatingComponent';
 import CurrencyComponent from '../../components/ui/Currencycomponent';
-import {getPathFromState, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import WishlistComponent from '../../components/Product/WishlistComponent';
 import CartComponent from '../../components/Product/CartComponent';
-import { useProductContext } from '../../context/ProductContext';
-
+import {useProductContext} from '../../context/ProductContext';
 
 interface IProps {
   name?: any;
@@ -19,29 +18,18 @@ interface IProps {
   product?: any;
 }
 
+export default function ProductItem({product}: IProps) {
+  const {images: [{src = ''} = {}] = []} = product;
 
-export default function ProductItem({
-  name,
-  description,
-  img,
-  price,
-  rating,
-  product,
-}: IProps) {
-  const {
-    images: [{src}],
-  } = product;
-
- 
-  const {getProductById } =useProductContext()
+  const {getProductById} = useProductContext();
 
   const navigation: any = useNavigation();
 
   const handlePress = async () => {
     await getProductById(product.id); // Use product.id directly
-    navigation.navigate('ProductDetailsScreen', { productId: product.id });
+    navigation.navigate('ProductDetailsScreen', {productId: product.id});
   };
-  
+
   return (
     <>
       <View style={{flex: 1, padding: 2}}>
@@ -54,9 +42,8 @@ export default function ProductItem({
           }}>
           <View>
             <WishlistComponent />
-  
-<TouchableOpacity onPress={handlePress}>
-  
+
+            <TouchableOpacity onPress={handlePress}>
               {src && <Card.Cover source={{uri: src}} style={{height: 200}} />}
             </TouchableOpacity>
           </View>
@@ -73,7 +60,7 @@ export default function ProductItem({
             ellipsizeMode="tail">
             {product.name}
           </Text>
-          {product.sale_price > 1 && (
+          {product?.sale_price > 1 && (
             <View
               style={{
                 flexDirection: 'row',
@@ -97,7 +84,7 @@ export default function ProductItem({
             </View>
           )}
 
-          {product.sale_price <= 1 && (
+          {product?.sale_price <= 1 && (
             <CurrencyComponent
               value={product.price}
               style={{fontSize: 17, fontWeight: 'bold', marginLeft: 10}}
