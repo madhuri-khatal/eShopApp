@@ -20,13 +20,13 @@ export default function ProfileScreen(props: any) {
 
       <View style={{marginTop: 20}}>
         <View style={styles.profileContainer}>
-          <Avatar.Image
+            <Avatar.Image
             size={80}
             source={{
               uri: 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_960_720.png',
-            }}
+             }}
           />
-          <Text style={styles.userName}>John Doe</Text>
+           <Text style={styles.userName}>John Doe</Text>
 
           <View
             style={{
@@ -42,7 +42,7 @@ export default function ProfileScreen(props: any) {
                 style={{
                   width: 190,
                   height: 50,
-                  backgroundColor: '#f6d70e',
+                  backgroundColor:'#f7c6b2',
                   borderRadius: 10,
                   padding: 3,
                   justifyContent: 'center',
@@ -55,7 +55,7 @@ export default function ProfileScreen(props: any) {
                     justifyContent: 'center',
                     fontSize: 17,
                     textTransform: 'capitalize',
-                    color: '#595555',
+                    color: '#f25616',
                   }}>
                   My Cart
                 </Text>
@@ -66,7 +66,7 @@ export default function ProfileScreen(props: any) {
                 style={{
                   width: 190,
                   height: 50,
-                  backgroundColor: '#f6d70e',
+                  backgroundColor: '#f7c6b2',
                   borderRadius: 10,
                   padding: 3,
                   justifyContent: 'center',
@@ -79,7 +79,7 @@ export default function ProfileScreen(props: any) {
                     justifyContent: 'center',
                     fontSize: 17,
                     textTransform: 'capitalize',
-                    color: '#595555',
+                    color: '#f25616',
                   }}>
                   My Orders
                 </Text>
@@ -89,66 +89,63 @@ export default function ProfileScreen(props: any) {
         </View>
         <Divider />
 
-        <View style={styles.addressSection}>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.sectionTitle}>Current Address</Text>
-            <MaterialCommunityIcons
-              name="pencil"
-              size={24}
-              color="gray"
-              style={{marginLeft: 25}}
-            />
-          </View>
-          <Text style={styles.addressText}>{address}</Text>
-        </View>
-        <Divider />
-
-        <Divider />
-        <View style={styles.addressSection}>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.sectionTitle}>Gender</Text>
-            <MaterialCommunityIcons
-              name="pencil"
-              size={24}
-              color="gray"
-              style={{marginLeft: 25}}
-            />
-          </View>
-          <Text style={styles.addressText}>Female</Text>
-        </View>
-        <Divider />
-        <View style={styles.addressSection}>
-          <View style={{flexDirection: 'row'}}>
-            <View>
-              <Text style={styles.sectionTitle}>Selected Language</Text>
+        <View style={{padding: 40}}>
+          <MaterialCommunityIcons
+            name="pencil"
+            size={24}
+            color="gray"
+            style={{marginLeft: 300}}
+          />
+          <View style={styles.addressSection}>
+            <View style={{flexDirection: 'row',marginTop:-40}}>
+              <Text style={styles.sectionTitle}>Current Address</Text>
             </View>
+            <Text style={styles.addressText}>{address}</Text>
+          </View>
+          <Divider />
 
-            <View>
-              <MaterialCommunityIcons
-                name="pencil"
-                size={24}
-                color="gray"
-                style={{marginLeft: 25}}
-              />
+          <View style={styles.addressSection}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.sectionTitle}>Email Id</Text>
             </View>
+            <Text style={styles.addressText}>a@gmail.com</Text>
           </View>
-          <Text style={styles.addressText}>English</Text>
-        </View>
-        <Divider />
-        <View style={styles.addressSection}>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={styles.sectionTitle}>Contact Number</Text>
-            <MaterialCommunityIcons
-              name="pencil"
-              size={24}
-              color="gray"
-              style={{marginLeft: 25}}
-            />
-          </View>
+          
+          <Divider />
 
-          <Text style={styles.addressText}>98765 43210</Text>
+          <View style={styles.addressSection}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={styles.sectionTitle}>Contact Number</Text>
+            </View>
+            <Text style={styles.addressText}>98765 43210</Text>
+          </View>
+          <Divider />
         </View>
-        <Divider />
+
+        <View style={{alignItems: 'center', marginRight: 5}}>
+              <Button
+                style={{
+                  width: 190,
+                  height: 50,
+                  backgroundColor: '#f7c6b2',
+                  borderRadius: 10,
+                  padding: 3,
+                  justifyContent: 'center',
+                }}
+                mode="contained"
+                onPress={() => navigation.navigate('CartScreen')}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    justifyContent: 'center',
+                    fontSize: 17,
+                    textTransform: 'capitalize',
+                    color: '#f25616',
+                  }}>
+                  Log Out
+                </Text>
+              </Button>
+            </View>
       </View>
     </View>
   );
@@ -162,6 +159,7 @@ const styles = StyleSheet.create({
   profileContainer: {
     alignItems: 'center',
     marginBottom: 20,
+    
   },
   userName: {
     fontSize: 18,
