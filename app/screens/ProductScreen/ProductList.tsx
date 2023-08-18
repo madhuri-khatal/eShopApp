@@ -3,11 +3,23 @@ import {ScrollView, View} from 'react-native';
 import ProductItem from './ProductItem';
 import {ProductApi} from '../../api/ProductApi';
 import {useProductContext} from './../../context/ProductContext';
+import { HeaderBar } from '../../components/ui/HeaderBar';
+import {DrawerActions, useTheme} from '@react-navigation/native';
 
-export default function ProductList() {
-  const {data} = useProductContext();
+
+interface props{
+  props:any;
+}
+export default function ProductList(props:any) {
+  const {productByCategoryId} = useProductContext();
+
+ 
+
+  const {navigation} = props;
+  const {colors} = useTheme();
+
   const [products, setProducts] = useState<any>([]);
-  useEffect(() => {
+   useEffect(() => {
     (async () => {
       const {
         result: {data},
@@ -16,10 +28,10 @@ export default function ProductList() {
 
       if (err) {
       } else {
-        setProducts(data); // Store fetched products in state
+        setProducts(data); 
       }
     })();
-  }, []);
+  }, [productByCategoryId]);
 
   if (products.length > 0) {
     products.forEach((product: any) => {
@@ -27,12 +39,12 @@ export default function ProductList() {
       const img = imageSrcs.src;
     });
   }
+  
+
   const rows = [];
   let rowIndex = 0;
-
   while (rowIndex < products.length) {
     const rowProducts = products.slice(rowIndex, rowIndex + 2);
-
     rows.push(
       <View
         style={{
@@ -54,11 +66,34 @@ export default function ProductList() {
         ))}
       </View>,
     );
-
     rowIndex += 2;
   }
 
   return (
+    <>
+    {productByCategoryId.length !== 0 ? (
+      <><HeaderBar
+      title="Product List"
+      titleStyle={{ color: colors.onSecondary }}             
+      backAction={() => navigation.goBack()}
+      right1Action={() =>
+        navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
+      }
+      icon1="menu"
+      />
+      <ScrollView style={{ flex: 1 }}>
+          <View
+            style={{
+              flex: 1,
+              padding: 3,
+              paddingTop: 20,
+              backgroundColor: '#F7F7F7',
+            }}>
+            {rows}
+          </View>
+        </ScrollView></>
+
+    ):(
     <ScrollView style={{flex: 1}}>
       <View
         style={{
@@ -70,5 +105,9 @@ export default function ProductList() {
         {rows}
       </View>
     </ScrollView>
+    )}
+
+    </>
   );
+
 }

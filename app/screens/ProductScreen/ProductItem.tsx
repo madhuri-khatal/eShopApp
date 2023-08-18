@@ -11,12 +11,12 @@ import { useProductContext } from '../../context/ProductContext';
 
 
 interface IProps {
-  name: any;
-  description: any;
-  img: any;
-  price: any;
-  rating: any;
-  product: any;
+  name?: any;
+  description?: any;
+  img?: any;
+  price?: any;
+  rating?: any;
+  product?: any;
 }
 
 

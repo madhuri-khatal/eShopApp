@@ -6,6 +6,7 @@ import DrawerContent from './DrawerContent';
 import {ProductContextProvider} from './../../../context/ProductContext';
 import {useTheme} from 'react-native-paper';
 import ProductStackScreen from './../../../navigators/ProductStackScreen';
+import ProductList from '../ProductList';
 const Drawer = createDrawerNavigator();
 
 export const ProductFilterDrawer = () => {
@@ -27,7 +28,8 @@ export const ProductFilterDrawer = () => {
           component={ProductStackScreen}
           name="productStackScreen"
         />
-      </Drawer.Navigator>
+        <Drawer.Screen component={ProductList} name='productListScreen'/>
+        </Drawer.Navigator>
     </ProductContextProvider>
   );
 };

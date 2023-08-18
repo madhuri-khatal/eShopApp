@@ -23,6 +23,7 @@ export default function ProductStackScreen({navigation}: any) {
           name="ProductDetailsScreen"
           component={ProductDetailsScreen}
         />
+         
       </Stack.Navigator>
     </>
   );
