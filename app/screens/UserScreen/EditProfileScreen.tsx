@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { DrawerActions } from '@react-navigation/native';
 import { Avatar, Divider, Appbar, Button, TextInput } from 'react-native-paper';
+import RandomAvatar from '../../components/ui/RandomAvtar';
 
 export default function EditProfileScreen({ navigation }: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
 
-  const [username, setUsername] = useState('John Doe');
+  const [email, setEmail] = useState('A@gmail.com');
   const [address, setAddress] = useState('1234 Example Street, City, State 12345, Country');
-  const [language, setLanguage] = useState('English');
+  const [contact, setContact] = useState('9090908978');
   const [photoUri, setPhotoUri] = useState(
     'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_960_720.png'
   );
@@ -25,21 +26,16 @@ export default function EditProfileScreen({ navigation }: any) {
       </Appbar.Header>
 
       <View style={{ marginTop: 20 }}>
+        <RandomAvatar/>
         <View style={styles.profileContainer}>
-          <Avatar.Image size={80} source={{ uri: photoUri }} />
-          <Button
-            mode="outlined"
-            onPress={() => console.log('Change Photo')}
-            style={{ marginTop: 10 }}>
-            Change Photo
-          </Button>
+            
         </View>
-        <Divider />
+      
 
         <TextInput
-          label="Username"
-          value={username}
-          onChangeText={(text) => setUsername(text)}
+          label="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
           style={styles.input}
         />
 
@@ -51,9 +47,9 @@ export default function EditProfileScreen({ navigation }: any) {
         />
 
         <TextInput
-          label="Language"
-          value={language}
-          onChangeText={(text) => setLanguage(text)}
+          label="Contact No"
+          value={contact}
+          onChangeText={(text) => setContact(text)}
           style={styles.input}
         />
 
@@ -69,14 +65,13 @@ export default function EditProfileScreen({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  // ... your other styles ...
-
-  profileContainer: {
+   profileContainer: {
     alignItems: 'center',
     marginBottom: 20,
   },
   input: {
     marginHorizontal: 20,
     marginTop: 10,
+    fontSize:15,
   },
 });

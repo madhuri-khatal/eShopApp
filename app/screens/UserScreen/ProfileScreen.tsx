@@ -3,6 +3,8 @@ import React from 'react';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import {Avatar, Divider, Appbar, Button} from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import RandomAvatar from '../../components/ui/RandomAvtar';
+
 export default function ProfileScreen(props: any) {
   // const {navigation} = props;
   const navigation: any = useNavigation();
@@ -11,7 +13,7 @@ export default function ProfileScreen(props: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
   const address = '1234 Example Street, City, State 12345, Country';
   return (
-    <View>
+        <View>
       <Appbar.Header>
         <Appbar.Content title="Profile" />
         <Appbar.Action icon="magnify" onPress={_handleSearch} />
@@ -20,13 +22,8 @@ export default function ProfileScreen(props: any) {
 
       <View style={{marginTop: 20}}>
         <View style={styles.profileContainer}>
-            <Avatar.Image
-            size={80}
-            source={{
-              uri: 'https://cdn.pixabay.com/photo/2015/03/04/22/35/avatar-659652_960_720.png',
-             }}
-          />
-           <Text style={styles.userName}>John Doe</Text>
+          <RandomAvatar/>
+            <Text style={styles.userName}>John Doe</Text>
 
           <View
             style={{
@@ -93,8 +90,10 @@ export default function ProfileScreen(props: any) {
           <MaterialCommunityIcons
             name="pencil"
             size={24}
-            color="gray"
+            color='#f25616'
             style={{marginLeft: 300}}
+            onPress={() => navigation.navigate('EditProfileScreen')}
+            
           />
           <View style={styles.addressSection}>
             <View style={{flexDirection: 'row',marginTop:-40}}>
