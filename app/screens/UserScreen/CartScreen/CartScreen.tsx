@@ -8,6 +8,7 @@ import CartList from './CartList';
 
 export const CartScreen = (props: any) => {
   const {navigation} = props;
+  // const navigation: any = useNavigation();
   const cartItems = [
     {
       id: 1,
@@ -109,6 +110,9 @@ export const CartScreen = (props: any) => {
                   padding: 12,
                   borderRadius: 8,
                   marginTop: 16,
+                }}
+                onPress={()=>{
+                  navigation.navigate('CheckoutScreen')
                 }}>
                 <Text
                   style={{
