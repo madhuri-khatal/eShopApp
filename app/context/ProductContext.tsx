@@ -24,6 +24,8 @@ interface IProductContext {
   getProductByCategoryId: Function;
   getProductDetailByCategoryId: Function;
   productDetailByCategoryId: any;
+  fetchMoreData:Function;
+    hasMoreData:any;
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -34,10 +36,11 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [productById, setProductByID] = useState<any>(null);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
-  const [productDetailByCategoryId, setProductDetailByCategoryId] =
-    useState<any>(null);
+  const [productDetailByCategoryId, setProductDetailByCategoryId] =useState<any>(null);
   const navigation: any = useNavigation();
-
+  // const [data, setData] = useState<any>([1, 2, 3]);
+  const [page, setPage] = useState<number>(1);
+  const [hasMoreData, setHasMoreData] = useState<boolean>(true);
   useEffect(() => {
     (async () => {
       try {
@@ -51,6 +54,26 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
       }
     })();
   }, []);
+
+
+  
+  const fetchMoreData = async () => {
+    if (!hasMoreData) return;
+    try {
+      const {
+        result: { data },
+        err,
+      } = await ProductApi.getProductList(page + 1); // Fetch next page
+      if (data.length > 0) {
+        setProductByCategoryId(prevData => [...prevData, ...data]);
+        setPage(prevPage => prevPage + 1);
+      } else {
+        setHasMoreData(false);
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -136,6 +159,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     setProductByCategoryId,
     getProductDetailByCategoryId,
     productDetailByCategoryId,
+    fetchMoreData,
+    hasMoreData,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
