@@ -5,11 +5,11 @@ import {DrawerActions} from '@react-navigation/native';
 import SearchBar from '../../components/Product/SearchBar';
 import {Caraousel} from '../../components/Product/Carousel';
 import {CaraouselContent} from '../../components/Product/CarouselContent';
+import FeaturedCategories from '../../components/Product/FeaturedCategories';
 export default function HomeScreen({navigation}: any) {
-
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
 
-    const {colors}=useTheme();
+  const {colors} = useTheme();
 
   const handleSearchChange = (query: any) => {
     console.log('Search query:', query);
@@ -19,12 +19,11 @@ export default function HomeScreen({navigation}: any) {
     <>
       <View>
         <Appbar.Header>
-
-          <Appbar.Content title="Home"  titleStyle={{ color: colors.onSecondary }}   />
-           <Appbar.Action icon="menu" onPress={_handleMore} />
-
-          
-
+          <Appbar.Content
+            title="Home"
+            titleStyle={{color: colors.onSecondary}}
+          />
+          <Appbar.Action icon="menu" onPress={_handleMore} />
         </Appbar.Header>
 
         <SearchBar onChangeText={handleSearchChange} />
@@ -35,6 +34,8 @@ export default function HomeScreen({navigation}: any) {
           autoPlay
           onSnapToItem={() => console.log('hi')}
         />
+
+        <FeaturedCategories />
       </View>
     </>
   );
