@@ -13,5 +13,11 @@ export const ProductApi = {
   // Get product by categoryID
   getProductByCategoryId:async(id:number| string)=>{
     return await Get <any>(`/wp-json/wc/v3/products/categories?parent=${id}&per_page=50&`)
+  },
+
+  // Get particular product information of subCtegory Product
+  getProductDetailByCategoryId:async(id:number | string)=>{
+    return await Get<any>(`/wp-json/wc/v3/products/categories/${id}?`)
   }
+  // /wp-json/wc/v3/products/categories/412?
 };

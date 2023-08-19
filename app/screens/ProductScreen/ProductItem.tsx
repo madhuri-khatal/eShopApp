@@ -21,14 +21,15 @@ interface IProps {
 export default function ProductItem({product}: IProps) {
   const {images: [{src = ''} = {}] = []} = product;
 
-  const {getProductById} = useProductContext();
+  const {getProductById, getProductDetailByCategoryId} = useProductContext();
 
   const navigation: any = useNavigation();
 
   const handlePress = async () => {
-    await getProductById(product.id); // Use product.id directly
+    await getProductById(product.id); 
+    getProductDetailByCategoryId(product.id);
     navigation.navigate('ProductDetailsScreen', {productId: product.id});
-  };
+     };
 
   let productImageSrc = null;
 

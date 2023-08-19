@@ -26,9 +26,8 @@ export const ProductDetailsScreen = (props: any) => {
     setIndex(index);
   };
 
-  const {productById} = useProductContext();
-
-  
+  const {productById,productDetailByCategoryId} = useProductContext();
+ 
    // For removing <p> tag
   // function stripHtmlTags(htmlString:any) {
   //   const div = document.createElement('div');
@@ -56,7 +55,7 @@ export const ProductDetailsScreen = (props: any) => {
                 </Button>
               )}
 
-              <Carousel
+              {/* <Carousel
                 loop
                 mode="parallax"
                 onProgressChange={(_, absoluteProgress) => {
@@ -65,6 +64,7 @@ export const ProductDetailsScreen = (props: any) => {
                 width={width}
                 height={Dimensions.get('window').height * refWidth.current}
                 autoPlay={true}
+                // data={productDetailByCategoryId?.image?.src||productById?.images || []}
                 data={productById?.images ?? []}
                 scrollAnimationDuration={1000}
                 renderItem={({item}: any) => (
@@ -86,7 +86,35 @@ export const ProductDetailsScreen = (props: any) => {
                     </TouchableOpacity>
                   </View>
                 )}
-              />
+              /> */}
+              <Carousel
+  loop
+  mode="parallax"
+  onProgressChange={(_, absoluteProgress) => {
+    handleIndex(Math.round(absoluteProgress));
+  }}
+  width={width}
+  height={Dimensions.get('window').height * refWidth.current}
+  autoPlay={true}
+  data={productDetailByCategoryId?.image ? [productDetailByCategoryId.image] : productById?.images || []}
+  scrollAnimationDuration={1000}
+  renderItem={({ item }: any) => (
+    <View style={{ flex: 1, justifyContent: 'flex-start' }}>
+      <TouchableOpacity
+        style={{}}
+        onPress={() => (refWidth.current = 1)}
+        onPressOut={() => (refWidth.current = 0.6)}>
+        <ImageComponent
+          src={{ uri: item.src }}
+          alt={item.alt}
+          width={width}
+          height={Dimensions.get('window').height * 0.5}
+        />
+      </TouchableOpacity>
+    </View>
+  )}
+/>
+
 
               <View
                 style={{
@@ -159,19 +187,20 @@ export const ProductDetailsScreen = (props: any) => {
               textTransform: 'capitalize',
               marginBottom: 5,
             }}>
-              {productById?.name}
+               {productDetailByCategoryId?.name || productById?.name}
+             
           </Text>
 
           <Text
             style={{fontSize: 16, padding: 5, margin: 8, textAlign: 'justify'}}>
-            {productById?.short_description}
+              {productDetailByCategoryId?.short_description || productById?.short_description }
+          
           </Text>
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               <CurrencyComponent
-                value={productById?.price}
-                // value={productById?.sale_price ?? productById?.price}
-                style={{
+                value={productDetailByCategoryId? productDetailByCategoryId?.price:productById?.price}
+                  style={{
                   alignSelf: 'flex-bottom',
                   fontSize: 28,
                   fontWeight: 'bold',
@@ -189,7 +218,7 @@ export const ProductDetailsScreen = (props: any) => {
               <TouchableOpacity>
                 <Rating
                   rating={5}
-                  maxRating={productById?.rating_count}
+                  maxRating={ productDetailByCategoryId ?.rating_count ||productById?.rating_count}
                   iconFilled={
                     <View style={{marginRight: 5}}>
                       <Text style={{color: 'gold', fontSize: 30}}>★</Text>
@@ -205,28 +234,8 @@ export const ProductDetailsScreen = (props: any) => {
               </TouchableOpacity>
             </View>
           </View>
-
-          {/* <View style={{ flexDirection: 'row' }}>
-          <View
-            style={{
-              flex: 1,
-              margin: 6,
-              padding: 5,
-              marginTop: 15,
-              marginBottom: 15,
-              borderColor: 'gray',
-              borderWidth: 0.3,
-              borderRadius: 5,
-            }}
-          >
-            <Text>kkkk</Text>
-          </View>
-
-                  </View> */}
-
-
           <WeightList />
-          
+    
         
 
           <Text
@@ -241,8 +250,10 @@ export const ProductDetailsScreen = (props: any) => {
           {/* <Text>{stripHtmlTags(productById?.description)}</Text>   */}
           <Text
             style={{fontSize: 16, padding: 5, margin: 8, textAlign: 'justify'}}>
-            {productById?.description}
-          </Text>
+            {/* {productDetailByCategoryId?.description ||productById?.description} */}
+            {productDetailByCategoryId ? productDetailByCategoryId?.description : productById?.description}
+</Text>
+
         </View>
 
        

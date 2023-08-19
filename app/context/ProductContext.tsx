@@ -22,6 +22,8 @@ interface IProductContext {
   productByCategoryId: any[];
   setProductByCategoryId: Function;
   getProductByCategoryId: Function;
+  getProductDetailByCategoryId: Function;
+  productDetailByCategoryId: any;
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -32,6 +34,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [productById, setProductByID] = useState<any>(null);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
+  const [productDetailByCategoryId, setProductDetailByCategoryId] =
+    useState<any>(null);
   const navigation: any = useNavigation();
 
   useEffect(() => {
@@ -97,12 +101,23 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     try {
       const {result: {data = []} = {}, err} =
         await ProductApi.getProductByCategoryId(id);
-      console.log('data for product by category', data);
-      setProductByCategoryId(data);
+           setProductByCategoryId(data);
       // data?.length > 0 && setProductByCategoryId(data);
       // data?.length == 0 || (data && setProductByCategoryId([]));
     } catch (err: any) {
       console.log('Error in Product By Cateory Id', err);
+    }
+  };
+
+  //PRODUCT DETAIL BY CATEGORY ID
+  const getProductDetailByCategoryId = async (id: number | string) => {
+    try {
+      const {
+        result: {data},
+                } = await ProductApi.getProductDetailByCategoryId(id);
+      setProductDetailByCategoryId(data);
+    } catch (err: any) {
+      console.log('Error In Product Detail By CategoryId', err);
     }
   };
 
@@ -119,6 +134,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     productByCategoryId,
     getProductByCategoryId,
     setProductByCategoryId,
+    getProductDetailByCategoryId,
+    productDetailByCategoryId,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
