@@ -124,6 +124,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     try {
       const {result: {data = []} = {}, err} =
         await ProductApi.getProductByCategoryId(id);
+        // console.log("getProductByCategoryIdgetProductByCategoryId",data);
+        
            setProductByCategoryId(data);
       // data?.length > 0 && setProductByCategoryId(data);
       // data?.length == 0 || (data && setProductByCategoryId([]));
