@@ -6,22 +6,22 @@ const FeaturedCategories = () => {
     {
       id: 1,
       title: 'Category 1',
-      image: require('../../../assets/images/book-keeping.png'),
+      image: 'https://shgeshop.com/wp-content/uploads/2023/08/papad-1.jpg',
     },
     {
       id: 2,
       title: 'Category 2',
-      image: require('../../../assets/images/sell-products.png'),
+      image: 'https://shgeshop.com/wp-content/uploads/2023/08/chips.webp',
     },
     {
       id: 3,
       title: 'Category 3',
-      image: require('../../../assets/images/book-keeping.png'),
+      image: 'https://shgeshop.com/wp-content/uploads/2023/08/flour.webp',
     },
     {
       id: 4,
       title: 'Category 4',
-      image: require('../../../assets/images/buy-products.png'),
+      image: 'https://shgeshop.com/wp-content/uploads/2023/08/traditional.webp',
     },
   ];
 
@@ -29,7 +29,7 @@ const FeaturedCategories = () => {
     <View style={styles.container}>
       {categories.map(category => (
         <View key={category.id} style={styles.categoryItem}>
-          <Image source={category.image} style={styles.categoryImage} />
+          <Image source={{uri: category.image}} style={styles.categoryImage} />
           <Text style={styles.categoryTitle}>{category.title}</Text>
         </View>
       ))}
