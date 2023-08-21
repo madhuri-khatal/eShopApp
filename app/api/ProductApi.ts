@@ -1,7 +1,7 @@
 import {Get} from './AxiosRequester';
 export const ProductApi = {
   getProductList: async () => {
-    return await Get<any>('/wp-json/wc/v3/products');
+    return await Get<any>('/wp-json/wc/v3/products?per_page=20&');
   },
 
    // Get perticular Poduct information
@@ -14,6 +14,8 @@ export const ProductApi = {
   getProductByCategoryId:async(id:number| string)=>{
     return await Get <any>(`/wp-json/wc/v3/products/categories?parent=${id}&per_page=50&`)
   },
+
+ 
 
   // Get particular product information of subCtegory Product
   getProductDetailByCategoryId:async(id:number | string)=>{
