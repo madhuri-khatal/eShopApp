@@ -4,17 +4,15 @@ import {DrawerActions} from '@react-navigation/native';
 import {View} from 'react-native';
 import React from 'react';
 import CartList from './CartList';
-import {Modal, Portal, Text, Button, PaperProvider} from 'react-native-paper';
-import CheckoutScreen from '../CheckoutScreen/CheckoutScreen';
-import {useNavigation} from '@react-navigation/native';
-export const CartScreen = (props: any) => {
+import {Text} from 'react-native-paper';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+export const CartScreen = (props: NativeStackScreenProps<any>) => {
   const [visible, setVisible] = React.useState(false);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const containerStyle = {backgroundColor: 'white', padding: 20};
-  // const {navigation} = props;
-  const navigation: any = useNavigation();
+  const {navigation}: any = props;
   const cartItems = [
     {
       id: 1,
@@ -113,17 +111,6 @@ export const CartScreen = (props: any) => {
             </View>
           </View>
         </View>
-
-        {/* <PaperProvider>
-          <Portal>
-            <Modal
-              visible={visible}
-              onDismiss={hideModal}
-              contentContainerStyle={containerStyle}>
-              <CheckoutScreen />
-            </Modal>
-          </Portal> */}
-
         <TouchableOpacity
           style={{
             backgroundColor: '#f6d70e',
@@ -132,7 +119,6 @@ export const CartScreen = (props: any) => {
             marginTop: 16,
           }}
           onPress={() => navigation.navigate('CheckoutScreen')}>
-          {/* onPress={showModal}> */}
           <Text
             style={{
               color: '#595555',
@@ -142,7 +128,6 @@ export const CartScreen = (props: any) => {
             Proceed to Checkout
           </Text>
         </TouchableOpacity>
-        {/* </PaperProvider> */}
       </ScrollView>
     </>
   );
