@@ -38,7 +38,6 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
   const [productDetailByCategoryId, setProductDetailByCategoryId] =useState<any>(null);
   const navigation: any = useNavigation();
-  // const [data, setData] = useState<any>([1, 2, 3]);
   const [page, setPage] = useState<number>(1);
   const [hasMoreData, setHasMoreData] = useState<boolean>(true);
   useEffect(() => {
@@ -63,7 +62,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
       const {
         result: { data },
         err,
-      } = await ProductApi.getProductList(page + 1); // Fetch next page
+      } = await ProductApi.getProductList(page + 1); 
       if (data.length > 0) {
         setProductByCategoryId(prevData => [...prevData, ...data]);
         setPage(prevPage => prevPage + 1);
@@ -124,12 +123,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     try {
       const {result: {data = []} = {}, err} =
         await ProductApi.getProductByCategoryId(id);
-        // console.log("getProductByCategoryIdgetProductByCategoryId",data);
-        
-           setProductByCategoryId(data);
-      // data?.length > 0 && setProductByCategoryId(data);
-      // data?.length == 0 || (data && setProductByCategoryId([]));
-    } catch (err: any) {
+                   setProductByCategoryId(data);
+      } catch (err: any) {
       console.log('Error in Product By Cateory Id', err);
     }
   };
