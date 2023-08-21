@@ -6,14 +6,15 @@ import React from 'react';
 import CartList from './CartList';
 import {Modal, Portal, Text, Button, PaperProvider} from 'react-native-paper';
 import CheckoutScreen from '../CheckoutScreen/CheckoutScreen';
-
+import {useNavigation} from '@react-navigation/native';
 export const CartScreen = (props: any) => {
   const [visible, setVisible] = React.useState(false);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const containerStyle = {backgroundColor: 'white', padding: 20};
-  const {navigation} = props;
+  // const {navigation} = props;
+  const navigation: any = useNavigation();
   const cartItems = [
     {
       id: 1,
@@ -109,38 +110,39 @@ export const CartScreen = (props: any) => {
                 </Text>
                 <Text style={{fontSize: 18}}>₹ 219.98</Text>
               </View>
-                          </View>
+            </View>
           </View>
         </View>
 
-        <PaperProvider>
+        {/* <PaperProvider>
           <Portal>
             <Modal
               visible={visible}
               onDismiss={hideModal}
-              contentContainerStyle={containerStyle} >
-                            <CheckoutScreen />
+              contentContainerStyle={containerStyle}>
+              <CheckoutScreen />
             </Modal>
-          </Portal>
-        
-          <TouchableOpacity
+          </Portal> */}
+
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#f6d70e',
+            padding: 12,
+            borderRadius: 8,
+            marginTop: 16,
+          }}
+          onPress={() => navigation.navigate('CheckoutScreen')}>
+          {/* onPress={showModal}> */}
+          <Text
             style={{
-              backgroundColor: '#f6d70e',
-              padding: 12,
-              borderRadius: 8,
-              marginTop: 16,
-            }}
-            onPress={showModal}>
-            <Text
-              style={{
-                color: '#595555',
-                textAlign: 'center',
-                fontSize: 18,
-              }}>
-              Proceed to Checkout
-            </Text>
-          </TouchableOpacity>
-        </PaperProvider>
+              color: '#595555',
+              textAlign: 'center',
+              fontSize: 18,
+            }}>
+            Proceed to Checkout
+          </Text>
+        </TouchableOpacity>
+        {/* </PaperProvider> */}
       </ScrollView>
     </>
   );
