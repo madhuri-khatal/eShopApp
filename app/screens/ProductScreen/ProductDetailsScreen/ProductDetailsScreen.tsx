@@ -26,14 +26,7 @@ export const ProductDetailsScreen = (props: any) => {
     setIndex(index);
   };
 
-  const {productById,productDetailByCategoryId} = useProductContext();
- 
-   // For removing <p> tag
-  // function stripHtmlTags(htmlString:any) {
-  //   const div = document.createElement('div');
-  //   div.innerHTML = htmlString;
-  //   return div.textContent || div.innerText || '';
-  // }
+  const {productById} = useProductContext();
 
   return (
     <>
@@ -55,7 +48,7 @@ export const ProductDetailsScreen = (props: any) => {
                 </Button>
               )}
 
-              {/* <Carousel
+              <Carousel
                 loop
                 mode="parallax"
                 onProgressChange={(_, absoluteProgress) => {
@@ -64,7 +57,6 @@ export const ProductDetailsScreen = (props: any) => {
                 width={width}
                 height={Dimensions.get('window').height * refWidth.current}
                 autoPlay={true}
-                // data={productDetailByCategoryId?.image?.src||productById?.images || []}
                 data={productById?.images ?? []}
                 scrollAnimationDuration={1000}
                 renderItem={({item}: any) => (
@@ -86,35 +78,7 @@ export const ProductDetailsScreen = (props: any) => {
                     </TouchableOpacity>
                   </View>
                 )}
-              /> */}
-              <Carousel
-  loop
-  mode="parallax"
-  onProgressChange={(_, absoluteProgress) => {
-    handleIndex(Math.round(absoluteProgress));
-  }}
-  width={width}
-  height={Dimensions.get('window').height * refWidth.current}
-  autoPlay={true}
-  data={productDetailByCategoryId?.image ? [productDetailByCategoryId.image] : productById?.images || []}
-  scrollAnimationDuration={1000}
-  renderItem={({ item }: any) => (
-    <View style={{ flex: 1, justifyContent: 'flex-start' }}>
-      <TouchableOpacity
-        style={{}}
-        onPress={() => (refWidth.current = 1)}
-        onPressOut={() => (refWidth.current = 0.6)}>
-        <ImageComponent
-          src={{ uri: item.src }}
-          alt={item.alt}
-          width={width}
-          height={Dimensions.get('window').height * 0.5}
-        />
-      </TouchableOpacity>
-    </View>
-  )}
-/>
-
+              />
 
               <View
                 style={{
@@ -187,20 +151,18 @@ export const ProductDetailsScreen = (props: any) => {
               textTransform: 'capitalize',
               marginBottom: 5,
             }}>
-               {productDetailByCategoryId?.name || productById?.name}
-             
+            {productById?.name}
           </Text>
 
           <Text
             style={{fontSize: 16, padding: 5, margin: 8, textAlign: 'justify'}}>
-              {productDetailByCategoryId?.short_description || productById?.short_description }
-          
+            {productById?.short_description}
           </Text>
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               <CurrencyComponent
-                value={productDetailByCategoryId? productDetailByCategoryId?.price:productById?.price}
-                  style={{
+                value={productById?.price}
+                style={{
                   alignSelf: 'flex-bottom',
                   fontSize: 28,
                   fontWeight: 'bold',
@@ -218,7 +180,7 @@ export const ProductDetailsScreen = (props: any) => {
               <TouchableOpacity>
                 <Rating
                   rating={5}
-                  maxRating={ productDetailByCategoryId ?.rating_count ||productById?.rating_count}
+                  maxRating={productById?.rating_count}
                   iconFilled={
                     <View style={{marginRight: 5}}>
                       <Text style={{color: 'gold', fontSize: 30}}>★</Text>
@@ -235,8 +197,6 @@ export const ProductDetailsScreen = (props: any) => {
             </View>
           </View>
           <WeightList />
-    
-        
 
           <Text
             style={{
@@ -250,15 +210,10 @@ export const ProductDetailsScreen = (props: any) => {
           {/* <Text>{stripHtmlTags(productById?.description)}</Text>   */}
           <Text
             style={{fontSize: 16, padding: 5, margin: 8, textAlign: 'justify'}}>
-            {/* {productDetailByCategoryId?.description ||productById?.description} */}
-            {productDetailByCategoryId ? productDetailByCategoryId?.description : productById?.description}
-</Text>
-
+            {productById?.description}
+          </Text>
         </View>
 
-       
-      
-    
         <View style={{flex: 1}}>
           <ReviewComponent />
         </View>

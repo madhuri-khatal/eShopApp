@@ -8,6 +8,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import WishlistComponent from '../../components/Product/WishlistComponent';
 import CartComponent from '../../components/Product/CartComponent';
 import {useProductContext} from '../../context/ProductContext';
+import { Image } from 'react-native';
 
 interface IProps {
   name?: any;
@@ -21,14 +22,13 @@ interface IProps {
 export default function ProductItem({product}: IProps) {
   const {images: [{src = ''} = {}] = []} = product;
 
-  const {getProductById, getProductDetailByCategoryId} = useProductContext();
+  const {getProductById} = useProductContext();
 
   const navigation: any = useNavigation();
 
   const handlePress = async () => {
     await getProductById(product.id); 
-    getProductDetailByCategoryId(product.id);
-    navigation.navigate('ProductDetailsScreen', {productId: product.id});
+       navigation.navigate('ProductDetailsScreen', {productId: product.id});
      };
 
   let productImageSrc = null;
@@ -41,19 +41,18 @@ export default function ProductItem({product}: IProps) {
 
   return (
     <>
-      <View style={{flex: 1, padding: 2}}>
-        <Card
+      <View style={{flex: 1}}>
+        <View 
           style={{
             backgroundColor: '#ffffff',
             width: '100%',
-
             margin: 'auto',
           }}>
           <View>
             <WishlistComponent />
             <TouchableOpacity onPress={handlePress}>
               {productImageSrc && (
-                <Card.Cover
+                <Image
                   source={{uri: productImageSrc}}
                   style={{height: 200}}
                 />
@@ -127,7 +126,7 @@ export default function ProductItem({product}: IProps) {
               <CartComponent />
             </View>
           </View>
-        </Card>
+        </View>
       </View>
     </>
   );

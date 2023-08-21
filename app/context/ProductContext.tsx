@@ -22,9 +22,7 @@ interface IProductContext {
   productByCategoryId: any[];
   setProductByCategoryId: Function;
   getProductByCategoryId: Function;
-  getProductDetailByCategoryId: Function;
-  productDetailByCategoryId: any;
-  fetchMoreData:Function;
+   fetchMoreData:Function;
     hasMoreData:any;
 }
 const ProductContext = createContext<IProductContext | null>(null);
@@ -36,7 +34,6 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [productById, setProductByID] = useState<any>(null);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
-  const [productDetailByCategoryId, setProductDetailByCategoryId] =useState<any>(null);
   const navigation: any = useNavigation();
   const [page, setPage] = useState<number>(1);
   const [hasMoreData, setHasMoreData] = useState<boolean>(true);
@@ -129,18 +126,6 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     }
   };
 
-  //PRODUCT DETAIL BY CATEGORY ID
-  const getProductDetailByCategoryId = async (id: number | string) => {
-    try {
-      const {
-        result: {data},
-                } = await ProductApi.getProductDetailByCategoryId(id);
-      setProductDetailByCategoryId(data);
-    } catch (err: any) {
-      console.log('Error In Product Detail By CategoryId', err);
-    }
-  };
-
   const value: IProductContext = {
     data,
     mainCategory,
@@ -154,8 +139,6 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     productByCategoryId,
     getProductByCategoryId,
     setProductByCategoryId,
-    getProductDetailByCategoryId,
-    productDetailByCategoryId,
     fetchMoreData,
     hasMoreData,
   };
