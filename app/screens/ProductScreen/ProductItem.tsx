@@ -8,7 +8,8 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import WishlistComponent from '../../components/Product/WishlistComponent';
 import CartComponent from '../../components/Product/CartComponent';
 import {useProductContext} from '../../context/ProductContext';
-import { Image } from 'react-native';
+import {Image} from 'react-native';
+import { red } from 'react-native-reanimated';
 
 interface IProps {
   name?: any;
@@ -27,9 +28,9 @@ export default function ProductItem({product}: IProps) {
   const navigation: any = useNavigation();
 
   const handlePress = async () => {
-    await getProductById(product.id); 
-       navigation.navigate('ProductDetailsScreen', {productId: product.id});
-     };
+    await getProductById(product.id);
+    navigation.navigate('ProductDetailsScreen', {productId: product.id});
+  };
 
   let productImageSrc = null;
 
@@ -41,89 +42,91 @@ export default function ProductItem({product}: IProps) {
 
   return (
     <>
-      <View style={{flex: 1}}>
-        <View 
-          style={{
-            backgroundColor: '#ffffff',
-            width: '100%',
-            margin: 'auto',
-          }}>
-          <View>
-            <WishlistComponent />
-            <TouchableOpacity onPress={handlePress}>
-              {productImageSrc && (
-                <Image
-                  source={{uri: productImageSrc}}
-                  style={{height: 200}}
-                />
-              )}
-            </TouchableOpacity>
-          </View>
-          <Text
+      <View style={{padding: 5, width: '50%',backgroundColor:'#f7f7f7'}}>
+        <View style={{flex: 1}}>
+          <View
             style={{
-              fontSize: 17,
-              marginLeft: 8,
-              overflow: 'hidden',
-              flex: 1,
-              marginTop: 8,
-              fontWeight: '600',
-            }}
-            numberOfLines={1}
-            ellipsizeMode="tail">
-            {product.name}
-          </Text>
-          {product?.sale_price > 1 && (
-            <View
+              backgroundColor: '#ffffff',
+              width: '100%',
+              margin: 'auto',
+            }}>
+            <View>
+              <WishlistComponent />
+              <TouchableOpacity onPress={handlePress}>
+                {productImageSrc && (
+                  <Image
+                    source={{uri: productImageSrc}}
+                    style={{height: 200}}
+                  />
+                )}
+              </TouchableOpacity>
+            </View>
+            <Text
               style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginLeft: 10,
-              }}>
-              <Text
+                fontSize: 17,
+                marginLeft: 8,
+                overflow: 'hidden',
+                flex: 1,
+                marginTop: 8,
+                fontWeight: '600',
+              }}
+              numberOfLines={1}
+              ellipsizeMode="tail">
+              {product.name}
+            </Text>
+            {product?.sale_price > 1 && (
+              <View
                 style={{
-                  textDecorationLine: 'line-through',
-                  marginRight: 8,
-                  fontSize: 17,
-                  fontWeight: 'bold',
-                  color: '#cc3a1d',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginLeft: 10,
                 }}>
-                <CurrencyComponent value={product.price} />
-              </Text>
+                <Text
+                  style={{
+                    textDecorationLine: 'line-through',
+                    marginRight: 8,
+                    fontSize: 17,
+                    fontWeight: 'bold',
+                    color: '#cc3a1d',
+                  }}>
+                  <CurrencyComponent value={product.price} />
+                </Text>
+                <CurrencyComponent
+                  value={product.sale_price}
+                  style={{fontSize: 18, fontWeight: 'bold'}}
+                />
+              </View>
+            )}
+
+            {product?.sale_price <= 1 && (
               <CurrencyComponent
-                value={product.sale_price}
-                style={{fontSize: 18, fontWeight: 'bold'}}
+                value={product.price}
+                style={{fontSize: 17, fontWeight: 'bold', marginLeft: 10}}
               />
-            </View>
-          )}
+            )}
 
-          {product?.sale_price <= 1 && (
-            <CurrencyComponent
-              value={product.price}
-              style={{fontSize: 17, fontWeight: 'bold', marginLeft: 10}}
-            />
-          )}
-
-          <View style={{flex: 1, flexDirection: 'row'}}>
-            <View style={{marginBottom: 10}}>
-              <Rating
-                rating={product?.rating_count}
-                maxRating={5}
-                editable={true}
-                iconFilled={
-                  <View style={{marginRight: 5}}>
-                    <Text style={{color: 'orange', fontSize: 20}}>★</Text>
-                  </View>
-                }
-                iconEmpty={
-                  <View style={{marginRight: 5}}>
-                    <Text style={{color: 'orange', fontSize: 20}}>☆</Text>
-                  </View>
-                }
-                iconSize={50}
-              />
-            </View>
-            <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <CartComponent />
+            <View style={{flex: 1, flexDirection: 'row'}}>
+              <View style={{marginBottom: 10}}>
+                <Rating
+                  rating={product?.rating_count}
+                  maxRating={5}
+                  editable={true}
+                  iconFilled={
+                    <View style={{marginRight: 5}}>
+                      <Text style={{color: 'orange', fontSize: 20}}>★</Text>
+                    </View>
+                  }
+                  iconEmpty={
+                    <View style={{marginRight: 5}}>
+                      <Text style={{color: 'orange', fontSize: 20}}>☆</Text>
+                    </View>
+                  }
+                  iconSize={50}
+                />
+              </View>
+              <View style={{flex: 1, alignItems: 'flex-end'}}>
+                <CartComponent />
+              </View>
             </View>
           </View>
         </View>

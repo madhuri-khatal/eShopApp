@@ -12,7 +12,7 @@ export const ProductsScreen = (props: any) => {
   const {navigation} = props;
   const {colors} = useTheme();
   return (
-    <ScrollView style={{backgroundColor: '#F7F7F7'}}>
+    <>
       <HeaderBar
         title="Product Screen"
         titleStyle={{color: colors.onSecondary}}
@@ -36,6 +36,6 @@ export const ProductsScreen = (props: any) => {
       <View style={{marginTop: 20}}>
         <ProductList props={undefined} />
       </View>
-    </ScrollView>
+    </>
   );
 };

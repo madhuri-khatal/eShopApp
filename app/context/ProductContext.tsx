@@ -24,7 +24,6 @@ interface IProductContext {
   setProductByCategoryId: Function;
   getProductByCategoryId: Function;
   fetchMoreData: Function;
-  hasMoreData: any;
   isLoading?: boolean;
   refThreshold?: any;
 }
@@ -40,8 +39,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation: any = useNavigation();
   const refThreshold = useRef(null);
-  const [page, setPage] = useState<number>(1);
-  const [hasMoreData, setHasMoreData] = useState<boolean>(true);
+  const paginationIncrement = useRef(1);
+// ALL PRODUCTS LIST 
   useEffect(() => {
     (async () => {
       try {
@@ -56,25 +55,24 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     })();
   }, []);
 
+  // PAGINATION 
   const fetchMoreData = async () => {
     try {
       setIsLoading(true);
-      console.log('this is set is loading true');
-
+      paginationIncrement.current = paginationIncrement.current + 1;
       const {
         result: {data},
         err,
-      } = await ProductApi.getProductList();
-      setProductByCategoryId([...productByCategoryId, ...data]);
+      } = await ProductApi.pagination(paginationIncrement.current);
+       setProductByCategoryId([...productByCategoryId, ...data]);
       setIsLoading(false);
-      
     } catch (error) {
       console.log('error', error);
     } finally {
-      
     }
   };
 
+  //PRODUCT MAIN CATEGORY
   useEffect(() => {
     (async () => {
       const {
@@ -87,7 +85,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
       setMainCategory(data);
     })();
   }, []);
-  // SUBCATEGORY
+
+  //PRODUCT SUBCATEGORY
   const getSubCategoery = async (id: number | string) => {
     try {
       const {
@@ -144,7 +143,6 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     getProductByCategoryId,
     setProductByCategoryId,
     fetchMoreData,
-    hasMoreData,
     isLoading,
     refThreshold,
   };
