@@ -1,8 +1,13 @@
 import {Get} from './AxiosRequester';
 export const ProductApi = {
   getProductList: async () => {
-    return await Get<any>('/wp-json/wc/v3/products?per_page=20&status=publish&');
+    return await Get<any>('/wp-json/wc/v3/products?per_page=10&status=publish&');
   },
+
+  // Pagination
+  pagination:async(id:number | string)=>{
+    return await Get <any>(`/wp-json/wc/v3/products?page=${id}&status=publish&`);
+    },
 
    // Get perticular Poduct information
    getProductById:async(id:number | string)=>{

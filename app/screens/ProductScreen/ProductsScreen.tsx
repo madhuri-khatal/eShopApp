@@ -37,11 +37,9 @@ export const ProductsScreen = (props: any) => {
         }}>
         <FilterMenu />
       </View>
-      <ScrollView style={{backgroundColor: '#F7F7F7'}}>
-        <View style={{marginTop: 20}}>
-          <ProductList props={undefined} />
-        </View>
-      </ScrollView>
+      <View style={{marginTop: 20}}>
+        <ProductList props={undefined} />
+      </View>
     </>
   );
 };

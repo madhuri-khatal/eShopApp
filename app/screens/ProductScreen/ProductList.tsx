@@ -12,56 +12,35 @@ export default function ProductList(props: any) {
     useProductContext();
   return (
     <>
-     
-      <View
-        style={{
-          flex: 1,
-          paddingTop: 20,
-          backgroundColor: '#F7F7F7',
-          height: '100%',
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            height: '100%',
-            flexWrap: 'wrap',
-          }}>
-          <FlatList
-            nestedScrollEnabled={true}
-            contentContainerStyle={{flex: 1}}
-            style={{flex: 1}}
-            numColumns={2}
-            ItemSeparatorComponent={() => (
-              <View
-                style={{
-                  height: 0.5,
-                  width: '100%',
-                  backgroundColor: '#C8C8C8',
-                }}
-              />
-            )}
-            data={productByCategoryId}
-            onEndReached={() => {
-              console.log('to end reach');
-              fetchMoreData();
+      <FlatList
+        nestedScrollEnabled={true}
+        alwaysBounceVertical
+        numColumns={2}
+        ItemSeparatorComponent={() => (
+          <View
+            style={{
+              height: 10,
+              width: '100%',
+              backgroundColor: '#f7f7f7',
             }}
-            ref={refThreshold}
-            onEndReachedThreshold={0.5}
-            ListFooterComponent={() => (
-              <View style={{flex: 1}}>
-                {isLoading && <ActivityIndicator size="small" />}
-              </View>
-            )}
-            renderItem={({item}) => (
-              <View style={{width: '50%', padding: 3}}>
-                <ProductItem product={item} />
-              </View>
-            )}
-            keyExtractor={(item, i) => i.toString()}
           />
-        </View>
-      </View>
+        )}
+        data={productByCategoryId}
+        onEndReached={async () => {
+          console.log('to end reach');
+          await fetchMoreData();
+        }}
+        ref={refThreshold}
+        onEndReachedThreshold={10}
+        ListFooterComponent={() => (
+          <>
+            {isLoading && <ActivityIndicator size="small" />}
+          </>
+        )}
+        renderItem={({item}) => <ProductItem product={item} />}
+        keyExtractor={(item, i) => i.toString()}
+        scrollEnabled
+      />
     </>
   );
 }
