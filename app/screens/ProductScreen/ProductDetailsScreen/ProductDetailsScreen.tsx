@@ -16,7 +16,7 @@ import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useProductContext} from '../../../context/ProductContext';
-
+import HTMLView from 'react-native-htmlview';
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
   const [index, setIndex] = useState<number>(0);
@@ -27,6 +27,15 @@ export const ProductDetailsScreen = (props: any) => {
   };
 
   const {productById} = useProductContext();
+  // CODE FOR REMOVE <P>DESCRIPTION</P> TAG
+  const [descriptionText, setDescriptionText] = useState<string>('');
+  const [shortDescriptionText, setShortDescriptionText] = useState<string>('');
+  useEffect(() => {
+    if (productById?.description || productById?.short_description) {
+      setDescriptionText(productById.description);
+      setShortDescriptionText(productById?.short_description);
+    }
+  }, [productById?.description || productById?.short_description]);
 
   return (
     <>
@@ -154,10 +163,7 @@ export const ProductDetailsScreen = (props: any) => {
             {productById?.name}
           </Text>
 
-          <Text
-            style={{fontSize: 16, padding: 5, margin: 8, textAlign: 'justify'}}>
-            {productById?.short_description}
-          </Text>
+          <HTMLView value={shortDescriptionText} stylesheet={styles} />
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <View style={{flex: 1}}>
               <CurrencyComponent
@@ -207,11 +213,7 @@ export const ProductDetailsScreen = (props: any) => {
             }}>
             Product Details
           </Text>
-          {/* <Text>{stripHtmlTags(productById?.description)}</Text>   */}
-          <Text
-            style={{fontSize: 16, padding: 5, margin: 8, textAlign: 'justify'}}>
-            {productById?.description}
-          </Text>
+          <HTMLView value={descriptionText} stylesheet={styles} />
         </View>
 
         <View style={{flex: 1}}>
@@ -255,4 +257,10 @@ export const ProductDetailsScreen = (props: any) => {
     </>
   );
 };
-// Changes
+const styles = {
+  p: {
+    fontSize: 16,
+    margin: 8,
+    textAlign: 'justify',
+  },
+};
