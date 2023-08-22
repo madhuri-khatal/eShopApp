@@ -5,6 +5,7 @@ import React, {
   ReactNode,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import {ProductApi} from './../api/ProductApi';
@@ -22,8 +23,10 @@ interface IProductContext {
   productByCategoryId: any[];
   setProductByCategoryId: Function;
   getProductByCategoryId: Function;
-   fetchMoreData:Function;
-    hasMoreData:any;
+  fetchMoreData: Function;
+  hasMoreData: any;
+  isLoading?: boolean;
+  refThreshold?: any;
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -34,7 +37,9 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [productById, setProductByID] = useState<any>(null);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation: any = useNavigation();
+  const refThreshold = useRef(null);
   const [page, setPage] = useState<number>(1);
   const [hasMoreData, setHasMoreData] = useState<boolean>(true);
   useEffect(() => {
@@ -51,23 +56,22 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     })();
   }, []);
 
-
-  
   const fetchMoreData = async () => {
-    if (!hasMoreData) return;
     try {
+      setIsLoading(true);
+      console.log('this is set is loading true');
+
       const {
-        result: { data },
+        result: {data},
         err,
-      } = await ProductApi.getProductList(page + 1); 
-      if (data.length > 0) {
-        setProductByCategoryId(prevData => [...prevData, ...data]);
-        setPage(prevPage => prevPage + 1);
-      } else {
-        setHasMoreData(false);
-      }
+      } = await ProductApi.getProductList();
+      setProductByCategoryId([...productByCategoryId, ...data]);
+      setIsLoading(false);
+      
     } catch (error) {
       console.log('error', error);
+    } finally {
+      
     }
   };
 
@@ -120,8 +124,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     try {
       const {result: {data = []} = {}, err} =
         await ProductApi.getProductByCategoryId(id);
-                   setProductByCategoryId(data);
-      } catch (err: any) {
+      setProductByCategoryId(data);
+    } catch (err: any) {
       console.log('Error in Product By Cateory Id', err);
     }
   };
@@ -141,6 +145,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     setProductByCategoryId,
     fetchMoreData,
     hasMoreData,
+    isLoading,
+    refThreshold,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
