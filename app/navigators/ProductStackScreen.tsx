@@ -1,14 +1,9 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import ProductList from '../screens/ProductScreen/ProductList';
-import ProductItem from '../screens/ProductScreen/ProductItem';
-import {Appbar} from 'react-native-paper';
-import {DrawerActions} from '@react-navigation/native';
-import CategoryList from '../screens/WeightListScreen/WeightList';
 import {ProductsScreen} from '../screens/ProductScreen/ProductsScreen';
 import {ProductDetailsScreen} from '../screens/ProductScreen/ProductDetailsScreen/ProductDetailsScreen';
 import CheckoutScreen from '../screens/UserScreen/CheckoutScreen/CheckoutScreen';
+import {CartScreen} from '../screens/UserScreen/CartScreen/CartScreen';
 
 const Stack = createStackNavigator();
 export default function ProductStackScreen({navigation}: any) {
@@ -24,6 +19,7 @@ export default function ProductStackScreen({navigation}: any) {
           name="ProductDetailsScreen"
           component={ProductDetailsScreen}
         />
+        <Stack.Screen name="cartScreen" component={CartScreen} />
         <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
       </Stack.Navigator>
     </>
