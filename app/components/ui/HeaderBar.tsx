@@ -1,22 +1,22 @@
-import * as React from "react"
-import { StyleProp, TextStyle } from "react-native"
-import { Appbar } from "react-native-paper"
+import * as React from 'react';
+import {StyleProp, TextStyle} from 'react-native';
+import {Appbar} from 'react-native-paper';
 interface IHeaderBar {
-  backAction?: Function | undefined
-  right2Action?: Function | undefined
-  right1Action?: Function | undefined
-  title?: string
-  icon1?: string
-  icon2?: string
-  titleStyle?: StyleProp<TextStyle>
+  backAction?: Function | undefined;
+  right2Action?: Function | undefined;
+  right1Action?: Function | undefined;
+  title?: string;
+  icon1?: string;
+  icon2?: string;
+  titleStyle?: StyleProp<TextStyle>;
 }
 export const HeaderBar = ({
-  title = "",
+  title = '',
   backAction = undefined,
   right2Action = undefined,
   right1Action = undefined,
-  icon1 = "",
-  icon2 = "",
+  icon1 = '',
+  icon2 = '',
   titleStyle = {},
 }: IHeaderBar) => {
   return (
@@ -25,7 +25,7 @@ export const HeaderBar = ({
         {backAction && (
           <Appbar.BackAction
             onPress={() => {
-              backAction()
+              backAction();
             }}
           />
         )}
@@ -34,7 +34,7 @@ export const HeaderBar = ({
           <Appbar.Action
             icon={icon2}
             onPress={() => {
-              right2Action()
+              right2Action();
             }}
           />
         )}
@@ -42,11 +42,11 @@ export const HeaderBar = ({
           <Appbar.Action
             icon={icon1}
             onPress={() => {
-              right1Action()
+              right1Action();
             }}
           />
         )}
       </Appbar.Header>
     </>
-  )
-}
+  );
+};

@@ -7,17 +7,35 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {Modal, Portal, Text, Button, PaperProvider} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import DeliveryAddressScreen from './DeliveryAddressScreen';
+import {HeaderBar} from '../../../components/ui/HeaderBar';
+import {useTheme} from 'react-native-paper';
+import {DrawerActions} from '@react-navigation/native';
 
-export default function CheckoutScreen() {
+export default function CheckoutScreen(props: any) {
   const [visible, setVisible] = React.useState(false);
   const showModal = () => setVisible(true);
+  const showModal1 = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const containerStyle = {backgroundColor: 'white', padding: 20};
+  const {navigation} = props;
+  const {colors} = useTheme();
+
   return (
     <>
+      <HeaderBar
+        title="Product Screen"
+        titleStyle={{color: colors.onSecondary}}
+        backAction={() => navigation.goBack()}
+        right2Action={() => navigation.navigate('cartScreen')}
+        right1Action={() =>
+          navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
+        }
+        icon1="menu"
+        icon2="cart"
+      />
       <ScrollView>
-        <View>
-          <View style={{flexDirection: 'row', padding: 2}}>
+        <View style={{marginTop: 10, padding: 7}}>
+          <View style={{flexDirection: 'row', paddingVertical: 8}}>
             <AntDesign
               name="checkcircle"
               style={{fontSize: 25, color: '#fa5f11', margin: 3}}
@@ -28,7 +46,7 @@ export default function CheckoutScreen() {
             </Text>
             <Divider />
           </View>
-          <View style={{flexDirection: 'row', padding: 7}}>
+          <View style={{flexDirection: 'row'}}>
             <EvilIcons
               name="spinner-2"
               style={{fontSize: 30, color: '#fa5f11'}}
@@ -38,24 +56,25 @@ export default function CheckoutScreen() {
             </Text>
           </View>
 
-          <View style={{padding: 10}}>
+          <View style={{padding: 8}}>
             <TextInput label={'Phone Number'} style={{margin: 8}} />
 
             <View style={{flexDirection: 'row'}}>
-              <TextInput label={'OTP'} style={{margin: 8, width: 270}} />
-              <ButtonComponent
-                title={'Verify'}
-                backgroundColor="orange"
-                onPress={function (): void {
-                  throw new Error('Function not implemented.');
-                }}
-                style={{marginTop: 90}}
-              />
+              <View>
+                <TextInput label={'OTP'} style={{margin: 8, width: 255}} />
+              </View>
+              <View style={{marginTop: 10}}>
+                <ButtonComponent
+                  title={'Verify'}
+                  backgroundColor="orange"
+                  onPress={function (): void {
+                    throw new Error('Function not implemented.');
+                  }}
+                />
+              </View>
             </View>
-          </View>
-          <TextInput label={'Full Name'} style={{margin: 8}} />
+            <TextInput label={'Full Name'} style={{margin: 8}} />
 
-          {/* <PaperProvider> */}
             <Portal>
               <Modal
                 visible={visible}
@@ -64,8 +83,9 @@ export default function CheckoutScreen() {
                 <DeliveryAddressScreen />
               </Modal>
             </Portal>
-            <View style={{flexDirection: 'row', padding: 8}}>
-              <Text style={{fontSize: 25, fontWeight: 'normal', width: '90%'}}>
+
+            <View style={{flexDirection: 'row', padding: 10}}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
                 Delivery address
               </Text>
               <AntDesign
@@ -74,10 +94,27 @@ export default function CheckoutScreen() {
                 onPress={showModal}
               />
             </View>
-          {/* </PaperProvider> */}
 
+            <Portal>
+              <Modal
+                visible={visible}
+                onDismiss={hideModal}
+                contentContainerStyle={containerStyle}>
+                <Text>Payment</Text>
+              </Modal>
+            </Portal>
 
-          <View></View>
+            <View style={{flexDirection: 'row', padding: 10}}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
+                Payment
+              </Text>
+              <AntDesign
+                name="down"
+                style={{fontSize: 30}}
+                onPress={showModal1}
+              />
+            </View>
+          </View>
         </View>
       </ScrollView>
     </>

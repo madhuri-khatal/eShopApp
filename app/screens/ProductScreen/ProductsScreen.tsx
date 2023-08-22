@@ -17,10 +17,12 @@ export const ProductsScreen = (props: any) => {
         title="Product Screen"
         titleStyle={{color: colors.onSecondary}}
         backAction={() => navigation.goBack()}
+        right2Action={() => navigation.navigate('cartScreen')}
         right1Action={() =>
           navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
         }
         icon1="menu"
+        icon2="cart"
       />
       <View
         style={{
@@ -30,6 +32,8 @@ export const ProductsScreen = (props: any) => {
           zIndex: 9000,
           borderRadius: 10,
           paddingBottom: 5,
+          backgroundColor: 'white',
+          width: '100%',
         }}>
         <FilterMenu />
       </View>
