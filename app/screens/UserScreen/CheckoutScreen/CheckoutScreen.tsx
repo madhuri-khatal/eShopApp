@@ -10,6 +10,7 @@ import DeliveryAddressScreen from './DeliveryAddressScreen';
 import {HeaderBar} from '../../../components/ui/HeaderBar';
 import {useTheme} from 'react-native-paper';
 import {DrawerActions} from '@react-navigation/native';
+import PaymentMethod from '../../../components/Product/PaymentMethod';
 
 export default function CheckoutScreen(props: any) {
   const [visible, setVisible] = React.useState(false);
@@ -113,6 +114,7 @@ export default function CheckoutScreen(props: any) {
                 style={{fontSize: 30}}
                 onPress={showModal1}
               />
+              <PaymentMethod />
             </View>
           </View>
         </View>
