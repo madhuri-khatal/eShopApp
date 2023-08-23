@@ -38,7 +38,7 @@ export const ProductsScreen = (props: any) => {
         <FilterMenu />
       </View>
       <View style={{marginTop: 20}}>
-        <ProductList props={undefined} />
+        <ProductList  />
       </View>
     </>
   );
