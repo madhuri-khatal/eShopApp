@@ -2,22 +2,28 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {HeaderBar} from '../../../components/ui/HeaderBar';
 import {DrawerActions} from '@react-navigation/native';
 import {View} from 'react-native';
-import React from 'react';
+import React, {useRef, useMemo, useCallback} from 'react';
 import CartList from './CartList';
 import {Text} from 'react-native-paper';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useProductContext} from '../../../context/ProductContext';
 import CurrencyComponent from '../../../components/ui/Currencycomponent';
 
+import BottomSheet from '@gorhom/bottom-sheet';
+import CheckoutScreen from '../CheckoutScreen/CheckoutScreen';
 export const CartScreen = (props: NativeStackScreenProps<any>) => {
-  const [visible, setVisible] = React.useState(false);
-
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-  const containerStyle = {backgroundColor: 'white', padding: 20};
   const {navigation}: any = props;
 
   const {cartItems} = useProductContext();
+
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const snapPoints = useMemo(() => ['1%', '2%', '50%', '75%', '100%'], []);
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
+  const handleButtonPress = () => {
+    bottomSheetRef.current?.snapToIndex(4);
+  };
   return (
     <>
       <HeaderBar
@@ -90,7 +96,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
             borderRadius: 8,
             marginTop: 16,
           }}
-          onPress={() => navigation.navigate('CheckoutScreen')}>
+          onPress={handleButtonPress}>
           <Text
             style={{
               color: '#595555',
@@ -101,6 +107,15 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
           </Text>
         </TouchableOpacity>
       </ScrollView>
+      <BottomSheet
+        ref={bottomSheetRef}
+        index={1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}>
+        <View>
+          <CheckoutScreen />
+        </View>
+      </BottomSheet>
     </>
   );
 };
