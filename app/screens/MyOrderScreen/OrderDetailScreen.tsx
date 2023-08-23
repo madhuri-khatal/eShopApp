@@ -1,10 +1,11 @@
 import {ScrollView} from 'react-native-gesture-handler';
-import {Card, Text} from 'react-native-paper';
+import {Card, Divider, Text} from 'react-native-paper';
 import {HeaderBar} from './../../components/ui/HeaderBar';
 import {DrawerActions} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {View, Image} from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export const OrderDetailScreen = ({route, navigation}: any) => {
   const orderData = {
@@ -40,8 +41,17 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
 
         <View style={styles.section}>
           <Card.Content>
-            <Text style={styles.sectionTitle}>View Order Details</Text>
+            <View style={{flexDirection: 'row', paddingVertical: 8}}>
+              <AntDesign
+                name="checkcircle"
+                style={{fontSize: 25, color: '#fa5f11', margin: 3}}
+              />
 
+              <Text style={{fontSize: 25, fontWeight: 'bold'}}>
+                Order Summery
+              </Text>
+              <Divider />
+            </View>
             <View style={styles.paymentItem}>
               <Text style={styles.paymentLabel}>Order Date:</Text>
               <Text style={styles.text}>{orderData.date}</Text>
