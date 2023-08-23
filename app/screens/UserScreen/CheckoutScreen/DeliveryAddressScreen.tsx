@@ -8,12 +8,21 @@ export default function DeliveryAddressScreen() {
     <>
       <ScrollView>
         <View>
-          <Text style={{fontSize: 25}}>India</Text>
-          <TextInput label={'State'} style={{margin: 8}} />
-          <TextInput label={'Town/City'} style={{margin: 8}} />
-          <TextInput label={'Address'} style={{margin: 8}} />
-          <TextInput label={'Zip/PinCode'} style={{margin: 8}} />
-          <Button> Submit</Button>
+          <Text style={{fontSize: 22, marginLeft: 10}}>India</Text>
+          <TextInput label={'State'} style={{margin: 7}} mode="outlined" />
+          <TextInput
+            label={'Town / City'}
+            style={{margin: 7}}
+            mode="outlined"
+          />
+          <TextInput label={'Address'} style={{margin: 7}} mode="outlined" />
+          <TextInput
+            label={'Zip / PinCode'}
+            style={{margin: 8}}
+            mode="outlined"
+            keyboardType="number-pad"
+            maxLength={6}
+          />
         </View>
       </ScrollView>
     </>

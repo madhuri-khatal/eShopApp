@@ -1,52 +1,32 @@
-import {View} from 'react-native';
-import React from 'react';
-import {Divider, TextInput} from 'react-native-paper';
+import React, {useState} from 'react';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
+import {TextInput, Text} from 'react-native-paper';
 import ButtonComponent from '../../../components/ui/ButtonComponent';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import {Modal, Portal, Text, Button, PaperProvider} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import DeliveryAddressScreen from './DeliveryAddressScreen';
-import {HeaderBar} from '../../../components/ui/HeaderBar';
-import {useTheme} from 'react-native-paper';
-import {DrawerActions} from '@react-navigation/native';
-import PaymentMethod from '../../../components/Product/PaymentMethod';
+import {useNavigation} from '@react-navigation/native';
 
 export default function CheckoutScreen(props: any) {
-  const [visible, setVisible] = React.useState(false);
-  const showModal = () => setVisible(true);
-  const showModal1 = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-  const containerStyle = {backgroundColor: 'white', padding: 20};
-  const {navigation} = props;
-  const {colors} = useTheme();
+  const navigation: any = useNavigation();
+  const [selectedMethod, setSelectedMethod] = useState(null);
+  const [showCODDetails, setShowCODDetails] = useState(false);
+  const handlePaymentMethodPress = (method: any) => {
+    if (selectedMethod === method) {
+      setSelectedMethod(null);
+    } else {
+      setSelectedMethod(method);
+    }
 
+    if (method === 'COD') {
+      setShowCODDetails(!showCODDetails);
+    }
+  };
   return (
     <>
-      <HeaderBar
-        title="Product Screen"
-        titleStyle={{color: colors.onSecondary}}
-        backAction={() => navigation.goBack()}
-        right2Action={() => navigation.navigate('cartScreen')}
-        right1Action={() =>
-          navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
-        }
-        icon1="menu"
-        icon2="cart"
-      />
       <ScrollView>
         <View style={{marginTop: 10, padding: 7}}>
-          <View style={{flexDirection: 'row', paddingVertical: 8}}>
-            <AntDesign
-              name="checkcircle"
-              style={{fontSize: 25, color: '#fa5f11', margin: 3}}
-            />
-
-            <Text style={{fontSize: 25, fontWeight: 'bold'}}>
-              Order Summery
-            </Text>
-            <Divider />
-          </View>
           <View style={{flexDirection: 'row'}}>
             <EvilIcons
               name="spinner-2"
@@ -58,13 +38,23 @@ export default function CheckoutScreen(props: any) {
           </View>
 
           <View style={{padding: 8}}>
-            <TextInput label={'Phone Number'} style={{margin: 8}} />
+            <TextInput
+              label={'Phone Number'}
+              style={{margin: 8}}
+              mode="outlined"
+              keyboardType="number-pad"
+              maxLength={10}
+            />
 
             <View style={{flexDirection: 'row'}}>
               <View>
-                <TextInput label={'OTP'} style={{margin: 8, width: 255}} />
+                <TextInput
+                  label={'OTP'}
+                  style={{margin: 8, width: 255}}
+                  mode="outlined"
+                />
               </View>
-              <View style={{marginTop: 10}}>
+              <View style={{marginTop: 14}}>
                 <ButtonComponent
                   title={'Verify'}
                   backgroundColor="orange"
@@ -74,39 +64,67 @@ export default function CheckoutScreen(props: any) {
                 />
               </View>
             </View>
-            <TextInput label={'Full Name'} style={{margin: 8}} />
-
-            <Portal>
-              <Modal
-                visible={visible}
-                onDismiss={hideModal}
-                contentContainerStyle={containerStyle}>
-                <DeliveryAddressScreen />
-              </Modal>
-            </Portal>
-
+            <TextInput
+              label={'Full Name'}
+              style={{margin: 8}}
+              mode="outlined"
+            />
+            <TextInput
+              label={'Email'}
+              style={{margin: 8}}
+              mode="outlined"
+              keyboardType="email-address"
+            />
             <View style={{flexDirection: 'row', padding: 10}}>
               <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
                 Delivery address
               </Text>
-              <AntDesign
-                name="down"
-                style={{fontSize: 30}}
-                onPress={showModal}
-              />
+              <Entypo name="location" style={{fontSize: 30}} />
             </View>
+            <DeliveryAddressScreen />
 
-            <Portal>
-              <Modal
-                visible={visible}
-                onDismiss={hideModal}
-                contentContainerStyle={containerStyle}>
-                <Text>Payment</Text>
-              </Modal>
-            </Portal>
-
-            <View style={{width: '100%'}}>
-                <PaymentMethod />
+            <View>
+              {/* <PaymentMethod />
+               */}
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  // width: '90%',
+                  marginBottom: 10,
+                  padding: 7,
+                }}>
+                Payment Method
+              </Text>
+              <TouchableOpacity
+                style={[
+                  styles.methodContainer,
+                  selectedMethod === 'COD' && styles.selectedMethod,
+                ]}
+                onPress={() => handlePaymentMethodPress('COD')}>
+                <Text
+                  style={[
+                    styles.methodText,
+                    selectedMethod === 'COD' && styles.selectedMethodText,
+                  ]}>
+                  Cash on Delivary
+                </Text>
+              </TouchableOpacity>
+              {showCODDetails && (
+                <View style={styles.methodDetails}>
+                  <Text style={styles.methodDetailsText}>Cash on Delivary</Text>
+                </View>
+              )}
+            </View>
+            <View style={{marginTop: 14}}>
+              <ButtonComponent
+                title={'Submit'}
+                backgroundColor="orange"
+                width={380}
+                onPress={() =>
+                  navigation.navigate('OrderDetailScreen', {data: 'item'})
+                }
+              />
             </View>
           </View>
         </View>
@@ -114,3 +132,44 @@ export default function CheckoutScreen(props: any) {
     </>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    marginVertical: 20,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  methodContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 15,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginBottom: 10,
+  },
+  methodText: {
+    fontSize: 16,
+    marginLeft: 10,
+  },
+  selectedMethod: {
+    backgroundColor: '#F7B492',
+    borderColor: '#F7B492',
+  },
+  selectedMethodText: {
+    color: '#ffffff',
+  },
+  methodDetails: {
+    marginTop: 10,
+    padding: 10,
+    backgroundColor: '#f4f4f4',
+    borderRadius: 5,
+  },
+  methodDetailsText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+});
