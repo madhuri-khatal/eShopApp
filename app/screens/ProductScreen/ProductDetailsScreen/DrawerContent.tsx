@@ -42,8 +42,7 @@ export default function DrawerContent(props: any) {
               onPress={() => {
                 onClose();
               }}>
-              <AntDesign name="close" style={{fontSize: 24}} />
-              {/* Press me */}
+            
             </Button>
 
             {mainCategory.map((categoery: any, index: number) => (
