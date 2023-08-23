@@ -25,7 +25,7 @@ export default function ProductList(props: any) {
               width: '100%',
               height: '100%',
               flexWrap: 'wrap',
-              }}>
+            }}>
             {productByCategoryId.map((product: any, i: number) => (
               <View style={{width: '50%', padding: 3}}>
                 <ProductItem key={i} product={product} />
@@ -36,4 +36,4 @@ export default function ProductList(props: any) {
       </ScrollView>
     </>
   );
- }
+}

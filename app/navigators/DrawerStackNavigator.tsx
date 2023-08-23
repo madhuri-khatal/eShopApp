@@ -22,7 +22,7 @@ export default function DrawerStackNavigator() {
         drawerContentStyle: {backgroundColor: colors.background},
       }}>
       <Drawer.Screen
-        name="bottomTab "
+        name="BottomTab"
         options={{
           drawerLabel: 'Home',
           title: 'Home',
@@ -30,7 +30,7 @@ export default function DrawerStackNavigator() {
         component={BottomTabNavigator}
       />
       <Drawer.Screen
-        name="userStack"
+        name="UserStack"
         options={{
           drawerLabel: 'Profile',
           title: 'Profile',
@@ -38,7 +38,7 @@ export default function DrawerStackNavigator() {
         component={UserStackScreen}
       />
       <Drawer.Screen
-        name="profile"
+        name="Profile"
         options={{
           drawerLabel: 'Product',
           title: 'Product',
@@ -47,7 +47,7 @@ export default function DrawerStackNavigator() {
         component={ProductFilterDrawer}
       />
       <Drawer.Screen
-        name="My Order"
+        name="OrderStack"
         options={{
           drawerLabel: 'My Order',
           title: 'My Order',
