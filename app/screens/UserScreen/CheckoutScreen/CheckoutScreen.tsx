@@ -105,16 +105,8 @@ export default function CheckoutScreen(props: any) {
               </Modal>
             </Portal>
 
-            <View style={{flexDirection: 'row', padding: 10}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
-                Payment
-              </Text>
-              <AntDesign
-                name="down"
-                style={{fontSize: 30}}
-                onPress={showModal1}
-              />
-              <PaymentMethod />
+            <View style={{width: '100%'}}>
+                <PaymentMethod />
             </View>
           </View>
         </View>

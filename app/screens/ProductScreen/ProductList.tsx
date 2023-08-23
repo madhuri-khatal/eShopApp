@@ -4,10 +4,8 @@ import ProductItem from './ProductItem';
 import {useProductContext} from './../../context/ProductContext';
 import {ActivityIndicator, Text} from 'react-native-paper';
 
-interface props {
-  props: any;
-}
-export default function ProductList(props: any) {
+
+export default function ProductList() {
   const {productByCategoryId, isLoading, fetchMoreData, refThreshold} =
     useProductContext();
   return (
@@ -38,8 +36,7 @@ export default function ProductList(props: any) {
           )}
           data={productByCategoryId}
           onEndReached={async () => {
-            console.log('to end reach');
-            await fetchMoreData();
+             await fetchMoreData();
           }}
           ref={refThreshold}
           onEndReachedThreshold={10}
