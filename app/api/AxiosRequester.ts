@@ -40,10 +40,14 @@ export const Get = async <T>(path: string, json?: AxiosRequestConfig<any> | unde
 }
 
 
-export const Post = async <T>(path: string, json?: any) => {
+export const Post = async <T>(path: string,  json?: AxiosRequestConfig<any> | undefined) => {
   let response: Response<T> = {}
   try {
-    response.result = (await axios.post(`${API_URL}${path}`, json)) as T
+    // response.result = (await axios.post(`${API_URL}${path}`, json)) as T
+    const header = { 'headers' : {
+      'Authorization': `Basic ${btoa(`${consumer_key}:${consumer_secret}`)}`,
+    }};
+    response.result = ((await axios.get(`${API_URL}${path}`, header))) as T
   } catch (e: any) {
     response.err = parseError(e.text)
     response.status = e.status

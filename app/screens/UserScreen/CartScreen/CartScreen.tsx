@@ -6,6 +6,9 @@ import React from 'react';
 import CartList from './CartList';
 import {Text} from 'react-native-paper';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useProductContext} from '../../../context/ProductContext';
+import CurrencyComponent from '../../../components/ui/Currencycomponent';
+
 export const CartScreen = (props: NativeStackScreenProps<any>) => {
   const [visible, setVisible] = React.useState(false);
 
@@ -13,33 +16,8 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
   const hideModal = () => setVisible(false);
   const containerStyle = {backgroundColor: 'white', padding: 20};
   const {navigation}: any = props;
-  const cartItems = [
-    {
-      id: 1,
-      title: 'Tomato powder',
-      price: 49.99,
-      imageSrc:
-        'https://shgeshop.com/wp-content/uploads/2023/05/tomato-powder.png',
-    },
-    {
-      id: 2,
-      title: 'Beet Root Powder',
-      price: 29.99,
-      imageSrc:
-        'https://shgeshop.com/wp-content/uploads/2023/05/beet-root-powder-1.png',
-    },
-    {
-      id: 3,
-      title: 'Tomato powder',
-      price: 49.99,
-      imageSrc:
-        'https://shgeshop.com/wp-content/uploads/2023/05/tomato-powder.png',
-    },
-  ];
-  const handleCartItemRemove = (itemId: any) => {
-    // Handle removing item from cart
-    console.log('Removing item with ID:', itemId);
-  };
+
+  const {cartItems} = useProductContext();
   return (
     <>
       <HeaderBar
@@ -52,10 +30,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
       />
       <ScrollView style={{backgroundColor: '#F7F7F7'}}>
         <View style={{flex: 1, padding: 10}}>
-          <CartList
-            cartItems={cartItems}
-            onCartItemRemove={handleCartItemRemove}
-          />
+          <CartList />
 
           <View
             style={{borderTopWidth: 1, borderTopColor: '#ddd', paddingTop: 16}}>
@@ -68,7 +43,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                   marginBottom: 8,
                 }}>
                 <Text style={{fontSize: 20, fontWeight: 'bold'}}>Total:</Text>
-                <Text style={{fontSize: 18}}>₹ 249.98</Text>
+                <CurrencyComponent value={cartItems?.totals?.total_items} />
               </View>
               <View
                 style={{
@@ -78,9 +53,8 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                   marginBottom: 8,
                 }}>
                 <Text style={{fontSize: 16, color: '#888'}}>Discount:</Text>
-                <Text style={{fontSize: 16, color: '#888', textAlign: 'right'}}>
-                  ₹ 50.00
-                </Text>
+
+                <CurrencyComponent value={cartItems?.totals?.total_discount} />
               </View>
               <View
                 style={{
@@ -92,9 +66,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                 <Text style={{fontSize: 16, color: '#888'}}>
                   Delivery Charges:
                 </Text>
-                <Text style={{fontSize: 16, color: '#888', textAlign: 'right'}}>
-                  ₹ 20.00
-                </Text>
+                <CurrencyComponent value={cartItems?.totals?.total_shipping} />
               </View>
               <View
                 style={{
@@ -106,7 +78,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                 <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                   Final Total:
                 </Text>
-                <Text style={{fontSize: 18}}>₹ 219.98</Text>
+                <CurrencyComponent value={cartItems?.totals?.total_price} />
               </View>
             </View>
           </View>

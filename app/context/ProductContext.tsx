@@ -9,6 +9,7 @@ import React, {
   useState,
 } from 'react';
 import {ProductApi} from './../api/ProductApi';
+import {CartApi} from '../api/CartApi';
 
 interface IProductContext {
   data: any;
@@ -26,6 +27,8 @@ interface IProductContext {
   fetchMoreData: Function;
   isLoading?: boolean;
   refThreshold?: any;
+  cartItems: any;
+  getCartList: () => Promise<void>;
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -40,7 +43,10 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const navigation: any = useNavigation();
   const refThreshold = useRef(null);
   const paginationIncrement = useRef(1);
-// ALL PRODUCTS LIST 
+
+  // CART
+  const [cartItems, setcartItems] = useState<any>();
+  // ALL PRODUCTS LIST
   useEffect(() => {
     (async () => {
       try {
@@ -48,6 +54,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
           result: {data},
           err,
         } = await ProductApi.getProductList();
+
         setProductByCategoryId(data);
       } catch (error) {
         console.log('error', error);
@@ -55,7 +62,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     })();
   }, []);
 
-  // PAGINATION 
+  // PAGINATION
   const fetchMoreData = async () => {
     try {
       setIsLoading(true);
@@ -64,7 +71,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
         result: {data},
         err,
       } = await ProductApi.pagination(paginationIncrement.current);
-       setProductByCategoryId([...productByCategoryId, ...data]);
+      setProductByCategoryId([...productByCategoryId, ...data]);
       setIsLoading(false);
     } catch (error) {
       console.log('error', error);
@@ -129,6 +136,14 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     }
   };
 
+  // CART
+  const getCartList = async () => {
+    const {
+      result: {data},
+    } = await CartApi.getCartList();
+      setcartItems(data);
+  };
+
   const value: IProductContext = {
     data,
     mainCategory,
@@ -145,6 +160,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     fetchMoreData,
     isLoading,
     refThreshold,
+    cartItems,
+    getCartList,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
