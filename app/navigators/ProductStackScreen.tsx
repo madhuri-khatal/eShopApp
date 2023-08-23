@@ -6,7 +6,7 @@ import CheckoutScreen from '../screens/UserScreen/CheckoutScreen/CheckoutScreen'
 import {CartScreen} from '../screens/UserScreen/CartScreen/CartScreen';
 
 const Stack = createStackNavigator();
-export default function ProductStackScreen({navigation}: any) {
+export default function ProductStackScreen() {
   return (
     <>
       <Stack.Navigator
@@ -19,8 +19,6 @@ export default function ProductStackScreen({navigation}: any) {
           name="ProductDetailsScreen"
           component={ProductDetailsScreen}
         />
-        <Stack.Screen name="cartScreen" component={CartScreen} />
-        <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
       </Stack.Navigator>
     </>
   );

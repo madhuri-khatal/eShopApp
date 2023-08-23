@@ -4,10 +4,8 @@ import {HeaderBar} from '../../components/ui/HeaderBar';
 import {DrawerActions} from '@react-navigation/native';
 import {View} from 'react-native';
 import React from 'react';
-
 import FilterMenu from '../../screens/FilterScreen/FilterMenu';
 import {useTheme} from 'react-native-paper';
-
 export const ProductsScreen = (props: any) => {
   const {navigation} = props;
   const {colors} = useTheme();
@@ -17,7 +15,12 @@ export const ProductsScreen = (props: any) => {
         title="Product Screen"
         titleStyle={{color: colors.onSecondary}}
         backAction={() => navigation.goBack()}
-        right2Action={() => navigation.navigate('cartScreen')}
+        right2Action={() => {
+          navigation.getParent('main').navigate('BottomTab', {
+            screen: 'CartStack',
+            initial: false,
+          });
+        }}
         right1Action={() =>
           navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
         }

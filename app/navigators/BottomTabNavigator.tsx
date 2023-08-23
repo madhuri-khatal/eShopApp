@@ -6,6 +6,8 @@ import ProfileScreen from '../screens/UserScreen/ProfileScreen';
 import DrawerStackNavigator from './DrawerStackNavigator';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {CartScreen} from '../screens/UserScreen/CartScreen/CartScreen';
+import CartStackScreen from './CartStackScreen';
+import HomeStackScreen from './HomeStackScreen';
 const Tab = createMaterialBottomTabNavigator();
 export default function BottomTabNavigator() {
   return (
@@ -17,17 +19,17 @@ export default function BottomTabNavigator() {
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
         }}
-        component={HomeScreen}
+        component={HomeStackScreen}
       />
       <Tab.Screen
-        name="CartScreen"
+        name="CartStack"
         options={{
           tabBarLabel: 'Cart',
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons name="cart" color={color} size={26} />
           ),
         }}
-        component={CartScreen}
+        component={CartStackScreen}
       />
       <Tab.Screen
         name="profileScreen"

@@ -6,6 +6,7 @@ import SearchBar from '../../components/Product/SearchBar';
 import {Caraousel} from '../../components/Product/Carousel';
 import {CaraouselContent} from '../../components/Product/CarouselContent';
 import FeaturedCategories from '../../components/Product/FeaturedCategories';
+import PaymentMethod from '../../components/Product/PaymentMethod';
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
 
