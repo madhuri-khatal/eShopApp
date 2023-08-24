@@ -12,6 +12,7 @@ import {
 } from 'react-native-paper';
 import {darkTheme, lightTheme} from './assets/colors/colors';
 import AppNavigator from './app/navigators/AppNavigator';
+import {CommanContextProvider} from './app/context/CommanContext';
 export default function App() {
   const fontConfig: any = {
     bodyLarge: {
@@ -29,7 +30,9 @@ export default function App() {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <PaperProvider theme={theme}>
-        <AppNavigator theme={theme} />
+        <CommanContextProvider>
+          <AppNavigator theme={theme} />
+        </CommanContextProvider>
       </PaperProvider>
     </SafeAreaProvider>
   );

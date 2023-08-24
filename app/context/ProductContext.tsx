@@ -9,7 +9,6 @@ import React, {
   useState,
 } from 'react';
 import {ProductApi} from './../api/ProductApi';
-import {CartApi} from '../api/CartApi';
 
 interface IProductContext {
   data: any;
@@ -17,7 +16,6 @@ interface IProductContext {
   getSubCategoery: Function;
   subCategory: any[];
   setSubCategory: Function;
-  onClose: Function;
   setProductByID: any;
   getProductById: Function;
   productById: any;
@@ -27,8 +25,7 @@ interface IProductContext {
   fetchMoreData: Function;
   isLoading?: boolean;
   refThreshold?: any;
-  cartItems: any;
-  getCartList: () => Promise<void>;
+ 
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -37,15 +34,13 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [mainCategory, setMainCategory] = useState<any>([]);
   const [subCategory, setSubCategory] = useState<any>([]);
   const [productById, setProductByID] = useState<any>(null);
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation: any = useNavigation();
   const refThreshold = useRef(null);
   const paginationIncrement = useRef(1);
 
-  // CART
-  const [cartItems, setcartItems] = useState<any>();
+
   // ALL PRODUCTS LIST
   useEffect(() => {
     (async () => {
@@ -106,11 +101,6 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     }
   };
 
-  const onClose = async () => {
-    setIsDrawerVisible(!isDrawerVisible);
-    console.log('pressed');
-    // setClose(true)
-  };
 
   // PRODUCTBYID
   const getProductById = async (id: number | string) => {
@@ -136,21 +126,14 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     }
   };
 
-  // CART
-  const getCartList = async () => {
-    const {
-      result: {data},
-    } = await CartApi.getCartList();
-      setcartItems(data);
-  };
-
+ 
   const value: IProductContext = {
     data,
     mainCategory,
     getSubCategoery,
     subCategory,
     setSubCategory,
-    onClose,
+  
     setProductByID,
     getProductById,
     productById,
@@ -160,8 +143,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     fetchMoreData,
     isLoading,
     refThreshold,
-    cartItems,
-    getCartList,
+    
+   
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
