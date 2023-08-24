@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
-import {TextInput, Text} from 'react-native-paper';
+import {TextInput, Text, useTheme} from 'react-native-paper';
 import ButtonComponent from '../../../components/ui/ButtonComponent';
 import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {ScrollView} from 'react-native-gesture-handler';
 import DeliveryAddressScreen from './DeliveryAddressScreen';
 import {useNavigation} from '@react-navigation/native';
-
+import {HeaderBar} from '../../../components/ui/HeaderBar';
+import {DrawerActions} from '@react-navigation/native';
 export default function CheckoutScreen(props: any) {
   const navigation: any = useNavigation();
+  const {colors} = useTheme();
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showCODDetails, setShowCODDetails] = useState(false);
   const handlePaymentMethodPress = (method: any) => {
@@ -26,6 +28,11 @@ export default function CheckoutScreen(props: any) {
   return (
     <>
       <ScrollView>
+        <HeaderBar
+          title="Product Screen"
+          titleStyle={{color: colors.onSecondary}}
+          backAction={() => navigation.goBack()}
+        />
         <View style={{marginTop: 10, padding: 7}}>
           <View style={{flexDirection: 'row'}}>
             <EvilIcons
@@ -121,8 +128,15 @@ export default function CheckoutScreen(props: any) {
                 title={'Submit'}
                 backgroundColor="orange"
                 width={380}
+                // onPress={() =>
+                //   // navigation.navigate('OrderDetailScreen', {data: 'item'})
+                //   navigation.navigate('DrawerStackNavigator', {
+                //     screen: 'OrderDetailScreen',
+                //     initial: false,
+                //   })
+                // }
                 onPress={() =>
-                  navigation.navigate('OrderDetailScreen', {data: 'item'})
+                  navigation.getParent('main').navigate('OrderScreen')
                 }
               />
             </View>

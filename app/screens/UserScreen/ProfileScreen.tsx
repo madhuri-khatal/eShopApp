@@ -1,9 +1,14 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {
+  CommonActions,
+  DrawerActions,
+  useNavigation,
+} from '@react-navigation/native';
 import {Avatar, Divider, Appbar, Button} from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RandomAvatar from '../../components/ui/RandomAvtar';
+import {ScrollView} from 'react-native-gesture-handler';
 
 export default function ProfileScreen(props: any) {
   // const {navigation} = props;
@@ -13,140 +18,149 @@ export default function ProfileScreen(props: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
   const address = '1234 Example Street, City, State 12345, Country';
   return (
-        <View>
-      <Appbar.Header>
-        <Appbar.Content title="Profile" />
-        <Appbar.Action icon="magnify" onPress={_handleSearch} />
-        <Appbar.Action icon="menu" onPress={_handleMore} />
-      </Appbar.Header>
+    <ScrollView>
+      <View>
+        <Appbar.Header>
+          <Appbar.Content title="Profile" />
+          <Appbar.Action icon="magnify" onPress={_handleSearch} />
+          <Appbar.Action icon="menu" onPress={_handleMore} />
+        </Appbar.Header>
 
-      <View style={{marginTop: 20}}>
-        <View style={styles.profileContainer}>
-          <RandomAvatar/>
+        <View style={{marginTop: 20}}>
+          <View style={styles.profileContainer}>
+            <RandomAvatar />
             <Text style={styles.userName}>John Doe</Text>
 
-          <View
-            style={{
-              flex: 1,
-              display: 'flex',
-              flexDirection: 'row',
-              marginTop: 15,
-              marginBottom: 45,
-              justifyContent: 'center',
-            }}>
-            <View style={{alignItems: 'center', marginRight: 5}}>
-              <Button
-                style={{
-                  width: 190,
-                  height: 50,
-                  backgroundColor:'#f7c6b2',
-                  borderRadius: 10,
-                  padding: 3,
-                  justifyContent: 'center',
-                }}
-                mode="contained"
-                onPress={() => navigation.navigate('CartScreen')}>
-                <Text
+            <View
+              style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'row',
+                marginTop: 15,
+
+                justifyContent: 'center',
+              }}>
+              <View style={{alignItems: 'center', marginRight: 5}}>
+                <Button
                   style={{
-                    fontWeight: 'bold',
+                    width: 190,
+                    height: 50,
+                    backgroundColor: '#f7c6b2',
+                    borderRadius: 10,
+                    padding: 3,
                     justifyContent: 'center',
-                    fontSize: 17,
-                    textTransform: 'capitalize',
-                    color: '#f25616',
+                  }}
+                  mode="contained"
+                  onPress={() => {
+                    navigation.getParent('main').navigate('BottomTab', {
+                      screen: 'CartStack',
+                      initial: false,
+                    });
                   }}>
-                  My Cart
-                </Text>
-              </Button>
-            </View>
-            <View style={{alignItems: 'center'}}>
-              <Button
-                style={{
-                  width: 190,
-                  height: 50,
-                  backgroundColor: '#f7c6b2',
-                  borderRadius: 10,
-                  padding: 3,
-                  justifyContent: 'center',
-                }}
-                mode="contained"
-                onPress={() => navigation.navigate('OrderScreen')}>
-                <Text
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      justifyContent: 'center',
+                      fontSize: 17,
+                      textTransform: 'capitalize',
+                      color: '#f25616',
+                    }}>
+                    My Cart
+                  </Text>
+                </Button>
+              </View>
+              <View style={{alignItems: 'center'}}>
+                <Button
                   style={{
-                    fontWeight: 'bold',
+                    width: 190,
+                    height: 50,
+                    backgroundColor: '#f7c6b2',
+                    borderRadius: 10,
+                    padding: 3,
                     justifyContent: 'center',
-                    fontSize: 17,
-                    textTransform: 'capitalize',
-                    color: '#f25616',
-                  }}>
-                  My Orders
-                </Text>
-              </Button>
+                  }}
+                  mode="contained"
+                  onPress={() =>
+                    navigation.getParent('main').navigate('OrderScreen')
+                  }>
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      justifyContent: 'center',
+                      fontSize: 17,
+                      textTransform: 'capitalize',
+                      color: '#f25616',
+                    }}>
+                    My Orders
+                  </Text>
+                </Button>
+              </View>
             </View>
+          </View>
+
+          <View style={{paddingHorizontal: 10}}>
+            <MaterialCommunityIcons
+              name="pencil"
+              size={24}
+              color="#f25616"
+              style={{marginLeft: 350}}
+              onPress={() => navigation.navigate('EditProfileScreen')}
+            />
+            <View style={styles.addressSection}>
+              <View style={{flexDirection: 'row', marginTop: -10}}>
+                <Text style={styles.sectionTitle}>Current Address</Text>
+              </View>
+              <Text style={styles.addressText}>
+                123 Demo Street Cityville, DemoState Country: DemoLand Postal
+                Code: 12345
+              </Text>
+            </View>
+            <Divider />
+
+            <View style={styles.addressSection}>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.sectionTitle}>Email Id</Text>
+              </View>
+              <Text style={styles.addressText}>a@gmail.com</Text>
+            </View>
+
+            <Divider />
+
+            <View style={styles.addressSection}>
+              <View style={{flexDirection: 'row'}}>
+                <Text style={styles.sectionTitle}>Contact Number</Text>
+              </View>
+              <Text style={styles.addressText}>98765 43210</Text>
+            </View>
+          </View>
+
+          <View style={{alignItems: 'center', marginRight: 5}}>
+            <Button
+              style={{
+                width: 190,
+                height: 50,
+                backgroundColor: '#f7c6b2',
+                borderRadius: 10,
+                padding: 3,
+                justifyContent: 'center',
+              }}
+              mode="contained"
+              onPress={() => navigation.navigate('CartScreen')}>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  justifyContent: 'center',
+                  fontSize: 17,
+                  textTransform: 'capitalize',
+                  color: '#f25616',
+                }}>
+                Log Out
+              </Text>
+            </Button>
           </View>
         </View>
-        <Divider />
-
-        <View style={{padding: 40}}>
-          <MaterialCommunityIcons
-            name="pencil"
-            size={24}
-            color='#f25616'
-            style={{marginLeft: 300}}
-            onPress={() => navigation.navigate('EditProfileScreen')}
-            
-          />
-          <View style={styles.addressSection}>
-            <View style={{flexDirection: 'row',marginTop:-40}}>
-              <Text style={styles.sectionTitle}>Current Address</Text>
-            </View>
-            <Text style={styles.addressText}>{address}</Text>
-          </View>
-          <Divider />
-
-          <View style={styles.addressSection}>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.sectionTitle}>Email Id</Text>
-            </View>
-            <Text style={styles.addressText}>a@gmail.com</Text>
-          </View>
-          
-          <Divider />
-
-          <View style={styles.addressSection}>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={styles.sectionTitle}>Contact Number</Text>
-            </View>
-            <Text style={styles.addressText}>98765 43210</Text>
-          </View>
-          <Divider />
-        </View>
-
-        <View style={{alignItems: 'center', marginRight: 5}}>
-              <Button
-                style={{
-                  width: 190,
-                  height: 50,
-                  backgroundColor: '#f7c6b2',
-                  borderRadius: 10,
-                  padding: 3,
-                  justifyContent: 'center',
-                }}
-                mode="contained"
-                onPress={() => navigation.navigate('CartScreen')}>
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                    justifyContent: 'center',
-                    fontSize: 17,
-                    textTransform: 'capitalize',
-                    color: '#f25616',
-                  }}>
-                  Log Out
-                </Text>
-              </Button>
-            </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -158,7 +172,6 @@ const styles = StyleSheet.create({
   profileContainer: {
     alignItems: 'center',
     marginBottom: 20,
-    
   },
   userName: {
     fontSize: 18,
