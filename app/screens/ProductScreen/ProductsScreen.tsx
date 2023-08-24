@@ -9,6 +9,7 @@ import {useTheme} from 'react-native-paper';
 export const ProductsScreen = (props: any) => {
   const {navigation} = props;
   const {colors} = useTheme();
+
   return (
     <>
       <HeaderBar
@@ -41,7 +42,7 @@ export const ProductsScreen = (props: any) => {
         <FilterMenu />
       </View>
       <View style={{marginTop: 20}}>
-        <ProductList  />
+        <ProductList />
       </View>
     </>
   );
