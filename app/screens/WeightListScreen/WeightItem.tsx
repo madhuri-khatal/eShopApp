@@ -1,3 +1,4 @@
+import { useCartContext } from '../../context/CartContext';
 import React from 'react';
 import { View, Text } from 'react-native';
 
@@ -8,6 +9,9 @@ interface IProps {
 }
 
 export default function WeightItem({ icon, title, options2 }: IProps) {
+ 
+  const {setVariation}:any=useCartContext();
+  
   return (
     <View
       style={{
@@ -20,7 +24,7 @@ export default function WeightItem({ icon, title, options2 }: IProps) {
         borderColor: '#59a30e',
         borderRadius: 5,
       }}>
-      <Text>{options2}</Text>
+      <Text onPress={() => setVariation(parseInt(options2[0]))}>{options2}</Text>
     </View>
   );
 }

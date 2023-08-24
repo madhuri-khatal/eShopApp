@@ -5,6 +5,5 @@ export const FilterApi = {
   },
 
   getProductSubCategoeriesList: async (id: number | string) =>
-    await Get<any>(`/wp-json/wc/v3/products/categories?parent=${id}&`, {
-    }),
+    await Get<any>(`/wp-json/wc/v3/products/categories?parent=${id}&per_page=50&`),
 };
