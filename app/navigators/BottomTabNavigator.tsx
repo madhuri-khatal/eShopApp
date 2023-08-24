@@ -10,6 +10,8 @@ import CartStackScreen from './CartStackScreen';
 import HomeStackScreen from './HomeStackScreen';
 const Tab = createMaterialBottomTabNavigator();
 export default function BottomTabNavigator() {
+  const cartItemCount = 5; // Replace this with your actual cart item count
+  const tabBarBadge = cartItemCount > 0 ? cartItemCount : undefined;
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
@@ -28,6 +30,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons name="cart" color={color} size={26} />
           ),
+          tabBarBadge: tabBarBadge,
         }}
         component={CartStackScreen}
       />
