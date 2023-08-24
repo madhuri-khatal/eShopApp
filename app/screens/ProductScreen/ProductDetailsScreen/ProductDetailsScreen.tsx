@@ -17,6 +17,8 @@ import {responsiveWidth} from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useProductContext} from '../../../context/ProductContext';
 import HTMLView from 'react-native-htmlview';
+import { useCartContext } from '../../../context/CartContext';
+
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
   const [index, setIndex] = useState<number>(0);
@@ -25,8 +27,10 @@ export const ProductDetailsScreen = (props: any) => {
   const handleIndex = (index: number) => {
     setIndex(index);
   };
-
+const{addToCart}=useCartContext()
   const {productById} = useProductContext();
+  // console.log("productByIdproductByIdproductByIdproductById",productById?.variations[0]);
+  
   // CODE FOR REMOVE <P>DESCRIPTION</P> TAG
   const [descriptionText, setDescriptionText] = useState<string>('');
   const [shortDescriptionText, setShortDescriptionText] = useState<string>('');
@@ -240,7 +244,9 @@ export const ProductDetailsScreen = (props: any) => {
               borderRadius: 10,
             }}
             mode="contained"
-            onPress={() => console.log('Pressed')}>
+            onPress={() => {addToCart
+               console.log('Pressed')}}
+            >
             <Text
               style={{
                 fontWeight: 'bold',

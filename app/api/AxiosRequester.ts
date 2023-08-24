@@ -1,6 +1,6 @@
 import axios, {AxiosRequestConfig} from 'axios';
 
-import {consumer_key, consumer_secret, API_URL} from '@env';
+import {consumer_key, consumer_secret, API_URL,Nonce} from '@env';
 import {btoa} from 'react-native-quick-base64';
 import Response from './Response';
 export abstract class RequestDefaults {
@@ -45,7 +45,6 @@ export const Post = async <T>(
   json?: AxiosRequestConfig<any> | undefined,
 ) => {
   let response: Response<T> = {};
-
   try {
            const header = {
       headers: {
@@ -53,8 +52,30 @@ export const Post = async <T>(
         'Content-Type': 'application/json',
       },
        };
-   
-    response.result = (await axios.post(`${API_URL}${path}`,json, header)) as T;
+       response.result = (await axios.post(`${API_URL}${path}`,json, header)) as T;
+     } catch (e: any) {
+    response.err = parseError(e.text);
+    response.status = e.status;
+  }
+  return response;
+};
+
+
+
+
+export const Create = async <T>(
+  path: string,
+  json?: AxiosRequestConfig<any> | undefined,
+) => {
+  let response: Response<T> = {};
+  try {
+           const header = {
+      headers: {
+        Authorization: `Basic ${btoa(`${consumer_key}:${consumer_secret}`)}`,
+        'Content-Type': 'application/json',Nonce,
+      },
+       };
+       response.result = (await axios.post(`${API_URL}${path}`,json, header)) as T;
      } catch (e: any) {
     response.err = parseError(e.text);
     response.status = e.status;

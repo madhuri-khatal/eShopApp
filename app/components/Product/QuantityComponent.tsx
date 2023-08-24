@@ -3,8 +3,8 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 const QuantityComponent = () => {
-  const { cartItems } = useCartContext();
-  const [quantity, setQuantity] = useState(cartItems?.quantity || 1);
+  const { cartItems,setQuantity,quantity }:any = useCartContext();
+  // const [quantity, setQuantity] = useState(cartItems?.quantity || 1);
 
   const handleQuantityChange = (newQuantity: any) => {
     if (newQuantity >= 1) {

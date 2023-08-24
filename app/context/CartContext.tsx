@@ -8,6 +8,12 @@ interface ICartContext {
   isShowDialog: boolean;
   onDeletehowDialog?: (key: string) => void;
   onCancel: () => void;
+  variation:number;
+  quantity:number;
+  setvariation: (variation: number) => void;
+  setQuantity: (quantity: number) => void;
+  addToCart: (json: any) => Promise<void>
+
 }
 const CartContext = createContext<ICartContext | null>(null);
 type CartContextType = {children: ReactNode};
@@ -15,29 +21,26 @@ export const CartContextProvider = ({children}: CartContextType) => {
   const [cartItems, setcartItems] = useState<any>();
   const [isShowDialog, setIsShowDialog] = useState<boolean>(false);
   const [productKey, setProductKey] = useState<string>('');
+  const [variation, setvariation]=useState<number>(1)
+  const [quantity, setQuantity]=useState<number>(1)
+
+const addToCart = async () => {
+  
+      const result = await CartApi.addToCart({
+        id: variation,
+        quantity: quantity,
+      });
+      console.log("resultresultresultresult=============",result);
+            console.log('id', variation);
+      console.log('quantity', quantity);
+    
+  };
   // CART ITEM LIST
   const getCartList = async () => {
     const {
       result: {data},
     } = await CartApi.getCartList();
     setcartItems(data);
-  };
-
-//   Delete Product Dialog Modal
-  const onDeletehowDialog = (key: string) => {
-    setProductKey(key);
-    setIsShowDialog(true);
-  };
-  
-//  cancle Delete Product Dialog Modal 
-  const onCancel = () => {
-    ToastAndroid.showWithGravity(
-      'Product Not Delete',
-      ToastAndroid.SHORT,
-      ToastAndroid.CENTER,
-    );
-    setProductKey('');
-    setIsShowDialog(false);
   };
 
   // DELETE CART ITEM
@@ -58,6 +61,25 @@ export const CartContextProvider = ({children}: CartContextType) => {
     }
   };
 
+
+//   Delete Product Dialog Modal
+  const onDeletehowDialog = (key: string) => {
+    setProductKey(key);
+    setIsShowDialog(true);
+  };
+  
+//  cancle Delete Product Dialog Modal 
+  const onCancel = () => {
+    ToastAndroid.showWithGravity(
+      'Product Not Delete',
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER,
+    );
+    setProductKey('');
+    setIsShowDialog(false);
+  };
+
+  
   const value: ICartContext = {
     cartItems,
     getCartList,
@@ -65,6 +87,11 @@ export const CartContextProvider = ({children}: CartContextType) => {
     isShowDialog,
     onDeletehowDialog,
     onCancel,
+    variation,
+    quantity,
+    setvariation,
+    setQuantity ,
+    addToCart
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
