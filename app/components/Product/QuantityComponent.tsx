@@ -1,8 +1,10 @@
+import { useCartContext } from '../../context/CartContext';
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 const QuantityComponent = () => {
-  const [quantity, setQuantity] = useState(1);
+  const { cartItems,setQuantity,quantity }:any = useCartContext();
+  // const [quantity, setQuantity] = useState(cartItems?.quantity || 1);
 
   const handleQuantityChange = (newQuantity: any) => {
     if (newQuantity >= 1) {
@@ -26,6 +28,7 @@ const QuantityComponent = () => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

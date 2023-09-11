@@ -16,7 +16,6 @@ interface IProductContext {
   getSubCategoery: Function;
   subCategory: any[];
   setSubCategory: Function;
-  onClose: Function;
   setProductByID: any;
   getProductById: Function;
   productById: any;
@@ -26,6 +25,7 @@ interface IProductContext {
   fetchMoreData: Function;
   isLoading?: boolean;
   refThreshold?: any;
+ 
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -34,13 +34,14 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [mainCategory, setMainCategory] = useState<any>([]);
   const [subCategory, setSubCategory] = useState<any>([]);
   const [productById, setProductByID] = useState<any>(null);
-  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation: any = useNavigation();
   const refThreshold = useRef(null);
   const paginationIncrement = useRef(1);
-// ALL PRODUCTS LIST 
+
+
+  // ALL PRODUCTS LIST
   useEffect(() => {
     (async () => {
       try {
@@ -48,6 +49,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
           result: {data},
           err,
         } = await ProductApi.getProductList();
+
         setProductByCategoryId(data);
       } catch (error) {
         console.log('error', error);
@@ -55,7 +57,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     })();
   }, []);
 
-  // PAGINATION 
+  // PAGINATION
   const fetchMoreData = async () => {
     try {
       setIsLoading(true);
@@ -64,7 +66,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
         result: {data},
         err,
       } = await ProductApi.pagination(paginationIncrement.current);
-       setProductByCategoryId([...productByCategoryId, ...data]);
+      setProductByCategoryId([...productByCategoryId, ...data]);
       setIsLoading(false);
     } catch (error) {
       console.log('error', error);
@@ -99,11 +101,6 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     }
   };
 
-  const onClose = async () => {
-    setIsDrawerVisible(!isDrawerVisible);
-    console.log('pressed');
-    // setClose(true)
-  };
 
   // PRODUCTBYID
   const getProductById = async (id: number | string) => {
@@ -129,13 +126,14 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     }
   };
 
+ 
   const value: IProductContext = {
     data,
     mainCategory,
     getSubCategoery,
     subCategory,
     setSubCategory,
-    onClose,
+  
     setProductByID,
     getProductById,
     productById,
@@ -145,6 +143,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     fetchMoreData,
     isLoading,
     refThreshold,
+    
+   
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>

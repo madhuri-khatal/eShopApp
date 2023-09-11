@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, FlatList } from 'react-native-gesture-handler';
 import WeightItem from './WeightItem';
 import { useProductContext } from '../../context/ProductContext';
+import { Vibration } from 'react-native';
 
 export default function WeightList({ options2 }: any) {
   const { productById } = useProductContext();
@@ -10,8 +11,8 @@ export default function WeightList({ options2 }: any) {
   if (options1 && options1.length > 0) {
     resolvedOptions2 = options1[0].options;
     }
-  
-  return (
+
+    return (
     <ScrollView
       showsHorizontalScrollIndicator={true}
       style={{ flex: 1, flexDirection: 'column' }}>
