@@ -9,6 +9,7 @@ interface IProps {
 }
 
 export default function WeightItem({ icon, title, options2 }: IProps) {
+ console.log("Options===========",options2);
  
   const {setVariation}:any=useCartContext();
   
@@ -24,7 +25,7 @@ export default function WeightItem({ icon, title, options2 }: IProps) {
         borderColor: '#59a30e',
         borderRadius: 5,
       }}>
-      <Text onPress={() => setVariation(parseInt(options2[0]))}>{options2}</Text>
+      <Text onPress={() => setVariation(options2[0])}>{options2}</Text>
     </View>
   );
 }
