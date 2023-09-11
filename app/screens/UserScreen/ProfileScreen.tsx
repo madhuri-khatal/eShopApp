@@ -26,7 +26,7 @@ export default function ProfileScreen(props: any) {
           <Appbar.Action icon="menu" onPress={_handleMore} />
         </Appbar.Header>
 
-        <View style={{marginTop: 20}}>
+        <View style={{marginTop: 15}}>
           <View style={{alignItems: 'center', marginBottom: 10}}>
             <RandomAvatar />
             <Text style={styles.userName}>John Doe</Text>
