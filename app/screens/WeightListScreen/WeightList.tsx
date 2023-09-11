@@ -12,30 +12,32 @@ export default function WeightList({options2}: any) {
     resolvedOptions2 = options1[0].options;
   }
 
-  console.log(resolvedOptions2, 'ITEM');
-
-      // console.log("productByIdproductById",productById?.variations);
-  // console.log("productByIdproductById",resolvedOptions2);
-  // const variations=productById?.variations
+  const variations = productById?.variations;
+  console.log(variations);
 
   return (
     <ScrollView
       showsHorizontalScrollIndicator={true}
       style={{flex: 1, flexDirection: 'column'}}>
-      {/* <FlatList
+      <FlatList
         horizontal
         data={resolvedOptions2}
-        renderItem={({item}) => <WeightItem options2={item} id={productById?.variations}/>}
+        renderItem={({item, index}) => (
+          <WeightItem options2={item} id={variations[index]} />
+        )}
         keyExtractor={item => String(item.id)}
-      /> */}
-  <FlatList
-    horizontal
-    data={productById?.variations || []} 
-    renderItem={({ item }) => (
-      <WeightItem options2={item.options2} id={item.id} /> 
-    )}
-    keyExtractor={(item) => String(item.id)}
-  />
+      />
+
+      {/* <FlatList
+  horizontal
+  data={resolvedOptions2}
+  renderItem={({ item }) => (
+    variations.map((variation: any) => (
+      <WeightItem options2={item} id={variation} />
+    ))
+  )}
+  keyExtractor={(item) => String(item.id)}
+/> */}
     </ScrollView>
   );
 }
