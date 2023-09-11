@@ -10,8 +10,8 @@ interface ICartContext {
   onCancel: () => void;
   variation:number;
   quantity:number;
-  setvariation: (variation: number) => void;
-  setQuantity: (quantity: number) => void;
+  setvariation: React.Dispatch<React.SetStateAction<number>>
+  setQuantity: React.Dispatch<React.SetStateAction<number>>
   addToCart: (json: any) => Promise<void>
 
 }
@@ -25,8 +25,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
   const [quantity, setQuantity]=useState<number>(1)
 
 const addToCart = async () => {
-  
-      const result = await CartApi.addToCart({
+        const result = await CartApi.addToCart({
         id: variation,
         quantity: quantity,
       });
