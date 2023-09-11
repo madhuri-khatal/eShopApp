@@ -5,7 +5,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useCartContext} from '../../../context/CartContext';
 
-const CartItem = ({item, onRemove}: any) => {
+const CartItem = ({item, onRemove}: any) => {  
   // console.log("Key For delete",item.key);
   const {deleteCartItem, onDeletehowDialog}: any = useCartContext();
   // const {deleteCartItem}=useProductContext();
