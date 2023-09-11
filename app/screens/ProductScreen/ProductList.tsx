@@ -4,7 +4,6 @@ import ProductItem from './ProductItem';
 import {useProductContext} from './../../context/ProductContext';
 import {ActivityIndicator, Text} from 'react-native-paper';
 
-
 export default function ProductList() {
   const {productByCategoryId, isLoading, fetchMoreData, refThreshold} =
     useProductContext();
@@ -28,7 +27,6 @@ export default function ProductList() {
           ItemSeparatorComponent={() => (
             <View
               style={{
-                height: 10,
                 width: '100%',
                 backgroundColor: '#f7f7f7',
               }}
@@ -36,7 +34,7 @@ export default function ProductList() {
           )}
           data={productByCategoryId}
           onEndReached={async () => {
-             await fetchMoreData();
+            await fetchMoreData();
           }}
           ref={refThreshold}
           onEndReachedThreshold={10}
