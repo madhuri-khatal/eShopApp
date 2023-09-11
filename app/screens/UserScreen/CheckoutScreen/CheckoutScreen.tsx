@@ -28,11 +28,11 @@ export default function CheckoutScreen(props: any) {
   return (
     <>
       <ScrollView>
-        <HeaderBar
+        {/* <HeaderBar
           title="Product Screen"
           titleStyle={{color: colors.onSecondary}}
           backAction={() => navigation.goBack()}
-        />
+        /> */}
         <View style={{marginTop: 10, padding: 7}}>
           <View style={{flexDirection: 'row'}}>
             <EvilIcons

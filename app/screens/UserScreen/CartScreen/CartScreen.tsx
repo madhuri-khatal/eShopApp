@@ -40,11 +40,12 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['1%', '2%', '50%', '75%', '100%'], []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
+  const handleSheetChanges = useCallback((index: number) => {}, []);
   const handleButtonPress = () => {
     bottomSheetRef.current?.snapToIndex(4);
+  };
+  const handleClose = () => {
+    bottomSheetRef.current?.snapToIndex(0);
   };
   return (
     <>
@@ -141,6 +142,16 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
         snapPoints={snapPoints}
         onChange={handleSheetChanges}>
         <View>
+          <Text
+            style={{
+              fontSize: 22,
+              fontWeight: 'bold',
+              textAlign: 'right',
+              marginRight: 20,
+            }}
+            onPress={handleClose}>
+            X
+          </Text>
           <CheckoutScreen />
         </View>
       </BottomSheet>
