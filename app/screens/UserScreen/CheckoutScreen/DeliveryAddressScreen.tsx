@@ -8,7 +8,13 @@ export default function DeliveryAddressScreen() {
     <>
       <ScrollView>
         <View>
-          <Text style={{fontSize: 22, marginLeft: 10}}>India</Text>
+          {/* <Text style={{fontSize: 20, marginLeft: 10}}>India</Text> */}
+          <TextInput
+            label={'India'}
+            style={{margin: 7}}
+            mode="outlined"
+            disabled
+          />
           <TextInput label={'State'} style={{margin: 7}} mode="outlined" />
           <TextInput
             label={'Town / City'}
