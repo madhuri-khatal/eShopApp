@@ -18,6 +18,9 @@ const CartItem = ({item, onRemove}: any) => {
   //   console.log("pressed",item.key);
 
   // }
+  const regular_price = item?.prices?.regular_price.substring(0, item?.prices?.regular_price.length - 2);
+ 
+  
   return (
     <View
       style={{
@@ -38,7 +41,7 @@ const CartItem = ({item, onRemove}: any) => {
       <View style={{flex: 1}}>
         <Text style={{fontSize: 16, fontWeight: 'bold'}}>{item.name}</Text>
         <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
-          Price: ₹ {item?.prices?.price}
+          Price: ₹ {regular_price}
         </Text>
         <QuantityComponent />
       </View>

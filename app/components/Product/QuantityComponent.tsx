@@ -4,6 +4,7 @@ import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 const QuantityComponent = () => {
   const { cartItems,setQuantity,quantity }:any = useCartContext();
+  
   // const [quantity, setQuantity] = useState(cartItems?.quantity || 1);
 
   const handleQuantityChange = (newQuantity: any) => {
