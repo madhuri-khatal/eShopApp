@@ -27,7 +27,7 @@ export default function ProfileScreen(props: any) {
         </Appbar.Header>
 
         <View style={{marginTop: 20}}>
-          <View style={styles.profileContainer}>
+          <View style={{alignItems: 'center', marginBottom: 10}}>
             <RandomAvatar />
             <Text style={styles.userName}>John Doe</Text>
 
@@ -169,10 +169,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  profileContainer: {
-    alignItems: 'center',
-    marginBottom: 20,
-  },
   userName: {
     fontSize: 18,
     marginTop: 10,
@@ -192,7 +188,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   addressSection: {
-    paddingVertical: 20,
+    paddingVertical: 15,
     paddingHorizontal: 20,
   },
   addressText: {
