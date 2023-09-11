@@ -1,6 +1,7 @@
 import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {CartApi} from '../api/CartApi';
 import {ToastAndroid} from 'react-native';
+import { useProductContext } from './ProductContext';
 interface ICartContext {
   cartItems: any;
   getCartList: () => Promise<void>;
@@ -8,12 +9,11 @@ interface ICartContext {
   isShowDialog: boolean;
   onDeletehowDialog?: (key: string) => void;
   onCancel: () => void;
-  variation:number;
-  quantity:number;
-  setvariation: React.Dispatch<React.SetStateAction<number>>
-  setQuantity: React.Dispatch<React.SetStateAction<number>>
-  addToCart: (json: any) => Promise<void>
-
+  variations: number[]
+  quantity: number | undefined
+  setvariation: React.Dispatch<React.SetStateAction<number[]>>
+  setQuantity: React.Dispatch<React.SetStateAction<number | undefined>>
+  addToCart: (id: number, quantity: number) => Promise<void>
 }
 const CartContext = createContext<ICartContext | null>(null);
 type CartContextType = {children: ReactNode};
@@ -21,18 +21,17 @@ export const CartContextProvider = ({children}: CartContextType) => {
   const [cartItems, setcartItems] = useState<any>();
   const [isShowDialog, setIsShowDialog] = useState<boolean>(false);
   const [productKey, setProductKey] = useState<string>('');
-  const [variation, setvariation]=useState<number>(1)
-  const [quantity, setQuantity]=useState<number>(1)
-
-const addToCart = async () => {
+  const [variations, setvariation]=useState<number[]>([])
+  const [quantity, setQuantity]=useState<number>()
+  const {productById} = useProductContext();
+const addToCart = async (id:number,quantity:number) => {
         const result = await CartApi.addToCart({
-        id: variation,
+        id: productById?.variations[0],
         quantity: quantity,
       });
       console.log("resultresultresultresult=============",result);
-            console.log('id', variation);
+            console.log('id', id);
       console.log('quantity', quantity);
-    
   };
   // CART ITEM LIST
   const getCartList = async () => {
@@ -86,7 +85,7 @@ const addToCart = async () => {
     isShowDialog,
     onDeletehowDialog,
     onCancel,
-    variation,
+    variations,
     quantity,
     setvariation,
     setQuantity ,
