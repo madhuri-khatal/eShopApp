@@ -28,7 +28,9 @@ console.log("cartItems",cartItems?.items);
   const handleButtonPress = () => {
     bottomSheetRef.current?.snapToIndex(4);
   };
-
+  const handleClose = () => {
+    bottomSheetRef.current?.snapToIndex(0);
+  };
   const {isShowDialog, deleteCartItem, onCancel} = useCartContext();
 
   return (
