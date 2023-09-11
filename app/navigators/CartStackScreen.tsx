@@ -3,11 +3,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {CartScreen} from './../screens/UserScreen/CartScreen/CartScreen';
 import CheckoutScreen from './../screens/UserScreen/CheckoutScreen/CheckoutScreen';
 import {CartContextProvider} from '../context/CartContext';
+import { ProductContextProvider } from '../context/ProductContext';
 
 const Stack = createStackNavigator();
 export default function CartStackScreen() {
   return (
     <>
+    <ProductContextProvider>
       <CartContextProvider>
         <Stack.Navigator
           screenOptions={{
@@ -18,6 +20,7 @@ export default function CartStackScreen() {
           <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
         </Stack.Navigator>
       </CartContextProvider>
+      </ProductContextProvider>
     </>
   );
 }
