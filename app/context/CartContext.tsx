@@ -1,7 +1,7 @@
 import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {CartApi} from '../api/CartApi';
 import {ToastAndroid} from 'react-native';
-import { useProductContext } from './ProductContext';
+import {useProductContext} from './ProductContext';
 interface ICartContext {
   cartItems: any;
   getCartList: () => Promise<void>;
@@ -9,11 +9,17 @@ interface ICartContext {
   isShowDialog: boolean;
   onDeletehowDialog?: (key: string) => void;
   onCancel: () => void;
-  variations: number[]
-  quantity: number | undefined
-  setvariation: React.Dispatch<React.SetStateAction<number[]>>
-  setQuantity: React.Dispatch<React.SetStateAction<number | undefined>>
-  addToCart: (id: number, quantity: number) => Promise<void>
+  variations: number[];
+  quantity: number | undefined;
+  setvariation: React.Dispatch<React.SetStateAction<number[]>>;
+  setQuantity: React.Dispatch<React.SetStateAction<number | undefined>>;
+  addToCart: (id: number, quantity: number) => Promise<void>;
+  weight: string | number;
+  variation: string | number;
+  onselectVariationOrWeight: (
+    weight: number | string,
+    variation: number | string,
+  ) => void;
 }
 const CartContext = createContext<ICartContext | null>(null);
 type CartContextType = {children: ReactNode};
@@ -21,18 +27,35 @@ export const CartContextProvider = ({children}: CartContextType) => {
   const [cartItems, setcartItems] = useState<any>();
   const [isShowDialog, setIsShowDialog] = useState<boolean>(false);
   const [productKey, setProductKey] = useState<string>('');
-  const [variations, setvariation]=useState<number[]>([])
-  const [quantity, setQuantity]=useState<number>()
+  const [variations, setvariation] = useState<number[]>([]);
+  const [quantity, setQuantity] = useState<number>();
   const {productById} = useProductContext();
-const addToCart = async (id:number,quantity:number) => {
-        const result = await CartApi.addToCart({
-        id: productById?.variations[0],
-        quantity: quantity,
-      });
-      console.log("resultresultresultresult=============",result);
-            console.log('id', id);
-      console.log('quantity', quantity);
+
+  const [weight, setWeight] = useState<number | string>('');
+  const [variation, setVariation] = useState<number | string>('');
+
+  //
+  const onselectVariationOrWeight = (
+    weight: number | string,
+    variation: number | string,
+  ) => {
+    setWeight(weight);
+    setVariation(variation);
   };
+
+  async function addToCart(id: number, quantity: number) {
+    const {
+      result: {
+        data: {data},
+      },
+    } = await CartApi.addToCart({
+      id: variation,
+      quantity: quantity,
+    });
+    console.log('resultresultresultresult=============', data);
+    console.log('id', id);
+    console.log('quantity', quantity);
+  }
   // CART ITEM LIST
   const getCartList = async () => {
     const {
@@ -59,14 +82,13 @@ const addToCart = async (id:number,quantity:number) => {
     }
   };
 
-
-//   Delete Product Dialog Modal
+  //   Delete Product Dialog Modal
   const onDeletehowDialog = (key: string) => {
     setProductKey(key);
     setIsShowDialog(true);
   };
-  
-//  cancle Delete Product Dialog Modal 
+
+  //  cancle Delete Product Dialog Modal
   const onCancel = () => {
     ToastAndroid.showWithGravity(
       'Product Not Delete',
@@ -77,7 +99,6 @@ const addToCart = async (id:number,quantity:number) => {
     setIsShowDialog(false);
   };
 
-  
   const value: ICartContext = {
     cartItems,
     getCartList,
@@ -88,8 +109,11 @@ const addToCart = async (id:number,quantity:number) => {
     variations,
     quantity,
     setvariation,
-    setQuantity ,
-    addToCart
+    setQuantity,
+    addToCart,
+    variation,
+    weight,
+    onselectVariationOrWeight,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
