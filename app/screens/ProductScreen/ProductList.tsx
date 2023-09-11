@@ -10,15 +10,29 @@ export default function ProductList() {
   return (
     <>
       {productByCategoryId.length === 0 ? (
-        <Image
-          style={{
-            width: 400,
-            height: 400,
-          }}
-          source={{
-            uri: 'https://stores.maxfashion.in/VendorpageTheme/Enterprise/EThemeForMax/images/product-not-found.jpg',
-          }}
-        />
+        <>
+          {/* <Image
+            style={{
+              width: 400,
+              height: 400,
+            }}
+            source={{
+              uri: 'https://stores.maxfashion.in/VendorpageTheme/Enterprise/EThemeForMax/images/product-not-found.jpg',
+            }}
+          /> */}
+          <View
+            style={{
+              height: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <ActivityIndicator
+              size="large"
+              color="#e95d2a"
+              style={{backgroundColor: 'white'}}
+            />
+          </View>
+        </>
       ) : (
         <FlatList
           nestedScrollEnabled={true}
