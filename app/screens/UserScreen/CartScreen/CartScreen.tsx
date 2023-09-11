@@ -22,6 +22,7 @@ console.log("cartItems",cartItems?.items);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['1%', '2%', '50%', '75%', '100%'], []);
+
   const handleSheetChanges = useCallback((index: number) => {
       }, []);
   const handleButtonPress = () => {
@@ -29,6 +30,7 @@ console.log("cartItems",cartItems?.items);
   };
 
   const {isShowDialog, deleteCartItem, onCancel} = useCartContext();
+
   return (
     <>
       <HeaderBar
@@ -134,6 +136,16 @@ console.log("cartItems",cartItems?.items);
         snapPoints={snapPoints}
         onChange={handleSheetChanges}>
         <View>
+          <Text
+            style={{
+              fontSize: 22,
+              fontWeight: 'bold',
+              textAlign: 'right',
+              marginRight: 20,
+            }}
+            onPress={handleClose}>
+            X
+          </Text>
           <CheckoutScreen />
         </View>
       </BottomSheet>

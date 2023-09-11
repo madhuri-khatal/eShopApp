@@ -15,6 +15,7 @@ export const ProductsScreen = (props: any) => {
       <HeaderBar
         title="Product Screen"
         titleStyle={{color: colors.onSecondary}}
+        // titleStyle={{color: 'gray', fontSize: 20}}
         backAction={() => navigation.goBack()}
         right2Action={() => {
           navigation.getParent('main').navigate('BottomTab', {
