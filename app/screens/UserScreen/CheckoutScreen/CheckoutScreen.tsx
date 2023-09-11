@@ -28,17 +28,8 @@ export default function CheckoutScreen(props: any) {
   return (
     <>
       <ScrollView>
-        {/* <HeaderBar
-          title="Product Screen"
-          titleStyle={{color: colors.onSecondary}}
-          backAction={() => navigation.goBack()}
-        /> */}
         <View style={{marginVertical: 20, padding: 7}}>
-          <View style={{flexDirection: 'row'}}>
-            <EvilIcons
-              name="spinner-2"
-              style={{fontSize: 30, color: '#fa5f11'}}
-            />
+          <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>
               Customer Information
             </Text>
@@ -86,20 +77,16 @@ export default function CheckoutScreen(props: any) {
               <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
                 Delivery address
               </Text>
-              <Entypo name="location" style={{fontSize: 30}} />
             </View>
             <DeliveryAddressScreen />
 
             <View>
-              {/* <PaymentMethod />
-               */}
               <Text
                 style={{
                   fontSize: 20,
                   fontWeight: 'bold',
-                  // width: '90%',
                   marginBottom: 10,
-                  padding: 7,
+                  padding: 10,
                 }}>
                 Payment Method
               </Text>
@@ -128,13 +115,6 @@ export default function CheckoutScreen(props: any) {
                 title={'Submit'}
                 backgroundColor="orange"
                 width={380}
-                // onPress={() =>
-                //   // navigation.navigate('OrderDetailScreen', {data: 'item'})
-                //   navigation.navigate('DrawerStackNavigator', {
-                //     screen: 'OrderDetailScreen',
-                //     initial: false,
-                //   })
-                // }
                 onPress={() =>
                   navigation.getParent('main').navigate('OrderScreen')
                 }
