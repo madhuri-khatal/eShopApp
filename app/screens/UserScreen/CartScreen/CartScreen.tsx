@@ -133,24 +133,26 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
           </ScrollView>
           <TouchableOpacity
             style={{
-              backgroundColor: '#f6d70e',
-              padding: 12,
-              borderRadius: 8,
-              marginTop: 16,
+              backgroundColor: '#e95d2a',
+              padding: 15,
+              // borderRadius: 8,
+              // marginTop: 16,
             }}
             onPress={handleButtonPress}>
             <Text
               style={{
-                color: '#595555',
+                color: '#ffffff',
                 textAlign: 'center',
                 fontSize: 18,
+                justifyContent: 'center',
               }}>
               Proceed to Checkout
             </Text>
           </TouchableOpacity>
           <BottomSheet
+            enablePanDownToClose
             ref={bottomSheetRef}
-            index={1}
+            index={0}
             snapPoints={snapPoints}
             onChange={handleSheetChanges}>
             <View>
