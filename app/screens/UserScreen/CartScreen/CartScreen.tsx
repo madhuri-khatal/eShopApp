@@ -19,14 +19,12 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
   const {snackBarVisible, setSnackBarVisible} = useCommanContext();
   const {cartItems} = useCartContext();
 
-// console.log("cartItems",cartItems?.items);
-// const regular_price = cartItems?.prices?.regular_price.substring(0, cartItems?.prices?.regular_price.length - 2);
-// const regular_price1 = cartItems 
-// const regular_price = cartItems?.items?.prices?. regular_price
-//  console.log(regular_price1);
-//  console.log(regular_price);
-
-
+  // console.log("cartItems",cartItems?.items);
+  // const regular_price = cartItems?.prices?.regular_price.substring(0, cartItems?.prices?.regular_price.length - 2);
+  // const regular_price1 = cartItems
+  // const regular_price = cartItems?.items?.prices?. regular_price
+  //  console.log(regular_price1);
+  //  console.log(regular_price);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['1%', '2%', '50%', '75%', '100%'], []);
@@ -67,7 +65,6 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
             firstAction={deleteCartItem}
             secondAction={onCancel}
           />
-
           <ScrollView style={{backgroundColor: '#F7F7F7'}}>
             <View style={{flex: 1, padding: 10}}>
               <CartList />
@@ -133,24 +130,24 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                 </View>
               </View>
             </View>
-            <TouchableOpacity
-              style={{
-                backgroundColor: '#f6d70e',
-                padding: 12,
-                borderRadius: 8,
-                marginTop: 16,
-              }}
-              onPress={handleButtonPress}>
-              <Text
-                style={{
-                  color: '#595555',
-                  textAlign: 'center',
-                  fontSize: 18,
-                }}>
-                Proceed to Checkout
-              </Text>
-            </TouchableOpacity>
           </ScrollView>
+          <TouchableOpacity
+            style={{
+              backgroundColor: '#f6d70e',
+              padding: 12,
+              borderRadius: 8,
+              marginTop: 16,
+            }}
+            onPress={handleButtonPress}>
+            <Text
+              style={{
+                color: '#595555',
+                textAlign: 'center',
+                fontSize: 18,
+              }}>
+              Proceed to Checkout
+            </Text>
+          </TouchableOpacity>
           <BottomSheet
             ref={bottomSheetRef}
             index={1}
