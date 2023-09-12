@@ -39,6 +39,9 @@ const CartItem = ({item, onRemove}: any) => {
         <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
           Price: ₹ {regular_price}
         </Text>
+        <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
+          Quantity: {item.quantity}
+        </Text>
         <QuantityComponent />
       </View>
       <View style={{marginRight: 15}}>
