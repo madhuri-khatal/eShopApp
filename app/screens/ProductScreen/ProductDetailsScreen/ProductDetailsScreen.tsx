@@ -28,12 +28,12 @@ export const ProductDetailsScreen = (props: any) => {
   const handleIndex = (index: number) => {
     setIndex(index);
   };
-  const {addToCart} = useCartContext();
+  const {addToCart,quantity} = useCartContext();
   const {productById} = useProductContext();
 
   const addCart = async () => {
     const id = productById?.variations[0];
-    addToCart(id, 1);
+    addToCart(id, quantity);
     navigation.navigate('CartScreen');
   };
 
