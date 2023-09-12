@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 const QuantityComponent = () => {
-
   const {cartItems, setQuantity, quantity}: any = useCartContext();
 
   // const [quantity, setQuantity] = useState(cartItems?.quantity || 1);
@@ -33,7 +32,6 @@ const QuantityComponent = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
@@ -41,7 +39,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     overflow: 'hidden',
     width: 110,
-    // margin: 10,
   },
   quantityButton: {
     flex: 1,
