@@ -28,7 +28,7 @@ export const ProductDetailsScreen = (props: any) => {
   const handleIndex = (index: number) => {
     setIndex(index);
   };
-  const {addToCart,quantity} = useCartContext();
+  const {addToCart, quantity} = useCartContext();
   const {productById} = useProductContext();
 
   const addCart = async () => {
@@ -246,7 +246,7 @@ export const ProductDetailsScreen = (props: any) => {
             style={{
               width: 220,
               height: 50,
-              backgroundColor: '#f6d70e',
+              backgroundColor: '#e95d2a',
               borderRadius: 10,
             }}
             mode="contained"
@@ -260,7 +260,7 @@ export const ProductDetailsScreen = (props: any) => {
                 justifyContent: 'center',
                 fontSize: 17,
                 textTransform: 'capitalize',
-                color: '#595555',
+                color: '#ffffff',
               }}>
               Add To Cart
             </Text>
