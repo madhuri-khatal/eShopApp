@@ -3,16 +3,13 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 const QuantityComponent = () => {
-  const {cartItems, setQuantity, quantity}: any = useCartContext();
-
-  // const [quantity, setQuantity] = useState(cartItems?.quantity || 1);
+  const {cartItems,setQuantity, quantity}: any = useCartContext();
 
   const handleQuantityChange = (newQuantity: any) => {
     if (newQuantity >= 1) {
       setQuantity(newQuantity);
     }
   };
-console.log("newQuantitynewQuantitynewQuantity",quantity);
 
   return (
     <View style={styles.container}>
@@ -56,7 +53,7 @@ const styles = StyleSheet.create({
     flex: 2,
     textAlign: 'center',
     fontSize: 18,
-    color:'red'
+    // color:'red'
   },
 });
 

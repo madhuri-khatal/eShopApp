@@ -10,7 +10,7 @@ interface ICartContext {
   onDeletehowDialog?: (key: string) => void;
   onCancel: () => void;
   variations: number[];
-  quantity: number | undefined;
+  quantity: number;
   setvariation: React.Dispatch<React.SetStateAction<number[]>>;
   setQuantity: React.Dispatch<React.SetStateAction<number | undefined>>;
   addToCart: (id: number, quantity: number) => Promise<void>;

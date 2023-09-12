@@ -1,17 +1,25 @@
 import {useProductContext} from '../../../context/ProductContext';
 import QuantityComponent from '../../../components/Product/QuantityComponent';
 import React, {useEffect} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useCartContext} from '../../../context/CartContext';
 
 const CartItem = ({item, onRemove}: any) => {
-  const {deleteCartItem, onDeletehowDialog}: any = useCartContext();
+  const {deleteCartItem, onDeletehowDialog,quantity,setQuantity}: any = useCartContext();
+  
   const regular_price = item?.prices?.regular_price.substring(
     0,
     item?.prices?.regular_price.length - 2,
   );
   const weight = item?.variation?.[0]?.value;
+console.log("item----------------",item?.quantity);
+
+  const handleQuantityChange = (newQuantity: any) => {
+    if (newQuantity >= 1) {
+      setQuantity(newQuantity);
+    }
+  };
   return (
     <View
       style={{
@@ -39,10 +47,22 @@ const CartItem = ({item, onRemove}: any) => {
         <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
           Price: ₹ {regular_price}
         </Text>
-        <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
-          Quantity: {item.quantity}
-        </Text>
-        <QuantityComponent />
+
+        {/* <QuantityComponent quantity={quantity} /> */}
+        <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.quantityButton}
+        onPress={() => handleQuantityChange(quantity - 1)}>
+        <Text style={styles.buttonText}>-</Text>
+      </TouchableOpacity>
+      <Text style={styles.quantityText}>{item?.quantity}</Text>
+      <TouchableOpacity
+        style={styles.quantityButton}
+        onPress={() => handleQuantityChange(quantity + 1)}>
+        <Text style={styles.buttonText}>+</Text>
+      </TouchableOpacity>
+    </View>
+
       </View>
       <View style={{marginRight: 15}}>
         <TouchableOpacity onPress={() => onDeletehowDialog(item.key)}>
@@ -54,3 +74,31 @@ const CartItem = ({item, onRemove}: any) => {
 };
 
 export default CartItem;
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 4,
+    overflow: 'hidden',
+    width: 110,
+  },
+  quantityButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 8,
+    backgroundColor: '#f0f0f0',
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  quantityText: {
+    flex: 2,
+    textAlign: 'center',
+    fontSize: 18,
+    // color:'red'
+  },
+});
