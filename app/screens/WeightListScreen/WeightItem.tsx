@@ -12,11 +12,10 @@ interface IProps {
 
 export default function WeightItem({icon, title, options2, id}: IProps) {
   const {onselectVariationOrWeight, variation} = useCartContext();
-  console.log('options2', options2);
-
+  
   return (
     <TouchableOpacity
-      style={{backgroundColor: variation == id ? 'red' : '#fff'}}
+      // style={{borderColor: variation == id ? 'red' : '#59a30e'}}
       onPress={() => onselectVariationOrWeight(options2, id)}>
       <View
         style={{
@@ -26,10 +25,11 @@ export default function WeightItem({icon, title, options2, id}: IProps) {
           marginBottom: 15,
           borderWidth: 0.5,
           borderTopWidth: 7,
-          borderColor: '#59a30e',
+          // borderColor: '#59a30e',
+          borderColor: variation == id ? '#e95d2a' : '#f7ab8f',
           borderRadius: 5,
         }}>
-        <Text>{id}</Text>
+
         <Text>{options2}</Text>
       </View>
     </TouchableOpacity>

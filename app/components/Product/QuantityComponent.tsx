@@ -13,6 +13,7 @@ const QuantityComponent = () => {
       setQuantity(newQuantity);
     }
   };
+console.log("newQuantitynewQuantitynewQuantity",quantity);
 
   return (
     <View style={styles.container}>
@@ -58,7 +59,9 @@ const styles = StyleSheet.create({
     flex: 2,
     textAlign: 'center',
     fontSize: 18,
+    color:'red'
   },
 });
 
 export default QuantityComponent;
+

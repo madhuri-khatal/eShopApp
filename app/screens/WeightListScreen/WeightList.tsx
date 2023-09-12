@@ -13,7 +13,6 @@ export default function WeightList({options2}: any) {
   }
 
   const variations = productById?.variations;
-  console.log(variations);
 
   return (
     <ScrollView

@@ -28,7 +28,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
   const [isShowDialog, setIsShowDialog] = useState<boolean>(false);
   const [productKey, setProductKey] = useState<string>('');
   const [variations, setvariation] = useState<number[]>([]);
-  const [quantity, setQuantity] = useState<number>();
+  const [quantity, setQuantity] = useState<number>(1);
   const {productById} = useProductContext();
 
   const [weight, setWeight] = useState<number | string>('');
@@ -45,16 +45,19 @@ export const CartContextProvider = ({children}: CartContextType) => {
 
   async function addToCart(id: number, quantity: number) {
     const {
-      result: {
-        data: {data},
-      },
+      result
+      // : {
+      //   data: {data},
+      // },
     } = await CartApi.addToCart({
       id: variation,
       quantity: quantity,
     });
-    console.log('resultresultresultresult=============', data);
-    console.log('id', id);
-    console.log('quantity', quantity);
+    
+    getCartList();
+    // console.log('resultresultresultresult=============', result);
+    // console.log('id', id);
+    // console.log('quantity', quantity);
   }
   // CART ITEM LIST
   const getCartList = async () => {
