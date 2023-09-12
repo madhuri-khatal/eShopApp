@@ -5,6 +5,7 @@ import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useCartContext} from '../../../context/CartContext';
 
+
 const CartItem = ({item, onRemove}: any) => {
   const {deleteCartItem, onDeletehowDialog,quantity,setQuantity}: any = useCartContext();
   
@@ -13,13 +14,14 @@ const CartItem = ({item, onRemove}: any) => {
     item?.prices?.regular_price.length - 2,
   );
   const weight = item?.variation?.[0]?.value;
-console.log("item----------------",item?.quantity);
 
   const handleQuantityChange = (newQuantity: any) => {
     if (newQuantity >= 1) {
       setQuantity(newQuantity);
     }
   };
+  const subTotal=regular_price * item?.quantity
+   
   return (
     <View
       style={{
@@ -42,10 +44,10 @@ console.log("item----------------",item?.quantity);
           </Text>
         </View>
       )}
-      <View style={{flex: 1, marginLeft: 10}}>
-        <Text style={{fontSize: 16, fontWeight: 'bold'}}>{item.name}</Text>
+      <View style={{flex: 1, marginLeft: 7}}>
+        <Text style={{fontSize: 16, fontWeight: 'bold' }}  numberOfLines={1} ellipsizeMode="tail">{item.name}</Text>
         <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
-          Price: ₹ {regular_price}
+          Price: ₹ {regular_price} X {item?.quantity} = ₹{subTotal}
         </Text>
 
         {/* <QuantityComponent quantity={quantity} /> */}
