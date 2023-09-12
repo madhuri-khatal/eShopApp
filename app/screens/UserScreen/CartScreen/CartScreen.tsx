@@ -25,7 +25,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
 // const regular_price = cartItems?.items?.prices?. regular_price
 //  console.log(regular_price1);
 //  console.log(regular_price);
- 
+
 
 
   const bottomSheetRef = useRef<BottomSheet>(null);
