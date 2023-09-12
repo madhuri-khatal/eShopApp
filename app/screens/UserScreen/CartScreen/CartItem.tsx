@@ -47,6 +47,7 @@ console.log("item----------------",item?.quantity);
         <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
           Price: ₹ {regular_price}
         </Text>
+
         {/* <QuantityComponent quantity={quantity} /> */}
         <View style={styles.container}>
       <TouchableOpacity
@@ -61,10 +62,6 @@ console.log("item----------------",item?.quantity);
         <Text style={styles.buttonText}>+</Text>
       </TouchableOpacity>
     </View>
-
-
-
-
 
       </View>
       <View style={{marginRight: 15}}>
