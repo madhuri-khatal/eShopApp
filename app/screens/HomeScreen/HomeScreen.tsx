@@ -7,6 +7,7 @@ import {Caraousel} from '../../components/Product/Carousel';
 import {CaraouselContent} from '../../components/Product/CarouselContent';
 import FeaturedCategories from '../../components/Product/FeaturedCategories';
 import PaymentMethod from '../../components/Product/PaymentMethod';
+import ImageCarousel from '../../components/Product/ImageCarousel';
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
 
@@ -21,21 +22,21 @@ export default function HomeScreen({navigation}: any) {
       <View>
         <Appbar.Header>
           <Appbar.Content
-            title="Home"
-            titleStyle={{color: colors.onSecondary}}
+            title="e-Shop"
+            // titleStyle={{color: colors.onSecondary}}
           />
           <Appbar.Action icon="menu" onPress={_handleMore} />
         </Appbar.Header>
 
         <SearchBar onChangeText={handleSearchChange} />
 
-        <Caraousel
+        {/* <Caraousel
           Component={CaraouselContent}
           data={[...new Array(3).keys()]}
           autoPlay
           onSnapToItem={() => console.log('hi')}
-        />
-
+        /> */}
+        <ImageCarousel />
         <FeaturedCategories />
       </View>
     </>
