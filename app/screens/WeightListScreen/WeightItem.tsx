@@ -13,14 +13,9 @@ interface IProps {
 }
 
 export default function WeightItem({icon, title, options2, id}: IProps) {
-  const {onselectVariationOrWeight, variation,setVariationWisePrice,variationPrice} = useCartContext();
-  const {productById} = useProductContext();
-  useEffect(() => {
-    (async () => {
-      await setVariationWisePrice(productById?.id);
-    })();
-  }, []);
-  console.log('variationPricevariationPrice', variationPrice);
+  const {onselectVariationOrWeight, variation} = useCartContext();
+ 
+
   return (
     <TouchableOpacity
       // style={{borderColor: variation == id ? 'red' : '#59a30e'}}
