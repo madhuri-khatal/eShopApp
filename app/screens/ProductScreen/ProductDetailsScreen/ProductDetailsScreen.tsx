@@ -277,9 +277,9 @@ export const ProductDetailsScreen = (props: any) => {
           <HTMLView value={descriptionText} stylesheet={styles} />
         </View>
 
-        <View style={{flex: 1}}>
+        {/* <View style={{flex: 1}}>
           <ReviewComponent />
-        </View>
+        </View> */}
       </ScrollView>
       <View
         style={{
