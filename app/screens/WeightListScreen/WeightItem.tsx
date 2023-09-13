@@ -25,6 +25,7 @@ export default function WeightItem({
   regularPrice,
 }: IProps) {
   const {onselectVariationOrWeight, variation} = useCartContext();
+
   const pressItem = () => {
     onselectVariationOrWeight(options2, id);
     onWeightItemClick(id);
@@ -67,6 +68,7 @@ export default function WeightItem({
               <CurrencyComponent value={price} style={{color: '#595555'}} />
             </>
           )}
+
           <Text>{options2}</Text>
         </View>
       </TouchableOpacity>
