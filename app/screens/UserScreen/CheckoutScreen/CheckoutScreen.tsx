@@ -2,18 +2,17 @@ import React, {useState} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {TextInput, Text, useTheme} from 'react-native-paper';
 import ButtonComponent from '../../../components/ui/ButtonComponent';
-import Entypo from 'react-native-vector-icons/Entypo';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {ScrollView} from 'react-native-gesture-handler';
 import DeliveryAddressScreen from './DeliveryAddressScreen';
 import {useNavigation} from '@react-navigation/native';
-import {HeaderBar} from '../../../components/ui/HeaderBar';
-import {DrawerActions} from '@react-navigation/native';
 import {useCartContext} from '../../../context/CartContext';
+import {useCheckoutContext} from '../../../context/CheckoutContext';
 export default function CheckoutScreen(props: any) {
   const navigation: any = useNavigation();
   const {colors} = useTheme();
   const {cartItems} = useCartContext();
+  const {onSubmitCheckout} = useCheckoutContext();
+
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showCODDetails, setShowCODDetails] = useState(false);
   const handlePaymentMethodPress = (method: any) => {
@@ -163,13 +162,10 @@ export default function CheckoutScreen(props: any) {
 
             <View style={{marginTop: 14}}>
               <ButtonComponent
-                title={'Submit'}
+                title={'Place Order'}
                 backgroundColor="orange"
                 width={380}
-                onPress={() =>
-                  
-                  navigation.getParent('main').navigate('OrderScreen')
-                }
+                onPress={() => onSubmitCheckout()}
               />
             </View>
           </View>

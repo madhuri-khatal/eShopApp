@@ -30,8 +30,14 @@ export const ProductDetailsScreen = (props: any) => {
     setIndex(index);
   };
 
-  const {addToCart, quantity, variationPrice, setVariationWisePrice, price} =
-    useCartContext();
+  const {addToCart, quantity, variationPrice, setVariationWisePrice, price,cartItems,getCartList} =   useCartContext();
+    
+    useEffect(() => {
+      (async () => {
+        await getCartList();
+      })();
+    }, []);
+    const badgeCount = cartItems?.items.length ||0;
 
   const {productById} = useProductContext();
 
@@ -73,13 +79,23 @@ export const ProductDetailsScreen = (props: any) => {
   const secondPrice = prices[1];
   return (
     <>
-      <ScrollView>
-        <HeaderBar
-          title="product detail screen"
-          backAction={() => navigation.goBack()}
-          icon1="menu"
-          right1Action={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-        />
+      
+      <HeaderBar
+        title=""
+        // titleStyle={{color: colors.onSecondary}}
+        // titleStyle={{color: 'gray', fontSize: 20}}
+        backAction={() => navigation.goBack()}
+        right2Action={() => {
+                 navigation.navigate("CartStack",{screen:'CartScreen',initial:false})
+        }}
+        right1Action={() =>
+          navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
+        }
+        icon1="menu"
+        icon2="cart"
+        badgeCount={badgeCount}
+      />
+        <ScrollView>
         <View style={{flex: 1, padding: 3}}>
           <View style={{flex: 1}}>
             <View style={{flex: 1, position: 'relative'}}>
