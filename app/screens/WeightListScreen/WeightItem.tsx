@@ -1,7 +1,9 @@
+import { useProductContext } from '../../context/ProductContext';
 import {useCartContext} from '../../context/CartContext';
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {View, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import CurrencyComponent from '../../components/ui/Currencycomponent';
 
 interface IProps {
   icon?: any;
@@ -12,7 +14,8 @@ interface IProps {
 
 export default function WeightItem({icon, title, options2, id}: IProps) {
   const {onselectVariationOrWeight, variation} = useCartContext();
-  
+ 
+
   return (
     <TouchableOpacity
       // style={{borderColor: variation == id ? 'red' : '#59a30e'}}
@@ -29,6 +32,7 @@ export default function WeightItem({icon, title, options2, id}: IProps) {
           borderColor: variation == id ? '#e95d2a' : '#f7ab8f',
           borderRadius: 5,
         }}>
+          <CurrencyComponent value={id} style={{color:"#595555" }}/>
 
         <Text>{options2}</Text>
       </View>
