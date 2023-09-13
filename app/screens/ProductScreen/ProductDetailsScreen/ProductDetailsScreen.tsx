@@ -28,8 +28,10 @@ export const ProductDetailsScreen = (props: any) => {
   const handleIndex = (index: number) => {
     setIndex(index);
   };
+
   const {addToCart, quantity, variationPrice, setVariationWisePrice} =
     useCartContext();
+
   const {productById} = useProductContext();
   // useEffect(() => {
   //   (async () => {
@@ -56,6 +58,29 @@ export const ProductDetailsScreen = (props: any) => {
     }
   }, [productById?.description || productById?.short_description]);
 
+  const priceHtml = productById?.price_html;
+  const regex =
+    /<span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#8377;<\/span>([\d.]+)<\/bdi><\/span>/g;
+
+  const prices = [];
+  let match;
+
+  while ((match = regex.exec(priceHtml)) !== null) {
+    // Extract the numeric price value from each match and add it to the 'prices' array
+    prices.push(parseFloat(match[1]));
+  }
+
+  if (prices.length === 2) {
+    // Now, 'prices' contains both numeric price values
+    const firstPrice = prices[0];
+    const secondPrice = prices[1];
+    console.log('First Price:', firstPrice);
+    console.log('Second Price:', secondPrice);
+  } else {
+    console.log('Prices not found');
+  }
+  const firstPrice = prices[0];
+  const secondPrice = prices[1];
   return (
     <>
       <ScrollView>
@@ -178,6 +203,7 @@ export const ProductDetailsScreen = (props: any) => {
               paddingLeft: 10,
               textTransform: 'capitalize',
               marginBottom: 5,
+              color: '#595555',
             }}>
             {productById?.name}
           </Text>
@@ -185,6 +211,15 @@ export const ProductDetailsScreen = (props: any) => {
           <HTMLView value={shortDescriptionText} stylesheet={styles} />
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <View style={{flex: 1}}>
+              <Text
+                style={{
+                  fontSize: 22,
+                  paddingTop: 13,
+                  marginLeft: 15,
+                  color: '#b1b1b1',
+                }}>
+                ₹{firstPrice} - ₹{secondPrice}
+              </Text>
               <CurrencyComponent
                 value={productById?.price}
                 style={{
@@ -229,6 +264,7 @@ export const ProductDetailsScreen = (props: any) => {
               paddingLeft: 15,
               fontWeight: 'bold',
               textAlign: 'justify',
+              color: '#595555',
             }}>
             Product Details
           </Text>
@@ -255,7 +291,7 @@ export const ProductDetailsScreen = (props: any) => {
             style={{
               width: 220,
               height: 50,
-              backgroundColor: '#f6d70e',
+              backgroundColor: '#e95d2a',
               borderRadius: 10,
             }}
             mode="contained"
@@ -269,7 +305,7 @@ export const ProductDetailsScreen = (props: any) => {
                 justifyContent: 'center',
                 fontSize: 17,
                 textTransform: 'capitalize',
-                color: '#595555',
+                color: '#ffffff',
               }}>
               Add To Cart
             </Text>
@@ -284,5 +320,6 @@ const styles = {
     fontSize: 16,
     margin: 8,
     textAlign: 'justify',
+    color: '#595555',
   },
 };

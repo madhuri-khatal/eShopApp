@@ -9,9 +9,11 @@ import DeliveryAddressScreen from './DeliveryAddressScreen';
 import {useNavigation} from '@react-navigation/native';
 import {HeaderBar} from '../../../components/ui/HeaderBar';
 import {DrawerActions} from '@react-navigation/native';
+import {useCartContext} from '../../../context/CartContext';
 export default function CheckoutScreen(props: any) {
   const navigation: any = useNavigation();
   const {colors} = useTheme();
+  const {cartItems} = useCartContext();
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showCODDetails, setShowCODDetails] = useState(false);
   const handlePaymentMethodPress = (method: any) => {
@@ -25,6 +27,9 @@ export default function CheckoutScreen(props: any) {
       setShowCODDetails(!showCODDetails);
     }
   };
+  const billing = cartItems?.billing_address;
+  console.log(cartItems?.shipping_address, 'paymentmethod');
+
   return (
     <>
       <ScrollView>
@@ -37,17 +42,18 @@ export default function CheckoutScreen(props: any) {
 
           <View style={{padding: 8}}>
             <TextInput
-              label={'Phone Number'}
-              style={{margin: 8}}
+              placeholder={'Phone Number'}
+              style={{margin: 8, backgroundColor: 'white'}}
               mode="outlined"
               keyboardType="number-pad"
               maxLength={10}
+              defaultValue={billing?.phone}
             />
 
             <View style={{flexDirection: 'row'}}>
               <View>
                 <TextInput
-                  label={'OTP'}
+                  placeholder={'OTP'}
                   style={{margin: 8, width: 255}}
                   mode="outlined"
                 />
@@ -63,24 +69,26 @@ export default function CheckoutScreen(props: any) {
               </View>
             </View>
             <TextInput
-              label={'Full Name'}
-              style={{margin: 8}}
+              placeholder={'Full Name'}
+              style={{margin: 8, backgroundColor: 'white'}}
               mode="outlined"
+              defaultValue={billing?.first_name}
             />
             <TextInput
-              label={'Email'}
+              placeholder={'Email'}
               style={{margin: 8}}
               mode="outlined"
               keyboardType="email-address"
+              defaultValue={billing?.email}
             />
             <View style={{flexDirection: 'row', padding: 10}}>
               <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
-                Delivery address
+                Shipping address
               </Text>
             </View>
             <DeliveryAddressScreen />
 
-            <View>
+            {/* <View>
               <Text
                 style={{
                   fontSize: 20,
@@ -109,7 +117,51 @@ export default function CheckoutScreen(props: any) {
                   <Text style={styles.methodDetailsText}>Cash on Delivary</Text>
                 </View>
               )}
+            </View> */}
+            <View>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  marginBottom: 10,
+                  padding: 10,
+                }}>
+                Payment Method
+              </Text>
+
+              {cartItems?.payment_methods.map((method: any, index: any) => (
+                <TouchableOpacity
+                  key={index}
+                  style={[
+                    styles.methodContainer,
+                    selectedMethod === method && styles.selectedMethod,
+                  ]}
+                  onPress={() => handlePaymentMethodPress(method)}>
+                  <Text
+                    style={[
+                      styles.methodText,
+                      selectedMethod === method && styles.selectedMethodText,
+                    ]}>
+                    {method}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+              <TouchableOpacity
+                style={[
+                  styles.methodContainer,
+                  selectedMethod === 'COD' && styles.selectedMethod,
+                ]}
+                onPress={() => handlePaymentMethodPress('COD')}>
+                <Text
+                  style={[
+                    styles.methodText,
+                    selectedMethod === 'COD' && styles.selectedMethodText,
+                  ]}>
+                  Cash on Delivary
+                </Text>
+              </TouchableOpacity>
             </View>
+
             <View style={{marginTop: 14}}>
               <ButtonComponent
                 title={'Submit'}

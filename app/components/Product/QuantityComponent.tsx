@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 const QuantityComponent = () => {
-  const {cartItems,setQuantity, quantity}: any = useCartContext();
+  const {cartItems, setQuantity, quantity}: any = useCartContext();
 
   const handleQuantityChange = (newQuantity: any) => {
     if (newQuantity >= 1) {
@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
     flex: 2,
     textAlign: 'center',
     fontSize: 18,
+    color: '#595555',
     // color:'red'
   },
 });
 
 export default QuantityComponent;
-
