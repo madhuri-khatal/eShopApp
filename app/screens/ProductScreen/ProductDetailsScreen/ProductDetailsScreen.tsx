@@ -23,6 +23,14 @@ import {CartApi} from '../../../api/CartApi';
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
   const [index, setIndex] = useState<number>(0);
+  const [selectedPrice, setSelectedPrice] = useState<number | null>(null); // State to hold the selected price
+
+  const handleWeightItemClick = (price: number) => {
+    setSelectedPrice(price);
+  };
+
+  console.log("===========================================selectedPrice=============================================",selectedPrice);
+  
   const width = Dimensions.get('window').width;
   const refWidth = useRef(0.6);
   const handleIndex = (index: number) => {
@@ -33,15 +41,7 @@ export const ProductDetailsScreen = (props: any) => {
     useCartContext();
 
   const {productById} = useProductContext();
-  // useEffect(() => {
-  //   (async () => {
-  //     await setVariationWisePrice(productById?.id);
-  //   })();
-  // }, []);
-  // const Data= JSON.parse(variationPrice)
-  // const [first] = variationPrice;
-  // console.log('variationPricevariationPrice', variationPrice);
-
+ 
   const addCart = async () => {
     const id = productById?.variations[0];
     addToCart(id, quantity);
@@ -71,12 +71,9 @@ export const ProductDetailsScreen = (props: any) => {
   }
 
   if (prices.length === 2) {
-    // Now, 'prices' contains both numeric price values
-    const firstPrice = prices[0];
+       const firstPrice = prices[0];
     const secondPrice = prices[1];
-    console.log('First Price:', firstPrice);
-    console.log('Second Price:', secondPrice);
-  } else {
+    } else {
     console.log('Prices not found');
   }
   const firstPrice = prices[0];
@@ -192,7 +189,7 @@ export const ProductDetailsScreen = (props: any) => {
               </View>
             </View>
             <View style={{alignItems: 'flex-end', paddingRight: 18}}>
-              <WishlistComponent />
+              <WishlistComponent  />
             </View>
           </View>
 
@@ -222,6 +219,7 @@ export const ProductDetailsScreen = (props: any) => {
               </Text>
               <CurrencyComponent
                 value={productById?.price}
+                // value={selectedPrice}
                 style={{
                   alignSelf: 'flex-bottom',
                   fontSize: 28,
@@ -256,7 +254,9 @@ export const ProductDetailsScreen = (props: any) => {
               </TouchableOpacity>
             </View>
           </View>
-          <WeightList />
+          <Text>Selected Price: {selectedPrice !== null ? selectedPrice : 'None selected'}</Text>
+          
+          <WeightList onWeightItemClick={handleWeightItemClick} />
 
           <Text
             style={{
