@@ -10,26 +10,34 @@ interface IProps {
   title?: any;
   options2: string;
   id: any;
+  price: any;
+  regularPrice: any;
+  onWeightItemClick: (id: any) => void;
 }
 
-export default function WeightItem({icon, title, options2, id}: IProps) {
+export default function WeightItem({
+  icon,
+  title,
+  options2,
+  id,
+  onWeightItemClick,
+  price,
+  regularPrice,
+}: IProps) {
   const {onselectVariationOrWeight, variation} = useCartContext();
-
+  const pressItem = () => {
+    onselectVariationOrWeight(options2, id);
+    onWeightItemClick(id);
+  };
 
   return (
     <>
-      {/* <CurrencyComponent
-        // value={productById?.price}
-        value={variationPrice}
-        style={{
-          alignSelf: 'flex-bottom',
-          fontSize: 28,
-          fontWeight: 'bold',
-          paddingTop: 13,
-          marginLeft: 15,
-        }}
-      /> */}
-      <TouchableOpacity onPress={() => onselectVariationOrWeight(options2, id)}>
+      {/* <TouchableOpacity onPress={() => onWeightItemClick(id)}></TouchableOpacity> */}
+
+      <TouchableOpacity onPress={pressItem}>
+        {/* <TouchableOpacity
+      // style={{borderColor: variation == id ? 'red' : '#59a30e'}}
+      onPress={() => onselectVariationOrWeight(options2, id)}> */}
         <View
           style={{
             margin: 6,
@@ -38,11 +46,27 @@ export default function WeightItem({icon, title, options2, id}: IProps) {
             marginBottom: 15,
             borderWidth: 0.5,
             borderTopWidth: 7,
+            // borderColor: '#59a30e',
             borderColor: variation == id ? '#e95d2a' : '#f7ab8f',
             borderRadius: 5,
           }}>
-          <CurrencyComponent value={id} style={{color: '#595555'}} />
-
+          {regularPrice > 0 && regularPrice !== price ? (
+            <>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <CurrencyComponent
+                  value={regularPrice}
+                  style={{textDecorationLine: 'line-through', color: '#b1b1b1'}}
+                />
+              </View>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <CurrencyComponent value={price} style={{color: '#595555'}} />
+              </View>
+            </>
+          ) : (
+            <>
+              <CurrencyComponent value={price} style={{color: '#595555'}} />
+            </>
+          )}
           <Text>{options2}</Text>
         </View>
       </TouchableOpacity>
