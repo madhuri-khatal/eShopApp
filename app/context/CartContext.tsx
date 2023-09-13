@@ -20,6 +20,8 @@ interface ICartContext {
     weight: number | string,
     variation: number | string,
   ) => void;
+  variationPrice: any;
+  setVariationWisePrice: (productById: number | string) => Promise<void>;
 }
 const CartContext = createContext<ICartContext | null>(null);
 type CartContextType = {children: ReactNode};
@@ -33,7 +35,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
 
   const [weight, setWeight] = useState<number | string>('');
   const [variation, setVariation] = useState<number | string>('');
-
+  const [variationPrice, setVariationPrice] = useState<any>([]);
   //
   const onselectVariationOrWeight = (
     weight: number | string,
@@ -45,7 +47,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
 
   async function addToCart(id: number, quantity: number) {
     const {
-      result
+      result,
       // : {
       //   data: {data},
       // },
@@ -53,11 +55,8 @@ export const CartContextProvider = ({children}: CartContextType) => {
       id: variation,
       quantity: quantity,
     });
-    
+
     getCartList();
-    // console.log('resultresultresultresult=============', result);
-    // console.log('id', id);
-    // console.log('quantity', quantity);
   }
   // CART ITEM LIST
   const getCartList = async () => {
@@ -65,6 +64,15 @@ export const CartContextProvider = ({children}: CartContextType) => {
       result: {data},
     } = await CartApi.getCartList();
     setcartItems(data);
+  };
+
+  const setVariationWisePrice = async (id: number | string) => {
+    const {
+      result: {data},
+    } = await CartApi.setVariationWisePrice(id);
+    console.log('DATA&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&', data);
+
+    setVariationPrice(data?.map((item: any) => item?.price)?.reverse());
   };
 
   // DELETE CART ITEM
@@ -117,6 +125,8 @@ export const CartContextProvider = ({children}: CartContextType) => {
     variation,
     weight,
     onselectVariationOrWeight,
+    variationPrice,
+    setVariationWisePrice,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

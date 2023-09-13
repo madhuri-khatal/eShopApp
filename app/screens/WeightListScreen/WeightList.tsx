@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, FlatList} from 'react-native-gesture-handler';
 import WeightItem from './WeightItem';
 import {useProductContext} from '../../context/ProductContext';
+import {useCartContext} from '../../context/CartContext';
 
 export default function WeightList({options2}: any) {
   const {productById} = useProductContext();
@@ -14,6 +15,19 @@ export default function WeightList({options2}: any) {
 
   const variations = productById?.variations;
 
+  const {
+    onselectVariationOrWeight,
+    variation,
+    setVariationWisePrice,
+    variationPrice,
+  } = useCartContext();
+
+  useEffect(() => {
+    (async () => {
+      await setVariationWisePrice(productById?.id);
+    })();
+  }, []);
+  console.log('variationPricevariationPrice', variationPrice);
   return (
     <ScrollView
       showsHorizontalScrollIndicator={true}
@@ -22,21 +36,10 @@ export default function WeightList({options2}: any) {
         horizontal
         data={resolvedOptions2}
         renderItem={({item, index}) => (
-          <WeightItem options2={item} id={variations[index]} />
+          <WeightItem options2={item} id={variationPrice[index]} />
         )}
-        keyExtractor={item => String(item.id)}
+        keyExtractor={(item, index) => String(item.id)}
       />
-
-      {/* <FlatList
-  horizontal
-  data={resolvedOptions2}
-  renderItem={({ item }) => (
-    variations.map((variation: any) => (
-      <WeightItem options2={item} id={variation} />
-    ))
-  )}
-  keyExtractor={(item) => String(item.id)}
-/> */}
     </ScrollView>
   );
 }

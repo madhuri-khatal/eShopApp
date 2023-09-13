@@ -10,5 +10,10 @@ export const CartApi = {
   // Delete CartItem
   deleteCartItem:async(json:any)=>{
     return await Post<any>(`/wp-json/wc/store/cart/remove-item?`,json)
+  },
+
+  // Variation wise Price
+  setVariationWisePrice:async(id:number|string)=>{
+return await Get<any>(`/wp-json/wc/v3/products/${id}/variations?`)
   }
 }

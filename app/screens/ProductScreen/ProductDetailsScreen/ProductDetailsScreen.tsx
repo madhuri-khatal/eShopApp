@@ -28,8 +28,17 @@ export const ProductDetailsScreen = (props: any) => {
   const handleIndex = (index: number) => {
     setIndex(index);
   };
-  const {addToCart,quantity} = useCartContext();
+  const {addToCart, quantity, variationPrice, setVariationWisePrice} =
+    useCartContext();
   const {productById} = useProductContext();
+  // useEffect(() => {
+  //   (async () => {
+  //     await setVariationWisePrice(productById?.id);
+  //   })();
+  // }, []);
+  // const Data= JSON.parse(variationPrice)
+  // const [first] = variationPrice;
+  // console.log('variationPricevariationPrice', variationPrice);
 
   const addCart = async () => {
     const id = productById?.variations[0];
