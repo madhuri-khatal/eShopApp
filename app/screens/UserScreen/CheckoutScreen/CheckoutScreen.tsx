@@ -28,7 +28,6 @@ export default function CheckoutScreen(props: any) {
     }
   };
   const billing = cartItems?.billing_address;
-  console.log(cartItems?.shipping_address, 'paymentmethod');
 
   return (
     <>
@@ -129,7 +128,7 @@ export default function CheckoutScreen(props: any) {
                 Payment Method
               </Text>
 
-              {cartItems?.payment_methods.map((method: any, index: any) => (
+              {/* {cartItems?.payment_methods.map((method: any, index: any) => (
                 <TouchableOpacity
                   key={index}
                   style={[
@@ -145,7 +144,7 @@ export default function CheckoutScreen(props: any) {
                     {method}
                   </Text>
                 </TouchableOpacity>
-              ))}
+              ))} */}
               <TouchableOpacity
                 style={[
                   styles.methodContainer,
@@ -168,6 +167,7 @@ export default function CheckoutScreen(props: any) {
                 backgroundColor="orange"
                 width={380}
                 onPress={() =>
+                  
                   navigation.getParent('main').navigate('OrderScreen')
                 }
               />
