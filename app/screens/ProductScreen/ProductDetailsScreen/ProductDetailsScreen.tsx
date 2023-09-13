@@ -23,25 +23,18 @@ import {CartApi} from '../../../api/CartApi';
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
   const [index, setIndex] = useState<number>(0);
-  const [selectedPrice, setSelectedPrice] = useState<number | null>(null); // State to hold the selected price
-
-  const handleWeightItemClick = (price: number) => {
-    setSelectedPrice(price);
-  };
-
-  console.log("===========================================selectedPrice=============================================",selectedPrice);
-  
+ 
   const width = Dimensions.get('window').width;
   const refWidth = useRef(0.6);
   const handleIndex = (index: number) => {
     setIndex(index);
   };
 
-  const {addToCart, quantity, variationPrice, setVariationWisePrice} =
+  const {addToCart, quantity, variationPrice, setVariationWisePrice, price} =
     useCartContext();
 
   const {productById} = useProductContext();
- 
+
   const addCart = async () => {
     const id = productById?.variations[0];
     addToCart(id, quantity);
@@ -71,9 +64,9 @@ export const ProductDetailsScreen = (props: any) => {
   }
 
   if (prices.length === 2) {
-       const firstPrice = prices[0];
+    const firstPrice = prices[0];
     const secondPrice = prices[1];
-    } else {
+  } else {
     console.log('Prices not found');
   }
   const firstPrice = prices[0];
@@ -189,7 +182,7 @@ export const ProductDetailsScreen = (props: any) => {
               </View>
             </View>
             <View style={{alignItems: 'flex-end', paddingRight: 18}}>
-              <WishlistComponent  />
+              <WishlistComponent />
             </View>
           </View>
 
@@ -218,8 +211,7 @@ export const ProductDetailsScreen = (props: any) => {
                 ₹{firstPrice} - ₹{secondPrice}
               </Text>
               <CurrencyComponent
-                value={productById?.price}
-                // value={selectedPrice}
+                value={price || productById?.price}
                 style={{
                   alignSelf: 'flex-bottom',
                   fontSize: 28,
@@ -254,9 +246,7 @@ export const ProductDetailsScreen = (props: any) => {
               </TouchableOpacity>
             </View>
           </View>
-          <Text>Selected Price: {selectedPrice !== null ? selectedPrice : 'None selected'}</Text>
-          
-          <WeightList onWeightItemClick={handleWeightItemClick} />
+                <WeightList />
 
           <Text
             style={{
