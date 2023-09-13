@@ -3,9 +3,13 @@ import {ScrollView, FlatList} from 'react-native-gesture-handler';
 import WeightItem from './WeightItem';
 import {useProductContext} from '../../context/ProductContext';
 import {useCartContext} from '../../context/CartContext';
+import { ActivityIndicator } from 'react-native-paper';
+import { View } from 'react-native';
+
 
 export default function WeightList({options2}: any) {
   const {productById} = useProductContext();
+  const [isLoading,setIsLoading]=useState<boolean>(true)
   
   const options1 = productById?.attributes;
   let resolvedOptions2 = options2;
@@ -18,24 +22,33 @@ export default function WeightList({options2}: any) {
 
   useEffect(() => {
     (async () => {
+      // setIsLoading(true)
       await setVariationWisePrice(productById?.id);
+      setIsLoading(false)
     })();
   }, []);
 
 
   const variationWisePriceAndId = variationPrice
-    ?.map((item: any) => ({price: item?.price, id: item?.id,regular_price:item?.regular_price}))
-    ?.reverse();
-  // const variationWiseregularPrice = variationPrice
-  //   ?.map((item: any) => item?.regular_price)
-  //   ?.reverse();
-
-
+    ?.map((item: any) => ({price: item?.price, id: item?.id,regular_price:item?.regular_price})) ?.reverse();
+ 
+    if (isLoading) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
+    }
+  
   return (
+    
     <ScrollView
-      showsHorizontalScrollIndicator={true}
-      style={{flex: 1, flexDirection: 'column'}}>
+    showsHorizontalScrollIndicator={true}
+      style={{flex: 1, flexDirection: 'column'}}
+      >
+   
           <FlatList
+          style={{width:"100%"}}
         horizontal
         data={resolvedOptions2}
         renderItem={({item, index}) => (
@@ -48,9 +61,11 @@ export default function WeightList({options2}: any) {
               setVariationWisePrice(productById?.id); 
             }}
           />
-        )}
+                )}
         keyExtractor={(item, index) => String(item.id)}
       />
     </ScrollView>
+
+    
   );
 }

@@ -62,7 +62,7 @@ export default function WeightItem({
             </>
           )}
 
-          <Text>{options2}</Text>
+          <Text style={{color: '#595555'}}>{options2}</Text>
         </View>
       </TouchableOpacity>
     </>
