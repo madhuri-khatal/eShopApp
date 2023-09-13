@@ -19,7 +19,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
   const {snackBarVisible, setSnackBarVisible} = useCommanContext();
   const {cartItems} = useCartContext();
 
-  // console.log("cartItems",cartItems?.items);
+  console.log('cartItems', cartItems?.items);
   // const regular_price = cartItems?.prices?.regular_price.substring(0, cartItems?.prices?.regular_price.length - 2);
   // const regular_price1 = cartItems
   // const regular_price = cartItems?.items?.prices?. regular_price
@@ -37,7 +37,14 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
     bottomSheetRef.current?.snapToIndex(0);
   };
   const {isShowDialog, deleteCartItem, onCancel} = useCartContext();
-
+  const formattedPrice = (cartItems?.totals?.total_price / 100).toLocaleString(
+    'en-US',
+    {
+      style: 'decimal',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    },
+  );
   return (
     <>
       <HeaderBar
@@ -86,9 +93,12 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                     <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                       Total:
                     </Text>
-                    <CurrencyComponent value={cartItems?.totals?.total_items} />
+                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                      ₹ {formattedPrice}
+                    </Text>
+                    {/* <CurrencyComponent value={cartItems?.totals?.total_price} /> */}
                   </View>
-                  <View
+                  {/* <View
                     style={{
                       flexDirection: 'row',
                       justifyContent: 'space-between',
@@ -126,7 +136,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                       Final Total:
                     </Text>
                     <CurrencyComponent value={cartItems?.totals?.total_price} />
-                  </View>
+                  </View> */}
                 </View>
               </View>
             </View>

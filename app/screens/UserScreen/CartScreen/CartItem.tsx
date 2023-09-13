@@ -1,27 +1,31 @@
-import {useProductContext} from '../../../context/ProductContext';
-import QuantityComponent from '../../../components/Product/QuantityComponent';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useCartContext} from '../../../context/CartContext';
 
-
 const CartItem = ({item, onRemove}: any) => {
-  const {deleteCartItem, onDeletehowDialog,quantity,setQuantity}: any = useCartContext();
-  
+  const {deleteCartItem, onDeletehowDialog, quantity, setQuantity}: any =
+    useCartContext();
+
   const regular_price = item?.prices?.regular_price.substring(
     0,
     item?.prices?.regular_price.length - 2,
   );
   const weight = item?.variation?.[0]?.value;
 
+  // sale price
+  const sale_price = item?.prices?.sale_price.substring(
+    0,
+    item?.prices?.sale_price.length - 2,
+  );
+
   const handleQuantityChange = (newQuantity: any) => {
     if (newQuantity >= 1) {
       setQuantity(newQuantity);
     }
   };
-  const subTotal=regular_price * item?.quantity
-   
+  const subTotal = sale_price * item?.quantity;
+
   return (
     <View
       style={{
@@ -40,31 +44,42 @@ const CartItem = ({item, onRemove}: any) => {
             style={{width: 100, height: 100, marginRight: 16}}
           />
           <Text style={{fontSize: 14, color: '#888', marginTop: 8}}>
-            Weight: {weight}
+            Quantity: {weight}
           </Text>
         </View>
       )}
-      <View style={{flex: 1, marginLeft: 7}}>
-        <Text style={{fontSize: 16, fontWeight: 'bold' }}  numberOfLines={1} ellipsizeMode="tail">{item.name}</Text>
-        <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
-          Price: ₹ {regular_price} X {item?.quantity} = ₹{subTotal}
+      <View style={{flex: 1, marginLeft: 15}}>
+        <Text
+          style={{fontSize: 16, fontWeight: 'bold'}}
+          numberOfLines={1}
+          ellipsizeMode="tail">
+          {item.name}
         </Text>
 
-        {/* <QuantityComponent quantity={quantity} /> */}
-        <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.quantityButton}
-        onPress={() => handleQuantityChange(quantity - 1)}>
-        <Text style={styles.buttonText}>-</Text>
-      </TouchableOpacity>
-      <Text style={styles.quantityText}>{item?.quantity}</Text>
-      <TouchableOpacity
-        style={styles.quantityButton}
-        onPress={() => handleQuantityChange(quantity + 1)}>
-        <Text style={styles.buttonText}>+</Text>
-      </TouchableOpacity>
-    </View>
+        <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
+          Price :
+          <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
+            {sale_price} X {item?.quantity} =
+          </Text>
+          <Text style={{fontSize: 14, color: '#888', fontWeight: 'bold'}}>
+            {' '}
+            ₹{subTotal}
+          </Text>
+        </Text>
 
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.quantityButton}
+            onPress={() => handleQuantityChange(quantity - 1)}>
+            <Text style={styles.buttonText}>-</Text>
+          </TouchableOpacity>
+          <Text style={styles.quantityText}>{item?.quantity}</Text>
+          <TouchableOpacity
+            style={styles.quantityButton}
+            onPress={() => handleQuantityChange(quantity + 1)}>
+            <Text style={styles.buttonText}>+</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={{marginRight: 15}}>
         <TouchableOpacity onPress={() => onDeletehowDialog(item.key)}>
@@ -101,6 +116,5 @@ const styles = StyleSheet.create({
     flex: 2,
     textAlign: 'center',
     fontSize: 18,
-    // color:'red'
   },
 });
