@@ -70,7 +70,8 @@ export const CartContextProvider = ({children}: CartContextType) => {
     const {
       result: {data},
     } = await CartApi.setVariationWisePrice(id);
-      setVariationPrice(data?.map((item: any) => item?.price)?.reverse());
+    setVariationPrice(data)
+      // setVariationPrice(data?.map((item: any) => item?.price)?.reverse());
   };
 
   // DELETE CART ITEM
