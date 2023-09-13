@@ -1,5 +1,5 @@
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useEffect,useState} from 'react';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import ProfileScreen from '../screens/UserScreen/ProfileScreen';
@@ -8,11 +8,13 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {CartScreen} from '../screens/UserScreen/CartScreen/CartScreen';
 import CartStackScreen from './CartStackScreen';
 import HomeStackScreen from './HomeStackScreen';
+import { CartApi } from '../api/CartApi';
+
 const Tab = createMaterialBottomTabNavigator();
 export default function BottomTabNavigator() {
-  const cartItemCount = 5; // Replace this with your actual cart item count
-  const tabBarBadge = cartItemCount > 0 ? cartItemCount : undefined;
+  
   return (
+    
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
         name="Home"
@@ -30,7 +32,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons name="cart" color={color} size={26} />
           ),
-          tabBarBadge: tabBarBadge,
+        
         }}
         component={CartStackScreen}
       />
@@ -45,5 +47,6 @@ export default function BottomTabNavigator() {
         component={ProfileScreen}
       />
     </Tab.Navigator>
+   
   );
 }
