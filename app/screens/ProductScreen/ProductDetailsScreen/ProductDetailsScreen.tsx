@@ -32,7 +32,6 @@ export const ProductDetailsScreen = (props: any) => {
   const {addToCart, quantity, variationPrice, setVariationWisePrice} =
     useCartContext();
 
-
   const {productById} = useProductContext();
   // useEffect(() => {
   //   (async () => {
