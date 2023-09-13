@@ -3,13 +3,20 @@ import ProductList from './ProductList';
 import {HeaderBar} from '../../components/ui/HeaderBar';
 import {DrawerActions} from '@react-navigation/native';
 import {View} from 'react-native';
-import React from 'react';
+import React,{useEffect} from 'react';
 import FilterMenu from '../../screens/FilterScreen/FilterMenu';
 import {useTheme} from 'react-native-paper';
+import { useCartContext } from '../../context/CartContext';
 export const ProductsScreen = (props: any) => {
   const {navigation} = props;
   const {colors} = useTheme();
-
+  const {cartItems,getCartList}=useCartContext();
+  useEffect(() => {
+    (async () => {
+      await getCartList();
+    })();
+  }, []);
+  const badgeCount = cartItems?.items.length ||0;
   return (
     <>
       <HeaderBar
@@ -28,6 +35,7 @@ export const ProductsScreen = (props: any) => {
         }
         icon1="menu"
         icon2="cart"
+        badgeCount={badgeCount}
       />
       <View
         style={{
