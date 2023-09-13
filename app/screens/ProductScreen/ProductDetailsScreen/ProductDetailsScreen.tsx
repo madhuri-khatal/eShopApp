@@ -220,6 +220,7 @@ export const ProductDetailsScreen = (props: any) => {
               <CurrencyComponent
                 value={productById?.price}
                 // value={selectedPrice}
+
                 style={{
                   alignSelf: 'flex-bottom',
                   fontSize: 28,
