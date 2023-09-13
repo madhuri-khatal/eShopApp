@@ -200,22 +200,14 @@ export const ProductDetailsScreen = (props: any) => {
           <HTMLView value={shortDescriptionText} stylesheet={styles} />
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <View style={{flex: 1}}>
-              {/* <CurrencyComponent
-                value={secondPrice} {secondPrice}
-                style={{
-                  alignSelf: 'flex-bottom',
-                  fontSize: 24,
-                  paddingTop: 13,
-                  marginLeft: 15,
-                }}
-              /> */}
               <Text
                 style={{
-                  fontSize: 24,
+                  fontSize: 22,
                   paddingTop: 13,
                   marginLeft: 15,
+                  color: '#b1b1b1',
                 }}>
-                ₹ {firstPrice} - ₹ {secondPrice}
+                ₹{firstPrice} - ₹{secondPrice}
               </Text>
               <CurrencyComponent
                 value={productById?.price}
