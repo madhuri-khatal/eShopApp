@@ -1,10 +1,20 @@
+import {useCartContext} from '../../context/CartContext';
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
-import {View, StyleSheet, Image, TouchableOpacity} from 'react-native'; 
+import React, {useEffect} from 'react';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Title, Text} from 'react-native-paper';
 
 const OrderItem = ({item}: any) => {
   const navigation: any = useNavigation();
+  const {cartItems, getCartList} = useCartContext();
+  useEffect(() => {
+    (async () => {
+      await getCartList();
+    })();
+  }, []);
+
+  
+  // console.log(cartItems);
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate('OrderDetailScreen', {data: item})}>
@@ -12,8 +22,8 @@ const OrderItem = ({item}: any) => {
         <View style={styles.cardContent}>
           <Image source={{uri: item.imageSrc}} style={styles.image} />
           <View style={styles.textContainer}>
-            <Title>{item.title}</Title>
-            <Text>Total: ${item.total.toFixed(2)}</Text>
+            <Title>{item.name}</Title>
+            <Text>Total: ${item.total}</Text>
             <Text>Status: {item.status}</Text>
           </View>
         </View>

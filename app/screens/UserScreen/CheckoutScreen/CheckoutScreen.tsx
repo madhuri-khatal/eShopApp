@@ -62,7 +62,7 @@ export default function CheckoutScreen(props: any) {
             />
 
             <View style={{flexDirection: 'row'}}>
-              <View>
+              {/* <View>
                 <TextInput
                   placeholder={'OTP'}
                   style={{margin: 8, width: 255}}
@@ -77,7 +77,7 @@ export default function CheckoutScreen(props: any) {
                     throw new Error('Function not implemented.');
                   }}
                 />
-              </View>
+              </View> */}
             </View>
             {/* <TextInput
               placeholder={'Full Name'}

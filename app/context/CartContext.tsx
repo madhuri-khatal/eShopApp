@@ -2,11 +2,17 @@ import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {CartApi} from '../api/CartApi';
 import {ToastAndroid} from 'react-native';
 import {useProductContext} from './ProductContext';
+
+import {OrderApi} from '../api/OrderApi';
+
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
 interface ICartContext {
   cartItems: any;
+  myOrderItems: any;
   getCartList: () => Promise<void>;
+  getMyOrderData: () => Promise<void>;
   deleteCartItem: () => Promise<void>;
   isShowDialog: boolean;
   onDeletehowDialog?: (key: string) => void;
@@ -31,6 +37,7 @@ const CartContext = createContext<ICartContext | null>(null);
 type CartContextType = {children: ReactNode};
 export const CartContextProvider = ({children}: CartContextType) => {
   const [cartItems, setcartItems] = useState<any>();
+  const [myOrderItems, setMyOrderItems] = useState<any>();
   const [isShowDialog, setIsShowDialog] = useState<boolean>(false);
   const [productKey, setProductKey] = useState<string>('');
   const [variations, setvariation] = useState<number[]>([]);
@@ -73,6 +80,14 @@ export const CartContextProvider = ({children}: CartContextType) => {
       result: {data},
     } = await CartApi.getCartList();
     setcartItems(data);
+  };
+
+  // My Order List
+  const getMyOrderData = async () => {
+    const {
+      result: {data},
+    } = await OrderApi.getMyOrderList();
+    setMyOrderItems(data);
   };
 
   const setVariationWisePrice = async (id: number | string) => {
@@ -136,6 +151,8 @@ export const CartContextProvider = ({children}: CartContextType) => {
     variationPrice,
     price,
     setVariationWisePrice,
+    getMyOrderData,
+    myOrderItems,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
