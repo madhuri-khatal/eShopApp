@@ -9,6 +9,7 @@ import React, {
   useState,
 } from 'react';
 import {ProductApi} from './../api/ProductApi';
+import { Alert } from 'react-native';
 
 interface IProductContext {
   data: any;
@@ -68,7 +69,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
       } = await ProductApi.pagination(paginationIncrement.current);
       setProductByCategoryId([...productByCategoryId, ...data]);
       setIsLoading(false);
-    } catch (error) {
+         } catch (error) {
       console.log('error', error);
     } finally {
     }

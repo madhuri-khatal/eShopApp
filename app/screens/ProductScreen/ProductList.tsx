@@ -5,22 +5,13 @@ import {useProductContext} from './../../context/ProductContext';
 import {ActivityIndicator, Text} from 'react-native-paper';
 
 export default function ProductList() {
-  const {productByCategoryId, isLoading, fetchMoreData, refThreshold} =
-    useProductContext();
+  const {productByCategoryId, isLoading, fetchMoreData, refThreshold} =useProductContext();
+  const noMoreProducts =productByCategoryId.length === 0;
   return (
     <>
       {productByCategoryId.length === 0 ? (
         <>
-          {/* <Image
-            style={{
-              width: 400,
-              height: 400,
-            }}
-            source={{
-              uri: 'https://stores.maxfashion.in/VendorpageTheme/Enterprise/EThemeForMax/images/product-not-found.jpg',
-            }}
-          /> */}
-          <View
+                   <View
             style={{
               height: '100%',
               justifyContent: 'center',
@@ -52,9 +43,56 @@ export default function ProductList() {
           }}
           ref={refThreshold}
           onEndReachedThreshold={10}
-          ListFooterComponent={() => (
-            <>{isLoading && <ActivityIndicator size="small" />}</>
-          )}
+      //     ListFooterComponent={() => (
+      //       isLoading ? (
+      //         <ActivityIndicator
+      //           size="large"
+      //           color="#e95d2a"
+      //           style={{ paddingBottom: 70 }}
+      //         />
+      //       ) : (
+      //         noMoreProducts && (
+      //           <View
+      //             style={{
+      //               height: "50%",
+      //               justifyContent: 'center',
+      //               alignItems: 'center',
+      //             }}>
+      //             <Text style={{ backgroundColor: 'red' }}>Product end</Text>
+      //           </View>
+      //         )
+      //     //   <>
+      //     //     {isLoading && (
+      //     //       <ActivityIndicator
+      //     //         size="large"
+      //     //         color="#e95d2a"
+      //     //         style={{paddingBottom: 70, }}
+      //     //       />
+      //     //     )}
+      //     //   </>
+      //     // )}
+          
+      // )}
+      ListFooterComponent={() => (
+        isLoading ? (
+          <ActivityIndicator
+            size="large"
+            color="#e95d2a"
+            style={{ paddingBottom: 70 }}
+          />
+        ) : (
+          noMoreProducts && (
+            <View
+              style={{
+                height: "50%",
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{ color:"#b1b1b1"}}>Product end</Text>
+            </View>
+          )
+        )
+      )}
           renderItem={({item}) => <ProductItem product={item} />}
           keyExtractor={(item, i) => i.toString()}
           scrollEnabled
