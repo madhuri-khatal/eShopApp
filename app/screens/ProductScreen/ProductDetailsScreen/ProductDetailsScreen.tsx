@@ -227,7 +227,9 @@ export const ProductDetailsScreen = (props: any) => {
                 ₹{firstPrice} - ₹{secondPrice}
               </Text>
               <CurrencyComponent
+
                 value={price || productById?.price}
+
                 style={{
                   alignSelf: 'flex-bottom',
                   fontSize: 28,
