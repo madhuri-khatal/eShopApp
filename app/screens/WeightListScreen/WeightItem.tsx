@@ -60,7 +60,10 @@ export default function WeightItem({
               <CurrencyComponent value={price} style={{color: '#595555'}} />
             </>
           )}
-          <Text>{options2}</Text>
+
+
+          <Text style={{color: '#595555'}}>{options2}</Text>
+
         </View>
       </TouchableOpacity>
     </>

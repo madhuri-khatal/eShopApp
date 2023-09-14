@@ -239,7 +239,7 @@ export const ProductDetailsScreen = (props: any) => {
                 }}
               />
             </View>
-            <View
+            {/* <View
               style={{
                 flex: 1,
                 alignItems: 'flex-end',
@@ -262,7 +262,7 @@ export const ProductDetailsScreen = (props: any) => {
                   iconSize={50}
                 />
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
                 <WeightList />
 
@@ -279,9 +279,9 @@ export const ProductDetailsScreen = (props: any) => {
           <HTMLView value={descriptionText} stylesheet={styles} />
         </View>
 
-        <View style={{flex: 1}}>
+        {/* <View style={{flex: 1}}>
           <ReviewComponent />
-        </View>
+        </View> */}
       </ScrollView>
       <View
         style={{
