@@ -10,8 +10,6 @@ export default function DeliveryAddressScreen() {
   const {checkoutControl} = useCheckoutContext();
   const {cartItems} = useCartContext();
   const shipping = cartItems?.shipping_address;
-  // const billing = cartItems?.billing_address;
-  // console.log(shipping, 'shipping');
 
   return (
     <>

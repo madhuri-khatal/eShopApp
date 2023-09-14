@@ -2,14 +2,14 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {HeaderBar} from '../../components/ui/HeaderBar';
 import {DrawerActions} from '@react-navigation/native';
 import {View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text} from 'react-native-paper';
 import OrderList from './OrderList';
 import OrderItem from './OrderItem';
+import {useCartContext} from '../../context/CartContext';
 
 export const OrderScreen = (props: any) => {
   const {navigation} = props;
-
   const orderItems = [
     {
       id: 1,
