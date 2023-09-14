@@ -121,7 +121,7 @@ export default function ProductItem({product}: IProps) {
               />
             </View>
             <View style={{flex: 1, alignItems: 'flex-end'}}>
-              <CartComponent />
+              {/* <CartComponent /> */}
             </View>
           </View>
         </View>

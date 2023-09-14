@@ -43,37 +43,7 @@ export default function ProductList() {
           }}
           ref={refThreshold}
           onEndReachedThreshold={10}
-      //     ListFooterComponent={() => (
-      //       isLoading ? (
-      //         <ActivityIndicator
-      //           size="large"
-      //           color="#e95d2a"
-      //           style={{ paddingBottom: 70 }}
-      //         />
-      //       ) : (
-      //         noMoreProducts && (
-      //           <View
-      //             style={{
-      //               height: "50%",
-      //               justifyContent: 'center',
-      //               alignItems: 'center',
-      //             }}>
-      //             <Text style={{ backgroundColor: 'red' }}>Product end</Text>
-      //           </View>
-      //         )
-      //     //   <>
-      //     //     {isLoading && (
-      //     //       <ActivityIndicator
-      //     //         size="large"
-      //     //         color="#e95d2a"
-      //     //         style={{paddingBottom: 70, }}
-      //     //       />
-      //     //     )}
-      //     //   </>
-      //     // )}
-          
-      // )}
-      ListFooterComponent={() => (
+           ListFooterComponent={() => (
         isLoading ? (
           <ActivityIndicator
             size="large"
