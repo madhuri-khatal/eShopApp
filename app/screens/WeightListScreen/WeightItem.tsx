@@ -5,7 +5,7 @@ import {View, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import CurrencyComponent from '../../components/ui/Currencycomponent';
 
-interface IProps {
+interface IProps { 
   icon?: any;
   title?: any;
   options2: string;

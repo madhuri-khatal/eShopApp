@@ -21,6 +21,7 @@
     "apisauce": "^3.0.1",
     "axios": "^1.4.0",
     "react": "18.2.0",
+    "react-hook-form": "^7.46.1",
     "react-native": "0.72.3",
     "react-native-animated-dots-carousel": "^1.0.2",
     "react-native-dotenv": "^3.4.9",
