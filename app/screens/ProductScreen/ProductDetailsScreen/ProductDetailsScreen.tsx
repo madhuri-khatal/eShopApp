@@ -294,11 +294,11 @@ export const ProductDetailsScreen = (props: any) => {
         <View style={{flex: 1, alignItems: 'flex-start', marginLeft: 15}}>
           <QuantityComponent />
         </View>
-        <View style={{flex: 1, alignItems: 'flex-end', marginRight: 20}}>
+        <View style={{flex: 1, alignItems: 'flex-end', marginRight: 10}}>
           <Button
             style={{
               width: 220,
-              height: 50,
+              height: 45,
               backgroundColor: '#e95d2a',
               borderRadius: 10,
             }}
