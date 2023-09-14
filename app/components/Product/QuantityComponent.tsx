@@ -43,17 +43,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 8,
+    
     backgroundColor: '#f0f0f0',
   },
   buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#505F79',
   },
   quantityText: {
     flex: 2,
     textAlign: 'center',
     fontSize: 18,
-    color: '#595555',
+    color: '#505F79',
     // color:'red'
   },
 });
