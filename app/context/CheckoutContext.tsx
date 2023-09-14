@@ -1,20 +1,32 @@
+import {CartApi} from 'api/CartApi';
 import React, {createContext, ReactNode, useContext, useState} from 'react';
-import {CartApi} from '../api/CartApi';
-import {ToastAndroid} from 'react-native';
-import {useProductContext} from './ProductContext';
+import {useForm} from 'react-hook-form';
+import {useCartContext} from './CartContext';
 interface ICheckoutContext {
   onSubmitCheckout: Function;
+  checkoutControl: any;
+  checkoutHandleSubmit: Function;
 }
 const CheckoutContext = createContext<ICheckoutContext | null>(null);
 type CheckoutContextType = {children: ReactNode};
 export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
   // order checkout
-  const onSubmitCheckout = () => {
-    console.log('hello i am checkout');
+  const {control: checkoutControl, handleSubmit: checkoutHandleSubmit} =
+    useForm();
+  const {cartItems} = useCartContext();
+  const onSubmitCheckout = (formData: any) => {
+    console.log('hello i am checkout', cartItems?.billing_address?.country);
+    const jsonData = {
+      billing_country: cartItems?.billing_address?.country,
+      ...formData,
+    };
+    console.log('hello i am checkout', jsonData);
   };
 
   const value: ICheckoutContext = {
     onSubmitCheckout,
+    checkoutControl,
+    checkoutHandleSubmit,
   };
   return (
     <CheckoutContext.Provider value={value}>
