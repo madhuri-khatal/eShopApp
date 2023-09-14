@@ -7,11 +7,13 @@ import DeliveryAddressScreen from './DeliveryAddressScreen';
 import {useNavigation} from '@react-navigation/native';
 import {useCartContext} from '../../../context/CartContext';
 import {useCheckoutContext} from '../../../context/CheckoutContext';
+import {TextInputController} from '../../../components/ui/TextInput';
 export default function CheckoutScreen(props: any) {
   const navigation: any = useNavigation();
   const {colors} = useTheme();
   const {cartItems} = useCartContext();
-  const {onSubmitCheckout} = useCheckoutContext();
+  const {onSubmitCheckout, checkoutControl, checkoutHandleSubmit} =
+    useCheckoutContext();
 
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showCODDetails, setShowCODDetails] = useState(false);
@@ -39,12 +41,23 @@ export default function CheckoutScreen(props: any) {
           </View>
 
           <View style={{padding: 8}}>
-            <TextInput
+            {/* <TextInputController
               placeholder={'Phone Number'}
               style={{margin: 8, backgroundColor: 'white'}}
               mode="outlined"
               keyboardType="number-pad"
               maxLength={10}
+              defaultValue={billing?.phone}
+            /> */}
+            <TextInputController
+              control={checkoutControl}
+              name={'billing_phone'}
+              placeholder="Phone Number"
+              style={{margin: 8, backgroundColor: 'white'}}
+              // errors={errors}
+              keyboardType={'default'}
+              isRequiredValue
+              mode="outlined"
               defaultValue={billing?.phone}
             />
 
@@ -66,19 +79,41 @@ export default function CheckoutScreen(props: any) {
                 />
               </View>
             </View>
-            <TextInput
+            {/* <TextInput
               placeholder={'Full Name'}
               style={{margin: 8, backgroundColor: 'white'}}
               mode="outlined"
               defaultValue={billing?.first_name}
+            /> */}
+            <TextInputController
+              control={checkoutControl}
+              name={'billing_first_name'}
+              placeholder="Full Name"
+              style={{margin: 8, backgroundColor: 'white'}}
+              // errors={errors}
+              keyboardType={'default'}
+              isRequiredValue
+              mode="outlined"
+              defaultValue={billing?.first_name}
             />
-            <TextInput
+            <TextInputController
+              control={checkoutControl}
+              name={'billing_email'}
+              placeholder="Email"
+              style={{margin: 8, backgroundColor: 'white'}}
+              // errors={errors}
+              keyboardType={'default'}
+              isRequiredValue
+              mode="outlined"
+              defaultValue={billing?.email}
+            />
+            {/* <TextInput
               placeholder={'Email'}
               style={{margin: 8}}
               mode="outlined"
               keyboardType="email-address"
               defaultValue={billing?.email}
-            />
+            /> */}
             <View style={{flexDirection: 'row', padding: 10}}>
               <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
                 Shipping address
@@ -165,7 +200,8 @@ export default function CheckoutScreen(props: any) {
                 title={'Place Order'}
                 backgroundColor="orange"
                 width={380}
-                onPress={() => onSubmitCheckout()}
+                // onPress={()=>console.log("clicked")                }
+                onPress={checkoutHandleSubmit(onSubmitCheckout)}
               />
             </View>
           </View>
