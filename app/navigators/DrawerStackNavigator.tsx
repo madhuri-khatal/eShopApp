@@ -8,6 +8,7 @@ import {ProductFilterDrawer} from './../screens/ProductScreen/ProductDetailsScre
 import {useTheme} from 'react-native-paper';
 import {OrderScreen} from './../screens/MyOrderScreen/OrderScreen';
 import OrderStackScreen from './OrderStackScreen';
+import BottomTabStack from './BottomTabStack';
 
 const Drawer = createDrawerNavigator();
 export default function DrawerStackNavigator() {
@@ -27,7 +28,7 @@ export default function DrawerStackNavigator() {
           drawerLabel: 'Home',
           title: 'Home',
         }}
-        component={BottomTabNavigator}
+        component={BottomTabStack}
       />
       <Drawer.Screen
         name="UserStack"

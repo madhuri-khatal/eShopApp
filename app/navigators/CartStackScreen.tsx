@@ -10,20 +10,16 @@ const Stack = createStackNavigator();
 export default function CartStackScreen() {
   return (
     <>
-      <ProductContextProvider>
-        <CartContextProvider>
-          <CheckoutContextProvider>
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false,
-              }}
-              initialRouteName="CartScreen">
-              <Stack.Screen name="CartScreen" component={CartScreen} />
-              <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
-            </Stack.Navigator>
-          </CheckoutContextProvider>
-        </CartContextProvider>
-      </ProductContextProvider>
+    <CheckoutContextProvider>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+        initialRouteName="CartScreen">
+        <Stack.Screen name="CartScreen" component={CartScreen} />
+        <Stack.Screen name="CheckoutScreen" component={CheckoutScreen} />
+      </Stack.Navigator>
+      </CheckoutContextProvider>
     </>
   );
 }

@@ -25,10 +25,7 @@ export const ProductsScreen = (props: any) => {
         // titleStyle={{color: 'gray', fontSize: 20}}
         backAction={() => navigation.goBack()}
         right2Action={() => {
-          navigation.getParent('main').navigate('BottomTab', {
-            screen: 'CartStack',
-            initial: false,
-          });
+                 navigation.navigate("CartStack",{screen:'CartScreen',initial:false})
         }}
         right1Action={() =>
           navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
