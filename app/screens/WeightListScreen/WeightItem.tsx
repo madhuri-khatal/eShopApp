@@ -5,7 +5,7 @@ import {View, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import CurrencyComponent from '../../components/ui/Currencycomponent';
 
-interface IProps {
+interface IProps { 
   icon?: any;
   title?: any;
   options2: string;
@@ -25,7 +25,6 @@ export default function WeightItem({
   regularPrice,
 }: IProps) {
   const {onselectVariationOrWeight, variation} = useCartContext();
-
   const pressItem = () => {
     onselectVariationOrWeight(options2, id);
     onWeightItemClick(id);
@@ -68,7 +67,6 @@ export default function WeightItem({
               <CurrencyComponent value={price} style={{color: '#595555'}} />
             </>
           )}
-
           <Text>{options2}</Text>
         </View>
       </TouchableOpacity>
