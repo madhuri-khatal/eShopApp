@@ -2,7 +2,12 @@ import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {CartApi} from '../api/CartApi';
 import {ToastAndroid} from 'react-native';
 import {useProductContext} from './ProductContext';
+
 import {OrderApi} from '../api/OrderApi';
+
+import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 interface ICartContext {
   cartItems: any;
   myOrderItems: any;
@@ -15,13 +20,15 @@ interface ICartContext {
   variations: number[];
   quantity: number;
   setvariation: React.Dispatch<React.SetStateAction<number[]>>;
-  setQuantity: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
   addToCart: (id: number, quantity: number) => Promise<void>;
   weight: string | number;
   variation: string | number;
+  price: number | string;
   onselectVariationOrWeight: (
     weight: number | string,
     variation: number | string,
+    price: string | number,
   ) => void;
   variationPrice: any;
   setVariationWisePrice: (productById: number | string) => Promise<void>;
@@ -36,17 +43,21 @@ export const CartContextProvider = ({children}: CartContextType) => {
   const [variations, setvariation] = useState<number[]>([]);
   const [quantity, setQuantity] = useState<number>(1);
   const {productById} = useProductContext();
-
+  const [price, setPrice] = useState<string | number>('');
   const [weight, setWeight] = useState<number | string>('');
   const [variation, setVariation] = useState<number | string>('');
   const [variationPrice, setVariationPrice] = useState<any>([]);
+
+  const navigation: any = useNavigation()
   //
   const onselectVariationOrWeight = (
     weight: number | string,
     variation: number | string,
+    price: string | number,
   ) => {
     setWeight(weight);
     setVariation(variation);
+    setPrice(price)
   };
 
   async function addToCart(id: number, quantity: number) {
@@ -59,7 +70,8 @@ export const CartContextProvider = ({children}: CartContextType) => {
       id: variation,
       quantity: quantity,
     });
-
+    Alert.alert("Product sucessfully Added in Cart")
+    navigation.navigate("CartScreen")
     getCartList();
   }
   // CART ITEM LIST
@@ -137,6 +149,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
     weight,
     onselectVariationOrWeight,
     variationPrice,
+    price,
     setVariationWisePrice,
     getMyOrderData,
     myOrderItems,

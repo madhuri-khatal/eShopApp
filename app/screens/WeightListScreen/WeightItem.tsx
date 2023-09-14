@@ -25,19 +25,12 @@ export default function WeightItem({
   regularPrice,
 }: IProps) {
   const {onselectVariationOrWeight, variation} = useCartContext();
-  const pressItem = () => {
-    onselectVariationOrWeight(options2, id);
-    onWeightItemClick(id);
-  };
 
   return (
     <>
-      {/* <TouchableOpacity onPress={() => onWeightItemClick(id)}></TouchableOpacity> */}
-
-      <TouchableOpacity onPress={pressItem}>
-        {/* <TouchableOpacity
-      // style={{borderColor: variation == id ? 'red' : '#59a30e'}}
-      onPress={() => onselectVariationOrWeight(options2, id)}> */}
+      
+        <TouchableOpacity
+           onPress={() => onselectVariationOrWeight(options2, id,price)}>
         <View
           style={{
             margin: 6,
@@ -67,7 +60,10 @@ export default function WeightItem({
               <CurrencyComponent value={price} style={{color: '#595555'}} />
             </>
           )}
-          <Text>{options2}</Text>
+
+
+          <Text style={{color: '#595555'}}>{options2}</Text>
+
         </View>
       </TouchableOpacity>
     </>
