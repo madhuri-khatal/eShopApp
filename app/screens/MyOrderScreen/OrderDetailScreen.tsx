@@ -6,29 +6,17 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {View, Image} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useCartContext } from '../../context/CartContext';
 
 export const OrderDetailScreen = ({route, navigation}: any) => {
-  const orderData = {
-    id: 1,
-    date: '2023-08-15',
-    total: 49.99,
-  };
-  const shipmentDetails = [
-    {
-      id: 1,
-      status: 'Delivered',
-      date: '2023-08-16',
-      productImage:
-        'https://shgeshop.com/wp-content/uploads/2023/05/tomato-powder.png',
-      title: 'Product 1',
-      quantity: 2,
-      price: 29.99,
-    },
-  ];
-  const paymentInformation = {
-    paymentMethod: 'Credit Card',
-    billingAddress: 'John Doe, 1234 Example Street City, State 12345 ,Country',
-  };
+  const {orderData}=useCartContext();
+  
+  const itemList=orderData?.data?.line_items;
+
+  const billingAddress=`${orderData?.data?.billing?.address_1} ${orderData?.data?.billing?.address_2} ${orderData?.data?.billing?.city} ${orderData?.data?.billing?.state} ${orderData?.data?.billing?.country} ${orderData?.data?.billing?.postcode} `
+
+  const shippingAddress=`${orderData?.data?.shipping?.address_1} ${orderData?.data?.shipping?.address_2} ${orderData?.data?.shipping?.city} ${orderData?.data?.shipping?.state} ${orderData?.data?.shipping?.country} ${orderData?.data?.shipping?.postcode} `
+  
   return (
     <>
       <ScrollView style={styles.container}>
@@ -47,55 +35,51 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
                 style={{fontSize: 25, color: '#fa5f11', margin: 3}}
               />
 
-              <Text style={{fontSize: 25, fontWeight: 'bold'}}>
+              <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                 Order Summery
               </Text>
               <Divider />
             </View>
             <View style={styles.paymentItem}>
               <Text style={styles.paymentLabel}>Order Date:</Text>
-              <Text style={styles.text}>{orderData.date}</Text>
+              <Text style={styles.text}>{orderData?.data?.date_created}</Text>
             </View>
             <View style={styles.paymentItem}>
               <Text style={styles.paymentLabel}>Order Number:</Text>
-              <Text style={styles.text}>{orderData.id}</Text>
+              <Text style={styles.text}>{orderData?.data?.id}</Text>
             </View>
             <View style={styles.paymentItem}>
               <Text style={styles.paymentLabel}>Order Total: </Text>
-              <Text style={styles.text}>₹{orderData.total.toFixed(2)}</Text>
+              <Text style={styles.text}>₹{orderData?.data?.total}</Text>
             </View>
-
-            {/* <Button
-              mode="contained"
-              onPress={() => console.log('Download Invoice')}
-              style={styles.downloadButton}>
-              Download Invoice
-            </Button> */}
-          </Card.Content>
+                </Card.Content>
         </View>
 
         <Card style={styles.section}>
           <Card.Content>
             <Text style={styles.sectionTitle}>Shipment Details</Text>
-            {shipmentDetails.map(shipment => (
-              <View style={styles.shipmentItem} key={shipment.id}>
-                <View style={styles.leftColumn}>
+            {itemList.map((item:any )=> (
+              <>
+              <View style={styles.leftColumn} key={item.id}>
+                <View >
                   <Image
-                    source={{uri: shipment.productImage}}
+                    source={{uri: item?.image?.src}}
                     style={styles.productImage}
                   />
                 </View>
                 <View style={styles.rightColumn}>
-                  <Text style={styles.title}>{shipment.title}</Text>
-                  <Text style={styles.text}>{shipment.status}</Text>
-                  <Text style={styles.text}>Date: {shipment.date}</Text>
-                  <Text style={styles.text}>
-                    Quantity: {shipment.quantity} | Price: ₹ {shipment.price}
+                  <Text style={styles.title}>{item.name}</Text>
+                  <Text style={styles.text}>{item.status}</Text>
+                                  <Text style={styles.text}>
+                    Quantity: {item.quantity} | Price: ₹ {item.price}
                   </Text>
                 </View>
               </View>
+              <Divider/>
+              </>
             ))}
           </Card.Content>
+          <Divider/>
         </Card>
 
         <Card style={styles.section}>
@@ -104,21 +88,21 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
             <View style={styles.paymentItem}>
               <Text style={styles.paymentLabel}>Payment Method:</Text>
               <Text style={styles.text}>
-                {paymentInformation.paymentMethod}
+                {orderData?.data?.payment_method_title}
               </Text>
             </View>
             <View style={styles.paymentItem}>
               <Text style={styles.paymentLabel}>Billing Address:</Text>
             </View>
-            <Text style={styles.text}>{paymentInformation.billingAddress}</Text>
+            <Text style={styles.text}>{billingAddress}</Text>
           </Card.Content>
         </Card>
 
         <Card style={styles.section}>
           <Card.Content>
-            <Text style={styles.sectionTitle}>Shipping Address </Text>
+            <Text style={styles.paymentLabel}>Shipping Address </Text>
 
-            <Text style={styles.text}>{paymentInformation.billingAddress}</Text>
+            <Text style={styles.text}>{shippingAddress}</Text>
           </Card.Content>
         </Card>
       </ScrollView>
@@ -134,33 +118,31 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
     backgroundColor: '#fff',
-    paddingTop: 10,
-  },
+     },
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
+    marginBottom:5
+      },
   text: {
     flex: 1,
     fontSize: 16,
     alignItems: 'flex-end',
   },
-  downloadButton: {
-    marginTop: 10,
-  },
+ 
   shipmentItem: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
+    // alignItems: 'center',
+      },
   leftColumn: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   rightColumn: {
-    flex: 2,
+    // flex: 1,
+    marginTop:18,
+    marginBottom:50
   },
   productImage: {
     width: 100,

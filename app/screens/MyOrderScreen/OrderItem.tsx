@@ -4,27 +4,24 @@ import React, {useEffect} from 'react';
 import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Title, Text} from 'react-native-paper';
 
-const OrderItem = ({item}: any) => {
+const OrderItem = ({item,lineItems,key}: any) => {
   const navigation: any = useNavigation();
-  const {cartItems, getCartList} = useCartContext();
-  useEffect(() => {
-    (async () => {
-      await getCartList();
-    })();
-  }, []);
-
+  const {getOrderDetailById} = useCartContext();
   
-  // console.log(cartItems);
+
+  const handlePress = async () => {
+    await getOrderDetailById(item.id);
+              navigation.navigate('OrderDetailScreen', {orderId: item.id});
+  };
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate('OrderDetailScreen', {data: item})}>
-      <View style={styles.card}>
+    <TouchableOpacity onPress={handlePress}>
+           <View style={styles.card}>
         <View style={styles.cardContent}>
-          <Image source={{uri: item.imageSrc}} style={styles.image} />
+          <Image source={{uri: item?.line_items[0]?.image?.src}} style={styles.image} />
           <View style={styles.textContainer}>
-            <Title>{item.name}</Title>
-            <Text>Total: ${item.total}</Text>
-            <Text>Status: {item.status}</Text>
+            <Text style={{fontSize: 19}}>{item?.line_items[0]?.name}</Text>
+            <Text>Total: ₹{item?.line_items[0]?.subtotal}</Text>
+            <Text>Quantity: {item?.line_items[0]?.quantity}</Text>
           </View>
         </View>
       </View>
@@ -35,7 +32,7 @@ const OrderItem = ({item}: any) => {
 const styles = StyleSheet.create({
   card: {
     marginBottom: 13,
-    paddingBottom: 10,
+
     backgroundColor: '#fff',
   },
   cardContent: {
