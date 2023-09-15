@@ -6,17 +6,26 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {View, Image} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useCartContext } from '../../context/CartContext';
+import {useCartContext} from '../../context/CartContext';
 
 export const OrderDetailScreen = ({route, navigation}: any) => {
-  const {orderData}=useCartContext();
-  
-  const itemList=orderData?.data?.line_items;
+  const {orderData} = useCartContext();
 
-  const billingAddress=`${orderData?.data?.billing?.address_1} ${orderData?.data?.billing?.address_2} ${orderData?.data?.billing?.city} ${orderData?.data?.billing?.state} ${orderData?.data?.billing?.country} ${orderData?.data?.billing?.postcode} `
+  const itemList = orderData?.data?.line_items;
 
-  const shippingAddress=`${orderData?.data?.shipping?.address_1} ${orderData?.data?.shipping?.address_2} ${orderData?.data?.shipping?.city} ${orderData?.data?.shipping?.state} ${orderData?.data?.shipping?.country} ${orderData?.data?.shipping?.postcode} `
-  
+  const billingAddress = `${orderData?.data?.billing?.address_1}, ${orderData?.data?.billing?.address_2}, ${orderData?.data?.billing?.city}, ${orderData?.data?.billing?.state}, ${orderData?.data?.billing?.country}, ${orderData?.data?.billing?.postcode}. `;
+
+  const shippingAddress = `${orderData?.data?.shipping?.address_1}, ${orderData?.data?.shipping?.address_2}, ${orderData?.data?.shipping?.city}, ${orderData?.data?.shipping?.state}, ${orderData?.data?.shipping?.country}, ${orderData?.data?.shipping?.postcode}. `;
+
+  const originalDateStr = orderData?.data?.date_created;
+
+  const originalDate = new Date(originalDateStr);
+  const formattedDate = originalDate.toLocaleString('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+
   return (
     <>
       <ScrollView style={styles.container}>
@@ -32,7 +41,7 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
             <View style={{flexDirection: 'row', paddingVertical: 8}}>
               <AntDesign
                 name="checkcircle"
-                style={{fontSize: 25, color: '#fa5f11', margin: 3}}
+                style={{fontSize: 22, color: '#fa5f11', margin: 3}}
               />
 
               <Text style={{fontSize: 20, fontWeight: 'bold'}}>
@@ -42,7 +51,7 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
             </View>
             <View style={styles.paymentItem}>
               <Text style={styles.paymentLabel}>Order Date:</Text>
-              <Text style={styles.text}>{orderData?.data?.date_created}</Text>
+              <Text style={styles.text}>{formattedDate}</Text>
             </View>
             <View style={styles.paymentItem}>
               <Text style={styles.paymentLabel}>Order Number:</Text>
@@ -52,34 +61,39 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
               <Text style={styles.paymentLabel}>Order Total: </Text>
               <Text style={styles.text}>₹{orderData?.data?.total}</Text>
             </View>
-                </Card.Content>
+          </Card.Content>
         </View>
 
         <Card style={styles.section}>
           <Card.Content>
             <Text style={styles.sectionTitle}>Shipment Details</Text>
-            {itemList.map((item:any )=> (
+            {itemList.map((item: any) => (
               <>
-              <View style={styles.leftColumn} key={item.id}>
-                <View >
-                  <Image
-                    source={{uri: item?.image?.src}}
-                    style={styles.productImage}
-                  />
+                <View style={styles.leftColumn} key={item.id}>
+                  <View>
+                    <Image
+                      source={{uri: item?.image?.src}}
+                      style={styles.productImage}
+                    />
+                  </View>
+                  <View style={{marginTop: 18, marginBottom: 20, width: '70%'}}>
+                    <Text
+                      style={styles.title}
+                      numberOfLines={1}
+                      ellipsizeMode="tail">
+                      {item.name}
+                    </Text>
+                    <Text style={styles.text}>{item.status}</Text>
+                    <Text style={styles.text}>
+                      Quantity: {item.quantity} | Price: ₹ {item.price}
+                    </Text>
+                  </View>
                 </View>
-                <View style={styles.rightColumn}>
-                  <Text style={styles.title}>{item.name}</Text>
-                  <Text style={styles.text}>{item.status}</Text>
-                                  <Text style={styles.text}>
-                    Quantity: {item.quantity} | Price: ₹ {item.price}
-                  </Text>
-                </View>
-              </View>
-              <Divider/>
+                <Divider />
               </>
             ))}
           </Card.Content>
-          <Divider/>
+          <Divider />
         </Card>
 
         <Card style={styles.section}>
@@ -118,32 +132,24 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 20,
     backgroundColor: '#fff',
-     },
+  },
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom:5
-      },
-  text: {
-    flex: 1,
-    fontSize: 16,
-    alignItems: 'flex-end',
+    marginBottom: 5,
   },
- 
+  text: {
+    fontSize: 16,
+  },
+
   shipmentItem: {
     flexDirection: 'row',
-    // alignItems: 'center',
-      },
+  },
   leftColumn: {
     flex: 1,
     flexDirection: 'row',
-    // alignItems: 'center',
   },
-  rightColumn: {
-    // flex: 1,
-    marginTop:18,
-    marginBottom:50
-  },
+
   productImage: {
     width: 100,
     height: 100,
@@ -156,13 +162,14 @@ const styles = StyleSheet.create({
   paymentItem: {
     flexDirection: 'row',
     marginBottom: 10,
+    width: '100%',
   },
   paymentLabel: {
-    flex: 1,
+    width: '40%',
     fontWeight: 'bold',
     fontSize: 16,
   },
   paymentValue: {
-    flex: 2,
+    flex: 1,
   },
 });
