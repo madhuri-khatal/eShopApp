@@ -34,6 +34,8 @@ interface ICartContext {
   setVariationWisePrice: (productById: number | string) => Promise<void>;
   orderData: any;
   getOrderDetailById: (id: number | string) => Promise<void>
+  deleteOrderData: any;
+  deleteOrder: (id: number | string) => Promise<void>
 }
 const CartContext = createContext<ICartContext | null>(null);
 type CartContextType = {children: ReactNode};
@@ -50,7 +52,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
   const [variation, setVariation] = useState<number | string>('');
   const [variationPrice, setVariationPrice] = useState<any>([]);
   const [orderData,setOrderData]=useState<any>();
-
+const [deleteOrderData,setDeleteOrderData]=useState<any>();
   const navigation: any = useNavigation()
   //
   const onselectVariationOrWeight = (
@@ -144,6 +146,16 @@ const{result}=await OrderApi.getOrderDetailById(id);
 setOrderData(result);
   }
 
+  const deleteOrder=async(id:number | string)=>{
+    const {result}=await OrderApi.deleteOrder(id);
+          setDeleteOrderData(result);
+   await getMyOrderData(); 
+   ToastAndroid.showWithGravity(
+    'Order are cancle succesfully!!!!',
+    ToastAndroid.SHORT,
+    ToastAndroid.CENTER,)
+  }
+
   const value: ICartContext = {
     cartItems,
     getCartList,
@@ -165,7 +177,9 @@ setOrderData(result);
     getMyOrderData,
     myOrderItems,
     orderData,
-    getOrderDetailById
+    getOrderDetailById,
+    deleteOrderData,
+    deleteOrder
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
