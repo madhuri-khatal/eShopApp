@@ -1,26 +1,25 @@
-import React, {useEffect} from 'react';
-import {View, ScrollView} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, ScrollView } from 'react-native';
 import OrderItem from './OrderItem';
-import {useCartContext} from '../../context/CartContext';
+import { useCartContext } from '../../context/CartContext';
 
-const OrderList = ({orderItems, onCartItemRemove}: any) => {
-  const {myOrderItems, getMyOrderData} = useCartContext();
+const OrderList = () => {
+  const { myOrderItems, getMyOrderData } = useCartContext();
+
   useEffect(() => {
     (async () => {
       await getMyOrderData();
     })();
   }, []);
-  console.log(
-    myOrderItems?.map((item: any) => ({name: item?.line_items[0]?.name})),
-    'ORDERITEm-=-=-_dasd+',
-  );
+
   return (
     <ScrollView>
-      {orderItems.map((item: any) => (
+      {myOrderItems?.map((item: any, key: any) => (
         <OrderItem
-          key={item.id}
+          key={item?.id}
+          lineItems={item?.line_items}
+          orderId={item?.id}
           item={item}
-          //   onRemove={() => onCartItemRemove(item.id)}
         />
       ))}
     </ScrollView>
