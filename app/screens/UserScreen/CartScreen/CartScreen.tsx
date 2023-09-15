@@ -48,7 +48,8 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
   return (
     <>
       <HeaderBar
-        title="Cart Screen"
+        title="My Cart"
+        titleStyle={{fontSize: 18}}
         backAction={() => navigation.goBack()}
         right1Action={() =>
           navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())

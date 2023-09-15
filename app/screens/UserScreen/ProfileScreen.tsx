@@ -21,8 +21,8 @@ export default function ProfileScreen(props: any) {
     <ScrollView>
       <View>
         <Appbar.Header>
-          <Appbar.Content title="Profile" />
-          <Appbar.Action icon="magnify" onPress={_handleSearch} />
+          <Appbar.Action icon="arrow" onPress={_goBack} />
+          <Appbar.Content title="Profile" titleStyle={{fontSize: 18}} />
           <Appbar.Action icon="menu" onPress={_handleMore} />
         </Appbar.Header>
 

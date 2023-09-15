@@ -39,7 +39,7 @@ export const OrderScreen = (props: any) => {
   return (
     <ScrollView style={{backgroundColor: '#F7F7F7'}}>
       <HeaderBar
-        title="My Orders"
+        title="My Orders" titleStyle={{fontSize:18}}
         backAction={() => navigation.goBack()}
         right1Action={() =>
           navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())

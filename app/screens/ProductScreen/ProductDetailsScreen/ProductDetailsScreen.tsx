@@ -81,7 +81,7 @@ export const ProductDetailsScreen = (props: any) => {
     <>
       
       <HeaderBar
-        title=""
+        title="" titleStyle={{fontSize:18}}
         // titleStyle={{color: colors.onSecondary}}
         // titleStyle={{color: 'gray', fontSize: 20}}
         backAction={() => navigation.goBack()}
