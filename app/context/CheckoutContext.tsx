@@ -21,9 +21,9 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
       ...formData,
     };
     const {
-      result: {data},
+      result
     } = await CartApi.onCreateOrderApi(jsonData);
-    console.log(data, 'res for order');
+    console.log(result, 'res for order');
   };
 
   const value: ICheckoutContext = {
