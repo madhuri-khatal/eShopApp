@@ -40,6 +40,25 @@ export const Get = async <T>(
   return response;
 };
 
+export const Delete = async <T>(
+  path: string,
+  json?: AxiosRequestConfig<any> | undefined,
+) => {
+  let response: Response<T> = {};
+  try {
+    const header = {
+      headers: {
+        Authorization: `Basic ${btoa(`${consumer_key}:${consumer_secret}`)}`,
+      },
+    };
+    response.result = (await axios.delete(`${API_URL}${path}`, header)) as T;
+  } catch (e: any) {
+    response.err = parseError(e.text);
+    response.status = e.status;
+  }
+  return response;
+};
+
 export const Post = async <T>(
   path: string,
   json?: AxiosRequestConfig<any> | undefined,
