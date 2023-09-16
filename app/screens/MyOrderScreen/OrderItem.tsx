@@ -8,6 +8,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 const OrderItem = ({item,lineItems,key}: any) => {
   const navigation: any = useNavigation();
   const {getOrderDetailById,  deleteOrder} = useCartContext();
+  console.log("item?.line_items[0]?.payment_method_title",item);
   
 
   const handlePress = async () => {
@@ -17,6 +18,17 @@ const OrderItem = ({item,lineItems,key}: any) => {
   const orderDelete=async()=>{
     await deleteOrder(item.id)
   }
+
+  const originalDateStr = item?.date_created;
+const originalDate = new Date(originalDateStr);
+const monthNames = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+const monthName = monthNames[originalDate.getMonth()];
+const formattedDate = `${monthName} ${originalDate.getDate()}, ${originalDate.getFullYear()}`;
+console.log(formattedDate); 
+
   return (
     <> 
 
@@ -26,20 +38,21 @@ const OrderItem = ({item,lineItems,key}: any) => {
         <View style={styles.cardContent}>
           <Image source={{uri: item?.line_items[0]?.image?.src}} style={styles.image} />
           <View style={styles.textContainer}>
-            <Text style={{fontSize: 15}}>{item?.line_items[0]?.name}</Text>
-            {/* <Text>Total: ₹{item?.line_items[0]?.subtotal}</Text>
-            <Text>Quantity: {item?.line_items[0]?.quantity}</Text> */}
+            <Text >Order Id : {item?.id}</Text>
+            <Text>Payment Method : {item?.payment_method_title}</Text>
+            <Text>Ordered on : {formattedDate}</Text>
+            <Text>Total Items : {lineItems.length}</Text>
           </View>
           
         </View>
       </View>
           </TouchableOpacity>
 
-      <Button
-       style={{marginTop:-50,zIndex:1000,width:"30%",alignSelf:"flex-end"}} 
+      {/* <Button
+       style={{marginTop:-40,zIndex:1000,width:"30%",alignSelf:"flex-end"}} 
            onPress={orderDelete}>
         <Text style={{fontSize:16 ,color:"#e95d2a"}}>Cancel </Text> 
-        </Button>
+        </Button> */}
     </View>
      
     
@@ -64,7 +77,6 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-    marginTop:-40
   },
 });
 
