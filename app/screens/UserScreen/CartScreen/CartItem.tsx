@@ -50,7 +50,7 @@ const CartItem = ({item, onRemove}: any) => {
       )}
       <View style={{flex: 1, marginLeft: 15}}>
         <Text
-          style={{fontSize: 16, fontWeight: 'bold'}}
+          style={{fontSize: 16, fontWeight: 'bold',color:"#b1b1b1"}}
           numberOfLines={1}
           ellipsizeMode="tail">
           {item.name}
