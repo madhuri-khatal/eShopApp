@@ -204,14 +204,14 @@ export default function CheckoutScreen(props: any) {
                 // onPress={checkoutHandleSubmit((data: any) =>
                 //   console.log('clicked', data),
                 // )}
-                // onPress={checkoutHandleSubmit(onSubmitCheckout)}
+                onPress={checkoutHandleSubmit(onSubmitCheckout)}
 
-                onPress={() =>
-                  navigation.navigate(OrderStackScreen, {
-                    screen: 'OrderScreen',
-                    initial: false,
-                  })
-                }
+                // onPress={() =>
+                //   navigation.navigate(OrderStackScreen, {
+                //     screen: 'OrderScreen',
+                //     initial: false,
+                //   })
+                // }
               />
             </View>
           </View>
