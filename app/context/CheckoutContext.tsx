@@ -3,7 +3,7 @@ import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useCartContext} from './CartContext';
 
-import { checkoutObject } from '../screens/UserScreen/CheckoutScreen/checkoutObject';
+import { checkoutObject } from '../screens/UserScreen/CheckoutScreen/checkoutobject';
 interface ICheckoutContext {
   onSubmitCheckout: Function;
   checkoutControl: any;
