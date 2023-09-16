@@ -25,8 +25,6 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
   ];
   const monthName = monthNames[originalDate.getMonth()];
   const formattedDate = `${monthName} ${originalDate.getDate()}, ${originalDate.getFullYear()}`;
- 
-  console.log(orderData?.data?.shipping_total);
   
   return (
     <>

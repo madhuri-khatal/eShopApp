@@ -3,7 +3,10 @@ import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useCartContext} from './CartContext';
 
-import { checkoutObject } from '../screens/UserScreen/CheckoutScreen/checkoutobject';
+import { checkoutObject } from '../screens/UserScreen/CheckoutScreen/checkoutObject';
+import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import OrderStackScreen from '../navigators/OrderStackScreen';
 interface ICheckoutContext {
   onSubmitCheckout: Function;
   checkoutControl: any;
@@ -13,11 +16,13 @@ const CheckoutContext = createContext<ICheckoutContext | null>(null);
 type CheckoutContextType = {children: ReactNode};
 
 export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
-  // order checkout
+
 
   const {control: checkoutControl, handleSubmit: checkoutHandleSubmit} =
     useForm();
-  const {cartItems} = useCartContext();
+  const {cartItems,getMyOrderData} = useCartContext();
+const navigation:any=useNavigation();
+
   const onSubmitCheckout = async (formData: any) => {
     const linItem: any = cartItems?.items?.map((item: any) => ({
       product_id: item?.id,
@@ -31,8 +36,18 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     const {
       result: {data},
     } = await CartApi.onCreateOrderApi(checkoutObject(formData, linItem));
+    Alert.alert("Order Sucessfully placed")
+    getMyOrderData();
+    // navigation.getParent('main').navigate('OrderScreenStack', {
+    //   screen: 'OrderScreen',
+    //   initial: false,
+    // });
     // console.log(data, 'res for order');
-  };
+    // linItem.length = 0;
+    // console.log(linItem)
+    
+    
+    };
 
   const value: ICheckoutContext = {
     onSubmitCheckout,

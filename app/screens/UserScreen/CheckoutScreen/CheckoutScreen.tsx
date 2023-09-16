@@ -8,6 +8,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useCartContext} from '../../../context/CartContext';
 import {useCheckoutContext} from '../../../context/CheckoutContext';
 import {TextInputController} from '../../../components/ui/TextInput';
+import OrderStackScreen from '../../../navigators/OrderStackScreen';
 export default function CheckoutScreen(props: any) {
   const navigation: any = useNavigation();
   const {colors} = useTheme();
@@ -203,7 +204,14 @@ export default function CheckoutScreen(props: any) {
                 // onPress={checkoutHandleSubmit((data: any) =>
                 //   console.log('clicked', data),
                 // )}
-                onPress={checkoutHandleSubmit(onSubmitCheckout)}
+                // onPress={checkoutHandleSubmit(onSubmitCheckout)}
+
+                onPress={() =>
+                  navigation.navigate(OrderStackScreen, {
+                    screen: 'OrderScreen',
+                    initial: false,
+                  })
+                }
               />
             </View>
           </View>
