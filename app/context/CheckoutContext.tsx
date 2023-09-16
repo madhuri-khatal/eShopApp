@@ -2,6 +2,8 @@ import {CartApi} from '../api/CartApi';
 import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useCartContext} from './CartContext';
+
+import { checkoutObject } from '../screens/UserScreen/CheckoutScreen/checkoutObject';
 interface ICheckoutContext {
   onSubmitCheckout: Function;
   checkoutControl: any;
@@ -9,6 +11,7 @@ interface ICheckoutContext {
 }
 const CheckoutContext = createContext<ICheckoutContext | null>(null);
 type CheckoutContextType = {children: ReactNode};
+
 export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
   // order checkout
 
@@ -16,14 +19,19 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     useForm();
   const {cartItems} = useCartContext();
   const onSubmitCheckout = async (formData: any) => {
+    const linItem: any = cartItems?.items?.map((item: any) => ({
+      product_id: item?.id,
+      quantity: item?.quantity,
+    }));
     const jsonData = {
-      billing_country: cartItems?.billing_address?.country,
       ...formData,
     };
+    console.log(JSON.stringify(checkoutObject(formData, linItem)));
+
     const {
-      result
-    } = await CartApi.onCreateOrderApi(jsonData);
-    console.log(result, 'res for order');
+      result: {data},
+    } = await CartApi.onCreateOrderApi(checkoutObject(formData, linItem));
+    // console.log(data, 'res for order');
   };
 
   const value: ICheckoutContext = {

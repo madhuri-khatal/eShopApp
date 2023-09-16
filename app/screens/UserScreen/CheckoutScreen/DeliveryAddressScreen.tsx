@@ -19,8 +19,8 @@ export default function DeliveryAddressScreen() {
             placeholder={'India'}
             style={{margin: 7}}
             mode="outlined"
-            disabled
           />
+          
           {/* <TextInputController
             control={checkoutControl}
             name={'billing_country'}

@@ -28,7 +28,7 @@ export default function CheckoutScreen(props: any) {
       setShowCODDetails(!showCODDetails);
     }
   };
-  const billing = cartItems?.billing_address;
+  const billing = cartItems?.address;
 
   return (
     <>
@@ -51,7 +51,7 @@ export default function CheckoutScreen(props: any) {
             /> */}
             <TextInputController
               control={checkoutControl}
-              name={'billing_phone'}
+              name={'phone'}
               placeholder="Phone Number"
               style={{margin: 8, backgroundColor: 'white'}}
               // errors={errors}
@@ -87,7 +87,7 @@ export default function CheckoutScreen(props: any) {
             /> */}
             <TextInputController
               control={checkoutControl}
-              name={'billing_first_name'}
+              name={'first_name'}
               placeholder="Full Name"
               style={{margin: 8, backgroundColor: 'white'}}
               // errors={errors}
@@ -98,7 +98,7 @@ export default function CheckoutScreen(props: any) {
             />
             <TextInputController
               control={checkoutControl}
-              name={'billing_email'}
+              name={'email'}
               placeholder="Email"
               style={{margin: 8, backgroundColor: 'white'}}
               // errors={errors}
@@ -200,7 +200,9 @@ export default function CheckoutScreen(props: any) {
                 title={'Place Order'}
                 backgroundColor="orange"
                 width={380}
-                // onPress={()=>console.log("clicked")                }
+                // onPress={checkoutHandleSubmit((data: any) =>
+                //   console.log('clicked', data),
+                // )}
                 onPress={checkoutHandleSubmit(onSubmitCheckout)}
               />
             </View>
