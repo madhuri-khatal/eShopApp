@@ -19,23 +19,13 @@ export default function DeliveryAddressScreen() {
             placeholder={'India'}
             style={{margin: 7}}
             mode="outlined"
-          />
-          
-          {/* <TextInputController
-            control={checkoutControl}
-            name={'billing_country'}
-            placeholder="India"
-            style={{margin: 8, backgroundColor: 'white'}}
-            // errors={errors}
-            keyboardType={'default'}
-            // isRequiredValue
-            mode="outlined"
             defaultValue={'India'}
-            isdisabled={true}
-          /> */}
+            disabled
+          />
+
           <TextInputController
             control={checkoutControl}
-            name={'billing_state'}
+            name={'state'}
             placeholder="State"
             style={{margin: 8, backgroundColor: 'white'}}
             // errors={errors}
@@ -44,15 +34,10 @@ export default function DeliveryAddressScreen() {
             mode="outlined"
             defaultValue={shipping?.state}
           />
-          {/* <TextInput
-            placeholder={'State'}
-            style={{margin: 7}}
-            mode="outlined"
-            defaultValue={shipping?.state}
-          /> */}
+
           <TextInputController
             control={checkoutControl}
-            name={'billing_city'}
+            name={'city'}
             placeholder="Town / City"
             style={{margin: 8, backgroundColor: 'white'}}
             // errors={errors}
@@ -61,15 +46,10 @@ export default function DeliveryAddressScreen() {
             mode="outlined"
             defaultValue={shipping?.city}
           />
-          {/* <TextInput
-            placeholder={'Town / City'}
-            style={{margin: 7}}
-            mode="outlined"
-            defaultValue={shipping?.city}
-          /> */}
+
           <TextInputController
             control={checkoutControl}
-            name={'billing_address_1'}
+            name={'address_1'}
             placeholder="Address"
             style={{margin: 8, backgroundColor: 'white'}}
             // errors={errors}
@@ -78,31 +58,28 @@ export default function DeliveryAddressScreen() {
             mode="outlined"
             defaultValue={shipping?.address_1}
           />
-          {/* <TextInput
-            placeholder={'Address'}
-            style={{margin: 7}}
-            mode="outlined"
-            defaultValue={shipping?.address_1}
-          /> */}
+
           <TextInputController
             control={checkoutControl}
-            name={'billing_address_2'}
+            name={'address_2'}
             placeholder="Zip / PinCode"
             style={{margin: 8, backgroundColor: 'white'}}
-            // errors={errors}
+            keyboardType={'default'}
+            isRequiredValue
+            mode="outlined"
+            defaultValue={shipping?.address_2}
+          />
+
+          <TextInputController
+            control={checkoutControl}
+            name={'postcode'}
+            placeholder="Zip / PinCode"
+            style={{margin: 8, backgroundColor: 'white'}}
             keyboardType={'default'}
             isRequiredValue
             mode="outlined"
             defaultValue={shipping?.postcode}
           />
-          {/* <TextInput
-            placeholder={'Zip / PinCode'}
-            style={{margin: 8}}
-            mode="outlined"
-            keyboardType="number-pad"
-            maxLength={6}
-            defaultValue={shipping?.postcode}
-          /> */}
         </View>
       </ScrollView>
     </>
