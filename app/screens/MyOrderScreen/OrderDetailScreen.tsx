@@ -18,13 +18,14 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
   const shippingAddress = `${orderData?.data?.shipping?.address_1}, ${orderData?.data?.shipping?.address_2}, ${orderData?.data?.shipping?.city}, ${orderData?.data?.shipping?.state}, ${orderData?.data?.shipping?.country}, ${orderData?.data?.shipping?.postcode}. `;
 
   const originalDateStr = orderData?.data?.date_created;
-
   const originalDate = new Date(originalDateStr);
-  const formattedDate = originalDate.toLocaleString('en-US', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  });
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+  const monthName = monthNames[originalDate.getMonth()];
+  const formattedDate = `${monthName} ${originalDate.getDate()}, ${originalDate.getFullYear()}`;
+  console.log(formattedDate); 
 
   return (
     <>
