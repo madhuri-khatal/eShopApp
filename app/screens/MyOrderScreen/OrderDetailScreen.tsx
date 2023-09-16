@@ -25,8 +25,9 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
   ];
   const monthName = monthNames[originalDate.getMonth()];
   const formattedDate = `${monthName} ${originalDate.getDate()}, ${originalDate.getFullYear()}`;
-  console.log(formattedDate); 
-
+ 
+  console.log(orderData?.data?.shipping_total);
+  
   return (
     <>
       <ScrollView style={styles.container}>
@@ -62,7 +63,11 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
               <Text style={styles.paymentLabel}>Order Total: </Text>
               <Text style={styles.text}>₹{orderData?.data?.total}</Text>
             </View>
-          </Card.Content>
+            <View style={styles.paymentItem}>
+              <Text style={styles.paymentLabel}>Shipping charges: </Text>
+              <Text style={styles.text}>{orderData?.data?.shipping_total}</Text>
+            </View>
+                      </Card.Content>
         </View>
 
         <Card style={styles.section}>
