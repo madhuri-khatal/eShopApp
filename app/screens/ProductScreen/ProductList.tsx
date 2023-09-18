@@ -8,6 +8,11 @@ export default function ProductList({filteredProducts}: any) {
   const {productByCategoryId, isLoading, fetchMoreData, refThreshold} =
     useProductContext();
   const noMoreProducts = productByCategoryId.length === 0;
+
+  // Determine the data source for the FlatList
+  const dataToShow =
+    filteredProducts.length > 0 ? filteredProducts : productByCategoryId;
+
   return (
     <>
       {productByCategoryId.length === 0 ? (
@@ -38,7 +43,7 @@ export default function ProductList({filteredProducts}: any) {
               }}
             />
           )}
-          data={filteredProducts}
+          data={dataToShow} // Use dataToShow as the data source
           onEndReached={async () => {
             await fetchMoreData();
           }}
