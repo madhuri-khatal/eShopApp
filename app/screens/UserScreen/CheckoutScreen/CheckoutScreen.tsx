@@ -13,8 +13,19 @@ export default function CheckoutScreen(props: any) {
   const navigation: any = useNavigation();
   const {colors} = useTheme();
   const {cartItems} = useCartContext();
-  const {onSubmitCheckout, checkoutControl, checkoutHandleSubmit} =
+  const {onSubmitCheckout, checkoutControl, checkoutHandleSubmit,onCreateCustomer,customerData} =
     useCheckoutContext();
+
+    const onPressToSubmit=() => {
+      if (customerData?.data?.role === 'customer') {
+        checkoutHandleSubmit(onSubmitCheckout)();
+        
+      } 
+      else {
+        checkoutHandleSubmit(onCreateCustomer)();
+              checkoutHandleSubmit(onSubmitCheckout)();
+      }
+    }
 
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showCODDetails, setShowCODDetails] = useState(false);
@@ -89,13 +100,24 @@ export default function CheckoutScreen(props: any) {
             <TextInputController
               control={checkoutControl}
               name={'first_name'}
-              placeholder="Full Name"
+              placeholder="First Name"
               style={{margin: 8, backgroundColor: 'white'}}
               // errors={errors}
               keyboardType={'default'}
               isRequiredValue
               mode="outlined"
               defaultValue={billing?.first_name}
+            />
+                <TextInputController
+              control={checkoutControl}
+              name={'last_name'}
+              placeholder="Last Name"
+              style={{margin: 8, backgroundColor: 'white'}}
+              // errors={errors}
+              keyboardType={'default'}
+              isRequiredValue
+              mode="outlined"
+              defaultValue={billing?.last_name}
             />
             <TextInputController
               control={checkoutControl}
@@ -204,8 +226,9 @@ export default function CheckoutScreen(props: any) {
                 // onPress={checkoutHandleSubmit((data: any) =>
                 //   console.log('clicked', data),
                 // )}
-                onPress={checkoutHandleSubmit(onSubmitCheckout)}
-
+                // onPress={checkoutHandleSubmit(onSubmitCheckout)}
+// onPress={checkoutHandleSubmit(onCreateCustomer)}
+onPress={onPressToSubmit}
                 // onPress={() =>
                 //   navigation.navigate(OrderStackScreen, {
                 //     screen: 'OrderScreen',

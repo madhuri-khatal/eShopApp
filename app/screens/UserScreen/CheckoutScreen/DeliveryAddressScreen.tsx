@@ -50,7 +50,7 @@ export default function DeliveryAddressScreen() {
           <TextInputController
             control={checkoutControl}
             name={'address_1'}
-            placeholder="Address"
+            placeholder="Address line 1"
             style={{margin: 8, backgroundColor: 'white'}}
             // errors={errors}
             keyboardType={'default'}
@@ -62,7 +62,7 @@ export default function DeliveryAddressScreen() {
           <TextInputController
             control={checkoutControl}
             name={'address_2'}
-            placeholder="Zip / PinCode"
+            placeholder="Address line 2"
             style={{margin: 8, backgroundColor: 'white'}}
             keyboardType={'default'}
             isRequiredValue
