@@ -12,11 +12,17 @@ const CustomSearchBar = ({placeholder, onChangeText}: any) => {
 
   return (
     <View style={{paddingHorizontal: 16}}>
-      <Searchbar 
-      
-        placeholder={placeholder || 'Search'}
+      <Searchbar
+        placeholder={placeholder || 'Search Product'}
         onChangeText={handleSearch}
         value={searchQuery}
+        placeholderTextColor={'gray'}
+        iconColor="gray"
+        style={{
+          backgroundColor: '#f1f1f1',
+          fontSize: 10, // Font size (adjust as needed)
+          borderRadius: 8, // Border radius (adjust as needed)
+        }}
       />
     </View>
   );

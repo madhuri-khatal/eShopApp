@@ -1,5 +1,4 @@
-
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -19,7 +18,7 @@ const FilterMenu = () => {
         flex: 1,
         zIndex: 9000,
         paddingHorizontal: 3,
-             }}>
+      }}>
       <TouchableOpacity
         onPress={toggleFilterMenu}
         style={{
@@ -33,11 +32,10 @@ const FilterMenu = () => {
           <Text
             style={{fontSize: 18, fontWeight: 'bold'}}
             onPress={toggleFilterMenu}>
-            Filter
+            Categories
           </Text>
         </View>
       </TouchableOpacity>
-    
     </View>
   );
 };

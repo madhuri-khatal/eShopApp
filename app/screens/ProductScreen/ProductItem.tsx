@@ -9,7 +9,6 @@ import WishlistComponent from '../../components/Product/WishlistComponent';
 import CartComponent from '../../components/Product/CartComponent';
 import {useProductContext} from '../../context/ProductContext';
 import {Image} from 'react-native';
-import {red} from 'react-native-reanimated';
 
 interface IProps {
   name?: any;
