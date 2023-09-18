@@ -7,10 +7,14 @@ import {checkoutObject} from '../screens/UserScreen/CheckoutScreen/checkoutobjec
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import OrderStackScreen from '../navigators/OrderStackScreen';
+import { CustomerObject } from '../screens/UserScreen/CheckoutScreen/CustomerObject';
+import { CustomerApi } from '../api/CustomerApi';
 interface ICheckoutContext {
   onSubmitCheckout: Function;
   checkoutControl: any;
   checkoutHandleSubmit: Function;
+  onCreateCustomer: (formData: any) => Promise<void>
+  customerData: any
 }
 const CheckoutContext = createContext<ICheckoutContext | null>(null);
 type CheckoutContextType = {children: ReactNode};
@@ -18,8 +22,9 @@ type CheckoutContextType = {children: ReactNode};
 export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
   const {control: checkoutControl, handleSubmit: checkoutHandleSubmit} =
     useForm();
-  const {cartItems, getMyOrderData} = useCartContext();
-  const navigation: any = useNavigation();
+  const {cartItems,getMyOrderData} = useCartContext();
+  const [customerData,setCustomerData]=useState<any>()
+const navigation:any=useNavigation();
 
   const onSubmitCheckout = async (formData: any) => {
     const linItem: any = cartItems?.items?.map((item: any) => ({
@@ -29,26 +34,37 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     const jsonData = {
       ...formData,
     };
-    console.log(JSON.stringify(checkoutObject(formData, linItem)));
-
+   
     const {
       result: {data},
     } = await CartApi.onCreateOrderApi(checkoutObject(formData, linItem));
-    Alert.alert('Order Sucessfully placed');
+   
+     Alert.alert("Order Sucessfully placed")
     getMyOrderData();
-    // navigation.getParent('main').navigate('OrderScreenStack', {
-    //   screen: 'OrderScreen',
-    //   initial: false,
-    // });
-    // console.log(data, 'res for order');
-    // linItem.length = 0;
-    // console.log(linItem)
+    };
+
+// create customer
+const onCreateCustomer = async (formData: any) => {
+  const jsonData = {
+    ...formData,
   };
+ 
+  const {
+    result
+  } = await CustomerApi.onCreateCustomerApi(CustomerObject(formData));
+    setCustomerData(result)
+  
+  
+  };
+
+
 
   const value: ICheckoutContext = {
     onSubmitCheckout,
     checkoutControl,
     checkoutHandleSubmit,
+    onCreateCustomer,
+    customerData
   };
   return (
     <CheckoutContext.Provider value={value}>
