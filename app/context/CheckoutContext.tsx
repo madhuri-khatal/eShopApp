@@ -3,9 +3,9 @@ import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useCartContext} from './CartContext';
 
-import { checkoutObject } from '../screens/UserScreen/CheckoutScreen/checkoutObject';
-import { Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {checkoutObject} from '../screens/UserScreen/CheckoutScreen/checkoutobject';
+import {Alert} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import OrderStackScreen from '../navigators/OrderStackScreen';
 import { CustomerObject } from '../screens/UserScreen/CheckoutScreen/CustomerObject';
 import { CustomerApi } from '../api/CustomerApi';
@@ -20,13 +20,13 @@ const CheckoutContext = createContext<ICheckoutContext | null>(null);
 type CheckoutContextType = {children: ReactNode};
 
 export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
-
-
   const {control: checkoutControl, handleSubmit: checkoutHandleSubmit} =
     useForm();
+
   const {cartItems,getMyOrderData} = useCartContext();
   const [customerData,setCustomerData]=useState<any>()
 const navigation:any=useNavigation();
+
 
   const onSubmitCheckout = async (formData: any) => {
     const linItem: any = cartItems?.items?.map((item: any) => ({
@@ -40,13 +40,12 @@ const navigation:any=useNavigation();
     const {
       result: {data},
     } = await CartApi.onCreateOrderApi(checkoutObject(formData, linItem));
-   
+  
      Alert.alert("Order Sucessfully placed")
     getMyOrderData();
-   
-    
-    
+       
     };
+
 
 // create customer
 const onCreateCustomer = async (formData: any) => {

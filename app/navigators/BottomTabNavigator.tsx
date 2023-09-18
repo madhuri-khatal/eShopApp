@@ -10,17 +10,17 @@ import CartStackScreen from './CartStackScreen';
 import HomeStackScreen from './HomeStackScreen';
 import {CartApi} from '../api/CartApi';
 import {useCartContext} from './../context/CartContext';
+import UserStackScreen from './UserStackScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 export default function BottomTabNavigator() {
-  const {cartItems,getCartList} = useCartContext();
+  const {cartItems, getCartList} = useCartContext();
   useEffect(() => {
     (async () => {
       await getCartList();
     })();
   }, []);
- 
-  
+
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
@@ -39,8 +39,7 @@ export default function BottomTabNavigator() {
           tabBarIcon: ({color}) => (
             <MaterialCommunityIcons name="cart" color={color} size={26} />
           ),
-          tabBarBadge:cartItems?.items.length ||0
-          
+          tabBarBadge: cartItems?.items.length || 0,
         }}
         component={CartStackScreen}
       />
@@ -52,7 +51,7 @@ export default function BottomTabNavigator() {
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),
         }}
-        component={ProfileScreen}
+        component={UserStackScreen}
       />
     </Tab.Navigator>
   );

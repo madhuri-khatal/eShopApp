@@ -28,7 +28,7 @@ export default function HomeScreen({navigation}: any) {
           <Appbar.Action icon="menu" onPress={_handleMore} />
         </Appbar.Header>
 
-        <SearchBar onChangeText={handleSearchChange} />
+        {/* <SearchBar onChangeText={handleSearchChange} /> */}
 
         {/* <Caraousel
           Component={CaraouselContent}

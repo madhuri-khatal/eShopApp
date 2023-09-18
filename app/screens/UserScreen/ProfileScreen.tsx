@@ -158,6 +158,30 @@ export default function ProfileScreen(props: any) {
               </Text>
             </Button>
           </View>
+          <View style={{alignItems: 'center', marginRight: 5}}>
+            <Button
+              style={{
+                width: 190,
+                height: 50,
+                backgroundColor: '#f7c6b2',
+                borderRadius: 10,
+                padding: 3,
+                justifyContent: 'center',
+              }}
+              mode="contained"
+              onPress={() => navigation.navigate('LoginScreen')}>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  justifyContent: 'center',
+                  fontSize: 17,
+                  textTransform: 'capitalize',
+                  color: '#f25616',
+                }}>
+                Log Out
+              </Text>
+            </Button>
+          </View>
         </View>
       </View>
     </ScrollView>
