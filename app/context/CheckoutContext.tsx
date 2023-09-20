@@ -16,6 +16,7 @@ interface ICheckoutContext {
   onCreateCustomer: (formData: any) => Promise<void>;
   customerData: any;
   onCallToTheCustomerAndCheckout: (formData: any) => void;
+  customerId: string | number | undefined;
 }
 
 const CheckoutContext = createContext<ICheckoutContext | null>(null);
@@ -28,7 +29,7 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
 
   const {cartItems, getMyOrderData, deleteCartItem} = useCartContext();
   const [customerData, setCustomerData] = useState<any>();
-  const [customerId, setCustomerId] = useState<string | undefined>(); 
+  const [customerId, setCustomerId] = useState<number | string>();
   const navigation: any = useNavigation();
 
   // create customer
@@ -36,40 +37,48 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     const jsonData = {
       ...formData,
     };
- 
-    const {result} = await CustomerApi.onCreateCustomerApi(CustomerObject(formData));
-    console.log('result?.data?.customer?.id======',result?.data?.customer?.id);
-
-    if (result?.data?.customer?.role === 'customer') {
-      setCustomerId(result?.data?.customer?.id); 
-      console.log(' customer  DATA========================', result);
-    }
-    onSubmitCheckout(formData,result?.data?.customer?.id);
+    const {result} = await CustomerApi.onCreateCustomerApi(
+      CustomerObject(formData),
+    );
+    // console.log('result?.data?.customer?.id======', result?.data?.customer?.id);
+    // if (result?.data?.customer?.role === 'customer') {
+      // const customerId = result?.data?.customer?.id;
+      setCustomerId(result?.data?.customer?.id);
+      // onSubmitCheckout(formData, result?.data?.customer?.id);
+    // }
+    onSubmitCheckout(formData, result?.data?.customer?.id);
     setCustomerData(result);
   };
+  
 
-  const onCallToTheCustomerAndCheckout = (formData: any) => {
-    onSubmitCheckout(formData, customerId); 
+  const onCallToTheCustomerAndCheckout = async(formData: any) => {
+    if (customerData?.data?.customer?.role === 'customer') {
+     await onSubmitCheckout(formData, customerId);
+    } else {
+      onCreateCustomer(formData);
+      onSubmitCheckout(formData, customerId);
+    }
   };
 
   // place order
-  const onSubmitCheckout = async (formData: any, customerId?: string) => {
+  const onSubmitCheckout = async (
+    formData: any,
+    customerId?: number | string,
+  ) => {
     const linItem: any = cartItems?.items?.map((item: any) => ({
       product_id: item?.id,
       quantity: item?.quantity,
     }));
-    console.log(' onCheckout =====================', customerId);
-      const jsonData = {
-      customer_id: customerId, 
+    const jsonData = {
       ...formData,
     };
-
     const {
-      result: {data},
-    } = await CartApi.onCreateOrderApi(checkoutObject(jsonData, linItem));
-    console.log(' ORDER DATA========================', data);
-console.log("data===============",data?.customer_id);
-
+      result: {data: responseData},
+    } = await CartApi.onCreateOrderApi(
+      checkoutObject(jsonData, linItem, {}, customerId),
+    );
+    const responseCustomerId = responseData?.customer_id;
+    responseData.responseCustomerId = responseCustomerId;
     Alert.alert('Order Successfully placed');
     deleteCartItem();
     getMyOrderData();
@@ -82,6 +91,7 @@ console.log("data===============",data?.customer_id);
     onCreateCustomer,
     customerData,
     onCallToTheCustomerAndCheckout,
+    customerId,
   };
 
   return (
