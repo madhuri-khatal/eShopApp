@@ -19,91 +19,12 @@ export default function CheckoutScreen(props: any) {
     checkoutHandleSubmit,
     onCreateCustomer,
     customerData,
+    onCallToTheCustomerAndCheckout
   } = useCheckoutContext();
 
   const onPressToSubmit = async (formData: any) => {
-    onCreateCustomer(formData);
-    // if (customerData?.data?.customer?.role === 'customer') {
-    //   onSubmitCheckout(formData);
-    // } else {
-    //   onCreateCustomer(formData);
-    //   onSubmitCheckout(formData);
-    // }
-  };
-
-  // const onPressToSubmit = async () => {
-  //   // Assuming checkoutHandleSubmit returns a promise for both onSubmitCheckout and onCreateCustomer
-
-  //   if (customerData?.data?.customer?.role === 'customer') {
-  //     // Customer already exists, so just submit the order
-  //     await checkoutHandleSubmit(onSubmitCheckout)();
-  //   } else {
-  //     // Create a new customer
-  //     try {
-  //       await checkoutHandleSubmit(onCreateCustomer)();
-
-  //       // If customer creation is successful, proceed to submit the order
-  //       await checkoutHandleSubmit(onSubmitCheckout)();
-  //     } catch (error) {
-  //       // Handle any errors that occur during customer creation
-  //       console.error('Customer creation failed:', error);
-  //       // You can add error handling logic here if needed
-  //     }
-  //   }
-  // };
-
-  // const onPressToSubmit = async () => {
-  //   try {
-  //     if (customerData?.data?.customer?.role === 'customer') {
-  //       // Customer already exists, so just submit the order
-  //       const orderResponse = await checkoutHandleSubmit(onSubmitCheckout)();
-
-  //       // Process the orderResponse as needed
-  //       console.log('Order placed:', orderResponse);
-  //     } else {
-  //       // Create a new customer
-  //       const customerResponse = await checkoutHandleSubmit(onCreateCustomer)();
-
-  //       // If customer creation is successful, proceed to submit the order
-  //       if (customerResponse.data && customerResponse.data.customer) {
-  //         const newCustomer = customerResponse.data.customer;
-
-  //         // Set the customer's role to "guest"
-  //         newCustomer.role = 'guest';
-
-  //         // Update the order with customer details
-  //         const orderData = {
-  //           // Populate order details based on your response data
-  //           // ...
-  //           customer_id: newCustomer.id, // Associate the order with the customer
-  //         };
-
-  //         // Submit the order with updated customer details
-  //         const orderResponse = await checkoutHandleSubmit(onSubmitCheckout)(orderData);
-
-  //         // Process the orderResponse as needed
-  //         console.log('Order placed:', orderResponse);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     // Handle any errors that occur during customer creation or order submission
-  //     console.error('Error:', error);
-  //     // You can add specific error-handling logic here as needed
-  //   }
-  // };
-
-  // const onPressToSubmit = async () => {
-  //   if (customerData?.data?.customer?.role != 'customer') {
-  //     // Call onCreateCustomer and wait for it to complete
-  //     await checkoutHandleSubmit(onCreateCustomer)();
-
-  //     // After onCreateCustomer completes, call onSubmitCheckout
-  //     await checkoutHandleSubmit(onSubmitCheckout)();
-  //   } else {
-  //     // If the customer's role is not 'customer', only call onSubmitCheckout
-  //     checkoutHandleSubmit(onSubmitCheckout)();
-  //   }
-  // };
+       onCallToTheCustomerAndCheckout(formData)
+     };
 
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showCODDetails, setShowCODDetails] = useState(false);
