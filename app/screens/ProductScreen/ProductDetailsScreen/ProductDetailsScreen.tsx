@@ -23,21 +23,29 @@ import {CartApi} from '../../../api/CartApi';
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
   const [index, setIndex] = useState<number>(0);
- 
+
   const width = Dimensions.get('window').width;
   const refWidth = useRef(0.6);
   const handleIndex = (index: number) => {
     setIndex(index);
   };
 
-  const {addToCart, quantity, variationPrice, setVariationWisePrice, price,cartItems,getCartList} =   useCartContext();
-    
-    useEffect(() => {
-      (async () => {
-        await getCartList();
-      })();
-    }, []);
-    const badgeCount = cartItems?.items.length ||0;
+  const {
+    addToCart,
+    quantity,
+    variationPrice,
+    setVariationWisePrice,
+    price,
+    cartItems,
+    getCartList,
+  } = useCartContext();
+
+  useEffect(() => {
+    (async () => {
+      await getCartList();
+    })();
+  }, []);
+  const badgeCount = cartItems?.items.length || 0;
 
   const {productById} = useProductContext();
 
@@ -79,14 +87,17 @@ export const ProductDetailsScreen = (props: any) => {
   const secondPrice = prices[1];
   return (
     <>
-      
       <HeaderBar
-        title="" titleStyle={{fontSize:18}}
+        title=""
+        titleStyle={{fontSize: 18}}
         // titleStyle={{color: colors.onSecondary}}
         // titleStyle={{color: 'gray', fontSize: 20}}
         backAction={() => navigation.goBack()}
         right2Action={() => {
-                 navigation.navigate("CartStack",{screen:'CartScreen',initial:false})
+          navigation.navigate('CartStack', {
+            screen: 'CartScreen',
+            initial: false,
+          });
         }}
         right1Action={() =>
           navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
@@ -95,7 +106,7 @@ export const ProductDetailsScreen = (props: any) => {
         icon2="cart"
         badgeCount={badgeCount}
       />
-        <ScrollView>
+      <ScrollView>
         <View style={{flex: 1, padding: 3}}>
           <View style={{flex: 1}}>
             <View style={{flex: 1, position: 'relative'}}>
@@ -227,9 +238,7 @@ export const ProductDetailsScreen = (props: any) => {
                 ₹{firstPrice} - ₹{secondPrice}
               </Text>
               <CurrencyComponent
-
                 value={price || productById?.price}
-
                 style={{
                   alignSelf: 'flex-bottom',
                   fontSize: 28,
@@ -264,7 +273,7 @@ export const ProductDetailsScreen = (props: any) => {
               </TouchableOpacity>
             </View> */}
           </View>
-                <WeightList />
+          <WeightList />
 
           <Text
             style={{
@@ -301,6 +310,7 @@ export const ProductDetailsScreen = (props: any) => {
               height: 45,
               backgroundColor: '#e95d2a',
               borderRadius: 10,
+              justifyContent: 'center',
             }}
             mode="contained"
             onPress={addCart}
