@@ -2,7 +2,7 @@ import {CartApi} from '../api/CartApi';
 import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useCartContext} from './CartContext';
-import {checkoutObject} from '../screens/UserScreen/CheckoutScreen/checkoutobject';
+import { checkoutObject } from '../screens/UserScreen/CheckoutScreen/checkoutObject';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import OrderStackScreen from '../navigators/OrderStackScreen';
