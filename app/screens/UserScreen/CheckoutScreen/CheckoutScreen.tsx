@@ -23,7 +23,8 @@ export default function CheckoutScreen(props: any) {
   } = useCheckoutContext();
 
   const onPressToSubmit = async (formData: any) => {
-       onCallToTheCustomerAndCheckout(formData)
+    onCreateCustomer(formData)
+     //  onCallToTheCustomerAndCheckout(formData)
      };
 
   const [selectedMethod, setSelectedMethod] = useState(null);

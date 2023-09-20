@@ -1,24 +1,21 @@
 import {Dimensions, TouchableOpacity, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Text, Button, Divider, Card} from 'react-native-paper';
+import {Text, Button} from 'react-native-paper';
 import {HeaderBar} from '../../../components/ui/HeaderBar';
-import {DrawerActions, useRoute} from '@react-navigation/native';
+import {DrawerActions} from '@react-navigation/native';
 import CurrencyComponent from '../../../components/ui/Currencycomponent';
-import Rating from '../../../components/ui/RatingComponent';
 import React, {useState, useRef, useEffect} from 'react';
 import Carousel from 'react-native-reanimated-carousel';
 import ImageComponent from '../../../components/ui/Image';
 import WishlistComponent from '../../../components/Product/WishlistComponent';
 import WeightList from '../../WeightListScreen/WeightList';
 import QuantityComponent from '../../../components/Product/QuantityComponent';
-import ReviewComponent from '../../../components/Product/ReviewComponent';
 import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useProductContext} from '../../../context/ProductContext';
 import HTMLView from 'react-native-htmlview';
 import {useCartContext} from '../../../context/CartContext';
-import {CartApi} from '../../../api/CartApi';
 
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
@@ -33,8 +30,6 @@ export const ProductDetailsScreen = (props: any) => {
   const {
     addToCart,
     quantity,
-    variationPrice,
-    setVariationWisePrice,
     price,
     cartItems,
     getCartList,
@@ -73,7 +68,6 @@ export const ProductDetailsScreen = (props: any) => {
   let match;
 
   while ((match = regex.exec(priceHtml)) !== null) {
-    // Extract the numeric price value from each match and add it to the 'prices' array
     prices.push(parseFloat(match[1]));
   }
 
@@ -90,8 +84,6 @@ export const ProductDetailsScreen = (props: any) => {
       <HeaderBar
         title=""
         titleStyle={{fontSize: 18}}
-        // titleStyle={{color: colors.onSecondary}}
-        // titleStyle={{color: 'gray', fontSize: 20}}
         backAction={() => navigation.goBack()}
         right2Action={() => {
           navigation.navigate('CartStack', {
@@ -248,30 +240,6 @@ export const ProductDetailsScreen = (props: any) => {
                 }}
               />
             </View>
-            {/* <View
-              style={{
-                flex: 1,
-                alignItems: 'flex-end',
-                marginRight: 5,
-              }}>
-              <TouchableOpacity>
-                <Rating
-                  rating={5}
-                  maxRating={productById?.rating_count}
-                  iconFilled={
-                    <View style={{marginRight: 5}}>
-                      <Text style={{color: 'gold', fontSize: 30}}>★</Text>
-                    </View>
-                  }
-                  iconEmpty={
-                    <View style={{marginRight: 5}}>
-                      <Text style={{color: 'gold', fontSize: 30}}>☆</Text>
-                    </View>
-                  }
-                  iconSize={50}
-                />
-              </TouchableOpacity>
-            </View> */}
           </View>
           <WeightList />
 
@@ -287,10 +255,6 @@ export const ProductDetailsScreen = (props: any) => {
           </Text>
           <HTMLView value={descriptionText} stylesheet={styles} />
         </View>
-
-        {/* <View style={{flex: 1}}>
-          <ReviewComponent />
-        </View> */}
       </ScrollView>
       <View
         style={{
@@ -313,10 +277,7 @@ export const ProductDetailsScreen = (props: any) => {
               justifyContent: 'center',
             }}
             mode="contained"
-            onPress={addCart}
-            // onPress={() => {addCart
-            //    console.log('Pressed')}}
-          >
+            onPress={addCart}  >
             <Text
               style={{
                 fontWeight: 'bold',

@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+
 const images = [
-  require('../../../assets/image/LoginPage.png'),
-  require('../../../assets/image/marketing.jpg'),
-  require('../../../assets/image/LoginPage.png'),
+  'https://shgeshop.com/wp-content/uploads/2023/08/homepage-slider-image3.png',
+  'https://shgeshop.com/wp-content/uploads/2023/08/homepage-slider-image1.png',
+  'https://shgeshop.com/wp-content/uploads/2023/08/homepage-slider-image2.png',
 ];
 
 const ImageCarousel = () => {
@@ -20,6 +21,16 @@ const ImageCarousel = () => {
     );
   };
 
+  // Auto-sliding functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextImage();
+    }, 3000); // Change image every 3 seconds (adjust the duration as needed)
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.arrowLeft} onPress={prevImage}>
@@ -29,7 +40,7 @@ const ImageCarousel = () => {
         {images.map((image, index) => (
           <Image
             key={index}
-            source={image}
+            source={{uri: image}}
             style={[styles.image, index === currentIndex && styles.activeImage]}
           />
         ))}
@@ -43,7 +54,7 @@ const ImageCarousel = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop:10,
+    paddingTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -51,8 +62,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 400,
+    height: 155,
     marginHorizontal: 10,
     display: 'none',
   },

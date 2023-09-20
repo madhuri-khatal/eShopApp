@@ -41,23 +41,23 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
       CustomerObject(formData),
     );
     // console.log('result?.data?.customer?.id======', result?.data?.customer?.id);
-    // if (result?.data?.customer?.role === 'customer') {
-      // const customerId = result?.data?.customer?.id;
+    if (result?.data?.customer?.role === 'customer') {
+      const customerId = result?.data?.customer?.id;
       setCustomerId(result?.data?.customer?.id);
       // onSubmitCheckout(formData, result?.data?.customer?.id);
-    // }
+    }
     onSubmitCheckout(formData, result?.data?.customer?.id);
     setCustomerData(result);
   };
   
 
   const onCallToTheCustomerAndCheckout = async(formData: any) => {
-    if (customerData?.data?.customer?.role === 'customer') {
-     await onSubmitCheckout(formData, customerId);
-    } else {
+    // if (customerData?.data?.customer?.role === 'customer') {
+    //  await onSubmitCheckout(formData, customerId);
+    // } else {
       onCreateCustomer(formData);
-      onSubmitCheckout(formData, customerId);
-    }
+    //   onSubmitCheckout(formData, customerId);
+    // }
   };
 
   // place order

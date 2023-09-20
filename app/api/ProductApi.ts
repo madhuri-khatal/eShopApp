@@ -1,27 +1,36 @@
 import {Get} from './AxiosRequester';
 export const ProductApi = {
   getProductList: async () => {
-    return await Get<any>('/wp-json/wc/v3/products?per_page=10&status=publish&');
+    return await Get<any>(
+      '/wp-json/wc/v3/products?per_page=10&status=publish&',
+    );
   },
 
   // Pagination
-  pagination:async(id:number | string)=>{
-    return await Get <any>(`/wp-json/wc/v3/products?page=${id}&status=publish&`);
-    },
+  pagination: async (id: number | string) => {
+    return await Get<any>(`/wp-json/wc/v3/products?page=${id}&status=publish&`);
+  },
 
-   // Get perticular Poduct information
-   getProductById:async(id:number | string)=>{
-    return await Get <any>(`/wp-json/wc/v3/products/${id}`)
+  // Get perticular Poduct information
+  getProductById: async (id: number | string) => {
+    return await Get<any>(`/wp-json/wc/v3/products/${id}`);
   },
-  
+
   // Get product by categoryID
-    getProductByCategoryId:async(id:number| string)=>{
-    return await Get <any>(`/wp-json/wc/v3/products?category=${id}&per_page=50&status=publish&`)
+  getProductByCategoryId: async (id: number | string) => {
+    return await Get<any>(
+      `/wp-json/wc/v3/products?category=${id}&per_page=50&status=publish&`,
+    );
   },
- 
-   // Get particular product information of subCtegory Product
-  getProductDetailByCategoryId:async(id:number | string)=>{
-    return await Get<any>(`/wp-json/wc/v3/products/categories/${id}`)
-  }
-  
+
+  // Get particular product information of subCtegory Product
+  getProductDetailByCategoryId: async (id: number | string) => {
+    return await Get<any>(`/wp-json/wc/v3/products/categories/${id}`);
+  },
+
+  getProductByFeatureCategory: async () => {
+    return await Get<any>(
+      `wp-json/wc/v3/products?category&per_page=4&status=publish`,
+    );
+  },
 };
