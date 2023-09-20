@@ -9,7 +9,7 @@ import React, {
   useState,
 } from 'react';
 import {ProductApi} from './../api/ProductApi';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 
 interface IProductContext {
   data: any;
@@ -26,7 +26,7 @@ interface IProductContext {
   fetchMoreData: Function;
   isLoading?: boolean;
   refThreshold?: any;
- 
+  getProductByFeatureCategory: Function;
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -36,11 +36,14 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [subCategory, setSubCategory] = useState<any>([]);
   const [productById, setProductByID] = useState<any>(null);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
+  const [productByFeatureCategory, setProductByFeatureCategory] = useState<
+    any[]
+  >([]);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation: any = useNavigation();
   const refThreshold = useRef(null);
   const paginationIncrement = useRef(1);
-
 
   // ALL PRODUCTS LIST
   useEffect(() => {
@@ -69,7 +72,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
       } = await ProductApi.pagination(paginationIncrement.current);
       setProductByCategoryId([...productByCategoryId, ...data]);
       setIsLoading(false);
-         } catch (error) {
+    } catch (error) {
       console.log('error', error);
     } finally {
     }
@@ -102,7 +105,6 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     }
   };
 
-
   // PRODUCTBYID
   const getProductById = async (id: number | string) => {
     try {
@@ -127,14 +129,25 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     }
   };
 
- 
+  // Featured Products
+  // const getProductByFeatureCategory = async () => {
+  //   const {result} = await ProductApi.getProductByFeatureCategory();
+  //   setProductByFeatureCategory(result);
+
+  //   console.log('setProductByFeatureCategory', result);
+  // };
+  const getProductByFeatureCategory = async () => {
+    const data = await ProductApi.getProductByFeatureCategory();
+    console.log('data====', data);
+  };
+
   const value: IProductContext = {
     data,
     mainCategory,
     getSubCategoery,
     subCategory,
     setSubCategory,
-  
+
     setProductByID,
     getProductById,
     productById,
@@ -144,8 +157,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     fetchMoreData,
     isLoading,
     refThreshold,
-    
-   
+    getProductByFeatureCategory,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
