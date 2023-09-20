@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
-import {TextInput, Text, useTheme} from 'react-native-paper';
+import {TextInput, Text, useTheme, Button} from 'react-native-paper';
 import ButtonComponent from '../../../components/ui/ButtonComponent';
 import {ScrollView} from 'react-native-gesture-handler';
 import DeliveryAddressScreen from './DeliveryAddressScreen';
@@ -297,7 +297,29 @@ export default function CheckoutScreen(props: any) {
             </View>
 
             <View style={{marginTop: 14}}>
-              <ButtonComponent
+              <Button
+                style={{
+                  width: '97%',
+                  height: 50,
+                  backgroundColor: '#f25616',
+                  borderRadius: 10,
+                  padding: 3,
+                  justifyContent: 'center',
+                }}
+                mode="contained"
+                onPress={checkoutHandleSubmit(onPressToSubmit)}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    justifyContent: 'center',
+                    fontSize: 17,
+                    textTransform: 'capitalize',
+                    color: '#ffffff',
+                  }}>
+                  Place Order
+                </Text>
+              </Button>
+              {/* <ButtonComponent
                 title={'Place Order'}
                 backgroundColor="orange"
                 width={380}
@@ -313,7 +335,7 @@ export default function CheckoutScreen(props: any) {
                 //     initial: false,
                 //   })
                 // }
-              />
+              /> */}
             </View>
           </View>
         </View>
