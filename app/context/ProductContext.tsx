@@ -137,8 +137,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   //   console.log('setProductByFeatureCategory', result);
   // };
   const getProductByFeatureCategory = async () => {
-    const data = await ProductApi.getProductByFeatureCategory();
-    console.log('data====', data);
+    const res = await ProductApi.getProductByFeatureCategory();
+    console.log('res====', res);
   };
 
   const value: IProductContext = {
