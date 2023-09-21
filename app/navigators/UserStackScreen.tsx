@@ -3,7 +3,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import ProfileScreen from '../screens/UserScreen/ProfileScreen';
 import EditProfileScreen from '../screens/UserScreen/EditProfileScreen';
-import {LoginScreen} from '../screens/UserScreen/LoginScreen';
+import {LoginScreen} from '../screens/MyOrderScreen/LoginScreen';
 
 const Stack = createStackNavigator();
 export default function UserStackScreen() {

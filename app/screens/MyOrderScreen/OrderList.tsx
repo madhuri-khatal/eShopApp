@@ -6,17 +6,18 @@
 import { useCheckoutContext } from '../../context/CheckoutContext';
 
   const OrderList = () => {
-    const { myOrderItems, getMyOrderData,getMyOrders,myOrderItemsByid } = useCartContext();
-    // const {customerId}=useCheckoutContext();
 
-    useEffect(() => {
-      (async () => {
-            // await getMyOrders(customerId);
-            await getMyOrders(160);
+    const { myOrderItems, getMyOrderData,getMyOrders,myOrderItemsByid,Login } = useCartContext();
+   
+const loginId=Login?.data?.ID
+ 
+useEffect(() => {
+           (async () => {
+             await getMyOrders(loginId);
       })();
-    }, []);
+    }, [loginId]);
     
-    console.log("myOrderItemsByid?.orders.length",myOrderItemsByid?.orders);
+   
     
     return (
       <View >
@@ -38,5 +39,6 @@ import { useCheckoutContext } from '../../context/CheckoutContext';
       </View>
     );
   };
+
 
   export default OrderList;

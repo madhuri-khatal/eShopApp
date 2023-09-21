@@ -1,4 +1,4 @@
-import {Get} from './AxiosRequester';
+import {Get, Login} from './AxiosRequester';
 export const OrderApi = {
   // My Order List
   getMyOrderList: async () => {
@@ -12,5 +12,10 @@ getOrderDetailById:async(id:number | string)=>{
 // orderDetailByCuatomerID
 getOrderList: async (id: number | string) => {
   return await Get<any>(`/wc-api/v3/customers/${id}/orders?`);
+},
+
+// Login
+Login: async (json: any) => {
+  return await Login<any>('/wp-json/custom-plugin/login', json);
 },
  };
