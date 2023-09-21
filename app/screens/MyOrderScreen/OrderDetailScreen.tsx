@@ -16,6 +16,7 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
   const billingAddress = `${orderData?.data?.billing?.address_1}, ${orderData?.data?.billing?.address_2}, ${orderData?.data?.billing?.city}, ${orderData?.data?.billing?.state}, ${orderData?.data?.billing?.country}, ${orderData?.data?.billing?.postcode}. `;
 
   const shippingAddress = `${orderData?.data?.shipping?.address_1}, ${orderData?.data?.shipping?.address_2}, ${orderData?.data?.shipping?.city}, ${orderData?.data?.shipping?.state}, ${orderData?.data?.shipping?.country}, ${orderData?.data?.shipping?.postcode}. `;
+  const username=`${orderData?.data?.shipping?.first_name} ${orderData?.data?.shipping?.last_name}`
 
   const originalDateStr = orderData?.data?.date_created;
   const originalDate = new Date(originalDateStr);
@@ -25,7 +26,7 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
   ];
   const monthName = monthNames[originalDate.getMonth()];
   const formattedDate = `${monthName} ${originalDate.getDate()}, ${originalDate.getFullYear()}`;
-  
+   
   return (
     <>
       <ScrollView style={styles.container}>
@@ -58,13 +59,14 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
               <Text style={styles.text}>{orderData?.data?.id}</Text>
             </View>
             <View style={styles.paymentItem}>
-              <Text style={styles.paymentLabel}>Order Total: </Text>
-              <Text style={styles.text}>₹{orderData?.data?.total}</Text>
-            </View>
-            <View style={styles.paymentItem}>
               <Text style={styles.paymentLabel}>Shipping charges: </Text>
               <Text style={styles.text}>{orderData?.data?.shipping_total}</Text>
             </View>
+            <View style={styles.paymentItem}>
+              <Text style={styles.paymentLabel}>Order Total: </Text>
+              <Text style={styles.text}>₹{orderData?.data?.total}</Text>
+            </View>
+           
                       </Card.Content>
         </View>
 
@@ -103,6 +105,7 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
         <Card style={styles.section}>
           <Card.Content>
             <Text style={styles.sectionTitle}>Payment Information</Text>
+            <Text style={{textTransform:'capitalize',fontSize:18,paddingBottom:2}}>{username}</Text>
             <View style={styles.paymentItem}>
               <Text style={styles.paymentLabel}>Payment Method:</Text>
               <Text style={styles.text}>
@@ -119,10 +122,12 @@ export const OrderDetailScreen = ({route, navigation}: any) => {
         <Card style={styles.section}>
           <Card.Content>
             <Text style={styles.paymentLabel}>Shipping Address </Text>
-
+           
             <Text style={styles.text}>{shippingAddress}</Text>
           </Card.Content>
         </Card>
+
+        
       </ScrollView>
     </>
   );

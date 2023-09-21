@@ -23,7 +23,7 @@ const OrderItem = ({item,lineItems,key}: any) => {
               navigation.navigate('OrderDetailScreen', {orderId: item.id});
   };
 
-  const originalDateStr = item?.date_created;
+  const originalDateStr = item?.created_at;
 const originalDate = new Date(originalDateStr);
 const monthNames = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -40,20 +40,21 @@ const formattedDate = `${monthName} ${originalDate.getDate()}, ${originalDate.ge
     <TouchableOpacity onPress={handlePress}>
            <View style={styles.card}>
         <View style={styles.cardContent}>
-          <Image source={{uri: item?.line_items[0]?.image?.src}} style={styles.image} />
+         
           <View style={styles.textContainer}>
-            <View style={{flexDirection:'row'}}>
-              <Text style={{width:"50%",padding:2}}>Order Id : {item?.id}</Text> 
+          <Text style={{textTransform:'capitalize',color:'#e05d2a',fontWeight:'bold'}}> {item?.status}</Text>
+            
+                            <Text>Order Id : {item?.id}</Text> 
               <Text>Total Items : {lineItems.length}</Text> 
-            </View>
+            
             <View>
-                        <Text style={{padding:2}}>Payment Method : {item?.payment_method_title}</Text>
+                        <Text style={{padding:2}}>Payment Method : {item?.payment_details?.method_title}</Text>
             <Text style={{padding:2}}>Ordered on : {formattedDate}</Text>
             </View>
           </View>
-          
+           <Text style={{marginRight: 16, fontWeight:'bold'}}>₹ {item?.total}  </Text> 
         </View>
-               <Button onPress={orderDelete } style={{width:"40%",marginTop:-25,marginLeft:"60%"}}>Cancel Order</Button>
+               <Button onPress={orderDelete } style={{width:"40%",marginTop:-10,marginLeft:"-7%"}}>Cancel Order</Button>
           </View>
                </TouchableOpacity>
          </View>
@@ -67,16 +68,13 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 13,
       backgroundColor: '#fff',
+      padding:10
   },
   cardContent: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  image: {
-    width: 100,
-    height: 100,
-    marginRight: 16,
-     },
+ 
   textContainer: {
     flex: 1,
   },

@@ -25,6 +25,7 @@ interface ICartContext {
   weight: string | number;
   variation: string | number;
   price: number | string;
+  myOrderItemsByid: any;
   onselectVariationOrWeight: (
     weight: number | string,
     variation: number | string,
@@ -34,12 +35,14 @@ interface ICartContext {
   setVariationWisePrice: (productById: number | string) => Promise<void>;
   orderData: any;
   getOrderDetailById: (id: number | string) => Promise<void>
+  getMyOrders: (id: number | string) => Promise<void>
  }
 const CartContext = createContext<ICartContext | null>(null);
 type CartContextType = {children: ReactNode};
 export const CartContextProvider = ({children}: CartContextType) => {
   const [cartItems, setcartItems] = useState<any>();
   const [myOrderItems, setMyOrderItems] = useState<any>();
+  const [myOrderItemsByid, setMyOrderItemsByID] = useState<any>();
   const [isShowDialog, setIsShowDialog] = useState<boolean>(false);
   const [productKey, setProductKey] = useState<string>('');
   const [variations, setvariation] = useState<number[]>([]);
@@ -138,6 +141,14 @@ export const CartContextProvider = ({children}: CartContextType) => {
     setMyOrderItems(data);
   };
 
+ // My Order List
+ const getMyOrders = async (id:number|string) => {
+  const {
+    result:{data}
+  } = await OrderApi.getOrderList(id)
+   setMyOrderItemsByID(data);
+};
+
   const getOrderDetailById =async(id:number|string)=>{
 const{result}=await OrderApi.getOrderDetailById(id);
 setOrderData(result);
@@ -166,7 +177,8 @@ setOrderData(result);
     myOrderItems,
     orderData,
     getOrderDetailById,
-   
+    myOrderItemsByid,
+    getMyOrders
   
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
