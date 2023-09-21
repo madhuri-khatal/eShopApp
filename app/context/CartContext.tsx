@@ -41,6 +41,7 @@ interface ICartContext {
   Login: any;
   onLogin: (data: any) => Promise<void>;
 }
+
 const CartContext = createContext<ICartContext | null>(null);
 type CartContextType = {children: ReactNode};
 export const CartContextProvider = ({children}: CartContextType) => {
@@ -174,6 +175,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
     setMyOrderItemsByID(data);
   };
 
+
   const getOrderDetailById = async (id: number | string) => {
     const {result} = await OrderApi.getOrderDetailById(id);
     setOrderData(result);
@@ -207,6 +209,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
     isLogin,
     Login,
     onLogin,
+
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
