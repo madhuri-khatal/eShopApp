@@ -1,22 +1,16 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from 'react-native';
+import {Text, View, TouchableOpacity, Image, ScrollView} from 'react-native';
 import {ActivityIndicator, Checkbox, TextInput} from 'react-native-paper';
 import {useForm} from 'react-hook-form';
 import {TextInputController} from '../../components/ui/TextInput';
-import { useCartContext } from '../../context/CartContext';
+import {useCartContext} from '../../context/CartContext';
 interface LoginScreenProps {
   username: string;
   password: string;
 }
 
 export const LoginScreen: any = function LoginScreen({navigation}: any) {
-  const{onLogin}=useCartContext();
+  const {onLogin, isLoginLoading} = useCartContext();
   const {
     control,
     formState: {errors},
@@ -26,17 +20,49 @@ export const LoginScreen: any = function LoginScreen({navigation}: any) {
   return (
     <View
       style={{
-        height: '100%',
         width: '100%',
-        flexDirection: 'column',
+        // marginTop: 100,
       }}>
-         <View style={{justifyContent: 'center'}}>
-        <Image
-          style={{width: '100%', height: '50%'}}
-          source={require('../../../assets/image/LoginPage.png')}
-        />
+      {isLoginLoading && (
+        <View
+          style={{
+            height: '100%',
+            width: '100%',
+            alignSelf: 'center',
+            justifyContent: 'center',
+            position: 'absolute',
+            zIndex: 10,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          }}>
+          <ActivityIndicator size="large" color="#e95d2a" />
+        </View>
+      )}
+      <View
+        style={{
+          justifyContent: 'center',
+          backgroundColor: '#f5f5f5',
+          borderRadius: 10,
+          padding: 20,
+          elevation: 8,
+          width: '90%',
+          alignContent: 'center',
+          alignItems: 'center',
+          alignSelf: 'center',
+          marginTop: 50,
+        }}>
+        <Text
+          style={{
+            justifyContent: 'center',
+            padding: 20,
+            fontSize: 22,
+            fontWeight: 'bold',
+            color: 'gray',
+            textAlign: 'center',
+          }}>
+          You need to Login to view order.
+        </Text>
       </View>
-      <View style={{justifyContent: 'flex-start', padding: 20, paddingTop: 10}}>
+      <View style={{padding: 20, paddingTop: 10}}>
         <TextInputController
           control={control}
           name="username"
@@ -66,6 +92,7 @@ export const LoginScreen: any = function LoginScreen({navigation}: any) {
         >
           <Text
             style={{
+              elevation: 8,
               backgroundColor: '#e95d2a',
               paddingHorizontal: 20,
               paddingVertical: 15,
@@ -80,7 +107,6 @@ export const LoginScreen: any = function LoginScreen({navigation}: any) {
           </Text>
         </TouchableOpacity>
       </View>
-    {/* </ScrollView> */}
     </View>
   );
 };
