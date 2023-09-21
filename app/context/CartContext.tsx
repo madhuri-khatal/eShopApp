@@ -5,8 +5,8 @@ import {useProductContext} from './ProductContext';
 
 import {OrderApi} from '../api/OrderApi';
 
-import { Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {Alert} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 interface ICartContext {
   cartItems: any;
@@ -34,9 +34,13 @@ interface ICartContext {
   variationPrice: any;
   setVariationWisePrice: (productById: number | string) => Promise<void>;
   orderData: any;
-  getOrderDetailById: (id: number | string) => Promise<void>
-  getMyOrders: (id: number | string) => Promise<void>
- }
+  getOrderDetailById: (id: number | string) => Promise<void>;
+  getMyOrders: (id: number | string) => Promise<void>;
+  isLoginLoading: boolean;
+  isLogin: boolean;
+  Login: any;
+  onLogin: (data: any) => Promise<void>;
+}
 const CartContext = createContext<ICartContext | null>(null);
 type CartContextType = {children: ReactNode};
 export const CartContextProvider = ({children}: CartContextType) => {
@@ -52,8 +56,11 @@ export const CartContextProvider = ({children}: CartContextType) => {
   const [weight, setWeight] = useState<number | string>('');
   const [variation, setVariation] = useState<number | string>('');
   const [variationPrice, setVariationPrice] = useState<any>([]);
-  const [orderData,setOrderData]=useState<any>();
-  const navigation: any = useNavigation()
+  const [orderData, setOrderData] = useState<any>();
+  const navigation: any = useNavigation();
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [Login, setLogin] = useState<any>();
   //
   const onselectVariationOrWeight = (
     weight: number | string,
@@ -62,7 +69,28 @@ export const CartContextProvider = ({children}: CartContextType) => {
   ) => {
     setWeight(weight);
     setVariation(variation);
-    setPrice(price)
+    setPrice(price);
+  };
+
+  // Login
+  const onLogin = async (data: any) => {
+    setIsLoginLoading(true);
+    try {
+      const {result} = await OrderApi.Login(data);
+      if (result == undefined) {
+        Alert.alert('Please Enter Valid Email and Password');
+        setIsLogin(false);
+      } else {
+        setLogin(result);
+        navigation.navigate('OrderScreen');
+        setIsLogin(true);
+      }
+  
+    } catch (error) {
+      console.error('Login error:', error);
+    } finally {
+      setIsLoginLoading(false);
+    }
   };
 
   async function addToCart(id: number, quantity: number) {
@@ -75,8 +103,8 @@ export const CartContextProvider = ({children}: CartContextType) => {
       id: variation,
       quantity: quantity,
     });
-    Alert.alert("Product sucessfully Added in Cart")
-    navigation.navigate("CartScreen")
+    Alert.alert('Product sucessfully Added in Cart');
+    navigation.navigate('CartScreen');
     getCartList();
   }
   // CART ITEM LIST
@@ -86,8 +114,6 @@ export const CartContextProvider = ({children}: CartContextType) => {
     } = await CartApi.getCartList();
     setcartItems(data);
   };
-
-  
 
   const setVariationWisePrice = async (id: number | string) => {
     const {
@@ -132,7 +158,6 @@ export const CartContextProvider = ({children}: CartContextType) => {
     setIsShowDialog(false);
   };
 
-
   // My Order List
   const getMyOrderData = async () => {
     const {
@@ -141,19 +166,18 @@ export const CartContextProvider = ({children}: CartContextType) => {
     setMyOrderItems(data);
   };
 
- // My Order List
- const getMyOrders = async (id:number|string) => {
-  const {
-    result:{data}
-  } = await OrderApi.getOrderList(id)
-   setMyOrderItemsByID(data);
-};
+  // My Order List
+  const getMyOrders = async (id: number | string) => {
+    const {
+      result: {data},
+    } = await OrderApi.getOrderList(id);
+    setMyOrderItemsByID(data);
+  };
 
-  const getOrderDetailById =async(id:number|string)=>{
-const{result}=await OrderApi.getOrderDetailById(id);
-setOrderData(result);
-  }
-
+  const getOrderDetailById = async (id: number | string) => {
+    const {result} = await OrderApi.getOrderDetailById(id);
+    setOrderData(result);
+  };
 
   const value: ICartContext = {
     cartItems,
@@ -178,8 +202,11 @@ setOrderData(result);
     orderData,
     getOrderDetailById,
     myOrderItemsByid,
-    getMyOrders
-  
+    getMyOrders,
+    isLoginLoading,
+    isLogin,
+    Login,
+    onLogin,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
