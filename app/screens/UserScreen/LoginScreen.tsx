@@ -1,7 +1,6 @@
-import React, {FC, useRef, useState} from 'react';
+import React from 'react';
 import {
   Text,
-  TextInputComponent,
   View,
   TouchableOpacity,
   Image,
@@ -27,9 +26,6 @@ export const LoginScreen: any = function LoginScreen({navigation}: any) {
         height: '100%',
         width: '100%',
         flexDirection: 'column',
-        // backgroundColor: "#ffffff",
-
-        // justifyContent: 'center',
       }}>
       {/* <View
         style={{
@@ -43,7 +39,7 @@ export const LoginScreen: any = function LoginScreen({navigation}: any) {
         }}>
         <ActivityIndicator size="large" color="#ffffff" />
       </View> */}
-      <View style={{justifyContent: 'flex-end'}}>
+      <View style={{justifyContent: 'center'}}>
         <Image
           style={{width: '100%', height: '60%'}}
           source={require('../../../assets/image/LoginPage.png')}
@@ -53,22 +49,24 @@ export const LoginScreen: any = function LoginScreen({navigation}: any) {
         <TextInputController
           control={control}
           name="username"
-          label="ई-मेल"
+          label="E-mail"
           errors={errors}
           keyboardType={'default'}
           isRequiredValue
           mode="outlined"
           placeholder={''}
+          style={{marginVertical: 10}}
         />
         <TextInputController
           control={control}
           name="password"
-          label="पासवर्ड"
+          label="Password"
           errors={errors}
           isRequiredValue
           keyboardType={'default'}
           mode="outlined"
           placeholder={''}
+          style={{marginVertical: 10}}
         />
         <TouchableOpacity
           style={{height: '100%', width: '100%'}}
@@ -85,8 +83,9 @@ export const LoginScreen: any = function LoginScreen({navigation}: any) {
               fontSize: 18,
               textAlign: 'center',
               fontWeight: 'bold',
+              marginVertical: 10,
             }}>
-            लॉगिन करा
+            Login
           </Text>
         </TouchableOpacity>
       </View>
