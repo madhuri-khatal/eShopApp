@@ -105,7 +105,11 @@ export const CartContextProvider = ({children}: CartContextType) => {
       quantity: quantity,
     });
     Alert.alert('Product sucessfully Added in Cart');
-    navigation.navigate('CartScreen');
+    // navigation.navigate('CartScreen');
+    navigation.navigate('CartStack', {
+      screen: 'CartScreen',
+      initial: false,
+    });
     getCartList();
   }
   // CART ITEM LIST

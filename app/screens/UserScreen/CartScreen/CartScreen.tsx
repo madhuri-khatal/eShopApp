@@ -37,6 +37,13 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
     bottomSheetRef.current?.snapToIndex(0);
   };
   const {isShowDialog, deleteCartItem, onCancel} = useCartContext();
+  const formattedShipping = (
+    cartItems?.totals?.total_shipping / 100
+  ).toLocaleString('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
   const formattedPrice = (cartItems?.totals?.total_price / 100).toLocaleString(
     'en-US',
     {
@@ -92,12 +99,25 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                       marginBottom: 8,
                     }}>
                     <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                      Shipping Price:
+                    </Text>
+                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                      ₹ {cartItems?.totals?.total_shipping / 100}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      marginBottom: 8,
+                    }}>
+                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                       Total:
                     </Text>
                     <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                       ₹ {formattedPrice}
                     </Text>
-                    {/* <CurrencyComponent value={cartItems?.totals?.total_price} /> */}
                   </View>
                   {/* <View
                     style={{

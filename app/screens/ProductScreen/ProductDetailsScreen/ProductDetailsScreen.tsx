@@ -27,13 +27,7 @@ export const ProductDetailsScreen = (props: any) => {
     setIndex(index);
   };
 
-  const {
-    addToCart,
-    quantity,
-    price,
-    cartItems,
-    getCartList,
-  } = useCartContext();
+  const {addToCart, quantity, price, cartItems, getCartList} = useCartContext();
 
   useEffect(() => {
     (async () => {
@@ -47,7 +41,11 @@ export const ProductDetailsScreen = (props: any) => {
   const addCart = async () => {
     const id = productById?.variations[0];
     addToCart(id, quantity);
-    navigation.navigate('CartScreen');
+    // navigation.navigate('CartScreen');
+    // navigation.navigate('CartStack', {
+    //   screen: 'CartScreen',
+    //   initial: false,
+    // });
   };
 
   // CODE FOR REMOVE <P>DESCRIPTION</P> TAG
@@ -277,7 +275,7 @@ export const ProductDetailsScreen = (props: any) => {
               justifyContent: 'center',
             }}
             mode="contained"
-            onPress={addCart}  >
+            onPress={addCart}>
             <Text
               style={{
                 fontWeight: 'bold',
