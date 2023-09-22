@@ -90,7 +90,7 @@ export const TextInputController = ({
             onChangeText={value => onChange(value)}
             value={value}
             maxLength={maxLength}
-            // error={errors[name] && true}
+            error={errors}
             secureTextEntry={secureTextEntry}
             disabled={isdisabled}
           />
@@ -104,9 +104,9 @@ export const TextInputController = ({
           },
         }}
       />
-      {/* <Text style={{color: 'red'}}>
+      <Text style={{color: 'red'}}>
         {errors[name] && errors[name]?.message}
-      </Text> */}
+      </Text>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, TextInput, StyleSheet} from 'react-native';
+import {View, Image} from 'react-native';
 
 interface IProps {
   src: any;
