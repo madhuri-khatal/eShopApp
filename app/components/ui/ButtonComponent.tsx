@@ -23,7 +23,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({
   buttonStyle,
   textStyle,
   type = "primary",
-  backgroundColor = "primary", // Set default background color to "primary"
+  backgroundColor = "primary",
 }) => {
   const getBackgroundColor = () => {
     switch (backgroundColor) {
@@ -71,12 +71,10 @@ const styles = StyleSheet.create({
   button: {
     justifyContent: "center",
     alignItems: "center",
-    // You can add more common styles for the button here (e.g., padding, margin, etc.).
   },
   buttonText: {
     fontSize: 16,
     color: "#FFFFFF",
-    // You can add more common styles for the button text here (e.g., fontFamily, fontWeight, etc.).
   },
   primaryButton: {
     // You can add additional styles for primary button if needed
