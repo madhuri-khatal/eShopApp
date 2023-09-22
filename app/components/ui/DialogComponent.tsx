@@ -10,11 +10,11 @@ interface IDialogComponent {
   title?: string;
 }
 export const DialogComponent = ({
-visible = false,
+  visible = false,
   hideDialog,
   firstAction,
   secondAction,
-  message = 'Are You Sure To Delete?',
+  message = 'Are You Sure To Remove?',
   title = '',
 }: IDialogComponent) => {
   return (
