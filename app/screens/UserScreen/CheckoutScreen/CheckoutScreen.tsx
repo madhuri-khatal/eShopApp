@@ -9,6 +9,7 @@ import {useCartContext} from '../../../context/CartContext';
 import {useCheckoutContext} from '../../../context/CheckoutContext';
 import {TextInputController} from '../../../components/ui/TextInput';
 import OrderStackScreen from '../../../navigators/OrderStackScreen';
+import PaymentMethod from '../../../components/Product/PaymentMethod';
 export default function CheckoutScreen(props: any) {
   const navigation: any = useNavigation();
   const {colors} = useTheme();
@@ -19,13 +20,13 @@ export default function CheckoutScreen(props: any) {
     checkoutHandleSubmit,
     onCreateCustomer,
     customerData,
-    onCallToTheCustomerAndCheckout
+    onCallToTheCustomerAndCheckout,
   } = useCheckoutContext();
 
   const onPressToSubmit = async (formData: any) => {
-    onCreateCustomer(formData)
-     //  onCallToTheCustomerAndCheckout(formData)
-     };
+    onCreateCustomer(formData);
+    //  onCallToTheCustomerAndCheckout(formData)
+  };
 
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showCODDetails, setShowCODDetails] = useState(false);
@@ -184,6 +185,7 @@ export default function CheckoutScreen(props: any) {
                 }}>
                 Payment Method
               </Text>
+              <PaymentMethod />
 
               {/* {cartItems?.payment_methods.map((method: any, index: any) => (
                 <TouchableOpacity

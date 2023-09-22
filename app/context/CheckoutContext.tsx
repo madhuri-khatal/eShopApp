@@ -16,7 +16,8 @@ interface ICheckoutContext {
   onCreateCustomer: (formData: any) => Promise<void>;
   customerData: any;
   onCallToTheCustomerAndCheckout: (formData: any) => void;
-  customerId: number|string;
+  customerId: string | number | undefined
+  checkoutData: any
 }
 
 const CheckoutContext = createContext<ICheckoutContext | null>(null);
@@ -30,6 +31,7 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
   const {cartItems, getMyOrderData, deleteCartItem,myOrderItemsByid,getMyOrders} = useCartContext();
   const [customerData, setCustomerData] = useState<any>();
   const [customerId, setCustomerId] = useState<number | string>();
+  const [checkoutData,setCheckoutData]=useState<any>()
   const navigation: any = useNavigation();
 
   // create customer
@@ -77,6 +79,7 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     } = await CartApi.onCreateOrderApi(
       checkoutObject(jsonData, linItem, {}, customerId),
     );
+    setCheckoutData(responseData)
     const responseCustomerId = responseData?.customer_id;
     responseData.responseCustomerId = responseCustomerId;
     Alert.alert('Order Successfully placed');
@@ -94,6 +97,7 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     customerData,
     onCallToTheCustomerAndCheckout,
     customerId,
+    checkoutData
   };
 
   return (
