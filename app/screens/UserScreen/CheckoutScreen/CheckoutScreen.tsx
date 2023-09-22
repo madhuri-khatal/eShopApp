@@ -1,48 +1,36 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
-import {TextInput, Text, useTheme, Button} from 'react-native-paper';
-import ButtonComponent from '../../../components/ui/ButtonComponent';
+import {Text, Button} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import DeliveryAddressScreen from './DeliveryAddressScreen';
-import {useNavigation} from '@react-navigation/native';
 import {useCartContext} from '../../../context/CartContext';
 import {useCheckoutContext} from '../../../context/CheckoutContext';
 import {TextInputController} from '../../../components/ui/TextInput';
-import OrderStackScreen from '../../../navigators/OrderStackScreen';
-import PaymentMethod from '../../../components/Product/PaymentMethod';
-import RNUpiPayment from 'react-native-upi-payment'
+import RNUpiPayment from 'react-native-upi-payment';
+import {Alert} from 'react-native';
+
 export default function CheckoutScreen(props: any) {
-  const navigation: any = useNavigation();
-  const {colors} = useTheme();
   const {cartItems} = useCartContext();
-  const {
-    onSubmitCheckout,
-    checkoutControl,
-    checkoutHandleSubmit,
-    onCreateCustomer,
-    customerData,
-    onCallToTheCustomerAndCheckout,
-  } = useCheckoutContext();
+  const {checkoutControl, checkoutHandleSubmit, onCreateCustomer} =
+    useCheckoutContext();
 
   const onPressToSubmit = async (formData: any) => {
     onCreateCustomer(formData);
-    };
-  const onPressToSubmitupipayment=async(formData:any)=>{
+  };
+  const onPressToSubmitupipayment = async (formData: any) => {
     onCreateCustomer(formData);
-    paymentoptions()
-  }
+    paymentoptions();
+  };
 
+  const totalAmount = (cartItems?.totals?.total_price / 100).toLocaleString(
+    'en-US',
+    {
+      style: 'decimal',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    },
+  );
 
-     const totalAmount=(cartItems?.totals?.total_price / 100).toLocaleString(
-      'en-US',
-      {
-        style: 'decimal',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      },
-    );
-  
-     
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showCODDetails, setShowCODDetails] = useState(false);
   const handlePaymentMethodPress = (method: any) => {
@@ -51,31 +39,34 @@ export default function CheckoutScreen(props: any) {
     } else {
       setSelectedMethod(method);
     }
-
     if (method === 'COD') {
       setShowCODDetails(!showCODDetails);
     }
   };
   const billing = cartItems?.address;
 
-// PAYMENT GATEWAY
-  const paymentoptions=(()=>{
-    RNUpiPayment.initializePayment({
-      vpa: 'madhuribkhatal@okicici',
-      payeeName: 'ShgeShop',
-      amount: totalAmount,
-      transactionRef: 'aasf-332-aoei-fn'
-      // 
-    }, successCallback, failureCallback);
-  })
-
+  // PAYMENT GATEWAY
+  const paymentoptions = () => {
+    RNUpiPayment.initializePayment(
+      {
+        vpa: 'madhuribkhatal@okicici',
+        payeeName: 'ShgeShop',
+        amount: totalAmount,
+        transactionRef: 'aasf-332-aoei-fn',
+        //
+      },
+      successCallback,
+      failureCallback,
+    );
+  };
   function successCallback(data: any) {
-  console.log( "sucessfully",data);
+    Alert.alert('Order Successfully placed');
+    console.log('sucessfully', data);
   }
-  
-  function failureCallback(data:any) {
-    console.log( "faild",data);
- }
+  function failureCallback(data: any) {
+    Alert.alert('Order failed Successfully placed');
+    console.log('faild', data);
+  }
 
   return (
     <>
@@ -88,22 +79,19 @@ export default function CheckoutScreen(props: any) {
           </View>
 
           <View style={{padding: 8}}>
-                       <TextInputController
+            <TextInputController
               control={checkoutControl}
               name={'phone'}
               placeholder="Phone Number"
               style={{margin: 8, backgroundColor: 'white'}}
-              // errors={errors}
               keyboardType={'default'}
               isRequiredValue
               mode="outlined"
               defaultValue={billing?.phone}
             />
 
-            <View style={{flexDirection: 'row'}}>
-             
-            </View>
-                       <TextInputController
+            <View style={{flexDirection: 'row'}}></View>
+            <TextInputController
               control={checkoutControl}
               name={'first_name'}
               placeholder="First Name"
@@ -136,13 +124,7 @@ export default function CheckoutScreen(props: any) {
               mode="outlined"
               defaultValue={billing?.email}
             />
-            {/* <TextInput
-              placeholder={'Email'}
-              style={{margin: 8}}
-              mode="outlined"
-              keyboardType="email-address"
-              defaultValue={billing?.email}
-            /> */}
+
             <View style={{flexDirection: 'row', padding: 10}}>
               <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
                 Shipping address
@@ -150,36 +132,6 @@ export default function CheckoutScreen(props: any) {
             </View>
             <DeliveryAddressScreen />
 
-            {/* <View>
-              <Text
-                style={{
-                  fontSize: 20,
-                  fontWeight: 'bold',
-                  marginBottom: 10,
-                  padding: 10,
-                }}>
-                Payment Method
-              </Text>
-              <TouchableOpacity
-                style={[
-                  styles.methodContainer,
-                  selectedMethod === 'COD' && styles.selectedMethod,
-                ]}
-                onPress={() => handlePaymentMethodPress('COD')}>
-                <Text
-                  style={[
-                    styles.methodText,
-                    selectedMethod === 'COD' && styles.selectedMethodText,
-                  ]}>
-                  Cash on Delivary
-                </Text>
-              </TouchableOpacity>
-              {showCODDetails && (
-                <View style={styles.methodDetails}>
-                  <Text style={styles.methodDetailsText}>Cash on Delivary</Text>
-                </View>
-              )}
-            </View> */}
             <View>
               <Text
                 style={{
@@ -190,22 +142,13 @@ export default function CheckoutScreen(props: any) {
                 }}>
                 Payment Method
               </Text>
-              {/* <PaymentMethod /> */}
-              {/* <Button mode='contained-tonal' onPress={onPressToSubmitupipayment}> Upi Payment  </Button> */}
+
               <TouchableOpacity
-                style={[
-                  styles.methodContainer,
-                                ]}
-                                onPress={checkoutHandleSubmit(onPressToSubmitupipayment)}>
-                <Text
-                  style={[
-                    styles.methodText,
-                  
-                  ]}>
-                  Upi Payment 
-                </Text>
+                style={[styles.methodContainer]}
+                onPress={checkoutHandleSubmit(onPressToSubmitupipayment)}>
+                <Text style={[styles.methodText]}>Upi Payment</Text>
               </TouchableOpacity>
-             
+
               <TouchableOpacity
                 style={[
                   styles.methodContainer,
@@ -245,23 +188,6 @@ export default function CheckoutScreen(props: any) {
                   Place Order
                 </Text>
               </Button>
-              {/* <ButtonComponent
-                title={'Place Order'}
-                backgroundColor="orange"
-                width={380}
-                // onPress={checkoutHandleSubmit((data: any) =>
-                //   console.log('clicked', data),
-                // )}
-                // onPress={checkoutHandleSubmit(onSubmitCheckout)}
-                // onPress={checkoutHandleSubmit(onCreateCustomer)}
-                onPress={checkoutHandleSubmit(onPressToSubmit)}
-                // onPress={() =>
-                //   navigation.navigate(OrderStackScreen, {
-                //     screen: 'OrderScreen',
-                //     initial: false,
-                //   })
-                // }
-              /> */}
             </View>
           </View>
         </View>
