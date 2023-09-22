@@ -21,7 +21,6 @@ export const LoginScreen: any = function LoginScreen({navigation}: any) {
     <View
       style={{
         width: '100%',
-        // marginTop: 100,
       }}>
       {isLoginLoading && (
         <View
@@ -88,7 +87,6 @@ export const LoginScreen: any = function LoginScreen({navigation}: any) {
         <TouchableOpacity
           style={{height: '100%', width: '100%'}}
           onPress={handleSubmit(onLogin)}
-          // disabled={isLoginLoading}
         >
           <Text
             style={{
