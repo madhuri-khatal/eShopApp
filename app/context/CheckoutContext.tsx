@@ -83,9 +83,7 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     const responseCustomerId = responseData?.customer_id;
     responseData.responseCustomerId = responseCustomerId;
     Alert.alert('Order Successfully placed');
-    // deleteCartItem();
-    // getMyOrderData();
-    // getMyOrders(160)
+    
     getMyOrders(responseCustomerId)
   };
 
