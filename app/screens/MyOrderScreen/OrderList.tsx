@@ -3,11 +3,10 @@
   import OrderItem from './OrderItem';
   import { useCartContext } from '../../context/CartContext';
   import { Text } from 'react-native-paper';
-import { useCheckoutContext } from '../../context/CheckoutContext';
 
   const OrderList = () => {
 
-    const { myOrderItems, getMyOrderData,getMyOrders,myOrderItemsByid,Login } = useCartContext();
+    const { getMyOrders,myOrderItemsByid,Login } = useCartContext();
    
 const loginId=Login?.data?.ID
  

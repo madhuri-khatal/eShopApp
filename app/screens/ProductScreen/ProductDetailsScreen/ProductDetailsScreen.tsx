@@ -41,11 +41,6 @@ export const ProductDetailsScreen = (props: any) => {
   const addCart = async () => {
     const id = productById?.variations[0];
     addToCart(id, quantity);
-    // navigation.navigate('CartScreen');
-    // navigation.navigate('CartStack', {
-    //   screen: 'CartScreen',
-    //   initial: false,
-    // });
   };
 
   // CODE FOR REMOVE <P>DESCRIPTION</P> TAG

@@ -1,18 +1,12 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Image, Text, Linking} from 'react-native';
-import {Button, Divider, List, useTheme} from 'react-native-paper';
+import {View, StyleSheet} from 'react-native';
+import {Button, List, useTheme} from 'react-native-paper';
 import {
   DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
 } from '@react-navigation/drawer';
 import {DrawerActions} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Drawer} from 'react-native-paper';
 import {useProductContext} from './../../../context/ProductContext';
-import {responsiveHeight} from 'react-native-responsive-dimensions';
-import {getPathFromState, useNavigation} from '@react-navigation/native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function DrawerContent(props: any) {
   const [active, setActive] = useState<string>('');
