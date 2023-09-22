@@ -10,6 +10,7 @@ import {useCheckoutContext} from '../../../context/CheckoutContext';
 import {TextInputController} from '../../../components/ui/TextInput';
 import OrderStackScreen from '../../../navigators/OrderStackScreen';
 import PaymentMethod from '../../../components/Product/PaymentMethod';
+import RNUpiPayment from 'react-native-upi-payment'
 export default function CheckoutScreen(props: any) {
   const navigation: any = useNavigation();
   const {colors} = useTheme();
@@ -25,9 +26,23 @@ export default function CheckoutScreen(props: any) {
 
   const onPressToSubmit = async (formData: any) => {
     onCreateCustomer(formData);
-    //  onCallToTheCustomerAndCheckout(formData)
-  };
+    };
+  const onPressToSubmitupipayment=async(formData:any)=>{
+    onCreateCustomer(formData);
+    paymentoptions()
+  }
 
+
+     const totalAmount=(cartItems?.totals?.total_price / 100).toLocaleString(
+      'en-US',
+      {
+        style: 'decimal',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      },
+    );
+  
+     
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showCODDetails, setShowCODDetails] = useState(false);
   const handlePaymentMethodPress = (method: any) => {
@@ -43,6 +58,25 @@ export default function CheckoutScreen(props: any) {
   };
   const billing = cartItems?.address;
 
+// PAYMENT GATEWAY
+  const paymentoptions=(()=>{
+    RNUpiPayment.initializePayment({
+      vpa: 'madhuribkhatal@okicici',
+      payeeName: 'ShgeShop',
+      amount: totalAmount,
+      transactionRef: 'aasf-332-aoei-fn'
+      // 
+    }, successCallback, failureCallback);
+  })
+
+  function successCallback(data: any) {
+  console.log( "sucessfully",data);
+  }
+  
+  function failureCallback(data:any) {
+    console.log( "faild",data);
+ }
+
   return (
     <>
       <ScrollView>
@@ -54,15 +88,7 @@ export default function CheckoutScreen(props: any) {
           </View>
 
           <View style={{padding: 8}}>
-            {/* <TextInputController
-              placeholder={'Phone Number'}
-              style={{margin: 8, backgroundColor: 'white'}}
-              mode="outlined"
-              keyboardType="number-pad"
-              maxLength={10}
-              defaultValue={billing?.phone}
-            /> */}
-            <TextInputController
+                       <TextInputController
               control={checkoutControl}
               name={'phone'}
               placeholder="Phone Number"
@@ -75,30 +101,9 @@ export default function CheckoutScreen(props: any) {
             />
 
             <View style={{flexDirection: 'row'}}>
-              {/* <View>
-                <TextInput
-                  placeholder={'OTP'}
-                  style={{margin: 8, width: 255}}
-                  mode="outlined"
-                />
-              </View>
-              <View style={{marginTop: 14}}>
-                <ButtonComponent
-                  title={'Verify'}
-                  backgroundColor="orange"
-                  onPress={function (): void {
-                    throw new Error('Function not implemented.');
-                  }}
-                />
-              </View> */}
+             
             </View>
-            {/* <TextInput
-              placeholder={'Full Name'}
-              style={{margin: 8, backgroundColor: 'white'}}
-              mode="outlined"
-              defaultValue={billing?.first_name}
-            /> */}
-            <TextInputController
+                       <TextInputController
               control={checkoutControl}
               name={'first_name'}
               placeholder="First Name"
@@ -185,25 +190,22 @@ export default function CheckoutScreen(props: any) {
                 }}>
                 Payment Method
               </Text>
-              <PaymentMethod />
-
-              {/* {cartItems?.payment_methods.map((method: any, index: any) => (
-                <TouchableOpacity
-                  key={index}
+              {/* <PaymentMethod /> */}
+              {/* <Button mode='contained-tonal' onPress={onPressToSubmitupipayment}> Upi Payment  </Button> */}
+              <TouchableOpacity
+                style={[
+                  styles.methodContainer,
+                                ]}
+                                onPress={checkoutHandleSubmit(onPressToSubmitupipayment)}>
+                <Text
                   style={[
-                    styles.methodContainer,
-                    selectedMethod === method && styles.selectedMethod,
-                  ]}
-                  onPress={() => handlePaymentMethodPress(method)}>
-                  <Text
-                    style={[
-                      styles.methodText,
-                      selectedMethod === method && styles.selectedMethodText,
-                    ]}>
-                    {method}
-                  </Text>
-                </TouchableOpacity>
-              ))} */}
+                    styles.methodText,
+                  
+                  ]}>
+                  Upi Payment 
+                </Text>
+              </TouchableOpacity>
+             
               <TouchableOpacity
                 style={[
                   styles.methodContainer,
