@@ -71,6 +71,7 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
       product_id: item?.id,
       quantity: item?.quantity,
     }));
+       
     const jsonData = {
       ...formData,
     };
@@ -79,6 +80,8 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     } = await CartApi.onCreateOrderApi(
       checkoutObject(jsonData, linItem, {}, customerId),
     );
+    console.log("data=======",responseData);
+    
     setCheckoutData(responseData)
     const responseCustomerId = responseData?.customer_id;
     responseData.responseCustomerId = responseCustomerId;

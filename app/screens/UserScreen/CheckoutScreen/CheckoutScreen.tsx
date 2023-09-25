@@ -12,15 +12,19 @@ import {Alert} from 'react-native';
 
 export default function CheckoutScreen(props: any) {
   const {cartItems} = useCartContext();
-  const {checkoutControl, checkoutHandleSubmit, onCreateCustomer} =
+  const {checkoutControl, checkoutHandleSubmit, onCreateCustomer,onCallToTheCustomerAndCheckout} =
     useCheckoutContext();
 
   const onPressToSubmit = async (formData: any) => {
-    onCreateCustomer(formData);
+    // onCreateCustomer(formData);
+    onCallToTheCustomerAndCheckout(formData)
+    
   };
   const onPressToSubmitupipayment = async (formData: any) => {
-    onCreateCustomer(formData);
+    // onCreateCustomer(formData);
+    onCallToTheCustomerAndCheckout(formData)
     paymentoptions();
+       
   };
 
   const totalAmount = (cartItems?.totals?.total_price / 100).toLocaleString(
@@ -59,9 +63,8 @@ export default function CheckoutScreen(props: any) {
         // vpa: 'bhidepurva123@okicici',
         payeeName: 'ShgeShop',
         amount: totalAmount,
-        transactionRef: 'aasf-332-aoei-fn',
-        // 
-      },
+        transactionRef:'aasf-332-aoei-fn',
+              },
       successCallback,
       failureCallback,
     );
@@ -74,23 +77,7 @@ export default function CheckoutScreen(props: any) {
     // Alert.alert('Order failed Successfully placed');
     console.log('faild', data);
   }
-  // function successCallback(data: any) {  
-  //   console.log('Response Data:', data); 
-
-  //   if (data.Status === 'Success') {
-  //     Alert.alert('Order Successfully placed');
-  //     console.log('successfully', data);
-  //   } else {
-  //     Alert.alert('Payment Failed');
-  //     console.log('failed', data);
-  //   }
-  // }
-  
-  // function failureCallback(data: any) {
-  //   Alert.alert('Payment Failed');
-  //   console.log('failed', data);
-  // }
-
+ 
   
   
   
@@ -110,7 +97,7 @@ export default function CheckoutScreen(props: any) {
     <>
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
-          <View style={{flexDirection: 'row', padding: 10}}>
+          {/* <View style={{flexDirection: 'row', padding: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
               Coupon Code
             </Text>
@@ -137,7 +124,7 @@ export default function CheckoutScreen(props: any) {
               style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
               Apply Coupon
             </Button>
-          </View>
+          </View> */}
           <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>
               Customer Information
