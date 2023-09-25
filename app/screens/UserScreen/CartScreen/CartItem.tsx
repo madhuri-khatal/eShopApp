@@ -22,6 +22,7 @@ const CartItem = ({item, onRemove}: any) => {
   const handleQuantityChange = (newQuantity: any) => {
     if (newQuantity >= 1) {
       setQuantity(newQuantity);
+      
     }
   };
   const subTotal = sale_price * item?.quantity;
@@ -36,6 +37,7 @@ const CartItem = ({item, onRemove}: any) => {
         borderBottomColor: '#ddd',
         paddingVertical: 10,
         backgroundColor: 'white',
+        elevation:2
       }}>
       {item.images && item.images.length > 0 && (
         <View>
@@ -43,9 +45,7 @@ const CartItem = ({item, onRemove}: any) => {
             source={{uri: item.images[0].src}}
             style={{width: 100, height: 100, marginRight: 16}}
           />
-          <Text style={{fontSize: 14, color: '#888', marginTop: 8}}>
-            Quantity: {weight}
-          </Text>
+        
         </View>
       )}
       <View style={{flex: 1, marginLeft: 15}}>
@@ -55,7 +55,7 @@ const CartItem = ({item, onRemove}: any) => {
           ellipsizeMode="tail">
           {item.name}
         </Text>
-
+{/* 
         <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
           Price :
           <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
@@ -65,9 +65,9 @@ const CartItem = ({item, onRemove}: any) => {
             {' '}
             ₹{subTotal}
           </Text>
-        </Text>
+        </Text> */}
 
-        <View style={styles.container}>
+        {/* <View style={styles.container}>
           <TouchableOpacity
             style={styles.quantityButton}
             onPress={() => handleQuantityChange(quantity - 1)}>
@@ -79,7 +79,10 @@ const CartItem = ({item, onRemove}: any) => {
             onPress={() => handleQuantityChange(quantity + 1)}>
             <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
+         <Text style={{fontSize: 14, color: '#888', marginTop: 8}}>Price:  {sale_price} X {item?.quantity} = ₹{subTotal}</Text>
+             <Text style={{fontSize: 14, color: '#888', marginTop: 8}}>Number of Packs: {item?.quantity} </Text>
+        <Text style={{fontSize: 14, color: '#888', marginTop: 8}}>Quantity: {weight}</Text>
       </View>
       <View style={{marginRight: 15}}>
         <TouchableOpacity onPress={() => onDeletehowDialog(item.key)}>

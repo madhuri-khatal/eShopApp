@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button, List, useTheme} from 'react-native-paper';
-import {
-  DrawerContentScrollView,
-} from '@react-navigation/drawer';
+import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {DrawerActions} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useProductContext} from './../../../context/ProductContext';
@@ -35,9 +33,7 @@ export default function DrawerContent(props: any) {
               style={{alignItems: 'flex-start'}}
               onPress={() => {
                 onClose();
-              }}>
-            
-            </Button>
+              }}></Button>
 
             {mainCategory.map((categoery: any, index: number) => (
               <List.Accordion
