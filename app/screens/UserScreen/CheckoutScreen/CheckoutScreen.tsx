@@ -34,6 +34,10 @@ export default function CheckoutScreen(props: any) {
 
   const [selectedMethod, setSelectedMethod] = useState(null);
   const [showCODDetails, setShowCODDetails] = useState(false);
+  const [couponCode, setCouponCode] = useState('');
+  const [discountedTotalAmount, setDiscountedTotalAmount] = useState(
+    cartItems?.totals?.total_price / 100,
+  );
   const handlePaymentMethodPress = (method: any) => {
     if (selectedMethod === method) {
       setSelectedMethod(null);
@@ -69,10 +73,47 @@ export default function CheckoutScreen(props: any) {
     console.log('faild', data);
   }
 
+  const applyCouponCode = () => {
+    // // You can add your coupon validation logic here
+    // // For example, check if the entered coupon code is valid and calculate the discount
+    // // For simplicity, let's assume a fixed discount of 10%
+    // const discount = 0.1; // 10% discount
+    // const newTotalAmount =
+    //   (cartItems?.totals?.total_price / 100) * (1 - discount);
+    // setDiscountedTotalAmount(newTotalAmount);
+  };
   return (
     <>
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
+          <View style={{flexDirection: 'row', padding: 10}}>
+            <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
+              Coupon Code
+            </Text>
+          </View>
+          <View style={{padding: 8}}>
+            <TextInputController
+              placeholder="Enter coupon code"
+              control={checkoutControl}
+              style={{
+                margin: 8,
+                backgroundColor: 'white',
+              }}
+              name={'coupon_lines'}
+              keyboardType={'default'}
+              isRequiredValue
+              mode="outlined"
+              // defaultValue={billing?.phone}
+              // value={couponCode}
+              // onChangeText={text => setCouponCode(text)}
+            />
+            <Button
+              mode="contained"
+              onPress={applyCouponCode}
+              style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
+              Apply Coupon
+            </Button>
+          </View>
           <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>
               Customer Information
