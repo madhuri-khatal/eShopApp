@@ -70,7 +70,7 @@ export default function CheckoutScreen(props: any) {
     // Alert.alert('Order failed Successfully placed');
     console.log('faild', data);
   }
-  // function successCallback(data: any) {
+  // function successCallback(data: any) {  
   //   console.log('Response Data:', data); 
 
   //   if (data.Status === 'Success') {
