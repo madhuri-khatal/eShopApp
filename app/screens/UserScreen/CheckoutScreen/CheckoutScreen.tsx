@@ -6,6 +6,7 @@ import DeliveryAddressScreen from './DeliveryAddressScreen';
 import {useCartContext} from '../../../context/CartContext';
 import {useCheckoutContext} from '../../../context/CheckoutContext';
 import {TextInputController} from '../../../components/ui/TextInput';
+// @ts-ignore
 import RNUpiPayment from 'react-native-upi-payment';
 import {Alert} from 'react-native';
 
