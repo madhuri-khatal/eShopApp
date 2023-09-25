@@ -71,7 +71,9 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
         err,
       } = await ProductApi.pagination(paginationIncrement.current);
       setProductByCategoryId([...productByCategoryId, ...data]);
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
     } catch (error) {
       console.log('error', error);
     } finally {
