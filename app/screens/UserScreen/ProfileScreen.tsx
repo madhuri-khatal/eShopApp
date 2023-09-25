@@ -45,10 +45,9 @@ export default function ProfileScreen(props: any) {
                   style={{
                     width: 190,
                     height: 50,
-                    backgroundColor: '#f7c6b2',
+                    margin: 8,
+                    backgroundColor: '#efa31d',
                     borderRadius: 10,
-                    padding: 3,
-                    justifyContent: 'center',
                   }}
                   mode="contained"
                   onPress={() => {
@@ -63,7 +62,7 @@ export default function ProfileScreen(props: any) {
                       justifyContent: 'center',
                       fontSize: 17,
                       textTransform: 'capitalize',
-                      color: '#f25616',
+                      color: '#ffffff',
                     }}>
                     My Cart
                   </Text>
@@ -74,10 +73,9 @@ export default function ProfileScreen(props: any) {
                   style={{
                     width: 190,
                     height: 50,
-                    backgroundColor: '#f7c6b2',
+                    margin: 8,
+                    backgroundColor: '#efa31d',
                     borderRadius: 10,
-                    padding: 3,
-                    justifyContent: 'center',
                   }}
                   mode="contained"
                   onPress={() =>
@@ -89,7 +87,7 @@ export default function ProfileScreen(props: any) {
                       justifyContent: 'center',
                       fontSize: 17,
                       textTransform: 'capitalize',
-                      color: '#f25616',
+                      color: '#ffffff',
                     }}>
                     My Orders
                   </Text>
@@ -99,13 +97,13 @@ export default function ProfileScreen(props: any) {
           </View>
 
           <View style={{paddingHorizontal: 10}}>
-            <MaterialCommunityIcons
+            {/* <MaterialCommunityIcons
               name="pencil"
               size={24}
               color="#f25616"
               style={{marginLeft: 350}}
               onPress={() => navigation.navigate('EditProfileScreen')}
-            />
+            /> */}
             <View style={styles.addressSection}>
               <View style={{flexDirection: 'row', marginTop: -10}}>
                 <Text style={styles.sectionTitle}>Current Address</Text>
@@ -135,7 +133,7 @@ export default function ProfileScreen(props: any) {
           </View>
 
           <View style={{alignItems: 'center', marginRight: 5}}>
-            <Button
+            {/* <Button
               style={{
                 width: 190,
                 height: 50,
@@ -156,17 +154,16 @@ export default function ProfileScreen(props: any) {
                 }}>
                 Log Out
               </Text>
-            </Button>
+            </Button> */}
           </View>
           <View style={{alignItems: 'center', marginRight: 5}}>
             <Button
               style={{
                 width: 190,
                 height: 50,
-                backgroundColor: '#f7c6b2',
+                margin: 8,
+                backgroundColor: '#efa31d',
                 borderRadius: 10,
-                padding: 3,
-                justifyContent: 'center',
               }}
               mode="contained"
               onPress={() => navigation.navigate('LoginScreen')}>
@@ -176,7 +173,7 @@ export default function ProfileScreen(props: any) {
                   justifyContent: 'center',
                   fontSize: 17,
                   textTransform: 'capitalize',
-                  color: '#f25616',
+                  color: '#ffffff',
                 }}>
                 Log Out
               </Text>
