@@ -50,24 +50,48 @@ export default function CheckoutScreen(props: any) {
   const paymentoptions = () => {
     RNUpiPayment.initializePayment(
       {
-        vpa: 'madhuribkhatal@okicici',
+        vpa: '50627101@ubin',
+        // vpa: 'madhuribkhatal@okicici',
+        // vpa: 'bhidepurva123@okicici',
         payeeName: 'ShgeShop',
         amount: totalAmount,
         transactionRef: 'aasf-332-aoei-fn',
-        //
+        // 
       },
       successCallback,
       failureCallback,
     );
   };
   function successCallback(data: any) {
-    Alert.alert('Order Successfully placed');
+    // Alert.alert('Order Successfully placed');
     console.log('sucessfully', data);
   }
   function failureCallback(data: any) {
-    Alert.alert('Order failed Successfully placed');
+    // Alert.alert('Order failed Successfully placed');
     console.log('faild', data);
   }
+  // function successCallback(data: any) {
+  //   console.log('Response Data:', data); 
+
+  //   if (data.Status === 'Success') {
+  //     Alert.alert('Order Successfully placed');
+  //     console.log('successfully', data);
+  //   } else {
+  //     Alert.alert('Payment Failed');
+  //     console.log('failed', data);
+  //   }
+  // }
+  
+  // function failureCallback(data: any) {
+  //   Alert.alert('Payment Failed');
+  //   console.log('failed', data);
+  // }
+
+  
+  
+  
+  
+  
 
   return (
     <>

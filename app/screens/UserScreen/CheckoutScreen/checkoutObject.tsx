@@ -22,6 +22,7 @@ export const checkoutObject = (
     status: 'processing',
     customer_id: customerId,
     set_paid: true,
+    // coupon_lines: [`SHGPurvaMadhuri`],
     billing: {
       ...formData,
       country: 'IN',
