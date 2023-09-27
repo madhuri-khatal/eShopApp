@@ -12,19 +12,21 @@ import {Alert} from 'react-native';
 
 export default function CheckoutScreen(props: any) {
   const {cartItems} = useCartContext();
-  const {checkoutControl, checkoutHandleSubmit, onCreateCustomer,onCallToTheCustomerAndCheckout} =
-    useCheckoutContext();
+  const {
+    checkoutControl,
+    checkoutHandleSubmit,
+    onCreateCustomer,
+    onCallToTheCustomerAndCheckout,
+  } = useCheckoutContext();
 
   const onPressToSubmit = async (formData: any) => {
     // onCreateCustomer(formData);
-    onCallToTheCustomerAndCheckout(formData)
-    
+    onCallToTheCustomerAndCheckout(formData,selectedMethod)
   };
   const onPressToSubmitupipayment = async (formData: any) => {
     // onCreateCustomer(formData);
-    onCallToTheCustomerAndCheckout(formData)
+    onCallToTheCustomerAndCheckout(formData,selectedMethod);
     paymentoptions();
-       
   };
 
   const totalAmount = (cartItems?.totals?.total_price / 100).toLocaleString(
@@ -36,22 +38,38 @@ export default function CheckoutScreen(props: any) {
     },
   );
 
-  const [selectedMethod, setSelectedMethod] = useState(null);
+  const [selectedMethod, setSelectedMethod] = useState('');
   const [showCODDetails, setShowCODDetails] = useState(false);
   const [couponCode, setCouponCode] = useState('');
   const [discountedTotalAmount, setDiscountedTotalAmount] = useState(
     cartItems?.totals?.total_price / 100,
   );
+  // const handlePaymentMethodPress = (method: any) => {
+  //   if (selectedMethod === method) {
+  //     setSelectedMethod('');
+  //   } else {
+  //     setSelectedMethod(method);
+  //   }
+  //   if (method === 'Cash on delivery') {
+  //     setShowCODDetails(!showCODDetails);
+  //   }
+  //   console.log('Selected Payment Method:', selectedMethod);
+  // };
+
   const handlePaymentMethodPress = (method: any) => {
-    if (selectedMethod === method) {
-      setSelectedMethod(null);
-    } else {
-      setSelectedMethod(method);
-    }
-    if (method === 'COD') {
-      setShowCODDetails(!showCODDetails);
-    }
+    setSelectedMethod((prevMethod) => {
+      if (prevMethod === method) {
+        setShowCODDetails(false); 
+        return '';
+      } else {
+        setShowCODDetails(method === 'Cash on delivery'); 
+        return method;
+      }
+    });
+
   };
+  // console.log("method",selectedMethod);
+
   const billing = cartItems?.address;
 
   // PAYMENT GATEWAY
@@ -63,8 +81,8 @@ export default function CheckoutScreen(props: any) {
         // vpa: 'bhidepurva123@okicici',
         payeeName: 'ShgeShop',
         amount: totalAmount,
-        transactionRef:'aasf-332-aoei-fn',
-              },
+        transactionRef: 'aasf-332-aoei-fn',
+      },
       successCallback,
       failureCallback,
     );
@@ -77,12 +95,6 @@ export default function CheckoutScreen(props: any) {
     // Alert.alert('Order failed Successfully placed');
     console.log('faild', data);
   }
- 
-  
-  
-  
-  
-  
 
   const applyCouponCode = () => {
     // // You can add your coupon validation logic here
@@ -197,21 +209,33 @@ export default function CheckoutScreen(props: any) {
               </Text>
 
               <TouchableOpacity
-                style={[styles.methodContainer]}
-                onPress={checkoutHandleSubmit(onPressToSubmitupipayment)}>
-                <Text style={[styles.methodText]}>Upi Payment</Text>
+                style={[
+                  styles.methodContainer,
+                  selectedMethod === 'upi' && styles.selectedMethod,
+                ]}
+                onPress={() => {
+                  handlePaymentMethodPress('upi');
+                  checkoutHandleSubmit(onPressToSubmitupipayment)();
+                }}>
+                <Text
+                  style={[
+                    styles.methodText,
+                    selectedMethod === 'upi' && styles.selectedMethodText,
+                  ]}>
+                  Upi Payment
+                </Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={[
                   styles.methodContainer,
-                  selectedMethod === 'COD' && styles.selectedMethod,
+                  selectedMethod === 'Cash on delivery' && styles.selectedMethod,
                 ]}
-                onPress={() => handlePaymentMethodPress('COD')}>
+                onPress={() => handlePaymentMethodPress('Cash on delivery')}>
                 <Text
                   style={[
                     styles.methodText,
-                    selectedMethod === 'COD' && styles.selectedMethodText,
+                    selectedMethod === 'Cash on delivery' && styles.selectedMethodText,
                   ]}>
                   Cash on Delivary
                 </Text>

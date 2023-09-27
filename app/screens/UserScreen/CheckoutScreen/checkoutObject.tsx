@@ -14,11 +14,12 @@ export const checkoutObject = (
   line_items: any,
   shipping_lines: any[],
   customerId?: number | string,
+  selectedMethod?: string,
 ) => {
   const shipping = shippingData(formData);
   return {
-    payment_method: 'cod',
-    payment_method_title: 'cod',
+      payment_method: selectedMethod || 'cod', 
+    payment_method_title: selectedMethod || 'cod',
     status: 'processing',
     customer_id: customerId,
     set_paid: true,
