@@ -13,9 +13,11 @@ interface ICheckoutContext {
   onSubmitCheckout: (formData: any, customer_id?: string) => Promise<void>;
   checkoutControl: any;
   checkoutHandleSubmit: Function;
-  onCreateCustomer: (formData: any) => Promise<void>;
+  // onCreateCustomer: (formData: any) => Promise<void>;
+  onCreateCustomer: (formData: any, selectedMethod: string) => Promise<void>
   customerData: any;
-  onCallToTheCustomerAndCheckout: (formData: any) => void;
+  // onCallToTheCustomerAndCheckout: (formData: any) => void;
+  onCallToTheCustomerAndCheckout: (formData: any, selectedMethod: string) => Promise<void>
   customerId: string | number | undefined
   checkoutData: any
 }
@@ -35,29 +37,28 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
   const navigation: any = useNavigation();
 
   // create customer
-  const onCreateCustomer = async (formData: any) => {
+  const onCreateCustomer = async (formData: any,selectedMethod:string) => {
     const jsonData = {
       ...formData,
     };
     const {result} = await CustomerApi.onCreateCustomerApi(
       CustomerObject(formData),
     );
-    // console.log('result?.data?.customer?.id======', result?.data?.customer?.id);
-    if (result?.data?.customer?.role === 'customer') {
+        if (result?.data?.customer?.role === 'customer') {
       const customerId = result?.data?.customer?.id;
       setCustomerId(result?.data?.customer?.id);
       // onSubmitCheckout(formData, result?.data?.customer?.id);
     }
-    onSubmitCheckout(formData, result?.data?.customer?.id);
+    onSubmitCheckout(formData, result?.data?.customer?.id,selectedMethod);
     setCustomerData(result);
   };
   
 
-  const onCallToTheCustomerAndCheckout = async(formData: any) => {
+  const onCallToTheCustomerAndCheckout = async(formData: any,selectedMethod:string) => {
     // if (customerData?.data?.customer?.role === 'customer') {
     //  await onSubmitCheckout(formData, customerId);
     // } else {
-      onCreateCustomer(formData);
+      onCreateCustomer(formData,selectedMethod);
     //   onSubmitCheckout(formData, customerId);
     // }
   };
@@ -66,19 +67,32 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
   const onSubmitCheckout = async (
     formData: any,
     customerId?: number | string,
+    selectedMethod?: string,
   ) => {
     const linItem: any = cartItems?.items?.map((item: any) => ({
       product_id: item?.id,
       quantity: item?.quantity,
     }));
+       
+   const shippingRate: any = cartItems?.totals?.total_shipping / 100;
+    const shippinglines: any= [
+    {
+      method_id: 'flat_rate',
+      method_title: 'Flat Rate',
+      total:shippingRate.toFixed(2),   
+    },
+  ];
+
     const jsonData = {
       ...formData,
     };
+
     const {
       result: {data: responseData},
     } = await CartApi.onCreateOrderApi(
-      checkoutObject(jsonData, linItem, {}, customerId),
-    );
+      checkoutObject(jsonData,linItem,shippinglines,customerId,selectedMethod),
+      );
+      
     setCheckoutData(responseData)
     const responseCustomerId = responseData?.customer_id;
     responseData.responseCustomerId = responseCustomerId;

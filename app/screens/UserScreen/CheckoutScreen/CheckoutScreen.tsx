@@ -12,14 +12,20 @@ import {Alert} from 'react-native';
 
 export default function CheckoutScreen(props: any) {
   const {cartItems} = useCartContext();
-  const {checkoutControl, checkoutHandleSubmit, onCreateCustomer} =
-    useCheckoutContext();
+  const {
+    checkoutControl,
+    checkoutHandleSubmit,
+    onCreateCustomer,
+    onCallToTheCustomerAndCheckout,
+  } = useCheckoutContext();
 
   const onPressToSubmit = async (formData: any) => {
-    onCreateCustomer(formData);
+    // onCreateCustomer(formData);
+    onCallToTheCustomerAndCheckout(formData,selectedMethod)
   };
   const onPressToSubmitupipayment = async (formData: any) => {
-    onCreateCustomer(formData);
+    // onCreateCustomer(formData);
+    onCallToTheCustomerAndCheckout(formData,selectedMethod);
     paymentoptions();
   };
 
@@ -32,22 +38,38 @@ export default function CheckoutScreen(props: any) {
     },
   );
 
-  const [selectedMethod, setSelectedMethod] = useState(null);
+  const [selectedMethod, setSelectedMethod] = useState('');
   const [showCODDetails, setShowCODDetails] = useState(false);
   const [couponCode, setCouponCode] = useState('');
   const [discountedTotalAmount, setDiscountedTotalAmount] = useState(
     cartItems?.totals?.total_price / 100,
   );
+  // const handlePaymentMethodPress = (method: any) => {
+  //   if (selectedMethod === method) {
+  //     setSelectedMethod('');
+  //   } else {
+  //     setSelectedMethod(method);
+  //   }
+  //   if (method === 'Cash on delivery') {
+  //     setShowCODDetails(!showCODDetails);
+  //   }
+  //   console.log('Selected Payment Method:', selectedMethod);
+  // };
+
   const handlePaymentMethodPress = (method: any) => {
-    if (selectedMethod === method) {
-      setSelectedMethod(null);
-    } else {
-      setSelectedMethod(method);
-    }
-    if (method === 'COD') {
-      setShowCODDetails(!showCODDetails);
-    }
+    setSelectedMethod((prevMethod) => {
+      if (prevMethod === method) {
+        setShowCODDetails(false); 
+        return '';
+      } else {
+        setShowCODDetails(method === 'Cash on delivery'); 
+        return method;
+      }
+    });
+
   };
+  // console.log("method",selectedMethod);
+
   const billing = cartItems?.address;
 
   // PAYMENT GATEWAY
@@ -60,7 +82,6 @@ export default function CheckoutScreen(props: any) {
         payeeName: 'ShgeShop',
         amount: totalAmount,
         transactionRef: 'aasf-332-aoei-fn',
-        // 
       },
       successCallback,
       failureCallback,
@@ -74,28 +95,6 @@ export default function CheckoutScreen(props: any) {
     // Alert.alert('Order failed Successfully placed');
     console.log('faild', data);
   }
-  // function successCallback(data: any) {  
-  //   console.log('Response Data:', data); 
-
-  //   if (data.Status === 'Success') {
-  //     Alert.alert('Order Successfully placed');
-  //     console.log('successfully', data);
-  //   } else {
-  //     Alert.alert('Payment Failed');
-  //     console.log('failed', data);
-  //   }
-  // }
-  
-  // function failureCallback(data: any) {
-  //   Alert.alert('Payment Failed');
-  //   console.log('failed', data);
-  // }
-
-  
-  
-  
-  
-  
 
   const applyCouponCode = () => {
     // // You can add your coupon validation logic here
@@ -110,7 +109,7 @@ export default function CheckoutScreen(props: any) {
     <>
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
-          <View style={{flexDirection: 'row', padding: 10}}>
+          {/* <View style={{flexDirection: 'row', padding: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
               Coupon Code
             </Text>
@@ -137,7 +136,7 @@ export default function CheckoutScreen(props: any) {
               style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
               Apply Coupon
             </Button>
-          </View>
+          </View> */}
           <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>
               Customer Information
@@ -210,21 +209,33 @@ export default function CheckoutScreen(props: any) {
               </Text>
 
               <TouchableOpacity
-                style={[styles.methodContainer]}
-                onPress={checkoutHandleSubmit(onPressToSubmitupipayment)}>
-                <Text style={[styles.methodText]}>Upi Payment</Text>
+                style={[
+                  styles.methodContainer,
+                  selectedMethod === 'upi' && styles.selectedMethod,
+                ]}
+                onPress={() => {
+                  handlePaymentMethodPress('upi');
+                  checkoutHandleSubmit(onPressToSubmitupipayment)();
+                }}>
+                <Text
+                  style={[
+                    styles.methodText,
+                    selectedMethod === 'upi' && styles.selectedMethodText,
+                  ]}>
+                  Upi Payment
+                </Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={[
                   styles.methodContainer,
-                  selectedMethod === 'COD' && styles.selectedMethod,
+                  selectedMethod === 'Cash on delivery' && styles.selectedMethod,
                 ]}
-                onPress={() => handlePaymentMethodPress('COD')}>
+                onPress={() => handlePaymentMethodPress('Cash on delivery')}>
                 <Text
                   style={[
                     styles.methodText,
-                    selectedMethod === 'COD' && styles.selectedMethodText,
+                    selectedMethod === 'Cash on delivery' && styles.selectedMethodText,
                   ]}>
                   Cash on Delivary
                 </Text>
