@@ -12,7 +12,7 @@ const shippingData = (data: any) => {
 export const checkoutObject = (
   formData: any,
   line_items: any,
-  shipping_lines?: any,
+  shipping_lines: any[],
   customerId?: number | string,
 ) => {
   const shipping = shippingData(formData);
@@ -33,12 +33,7 @@ export const checkoutObject = (
       country: 'IN',
     },
     line_items: line_items,
-    shipping_lines: [
-      {
-        method_id: 'flat_rate',
-        method_title: 'Flat Rate',
-        total: '10.00',
-      },
-    ],
+    shipping_lines: shipping_lines,
+   
   };
 };

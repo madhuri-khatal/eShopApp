@@ -72,16 +72,25 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
       quantity: item?.quantity,
     }));
        
+   const shippingRate: any = cartItems?.totals?.total_shipping / 100;
+    const shippinglines: any= [
+    {
+      method_id: 'flat_rate',
+      method_title: 'Flat Rate',
+      total:shippingRate.toFixed(2),   
+    },
+  ];
+
     const jsonData = {
       ...formData,
     };
+
     const {
       result: {data: responseData},
     } = await CartApi.onCreateOrderApi(
-      checkoutObject(jsonData, linItem, {}, customerId),
-    );
-    console.log("data=======",responseData);
-    
+      checkoutObject(jsonData,linItem,shippinglines,customerId),
+      );
+      
     setCheckoutData(responseData)
     const responseCustomerId = responseData?.customer_id;
     responseData.responseCustomerId = responseCustomerId;
