@@ -21,11 +21,13 @@ export default function CheckoutScreen(props: any) {
 
   const onPressToSubmit = async (formData: any) => {
     // onCreateCustomer(formData);
-    onCallToTheCustomerAndCheckout(formData,selectedMethod)
+    console.log("Foemdata===============",formData);
+    
+    // onCallToTheCustomerAndCheckout(formData,selectedMethod,discountedTotalAmount)
   };
   const onPressToSubmitupipayment = async (formData: any) => {
     // onCreateCustomer(formData);
-    onCallToTheCustomerAndCheckout(formData,selectedMethod);
+      onCallToTheCustomerAndCheckout(formData,selectedMethod,discountedTotalAmount);
     paymentoptions();
   };
 
@@ -68,11 +70,25 @@ export default function CheckoutScreen(props: any) {
     });
 
   };
-  // console.log("method",selectedMethod);
+  console.log("method",selectedMethod);
 
   const billing = cartItems?.address;
 
   // PAYMENT GATEWAY
+  // const paymentoptions = () => {
+  //   RNUpiPayment.initializePayment(
+  //     {
+  //       // vpa: '50627101@ubin',
+  //       vpa: 'madhuribkhatal@okicici',
+  //       // vpa: 'bhidepurva123@okicici',
+  //       payeeName: 'ShgeShop',
+  //       amount: totalAmount,
+  //       transactionRef: 'aasf-332-aoei-fn',
+  //     },
+  //     successCallback,
+  //     failureCallback,
+  //   );
+  // };
   const paymentoptions = () => {
     RNUpiPayment.initializePayment(
       {
@@ -83,33 +99,43 @@ export default function CheckoutScreen(props: any) {
         amount: totalAmount,
         transactionRef: 'aasf-332-aoei-fn',
       },
-      successCallback,
-      failureCallback,
+      (data: any) => {
+        if (data.status === 'SUCCESS') {
+          successCallback(data);
+        } else {
+          failureCallback(data);
+        }
+      },
+      failureCallback
     );
   };
+  
   function successCallback(data: any) {
-    // Alert.alert('Order Successfully placed');
+    Alert.alert('Order Successfully placed');
     console.log('sucessfully', data);
   }
   function failureCallback(data: any) {
-    // Alert.alert('Order failed Successfully placed');
+    Alert.alert('Order failed');
     console.log('faild', data);
   }
 
   const applyCouponCode = () => {
-    // // You can add your coupon validation logic here
-    // // For example, check if the entered coupon code is valid and calculate the discount
-    // // For simplicity, let's assume a fixed discount of 10%
-    // const discount = 0.1; // 10% discount
-    // const newTotalAmount =
-    //   (cartItems?.totals?.total_price / 100) * (1 - discount);
-    // setDiscountedTotalAmount(newTotalAmount);
+    // You can add your coupon validation logic here
+    // For example, check if the entered coupon code is valid and calculate the discount
+    // For simplicity, let's assume a fixed discount of 10%
+    const discount = 0.1; // 10% discount
+    const newTotalAmount =
+      (cartItems?.totals?.total_price / 100) * (1 - discount);
+    setDiscountedTotalAmount(newTotalAmount);
+    console.log("new=======",newTotalAmount);
+    
   };
+  console.log("new discountedTotalAmount=======",discountedTotalAmount);
   return (
     <>
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
-          {/* <View style={{flexDirection: 'row', padding: 10}}>
+           <View style={{flexDirection: 'row', padding: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
               Coupon Code
             </Text>
@@ -136,7 +162,7 @@ export default function CheckoutScreen(props: any) {
               style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
               Apply Coupon
             </Button>
-          </View> */}
+          </View> 
           <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>
               Customer Information
@@ -253,7 +279,9 @@ export default function CheckoutScreen(props: any) {
                   justifyContent: 'center',
                 }}
                 mode="contained"
-                onPress={checkoutHandleSubmit(onPressToSubmit)}>
+                onPress={checkoutHandleSubmit(onPressToSubmit)}
+                                // onPress={checkoutHandleSubmit()}
+                >
                 <Text
                   style={{
                     fontWeight: 'bold',
