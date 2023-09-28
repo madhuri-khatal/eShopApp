@@ -103,6 +103,9 @@ export const CartContextProvider = ({children}: CartContextType) => {
       id: variation,
       quantity: quantity,
     });
+       if (result == undefined) {
+      Alert.alert('please select weight first');
+    }else{
     Alert.alert('Product sucessfully Added in Cart');
     // navigation.navigate('CartScreen');
     navigation.navigate('CartStack', {
@@ -110,6 +113,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
       initial: false,
     });
     getCartList();
+  }
   }
   // CART ITEM LIST
   const getCartList = async () => {
