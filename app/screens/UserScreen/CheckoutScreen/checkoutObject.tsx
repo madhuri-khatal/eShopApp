@@ -15,6 +15,7 @@ export const checkoutObject = (
   shipping_lines: any[],
   customerId?: number | string,
   selectedMethod?: string,
+  discountedTotalAmount?:number|string[]
 ) => {
   const shipping = shippingData(formData);
   return {
@@ -23,6 +24,7 @@ export const checkoutObject = (
     status: 'processing',
     customer_id: customerId,
     set_paid: true,
+    coupon_lines: discountedTotalAmount,
     // coupon_lines: [`SHGPurvaMadhuri`],
     billing: {
       ...formData,
