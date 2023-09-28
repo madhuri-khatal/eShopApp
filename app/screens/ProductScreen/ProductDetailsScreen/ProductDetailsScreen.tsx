@@ -193,9 +193,9 @@ export const ProductDetailsScreen = (props: any) => {
                 </View>
               </View>
             </View>
-            <View style={{alignItems: 'flex-end', paddingRight: 18}}>
+            {/* <View style={{alignItems: 'flex-end', paddingRight: 18}}>
               <WishlistComponent />
-            </View>
+            </View> */}
           </View>
 
           <Text

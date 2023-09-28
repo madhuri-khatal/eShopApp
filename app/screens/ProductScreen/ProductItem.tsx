@@ -49,7 +49,7 @@ export default function ProductItem({product}: IProps) {
             margin: 'auto',
           }}>
           <View>
-            <WishlistComponent />
+            {/* <WishlistComponent /> */}
             <TouchableOpacity onPress={handlePress}>
               {productImageSrc && (
                 <Image source={{uri: productImageSrc}} style={{height: 200}} />
@@ -119,8 +119,7 @@ export default function ProductItem({product}: IProps) {
                 iconSize={50}
               />
             </View>
-            <View style={{flex: 1, alignItems: 'flex-end'}}>
-            </View>
+            <View style={{flex: 1, alignItems: 'flex-end'}}></View>
           </View>
         </View>
       </View>

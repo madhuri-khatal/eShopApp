@@ -184,6 +184,9 @@ export const CartContextProvider = ({children}: CartContextType) => {
     setOrderData(result);
   };
 
+  //  get wishlist 
+  
+
   const value: ICartContext = {
     cartItems,
     getCartList,
