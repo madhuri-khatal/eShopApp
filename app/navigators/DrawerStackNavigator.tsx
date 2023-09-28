@@ -9,6 +9,7 @@ import {useTheme} from 'react-native-paper';
 import {OrderScreen} from './../screens/MyOrderScreen/OrderScreen';
 import OrderStackScreen from './OrderStackScreen';
 import BottomTabStack from './BottomTabStack';
+import {WishlistScreen} from './../screens/Wishlistscreen/WishlistScreen';
 
 const Drawer = createDrawerNavigator();
 export default function DrawerStackNavigator() {
@@ -56,15 +57,15 @@ export default function DrawerStackNavigator() {
         }}
         component={OrderStackScreen}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="WishlistStack"
         options={{
           drawerLabel: 'Wishlist',
           title: 'My Wishlist',
           drawerContentStyle: {backgroundColor: colors.background},
         }}
-        component={OrderStackScreen}
-      />
+        component={WishlistScreen}
+      /> */}
     </Drawer.Navigator>
   );
 }
