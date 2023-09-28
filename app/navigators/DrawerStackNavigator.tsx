@@ -56,6 +56,15 @@ export default function DrawerStackNavigator() {
         }}
         component={OrderStackScreen}
       />
+      <Drawer.Screen
+        name="WishlistStack"
+        options={{
+          drawerLabel: 'Wishlist',
+          title: 'My Wishlist',
+          drawerContentStyle: {backgroundColor: colors.background},
+        }}
+        component={OrderStackScreen}
+      />
     </Drawer.Navigator>
   );
 }
