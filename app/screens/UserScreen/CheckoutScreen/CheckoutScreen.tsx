@@ -21,13 +21,15 @@ export default function CheckoutScreen(props: any) {
 
   const onPressToSubmit = async (formData: any) => {
     // onCreateCustomer(formData);
-    console.log("Foemdata===============",formData);
+    // console.log("Foemdata===============",formData);
     
-    // onCallToTheCustomerAndCheckout(formData,selectedMethod,discountedTotalAmount)
+    onCallToTheCustomerAndCheckout(formData,selectedMethod)
+    // ,discountedTotalAmount)
   };
   const onPressToSubmitupipayment = async (formData: any) => {
     // onCreateCustomer(formData);
-      onCallToTheCustomerAndCheckout(formData,selectedMethod,discountedTotalAmount);
+      onCallToTheCustomerAndCheckout(formData,selectedMethod)
+      // ,discountedTotalAmount);
     paymentoptions();
   };
 
@@ -46,17 +48,6 @@ export default function CheckoutScreen(props: any) {
   const [discountedTotalAmount, setDiscountedTotalAmount] = useState(
     cartItems?.totals?.total_price / 100,
   );
-  // const handlePaymentMethodPress = (method: any) => {
-  //   if (selectedMethod === method) {
-  //     setSelectedMethod('');
-  //   } else {
-  //     setSelectedMethod(method);
-  //   }
-  //   if (method === 'Cash on delivery') {
-  //     setShowCODDetails(!showCODDetails);
-  //   }
-  //   console.log('Selected Payment Method:', selectedMethod);
-  // };
 
   const handlePaymentMethodPress = (method: any) => {
     setSelectedMethod((prevMethod) => {
@@ -70,26 +61,10 @@ export default function CheckoutScreen(props: any) {
     });
 
   };
-  console.log("method",selectedMethod);
-
+ 
   const billing = cartItems?.address;
 
-  // PAYMENT GATEWAY
-  // const paymentoptions = () => {
-  //   RNUpiPayment.initializePayment(
-  //     {
-  //       // vpa: '50627101@ubin',
-  //       vpa: 'madhuribkhatal@okicici',
-  //       // vpa: 'bhidepurva123@okicici',
-  //       payeeName: 'ShgeShop',
-  //       amount: totalAmount,
-  //       transactionRef: 'aasf-332-aoei-fn',
-  //     },
-  //     successCallback,
-  //     failureCallback,
-  //   );
-  // };
-  const paymentoptions = () => {
+   const paymentoptions = () => {
     RNUpiPayment.initializePayment(
       {
         vpa: '50627101@ubin',
@@ -127,15 +102,13 @@ export default function CheckoutScreen(props: any) {
     const newTotalAmount =
       (cartItems?.totals?.total_price / 100) * (1 - discount);
     setDiscountedTotalAmount(newTotalAmount);
-    console.log("new=======",newTotalAmount);
-    
-  };
-  console.log("new discountedTotalAmount=======",discountedTotalAmount);
+   };
+ 
   return (
     <>
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
-           <View style={{flexDirection: 'row', padding: 10}}>
+           {/* <View style={{flexDirection: 'row', padding: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
               Coupon Code
             </Text>
@@ -162,7 +135,7 @@ export default function CheckoutScreen(props: any) {
               style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
               Apply Coupon
             </Button>
-          </View> 
+          </View>  */}
           <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>
               Customer Information
