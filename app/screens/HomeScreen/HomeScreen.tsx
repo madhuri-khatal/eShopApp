@@ -7,8 +7,11 @@ import FeaturedCategories from '../../components/Product/FeaturedCategories';
 import ImageCarousel from '../../components/Product/ImageCarousel';
 import FeaturedProducts from '../../components/Product/FeaturedProducts';
 import HomeWhyUs from '../../components/Product/HomeWhyUs';
+import CouponCode from '../../components/Product/HomeCouponCode';
+
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
+
   const products = [
     {
       id: 1,
@@ -50,19 +53,20 @@ export default function HomeScreen({navigation}: any) {
         <ScrollView style={{marginBottom: 60}}>
           <ImageCarousel />
           <FeaturedCategories />
+          <CouponCode />
+          <FeaturedProducts products={products} />
+
           <Text
             style={{
               fontSize: 20,
               fontWeight: 'bold',
               lineHeight: 28,
               padding: 10,
-              paddingTop: 30,
               textAlign: 'center',
             }}>
             WHY SHG E SHOP
           </Text>
           <HomeWhyUs />
-          <FeaturedProducts products={products} />
         </ScrollView>
       </View>
     </>

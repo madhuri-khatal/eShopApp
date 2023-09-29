@@ -28,6 +28,15 @@ export const ProductApi = {
     return await Get<any>(`/wp-json/wc/v3/products/categories/${id}`);
   },
 
+  getCouponListAll: async () => {
+    return await Get<any>(`/wp-json/wc/v3/coupons`);
+  },
+  // for feture categry
+  // not working
+  // not working
+  // not working
+  // not working
+
   getProductByFeatureCategory: async () => {
     return await Get<any>(
       `wp-json/wc/v3/products?category&per_page=4&status=publish`,
