@@ -9,8 +9,10 @@ import {TextInputController} from '../../../components/ui/TextInput';
 // @ts-ignore
 import RNUpiPayment from 'react-native-upi-payment';
 import {Alert} from 'react-native';
-
+import {useNavigation} from '@react-navigation/native';
+import {HeaderBar} from '../../../components/ui/HeaderBar';
 export default function CheckoutScreen(props: any) {
+  const navigation: any = useNavigation();
   const {cartItems} = useCartContext();
   const {
     checkoutControl,
@@ -22,14 +24,14 @@ export default function CheckoutScreen(props: any) {
   const onPressToSubmit = async (formData: any) => {
     // onCreateCustomer(formData);
     // console.log("Foemdata===============",formData);
-    
-    onCallToTheCustomerAndCheckout(formData,selectedMethod)
+
+    onCallToTheCustomerAndCheckout(formData, selectedMethod);
     // ,discountedTotalAmount)
   };
   const onPressToSubmitupipayment = async (formData: any) => {
     // onCreateCustomer(formData);
-      onCallToTheCustomerAndCheckout(formData,selectedMethod)
-      // ,discountedTotalAmount);
+    onCallToTheCustomerAndCheckout(formData, selectedMethod);
+    // ,discountedTotalAmount);
     paymentoptions();
   };
 
@@ -50,21 +52,20 @@ export default function CheckoutScreen(props: any) {
   );
 
   const handlePaymentMethodPress = (method: any) => {
-    setSelectedMethod((prevMethod) => {
+    setSelectedMethod(prevMethod => {
       if (prevMethod === method) {
-        setShowCODDetails(false); 
+        setShowCODDetails(false);
         return '';
       } else {
-        setShowCODDetails(method === 'Cash on delivery'); 
+        setShowCODDetails(method === 'Cash on delivery');
         return method;
       }
     });
-
   };
- 
+
   const billing = cartItems?.address;
 
-   const paymentoptions = () => {
+  const paymentoptions = () => {
     RNUpiPayment.initializePayment(
       {
         vpa: '50627101@ubin',
@@ -81,10 +82,10 @@ export default function CheckoutScreen(props: any) {
           failureCallback(data);
         }
       },
-      failureCallback
+      failureCallback,
     );
   };
-  
+
   function successCallback(data: any) {
     Alert.alert('Order Successfully placed');
     console.log('sucessfully', data);
@@ -95,20 +96,23 @@ export default function CheckoutScreen(props: any) {
   }
 
   const applyCouponCode = () => {
-    // You can add your coupon validation logic here
-    // For example, check if the entered coupon code is valid and calculate the discount
-    // For simplicity, let's assume a fixed discount of 10%
     const discount = 0.1; // 10% discount
     const newTotalAmount =
       (cartItems?.totals?.total_price / 100) * (1 - discount);
     setDiscountedTotalAmount(newTotalAmount);
-   };
- 
+  };
+
   return (
     <>
+      <HeaderBar
+        title="Checkout"
+        backAction={() => navigation.goBack()}
+        icon1="menu"
+      />
+
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
-           {/* <View style={{flexDirection: 'row', padding: 10}}>
+          {/* <View style={{flexDirection: 'row', padding: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
               Coupon Code
             </Text>
@@ -228,13 +232,15 @@ export default function CheckoutScreen(props: any) {
               <TouchableOpacity
                 style={[
                   styles.methodContainer,
-                  selectedMethod === 'Cash on delivery' && styles.selectedMethod,
+                  selectedMethod === 'Cash on delivery' &&
+                    styles.selectedMethod,
                 ]}
                 onPress={() => handlePaymentMethodPress('Cash on delivery')}>
                 <Text
                   style={[
                     styles.methodText,
-                    selectedMethod === 'Cash on delivery' && styles.selectedMethodText,
+                    selectedMethod === 'Cash on delivery' &&
+                      styles.selectedMethodText,
                   ]}>
                   Cash on Delivary
                 </Text>
@@ -253,8 +259,7 @@ export default function CheckoutScreen(props: any) {
                 }}
                 mode="contained"
                 onPress={checkoutHandleSubmit(onPressToSubmit)}
-                                // onPress={checkoutHandleSubmit()}
-                >
+              >
                 <Text
                   style={{
                     fontWeight: 'bold',
