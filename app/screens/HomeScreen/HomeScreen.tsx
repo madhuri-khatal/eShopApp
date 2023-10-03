@@ -7,7 +7,8 @@ import FeaturedCategories from '../../components/Product/FeaturedCategories';
 import ImageCarousel from '../../components/Product/ImageCarousel';
 import FeaturedProducts from '../../components/Product/FeaturedProducts';
 import HomeWhyUs from '../../components/Product/HomeWhyUs';
-import CouponCode from '../../components/Product/HomeCouponCode';
+// import CouponCode from '../../components/Product/HomeCouponCode';
+import CouponList from '../../components/Product/CouponList';
 
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
@@ -53,7 +54,8 @@ export default function HomeScreen({navigation}: any) {
         <ScrollView style={{marginBottom: 60}}>
           <ImageCarousel />
           <FeaturedCategories />
-          <CouponCode />
+          {/* <CouponCode /> */}
+          <CouponList/>
           {/* <FeaturedProducts products={products} /> */}
 
           <Text

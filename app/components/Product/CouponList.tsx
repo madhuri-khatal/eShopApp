@@ -56,27 +56,52 @@
 
 // export default CouponList;
 
-import {View, Text} from 'react-native';
-import React from 'react';
-import {useProductContext} from '../../context/ProductContext';
+// import {View, Text} from 'react-native';
+// import React from 'react';
+// import {useProductContext} from '../../context/ProductContext';
+
+// export default function CouponList() {
+//   const {couponData} = useProductContext();
+//   // console.log(couponData[0].code);
+
+//   return (
+//     <>
+//       {couponData?.map(item => {
+//         // console.log(item?.code);
+
+//         <View style={{flex: 1, flexDirection: 'row'}}>
+//           <View style={{width: '50%'}}>
+//             <Text style={{color: 'red', backgroundColor: 'black'}}>
+//               item?.code
+//             </Text>
+//           </View>
+//         </View>;
+//       })}
+//     </>
+//   );
+// }
+
+
+
+import { View, Text } from 'react-native'
+import React from 'react'
+import HomeCouponCode from './HomeCouponCode'
+import { useProductContext } from '../../context/ProductContext'
 
 export default function CouponList() {
-  const {couponData} = useProductContext();
-  // console.log(couponData[0].code);
-
+  const {couponData} =useProductContext();
+  console.log(couponData);
   return (
-    <>
-      {couponData?.map(item => {
-        // console.log(item?.code);
+    // <View style={{width:'100%',flexDirection:'row'}}>
+    //   {couponData.map((item: any) => (
+    //   <HomeCouponCode  item={item}/>
+    //   ))}
+    <View>
+    {couponData.map((item: any) => (
+    <HomeCouponCode  item={item}/>
+    ))}
 
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{width: '50%'}}>
-            <Text style={{color: 'red', backgroundColor: 'black'}}>
-              item?.code
-            </Text>
-          </View>
-        </View>;
-      })}
-    </>
-  );
+    
+    </View>
+  )
 }
