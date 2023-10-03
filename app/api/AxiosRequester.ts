@@ -40,6 +40,20 @@ export const Get = async <T>(
   return response;
 };
 
+export const GetFeatuare = async <T>(
+  path: string,
+  json?: AxiosRequestConfig<any> | undefined,
+) => {
+  let response: Response<T> = {};
+  try {
+
+    response.result = (await axios.get(`${API_URL}${path}`)) as T;
+  } catch (e: any) {
+    response.err = parseError(e.text);
+    response.status = e.status;
+  }
+  return response;
+};
 export const Delete = async <T>(
   path: string,
   json?: AxiosRequestConfig<any> | undefined,

@@ -28,6 +28,8 @@ interface IProductContext {
   refThreshold?: any;
   getProductByFeatureCategory: Function;
   couponData: any[];
+  getfeaturecategory: Function;
+  productByFeatureCategory: any[];
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -146,12 +148,11 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   };
 
   // Featured Products
-  // const getProductByFeatureCategory = async () => {
-  //   const {result} = await ProductApi.getProductByFeatureCategory();
-  //   setProductByFeatureCategory(result);
+  const getfeaturecategory = async () => {
+    const {result:{data}} = await FilterApi.getfeaturecategory();
+    setProductByFeatureCategory(data);
+     };
 
-  //   console.log('setProductByFeatureCategory', result);
-  // };
   const getProductByFeatureCategory = async () => {
     const res = await ProductApi.getProductByFeatureCategory();
     console.log('res====', res);
@@ -163,7 +164,6 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     getSubCategoery,
     subCategory,
     setSubCategory,
-
     setProductByID,
     getProductById,
     productById,
@@ -175,6 +175,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     refThreshold,
     getProductByFeatureCategory,
     couponData,
+    getfeaturecategory,
+    productByFeatureCategory,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
