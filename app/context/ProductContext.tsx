@@ -27,12 +27,14 @@ interface IProductContext {
   isLoading?: boolean;
   refThreshold?: any;
   getProductByFeatureCategory: Function;
+  couponData: any[];
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
 export const ProductContextProvider = ({children}: ProductContextType) => {
   const [data, setData] = useState<any>([1, 2, 3]);
   const [mainCategory, setMainCategory] = useState<any>([]);
+  const [couponData, setCouponData] = useState<any>([]);
   const [subCategory, setSubCategory] = useState<any>([]);
   const [productById, setProductByID] = useState<any>(null);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
@@ -91,6 +93,18 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
       err && console.log('error');
 
       setMainCategory(data);
+    })();
+  }, []);
+
+  // COUPON LIST
+  useEffect(() => {
+    (async () => {
+      const {
+        result: {data},
+        err,
+      } = await ProductApi.getCouponListAll();
+      err && console.log('error');
+      setCouponData(data);
     })();
   }, []);
 
@@ -160,6 +174,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     isLoading,
     refThreshold,
     getProductByFeatureCategory,
+    couponData,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
