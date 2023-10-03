@@ -9,6 +9,7 @@ import {Avatar, Divider, Appbar, Button} from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RandomAvatar from '../../components/ui/RandomAvtar';
 import {ScrollView} from 'react-native-gesture-handler';
+import { useCartContext } from '../../context/CartContext';
 
 export default function ProfileScreen(props: any) {
   // const {navigation} = props;
@@ -16,7 +17,11 @@ export default function ProfileScreen(props: any) {
   const _goBack = () => console.log('Went back');
   const _handleSearch = () => console.log('Searching');
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
-  const address = '1234 Example Street, City, State 12345, Country';
+
+  const {cartItems} = useCartContext();
+  const shipping = cartItems?.shipping_address;
+
+
   return (
     <ScrollView>
       <View>
@@ -29,7 +34,7 @@ export default function ProfileScreen(props: any) {
         <View style={{marginTop: 15}}>
           <View style={{alignItems: 'center', marginBottom: 10}}>
             <RandomAvatar />
-            <Text style={styles.userName}>John Doe</Text>
+            <Text style={styles.userName}>{shipping?.first_name}{shipping?.last_name}</Text>
 
             <View
               style={{
@@ -109,8 +114,7 @@ export default function ProfileScreen(props: any) {
                 <Text style={styles.sectionTitle}>Current Address</Text>
               </View>
               <Text style={styles.addressText}>
-                123 Demo Street Cityville, DemoState Country: DemoLand Postal
-                Code: 12345
+            {shipping?.address_1}
               </Text>
             </View>
             <Divider />
@@ -119,7 +123,7 @@ export default function ProfileScreen(props: any) {
               <View style={{flexDirection: 'row'}}>
                 <Text style={styles.sectionTitle}>Email Id</Text>
               </View>
-              <Text style={styles.addressText}>a@gmail.com</Text>
+              <Text style={styles.addressText}>{cartItems?.billing_address?.email}</Text>
             </View>
 
             <Divider />
@@ -128,7 +132,7 @@ export default function ProfileScreen(props: any) {
               <View style={{flexDirection: 'row'}}>
                 <Text style={styles.sectionTitle}>Contact Number</Text>
               </View>
-              <Text style={styles.addressText}>98765 43210</Text>
+              <Text style={styles.addressText}>{cartItems?.billing_address?.phone}</Text>
             </View>
           </View>
 
