@@ -54,7 +54,7 @@ export default function HomeScreen({navigation}: any) {
           <ImageCarousel />
           <FeaturedCategories />
           <CouponCode />
-          <FeaturedProducts products={products} />
+          {/* <FeaturedProducts products={products} /> */}
 
           <Text
             style={{
