@@ -81,27 +81,68 @@
 //   );
 // }
 
-
-
-import { View, Text } from 'react-native'
-import React from 'react'
-import HomeCouponCode from './HomeCouponCode'
-import { useProductContext } from '../../context/ProductContext'
+import {View, Text} from 'react-native';
+import React from 'react';
+import {useProductContext} from '../../context/ProductContext';
+import {FlatList} from 'react-native-gesture-handler';
 
 export default function CouponList() {
-  const {couponData} =useProductContext();
+  const {couponData} = useProductContext();
   console.log(couponData);
-  return (
-    // <View style={{width:'100%',flexDirection:'row'}}>
-    //   {couponData.map((item: any) => (
-    //   <HomeCouponCode  item={item}/>
-    //   ))}
-    <View>
-    {couponData.map((item: any) => (
-    <HomeCouponCode  item={item}/>
-    ))}
+  const getRandomColor = () => {
+    const colors = [
+      '#e3174b',
+      '#e83838',
+      '#a19999',
+      '#1f251e',
+      '#6f30cf',
+      '#467712',
+      '#000080',
+    ];
 
-    
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  };
+  return (
+    <View
+      style={{
+        borderRadius: 10,
+        marginVertical: 16,
+        marginTop: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 5,
+      }}>
+      <FlatList
+        data={couponData}
+        keyExtractor={(item: any) => item.id.toString()}
+        numColumns={2}
+        renderItem={({item}: any) => (
+          <View
+            style={{
+              // borderRadius: 20,
+              marginBottom: 5,
+              width: '50%',
+              padding: 8,
+              marginRight: 4,
+              backgroundColor: getRandomColor(),
+            }}>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                fontSize: 20,
+                color: '#ffffff',
+                textAlign: 'center',
+                margin: 5,
+              }}>
+              {item.code}
+            </Text>
+            <Text style={{fontSize: 16, color: 'black'}}>
+              {item.description}
+            </Text>
+          </View>
+        )}
+      />
     </View>
-  )
+  );
 }
