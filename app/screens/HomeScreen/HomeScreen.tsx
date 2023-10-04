@@ -13,7 +13,6 @@ import Footer from '../../components/Product/Footer';
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
 
-  
   return (
     <>
       <View>
@@ -25,9 +24,9 @@ export default function HomeScreen({navigation}: any) {
         <ScrollView style={{marginBottom: 60}}>
           <ImageCarousel />
           <FeaturedCategories />
-          <Festival/>
-                  <CouponList/>
-                  <Text
+          <Festival />
+          <CouponList />
+          <Text
             style={{
               fontSize: 20,
               fontWeight: 'bold',
@@ -35,10 +34,10 @@ export default function HomeScreen({navigation}: any) {
               padding: 10,
               textAlign: 'center',
             }}>
-            WHY SHG E SHOP
+            Why SHG E Shop
           </Text>
           <HomeWhyUs />
-          <Footer/>
+          <Footer />
         </ScrollView>
       </View>
     </>

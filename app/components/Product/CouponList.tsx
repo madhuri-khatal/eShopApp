@@ -6,28 +6,14 @@ import {Image} from 'react-native';
 
 export default function CouponList() {
   const {couponData} = useProductContext();
-  const getRandomColor = () => {
-    const colors = [
-      '#007bff',
-      '#17a2b8',
-      '#28a745',
-      '#e95d2a',
-      '#dc3545',
-      '#6c757d',
-    ];
-    for (let i = colors.length - 5; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [colors[i], colors[j]] = [colors[j], colors[i]];
-    }
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
-  };
+  const isOddLength = couponData.length === 1;
+  const itemWidth = isOddLength ? '99%' : '49%';
 
   return (
     <View
       style={{
         borderRadius: 10,
-        backgroundColor: '#c8e6ca',
+        backgroundColor: '#fcf4d9',
         alignItems: 'center',
         padding: 5,
         marginVertical: 4,
@@ -38,10 +24,10 @@ export default function CouponList() {
           fontSize: 20,
           fontWeight: 'bold',
           lineHeight: 28,
-          paddingTop: 30,
+          paddingVertical: 20,
           textAlign: 'center',
         }}>
-        SPECIAL OFFERS
+        Special Offers
       </Text>
       <FlatList
         data={couponData}
@@ -50,7 +36,7 @@ export default function CouponList() {
         renderItem={({item}: any) => (
           <View
             style={{
-              width: '49%',
+              width: itemWidth,
               marginVertical: 4,
               marginRight: 4,
               elevation: 5,
@@ -72,15 +58,17 @@ export default function CouponList() {
                     paddingBottom: 0,
                     marginTop: 15,
                     textAlign: 'center',
+                    color: '#506574',
                   }}>
                   {item.amount}₹ Off
                 </Text>
                 <Text
                   style={{
                     fontWeight: '600',
-                    fontSize: 14,
+                    fontSize: 16,
                     paddingBottom: 15,
-                    color: '#c2c2c2',
+                    color: '#506574',
+                    opacity: 0.5,
                     textAlign: 'center',
                   }}>
                   {item.code}
@@ -96,7 +84,7 @@ export default function CouponList() {
                   style={{
                     width: 65,
                     height: 65,
-                    justifyContent: 'center',                                                                                                                                               
+                    justifyContent: 'center',
                   }}
                 />
               </View>
@@ -104,12 +92,14 @@ export default function CouponList() {
 
             <Text
               style={{
-                fontSize: 14,
-                padding: 10,
+                fontSize: 13,
+                padding: 20,
                 marginTop: 5,
                 borderTopColor: '#e0e0e0',
                 borderTopWidth: 2,
                 borderStyle: 'dotted',
+                textAlign: 'center',
+                color: '#506574',
               }}>
               {item.description}
             </Text>
