@@ -30,7 +30,11 @@ export default function HomeScreen({navigation}: any) {
           <CouponList/>
           {/* <FeaturedProducts products={products} /> */}
 
-          {/* <CouponList /> */}
+          <Festival/>
+          {/* <CouponCode /> */}
+          <CouponList/>
+          {/* <FeaturedProducts products={products} /> */}
+
           {/* <FeaturedProducts products={products} /> */}
           <Text
             style={{
