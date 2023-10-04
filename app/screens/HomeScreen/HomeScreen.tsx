@@ -5,9 +5,7 @@ import {Appbar, Text} from 'react-native-paper';
 import {DrawerActions} from '@react-navigation/native';
 import FeaturedCategories from '../../components/Product/FeaturedCategories';
 import ImageCarousel from '../../components/Product/ImageCarousel';
-import FeaturedProducts from '../../components/Product/FeaturedProducts';
 import HomeWhyUs from '../../components/Product/HomeWhyUs';
-// import CouponCode from '../../components/Product/HomeCouponCode';
 import CouponList from '../../components/Product/CouponList';
 import Festival from '../../components/Product/Festival';
 import Footer from '../../components/Product/Footer';
@@ -32,6 +30,8 @@ export default function HomeScreen({navigation}: any) {
           <CouponList/>
           {/* <FeaturedProducts products={products} /> */}
 
+          {/* <CouponList /> */}
+          {/* <FeaturedProducts products={products} /> */}
           <Text
             style={{
               fontSize: 20,

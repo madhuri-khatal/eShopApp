@@ -17,7 +17,6 @@ export default function CheckoutScreen(props: any) {
   const {
     checkoutControl,
     checkoutHandleSubmit,
-    onCreateCustomer,
     onCallToTheCustomerAndCheckout,
   } = useCheckoutContext();
 
@@ -258,8 +257,7 @@ export default function CheckoutScreen(props: any) {
                   justifyContent: 'center',
                 }}
                 mode="contained"
-                onPress={checkoutHandleSubmit(onPressToSubmit)}
-              >
+                onPress={checkoutHandleSubmit(onPressToSubmit)}>
                 <Text
                   style={{
                     fontWeight: 'bold',
