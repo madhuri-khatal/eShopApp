@@ -25,14 +25,16 @@ export default function HomeScreen({navigation}: any) {
         <ScrollView style={{marginBottom: 60}}>
           <ImageCarousel />
           <FeaturedCategories />
+          <Festival/>
+          {/* <CouponCode /> */}
+          <CouponList/>
+          {/* <FeaturedProducts products={products} /> */}
 
           <Festival/>
           {/* <CouponCode /> */}
           <CouponList/>
           {/* <FeaturedProducts products={products} /> */}
 
-
-          <CouponList />
           {/* <FeaturedProducts products={products} /> */}
           <Text
             style={{
