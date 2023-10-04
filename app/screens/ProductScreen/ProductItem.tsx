@@ -31,6 +31,7 @@ export default function ProductItem({product}: IProps) {
     navigation.navigate('ProductDetailsScreen', {productId: product.id});
   };
 
+  
   let productImageSrc = null;
 
   if (product.images && product.images.length > 0) {
@@ -69,36 +70,45 @@ export default function ProductItem({product}: IProps) {
             ellipsizeMode="tail">
             {product.name}
           </Text>
-          {product?.sale_price > 1 && (
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginLeft: 10,
-              }}>
-              <Text
-                style={{
-                  textDecorationLine: 'line-through',
-                  marginRight: 8,
-                  fontSize: 17,
-                  fontWeight: 'bold',
-                  color: '#cc3a1d',
-                }}>
-                <CurrencyComponent value={product.price} />
-              </Text>
-              <CurrencyComponent
-                value={product.sale_price}
-                style={{fontSize: 18, fontWeight: 'bold'}}
-              />
-            </View>
-          )}
+        
+{product?.price > 1 && (
+  <View
+    style={{
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginLeft: 10,
+    }}>
+    <Text
+      style={{
+        textDecorationLine: 'line-through',
+        marginRight: 8,
+        fontSize: 17,
+        fontWeight: 'bold',
+        color: '#cc3a1d',
+      }}>
+      {product.regular_price ? (
+        <CurrencyComponent value={product.regular_price} />
+      ) : null}
+    </Text>
+    <CurrencyComponent
+      value={product.price}
+      style={{ fontSize: 18, fontWeight: 'bold' }}
+    />
+  </View>
+)}
 
-          {product?.sale_price <= 1 && (
-            <CurrencyComponent
-              value={product.price}
-              style={{fontSize: 17, fontWeight: 'bold', marginLeft: 10}}
-            />
-          )}
+{product?.price <= 1 && (
+  <CurrencyComponent
+    value={product.regular_price || product.price}
+    style={{
+      fontSize: 17,
+      fontWeight: 'bold',
+      marginLeft: 10,
+      color: product.regular_price ? 'red' : 'black',
+    }}
+  />
+)}
+
 
           <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{marginBottom: 10}}>
