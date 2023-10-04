@@ -13,36 +13,7 @@ import CouponList from '../../components/Product/CouponList';
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
 
-  const products = [
-    {
-      id: 1,
-      title: 'Product 1',
-      price: 19.99,
-      image:
-        'https://shgeshop.com/wp-content/uploads/2023/08/homepage-slider-image1.png',
-    },
-    {
-      id: 2,
-      title: 'Product 2',
-      price: 24.99,
-      image:
-        'https://shgeshop.com/wp-content/uploads/2023/08/homepage-slider-image1.png',
-    },
-    {
-      id: 3,
-      title: 'Product 3',
-      price: 14.99,
-      image:
-        'https://shgeshop.com/wp-content/uploads/2023/08/homepage-slider-image1.png',
-    },
-    {
-      id: 4,
-      title: 'Product 4',
-      price: 29.99,
-      image:
-        'https://shgeshop.com/wp-content/uploads/2023/08/homepage-slider-image1.png',
-    },
-  ];
+  
   return (
     <>
       <View>
