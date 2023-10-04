@@ -7,6 +7,8 @@ import FeaturedCategories from '../../components/Product/FeaturedCategories';
 import ImageCarousel from '../../components/Product/ImageCarousel';
 import HomeWhyUs from '../../components/Product/HomeWhyUs';
 import CouponList from '../../components/Product/CouponList';
+import Festival from '../../components/Product/Festival';
+import Footer from '../../components/Product/Footer';
 
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
@@ -24,6 +26,12 @@ export default function HomeScreen({navigation}: any) {
           <ImageCarousel />
           <FeaturedCategories />
 
+          <Festival/>
+          {/* <CouponCode /> */}
+          <CouponList/>
+          {/* <FeaturedProducts products={products} /> */}
+
+
           <CouponList />
           {/* <FeaturedProducts products={products} /> */}
           <Text
@@ -37,6 +45,7 @@ export default function HomeScreen({navigation}: any) {
             WHY SHG E SHOP
           </Text>
           <HomeWhyUs />
+          <Footer/>
         </ScrollView>
       </View>
     </>
