@@ -80,10 +80,20 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                       alignItems: 'center',
                       marginBottom: 8,
                     }}>
-                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                    <Text
+                      style={{
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        color: '#506574',
+                      }}>
                       Shipping Price:
                     </Text>
-                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                    <Text
+                      style={{
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        color: '#506574',
+                      }}>
                       ₹ {cartItems?.totals?.total_shipping / 100}
                     </Text>
                   </View>
@@ -94,10 +104,20 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                       alignItems: 'center',
                       marginBottom: 8,
                     }}>
-                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                    <Text
+                      style={{
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        color: '#506574',
+                      }}>
                       Total:
                     </Text>
-                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                    <Text
+                      style={{
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        color: '#506574',
+                      }}>
                       ₹ {formattedPrice}
                     </Text>
                   </View>
@@ -134,6 +154,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                   fontWeight: 'bold',
                   textAlign: 'right',
                   marginRight: 20,
+                  color: '#506574',
                 }}
                 onPress={handleClose}>
                 X
