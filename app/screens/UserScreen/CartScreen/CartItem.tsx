@@ -86,7 +86,7 @@ const CartItem = ({item, onRemove}: any) => {
       </View>
       <View style={{marginRight: 15}}>
         <TouchableOpacity onPress={() => onDeletehowDialog(item.key)}>
-          <FontAwesome5 name="trash" size={24} color="#e95d2a" />
+          <FontAwesome5 name="trash" size={23} color="#e95d2a" />
         </TouchableOpacity>
       </View>
     </View>

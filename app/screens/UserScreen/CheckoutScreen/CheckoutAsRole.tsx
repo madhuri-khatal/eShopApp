@@ -42,7 +42,6 @@ export default function CheckoutAsRole(props: any) {
                 marginTop: 30,
                 justifyContent: 'center',
               }}
-              mode="outlined"
               onPress={() => navigation.navigate('LoginScreen')}>
               <Text
                 style={{
