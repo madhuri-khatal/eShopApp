@@ -26,17 +26,8 @@ export default function HomeScreen({navigation}: any) {
           <ImageCarousel />
           <FeaturedCategories />
           <Festival/>
-          {/* <CouponCode /> */}
-          <CouponList/>
-          {/* <FeaturedProducts products={products} /> */}
-
-          <Festival/>
-          {/* <CouponCode /> */}
-          <CouponList/>
-          {/* <FeaturedProducts products={products} /> */}
-
-          {/* <FeaturedProducts products={products} /> */}
-          <Text
+                  <CouponList/>
+                  <Text
             style={{
               fontSize: 20,
               fontWeight: 'bold',
