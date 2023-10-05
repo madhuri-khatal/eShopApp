@@ -29,6 +29,9 @@ export default function ProductItem({product}: IProps) {
   const handlePress = async () => {
     await getProductById(product.id);
     navigation.navigate('ProductDetailsScreen', {productId: product.id});
+    // navigation.navigate('ProductsListScreen', {productId: product.id});
+    console.log("clicked",product.id);
+    
   };
 
   

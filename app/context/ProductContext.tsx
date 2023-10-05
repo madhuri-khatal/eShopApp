@@ -30,6 +30,9 @@ interface IProductContext {
   couponData: any[];
   getfeaturecategory: Function;
   productByFeatureCategory: any[];
+  // productData: any[]
+  // productlist: () => Promise<void>
+
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -40,9 +43,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [subCategory, setSubCategory] = useState<any>([]);
   const [productById, setProductByID] = useState<any>(null);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
-  const [productByFeatureCategory, setProductByFeatureCategory] = useState<
-    any[]
-  >([]);
+  const [productByFeatureCategory, setProductByFeatureCategory] = useState<any[]>([]);
+  // const [productData,setProductData]=useState<any[]>([])
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation: any = useNavigation();
@@ -64,7 +66,18 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
       }
     })();
   }, []);
-
+// productlist
+// const productlist = async () => {
+//   try {
+//     const {
+//       result: {data},
+//       err,
+//     } = await ProductApi.getProductList();
+//     setProductData(data);
+//   } catch (error: any) {
+//     console.error(error);
+//   }
+// };
   // PAGINATION
   const fetchMoreData = async () => {
     try {
@@ -177,6 +190,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     couponData,
     getfeaturecategory,
     productByFeatureCategory,
+    // productData,
+    // productlist
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
