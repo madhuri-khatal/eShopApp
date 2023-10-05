@@ -7,6 +7,7 @@ import FilterMenu from '../../screens/FilterScreen/FilterMenu';
 import {useCartContext} from '../../context/CartContext';
 import CustomSearchBar from '../../components/Product/SearchBar';
 import {useProductContext} from '../../context/ProductContext';
+// import ListOFProducts from './ProductDetailsScreen/ListOFProducts';
 export const ProductsScreen = (props: any) => {
   const {navigation} = props;
   const {cartItems, getCartList} = useCartContext();
@@ -65,7 +66,9 @@ export const ProductsScreen = (props: any) => {
         <FilterMenu />
       </View>
       <View style={{marginTop: 40}}>
+      {/* <ListOFProducts/> */}
       <ProductList filteredProducts={filteredProducts} />
+      
       </View>
     </>
   );

@@ -19,7 +19,10 @@ export default function HomeStackScreen() {
         initialRouteName="HomeScreen">
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="ProductsListScreen" component={ProductStackScreen} />
-       
+        <Stack.Screen
+            name="ProductDetailsScreen"
+            component={ProductDetailsScreen}
+          />
       </Stack.Navigator>
     </>
   );

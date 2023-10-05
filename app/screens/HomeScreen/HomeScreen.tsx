@@ -9,6 +9,9 @@ import HomeWhyUs from '../../components/Product/HomeWhyUs';
 import CouponList from '../../components/Product/CouponList';
 import Festival from '../../components/Product/Festival';
 import Footer from '../../components/Product/Footer';
+import { ProductsScreen } from '../../screens/ProductScreen/ProductsScreen';
+import ProductList from '../../screens/ProductScreen/ProductList';
+import ListOFProducts from '../../screens/ProductScreen/ProductDetailsScreen/ListOFProducts';
 
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
@@ -25,6 +28,9 @@ export default function HomeScreen({navigation}: any) {
           <ImageCarousel />
           <FeaturedCategories />
           <Festival />
+          {/* <ProductsScreen/> */}
+          <ListOFProducts/>
+{/* <ProductList/> */}
           <CouponList />
           <Text
             style={{
