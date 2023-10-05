@@ -26,6 +26,7 @@ export default function CouponList() {
           lineHeight: 28,
           paddingVertical: 20,
           textAlign: 'center',
+          color: '#506574',
         }}>
         Special Offers
       </Text>

@@ -33,6 +33,7 @@ export default function HomeScreen({navigation}: any) {
               lineHeight: 28,
               padding: 10,
               textAlign: 'center',
+              color: '#506574',                               
             }}>
             Why SHG E Shop
           </Text>
