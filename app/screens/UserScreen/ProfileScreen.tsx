@@ -9,7 +9,7 @@ import {Avatar, Divider, Appbar, Button} from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RandomAvatar from '../../components/ui/RandomAvtar';
 import {ScrollView} from 'react-native-gesture-handler';
-import { useCartContext } from '../../context/CartContext';
+import {useCartContext} from '../../context/CartContext';
 
 export default function ProfileScreen(props: any) {
   // const {navigation} = props;
@@ -20,7 +20,6 @@ export default function ProfileScreen(props: any) {
 
   const {cartItems} = useCartContext();
   const shipping = cartItems?.shipping_address;
-
 
   return (
     <ScrollView>
@@ -34,7 +33,10 @@ export default function ProfileScreen(props: any) {
         <View style={{marginTop: 15}}>
           <View style={{alignItems: 'center', marginBottom: 10}}>
             <RandomAvatar />
-            <Text style={styles.userName}>{shipping?.first_name}{shipping?.last_name}</Text>
+            <Text style={styles.userName}>
+              {shipping?.first_name}
+              {shipping?.last_name}
+            </Text>
 
             <View
               style={{
@@ -113,9 +115,7 @@ export default function ProfileScreen(props: any) {
               <View style={{flexDirection: 'row', marginTop: -10}}>
                 <Text style={styles.sectionTitle}>Current Address</Text>
               </View>
-              <Text style={styles.addressText}>
-            {shipping?.address_1}
-              </Text>
+              <Text style={styles.addressText}>{shipping?.address_1}</Text>
             </View>
             <Divider />
 
@@ -123,7 +123,9 @@ export default function ProfileScreen(props: any) {
               <View style={{flexDirection: 'row'}}>
                 <Text style={styles.sectionTitle}>Email Id</Text>
               </View>
-              <Text style={styles.addressText}>{cartItems?.billing_address?.email}</Text>
+              <Text style={styles.addressText}>
+                {cartItems?.billing_address?.email}
+              </Text>
             </View>
 
             <Divider />
@@ -132,7 +134,9 @@ export default function ProfileScreen(props: any) {
               <View style={{flexDirection: 'row'}}>
                 <Text style={styles.sectionTitle}>Contact Number</Text>
               </View>
-              <Text style={styles.addressText}>{cartItems?.billing_address?.phone}</Text>
+              <Text style={styles.addressText}>
+                {cartItems?.billing_address?.phone}
+              </Text>
             </View>
           </View>
 
@@ -197,6 +201,7 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 18,
     marginTop: 10,
+    color: '#506574',
   },
   editProfileText: {
     color: 'blue',

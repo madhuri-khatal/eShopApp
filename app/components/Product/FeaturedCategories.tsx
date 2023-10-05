@@ -7,9 +7,8 @@
 //   useEffect(() => {
 //     getfeaturecategory();
 //   }, []);
-  
-// console.log("id=====",productByFeatureCategory[0]?.id);
 
+// console.log("id=====",productByFeatureCategory[0]?.id);
 
 //   return (
 //     <View style={styles.container}>
@@ -47,22 +46,21 @@
 
 // export default FeaturedCategories;
 
-
-import { useNavigation } from '@react-navigation/native';
-import { useProductContext } from '../../context/ProductContext';
-import React, { useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useProductContext} from '../../context/ProductContext';
+import React, {useEffect} from 'react';
+import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 const FeaturedCategories = () => {
-  const { getfeaturecategory, productByFeatureCategory,getProductByCategoryId } = useProductContext();
+  const {getfeaturecategory, productByFeatureCategory, getProductByCategoryId} =
+    useProductContext();
   const navigation: any = useNavigation();
   useEffect(() => {
     getfeaturecategory();
   }, []);
 
-
-  const handleCategoryPress = (id:number|string) => {
-       getProductByCategoryId(id)
+  const handleCategoryPress = (id: number | string) => {
+    getProductByCategoryId(id);
     navigation.navigate('ProductsListScreen', {id});
   };
 
@@ -72,9 +70,11 @@ const FeaturedCategories = () => {
         <TouchableOpacity
           key={category.id}
           style={styles.categoryItem}
-          onPress={() => handleCategoryPress(category?.id)}
-        >
-          <Image source={{ uri: category?.category_image }} style={styles.categoryImage} />
+          onPress={() => handleCategoryPress(category?.id)}>
+          <Image
+            source={{uri: category?.category_image}}
+            style={styles.categoryImage}
+          />
           <Text style={styles.categoryTitle}>{category?.name}</Text>
         </TouchableOpacity>
       ))}
@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
   categoryTitle: {
     marginTop: 10,
     fontSize: 16,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#506574',
   },
 });
 
