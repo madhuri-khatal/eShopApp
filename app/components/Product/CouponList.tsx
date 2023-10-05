@@ -48,7 +48,6 @@ export default function CouponList() {
                 style={{
                   flexDirection: 'column',
                   width: '60%',
-                  // backgroundColor: '#000',
                 }}>
                 <Text
                   style={{
@@ -60,7 +59,7 @@ export default function CouponList() {
                     textAlign: 'center',
                     color: '#506574',
                   }}>
-                  {item.amount}₹ Off
+                  {item.amount}% Off
                 </Text>
                 <Text
                   style={{
