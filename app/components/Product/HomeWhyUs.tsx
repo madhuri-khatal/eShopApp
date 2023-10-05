@@ -4,7 +4,7 @@ import {Card} from 'react-native-paper';
 
 export default function HomeWhyUs() {
   return (
-    <View style={{backgroundColor: '#fae8e7', paddingBottom: 20}}>
+    <View style={{backgroundColor: '#fae8e7'}}>
       <View
         style={{
           backgroundColor: 'white',
