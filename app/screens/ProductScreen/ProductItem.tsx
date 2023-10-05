@@ -113,7 +113,7 @@ export default function ProductItem({product}: IProps) {
           <View style={{flex: 1, flexDirection: 'row'}}>
             <View style={{marginBottom: 10}}>
               <Rating
-                rating={product?.rating_count}
+                rating={product?.average_rating}
                 maxRating={5}
                 editable={true}
                 iconFilled={
