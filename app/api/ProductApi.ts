@@ -31,6 +31,10 @@ export const ProductApi = {
   getCouponListAll: async () => {
     return await Get<any>(`/wp-json/wc/v3/coupons`);
   },
+
+  getHomeSliderImages: async () => {
+    return await Get<any>('/wp-json/custom/v1/slider-images/12867');
+  },
   // for feture categry
   // not working
   // not working

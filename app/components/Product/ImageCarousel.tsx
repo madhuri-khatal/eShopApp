@@ -1,3 +1,4 @@
+import {useProductContext} from '../../context/ProductContext';
 import React, {useState, useEffect} from 'react';
 import {View, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -9,6 +10,7 @@ const images = [
 ];
 
 const ImageCarousel = () => {
+  const {getHomeSlider} = useProductContext();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextImage = () => {
@@ -30,6 +32,10 @@ const ImageCarousel = () => {
     // Clean up the interval on component unmount
     return () => clearInterval(interval);
   }, [currentIndex]);
+
+  useEffect(() => {
+    getHomeSlider();
+  });
 
   return (
     <View style={styles.container}>
