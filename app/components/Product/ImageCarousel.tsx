@@ -6,6 +6,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const ImageCarousel = () => {
   const {getHomeSlider,sliderData} = useProductContext();
+  // console.log(sliderData,"sliderData");
+  
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextImage = () => {
@@ -31,7 +33,6 @@ const ImageCarousel = () => {
   useEffect(() => {
     getHomeSlider();
   });
-  
 
   return (
     <View style={styles.container}>
@@ -39,13 +40,15 @@ const ImageCarousel = () => {
         <AntDesign name="left" size={24} color="lightgray" />
       </TouchableOpacity>
       <View style={styles.carousel}>
-        {sliderData.map((image: any, index: React.Key | null | undefined) => (
+        {/* {sliderData.map((image: any, index:number ) => ( */}
           <Image
-            key={index}
-            source={{uri: image}}
-            style={[styles.image, index === currentIndex && styles.activeImage]}
+            // key={index}
+            source={{uri: sliderData[0]}}
+            style={[styles.image,     
+                  //  index === currentIndex &&
+               styles.activeImage]}
           />
-        ))}
+       {/* ))}  */}
       </View>
       <TouchableOpacity style={styles.arrowRight} onPress={nextImage}>
         <AntDesign name="right" size={24} color="lightgray" />

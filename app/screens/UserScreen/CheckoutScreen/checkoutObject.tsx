@@ -30,17 +30,18 @@ export const checkoutObject = (
 ) => {
   const shipping = shippingData(formData);
   const biilingData = billingFormat(formData);
-  const {coupon_lines} = formData;
+  // const {coupon_lines} = formData;
   return {
     payment_method: selectedMethod || 'cod',
     payment_method_title: selectedMethod || 'cod',
     status: 'processing',
     customer_id: customerId,
     set_paid: true,
-    coupon_lines: coupon_lines,
+    // coupon_lines: coupon_lines,
     // coupon_lines: [`SHGPurvaMadhuri`],
     billing: {
-      ...biilingData,
+      // ...biilingData,
+      ...formData,
       country: 'IN',
     },
 
