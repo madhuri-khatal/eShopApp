@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button} from 'react-native-paper';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+  import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function WishlistComponent() {
   const [isLiked, setIsLiked] = useState(false);

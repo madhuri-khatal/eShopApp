@@ -7,42 +7,35 @@ import CurrencyComponent from '../../../components/ui/Currencycomponent';
 import React, {useState, useRef, useEffect} from 'react';
 import Carousel from 'react-native-reanimated-carousel';
 import ImageComponent from '../../../components/ui/Image';
-import WishlistComponent from '../../../components/Product/WishlistComponent';
 import WeightList from '../../WeightListScreen/WeightList';
 import QuantityComponent from '../../../components/Product/QuantityComponent';
 import AnimatedDotsCarousel from 'react-native-animated-dots-carousel';
 import {responsiveWidth} from 'react-native-responsive-dimensions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useProductContext} from '../../../context/ProductContext';
 import HTMLView from 'react-native-htmlview';
 import {useCartContext} from '../../../context/CartContext';
-
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
   const [index, setIndex] = useState<number>(0);
-
   const width = Dimensions.get('window').width;
   const refWidth = useRef(0.6);
   const handleIndex = (index: number) => {
     setIndex(index);
   };
-
   const {addToCart, quantity, price, cartItems, getCartList} = useCartContext();
-
   useEffect(() => {
     (async () => {
       await getCartList();
     })();
   }, []);
   const badgeCount = cartItems?.items.length || 0;
-
   const {productById} = useProductContext();
-
   const addCart = async () => {
     const id = productById?.variations[0];
     addToCart(id, quantity);
   };
-
   // CODE FOR REMOVE <P>DESCRIPTION</P> TAG
   const [descriptionText, setDescriptionText] = useState<string>('');
   const [shortDescriptionText, setShortDescriptionText] = useState<string>('');
@@ -193,18 +186,17 @@ export const ProductDetailsScreen = (props: any) => {
                 </View>
               </View>
             </View>
-            {/* <View style={{alignItems: 'flex-end', paddingRight: 18}}>
-              <WishlistComponent />
-            </View> */}
+            <View style={{alignItems: 'flex-end', paddingRight: 18}}>
+              <FontAwesome name="share" color="gray" size={24} />
+            </View>
           </View>
 
           <Text
             style={{
-              fontSize: 26,
+              fontSize: 24,
               fontWeight: 'bold',
               paddingLeft: 10,
               textTransform: 'capitalize',
-              marginBottom: 5,
               color: '#595555',
             }}>
             {productById?.name}
@@ -216,7 +208,6 @@ export const ProductDetailsScreen = (props: any) => {
               <Text
                 style={{
                   fontSize: 22,
-                  paddingTop: 13,
                   marginLeft: 15,
                   color: '#b1b1b1',
                 }}>

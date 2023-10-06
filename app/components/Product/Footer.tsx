@@ -15,16 +15,15 @@ export default function Footer() {
             />
           </View>
           <View style={{width: '85%'}}>
-            <Text style={{fontWeight: 'bold'}}>
+            <Text style={{fontWeight: 'bold', color: '#506574'}}>
               Need help? Call us: (+91) 8459172859
             </Text>
-            <Text>
+            <Text style={{color: '#506574'}}>
               Monday - Friday: 8:00 - 21:00 Saturday - Sunday 9:00 - 18:00
             </Text>
           </View>
         </View>
-
-              </View>
+      </View>
     </>
   );
 }

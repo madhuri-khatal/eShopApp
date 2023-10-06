@@ -21,6 +21,11 @@ export default function ProfileScreen(props: any) {
   const {cartItems} = useCartContext();
   const shipping = cartItems?.shipping_address;
 
+  const firstNameInitial = shipping?.first_name?.charAt(0);
+  const lastNameInitial =
+    shipping?.last_name?.charAt(0) ||
+    cartItems?.billing_address?.last_name?.charAt(0);
+  const initials = `${firstNameInitial}${lastNameInitial}`;
   return (
     <ScrollView>
       <View>
@@ -32,10 +37,10 @@ export default function ProfileScreen(props: any) {
 
         <View style={{marginTop: 15}}>
           <View style={{alignItems: 'center', marginBottom: 10}}>
-            <RandomAvatar />
+            <RandomAvatar label={initials} />
             <Text style={styles.userName}>
-              {shipping?.first_name}
-              {shipping?.last_name}
+              {shipping?.first_name}{' '}
+              {shipping?.last_name || cartItems?.billing_address?.last_name}
             </Text>
 
             <View
@@ -216,6 +221,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#506574',
   },
   addressSection: {
     paddingVertical: 15,
@@ -224,6 +230,7 @@ const styles = StyleSheet.create({
   addressText: {
     fontSize: 16,
     marginTop: 10,
+    color: '#506574',
   },
   editProfileButton: {
     flexDirection: 'row',
