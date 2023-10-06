@@ -67,18 +67,22 @@ export const ProductDetailsScreen = (props: any) => {
   const firstPrice = prices[0];
   const secondPrice = prices[1];
 
-  const handleWhatsAppLink = (id: number | string, message: string = '') => {
+  const handleWhatsAppLink = (
+    id: number | string,
+    message: string = '',
+    img: any,
+  ) => {
     const whatsappLink = `https://wa.me/${id}?text=${encodeURIComponent(
       message,
     )}`;
     Linking.openURL(whatsappLink);
   };
-  const shareProduct = async () => {
-    const defaultMessage = ` ${productById?.permalink} ${productById?.name}`;
-    await handleWhatsAppLink('', defaultMessage);
-  };
-  console.log(productById?.images[0]?.src);
 
+  const imageSrc = productById?.images[0]?.src;
+  const shareProduct = async () => {
+    const defaultMessage = ` ${productById?.permalink} \n \n ${productById?.name}`;
+    await handleWhatsAppLink('', defaultMessage, imageSrc);
+  };
   return (
     <>
       <HeaderBar
