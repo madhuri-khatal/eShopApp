@@ -30,9 +30,9 @@ interface IProductContext {
   couponData: any[];
   getfeaturecategory: Function;
   productByFeatureCategory: any[];
+  getHomeSlider: Function;
   // productData: any[]
   // productlist: () => Promise<void>
-
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -43,7 +43,9 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [subCategory, setSubCategory] = useState<any>([]);
   const [productById, setProductByID] = useState<any>(null);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
-  const [productByFeatureCategory, setProductByFeatureCategory] = useState<any[]>([]);
+  const [productByFeatureCategory, setProductByFeatureCategory] = useState<
+    any[]
+  >([]);
   // const [productData,setProductData]=useState<any[]>([])
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -66,18 +68,18 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
       }
     })();
   }, []);
-// productlist
-// const productlist = async () => {
-//   try {
-//     const {
-//       result: {data},
-//       err,
-//     } = await ProductApi.getProductList();
-//     setProductData(data);
-//   } catch (error: any) {
-//     console.error(error);
-//   }
-// };
+  // productlist
+  // const productlist = async () => {
+  //   try {
+  //     const {
+  //       result: {data},
+  //       err,
+  //     } = await ProductApi.getProductList();
+  //     setProductData(data);
+  //   } catch (error: any) {
+  //     console.error(error);
+  //   }
+  // };
   // PAGINATION
   const fetchMoreData = async () => {
     try {
@@ -154,7 +156,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     try {
       const {result: {data = []} = {}, err} =
         await ProductApi.getProductByCategoryId(id);
-              setProductByCategoryId(data);
+      setProductByCategoryId(data);
     } catch (err: any) {
       console.log('Error in Product By Cateory Id', err);
     }
@@ -162,12 +164,19 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
 
   // Featured Products
   const getfeaturecategory = async () => {
-    const {result:{data}} = await FilterApi.getfeaturecategory();
+    const {
+      result: {data},
+    } = await FilterApi.getfeaturecategory();
     setProductByFeatureCategory(data);
-     };
+  };
 
   const getProductByFeatureCategory = async () => {
     const res = await ProductApi.getProductByFeatureCategory();
+  };
+
+  // HomePage Slider
+  const getHomeSlider = async () => {
+    const res = await ProductApi.getHomeSliderImages();
     console.log('res====', res);
   };
 
@@ -190,6 +199,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     couponData,
     getfeaturecategory,
     productByFeatureCategory,
+    getHomeSlider,
     // productData,
     // productlist
   };

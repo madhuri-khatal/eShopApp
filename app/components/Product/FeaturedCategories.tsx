@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   categoryImage: {
     width: 80,
     height: 80,
-    borderRadius: 40,
+    // borderRadius: 40,
   },
   categoryTitle: {
     marginTop: 10,
