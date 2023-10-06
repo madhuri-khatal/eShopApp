@@ -16,6 +16,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useProductContext} from '../../../context/ProductContext';
 import HTMLView from 'react-native-htmlview';
 import {useCartContext} from '../../../context/CartContext';
+import {Linking} from 'react-native';
 export const ProductDetailsScreen = (props: any) => {
   const {navigation} = props;
   const [index, setIndex] = useState<number>(0);
@@ -65,6 +66,19 @@ export const ProductDetailsScreen = (props: any) => {
   }
   const firstPrice = prices[0];
   const secondPrice = prices[1];
+
+  const handleWhatsAppLink = (id: number | string, message: string = '') => {
+    const whatsappLink = `https://wa.me/${id}?text=${encodeURIComponent(
+      message,
+    )}`;
+    Linking.openURL(whatsappLink);
+  };
+  const shareProduct = async () => {
+    const defaultMessage = ` ${productById?.permalink} ${productById?.name}`;
+    await handleWhatsAppLink('', defaultMessage);
+  };
+  console.log(productById?.images[0]?.src);
+
   return (
     <>
       <HeaderBar
@@ -186,9 +200,11 @@ export const ProductDetailsScreen = (props: any) => {
                 </View>
               </View>
             </View>
-            <View style={{alignItems: 'flex-end', paddingRight: 18}}>
+            <Button
+              onPress={shareProduct}
+              style={{alignItems: 'flex-end', paddingRight: 18}}>
               <FontAwesome name="share" color="gray" size={24} />
-            </View>
+            </Button>
           </View>
 
           <Text
