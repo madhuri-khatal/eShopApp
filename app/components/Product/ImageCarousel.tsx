@@ -10,7 +10,7 @@ const images = [
 ];
 
 const ImageCarousel = () => {
-  const {getHomeSlider} = useProductContext();
+  // const {getHomeSlider} = useProductContext();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextImage = () => {
@@ -33,9 +33,9 @@ const ImageCarousel = () => {
     return () => clearInterval(interval);
   }, [currentIndex]);
 
-  useEffect(() => {
-    getHomeSlider();
-  });
+  // useEffect(() => {
+  //   getHomeSlider();
+  // });
 
   return (
     <View style={styles.container}>
