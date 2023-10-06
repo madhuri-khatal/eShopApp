@@ -206,7 +206,7 @@ export const ProductDetailsScreen = (props: any) => {
             </View>
             <Button
               onPress={shareProduct}
-              style={{alignItems: 'flex-end', paddingRight: 18}}>
+              style={{alignItems: 'flex-end', marginTop: 10, paddingRight: 18}}>
               <FontAwesome name="share" color="gray" size={24} />
             </Button>
           </View>
