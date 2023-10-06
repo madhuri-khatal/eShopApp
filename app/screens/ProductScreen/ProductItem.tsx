@@ -79,7 +79,7 @@ export default function ProductItem({product}: IProps) {
     style={{
       flexDirection: 'row',
       alignItems: 'center',
-      marginLeft: 10,
+      marginLeft: 7,
     }}>
     <Text
       style={{
@@ -113,7 +113,7 @@ export default function ProductItem({product}: IProps) {
 )}
 
 
-          <View style={{flex: 1, flexDirection: 'row'}}>
+          <View style={{flex: 1, flexDirection: 'row',marginLeft:8}}>
             <View style={{marginBottom: 10}}>
               <Rating
                 rating={product?.average_rating}

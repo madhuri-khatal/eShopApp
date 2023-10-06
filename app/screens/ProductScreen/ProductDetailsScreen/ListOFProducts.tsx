@@ -78,67 +78,6 @@
 // //   );
 // // }
 
-// import React from 'react';
-// import {Image, ScrollView, View, FlatList} from 'react-native';
-// import {ActivityIndicator, Text} from 'react-native-paper';
-// import ProductItem from '../ProductItem';
-// import { useProductContext } from '../../../context/ProductContext';
-
-// export default function ListOFProducts() {
-//     const {productByCategoryId, isLoading, fetchMoreData, refThreshold} =
-//     useProductContext();
-//     console.log("HOME PAGE==========================",productByCategoryId.map((item)=>item.name));
-//     const data= productByCategoryId.map((item)=>item.name)
-//     const Product=["Murmure", "Modak Flour" ]
-
-//   const noMoreProducts = productByCategoryId.length === 0;
-
-//   return (
-//     <>
-//     {productByCategoryId.length === 0 ? (
-//       <>
-//         <View
-//           style={{
-//             height: '100%',
-//             justifyContent: 'center',
-//             alignItems: 'center',
-//           }}>
-//           <ActivityIndicator
-//             size="large"
-//             color="#e95d2a"
-//             style={{backgroundColor: 'white'}}
-//           />
-//         </View>
-//       </>
-//     ) : (
-//       <FlatList
-//         nestedScrollEnabled={true}
-//         alwaysBounceVertical
-//         numColumns={2}
-//         ItemSeparatorComponent={() => (
-//           <View
-//             style={{
-//               width: '100%',
-//               backgroundColor: '#f7f7f7',
-//             }}
-//           />
-//         )}
-//         data={productByCategoryId} // Use dataToShow as the data source
-//         // onEndReached={async () => {
-//         //   await fetchMoreData();
-//         // }}
-//         ref={refThreshold}
-//         onEndReachedThreshold={10}
-//              renderItem={({item}) => <ProductItem product={item} />}
-//         keyExtractor={(item, i) => i.toString()}
-//         scrollEnabled
-//       />
-//     )}
-//   </>
-//   )
-// }
-
-
 
 import React from 'react';
 import { Image, ScrollView, View, FlatList } from 'react-native';
@@ -148,18 +87,9 @@ import { useProductContext } from '../../../context/ProductContext';
 
 export default function ListOFProducts() {
   const { productByCategoryId, isLoading, fetchMoreData, refThreshold } = useProductContext();
-  const Product = [ "Masala Banana Chips", "Pudina Banana Chips", 
-//   "Tomato Banana Chips","Nagli/Ragi Biscuit","Rajgira Ladoo", "Shevga/Moringa Powder", "Organic jaggery powder",
-//   "Kalna flour (कळणं पीठ)",
-  "Beet Root Powder","Batti Flour", "Moong Dal Chilla/Edani (मुगाची ऐडणी)","Millet flour (बाजरी पीठ)", "Murmure",];
-
-
-  // Filter the data to include only the products in the Product array
-  console.log("HOME PAGE==========================",productByCategoryId.map((item)=>item.name));
-  const filteredData = productByCategoryId.filter(item => Product.includes(item.name));
-
-  const noMoreProducts = filteredData.length === 0;
-
+  const Product = ["Masala Banana Chips", "Pudina Banana Chips","Tomato Banana Chips","Nagli/Ragi Biscuit","Rajgira Ladoo",
+  "Shevga/Moringa Powder","Beet Powder","Organic jaggery powder", "Kalna flour (कळणं पीठ)","Batti Flour", "Moong Dal Chilla/Edani (मुगाची ऐडणी)","Millet Flour","Murmure"];
+     const filteredData = productByCategoryId.filter(item => Product.includes(item.name));
   return (
     <>
       {filteredData.length === 0 ? (
@@ -190,7 +120,7 @@ export default function ListOFProducts() {
               }}
             />
           )}
-          data={filteredData} // Use filteredData as the data source
+          data={filteredData} 
           onEndReached={async () => {
             await fetchMoreData();
           }}
