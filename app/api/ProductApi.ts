@@ -41,9 +41,9 @@ export const ProductApi = {
   // not working
   // not working
 
-  getProductByFeatureCategory: async () => {
-    return await Get<any>(
-      `wp-json/wc/v3/products?category&per_page=4&status=publish`,
-    );
-  },
+  // getProductByFeatureCategory: async () => {
+  //   return await Get<any>(
+  //     `wp-json/wc/v3/products?category&per_page=4&status=publish`,
+  //   );
+  // },
 };
