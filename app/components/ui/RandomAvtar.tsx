@@ -17,14 +17,17 @@ const getRandomColor = () => {
   return colors[randomIndex];
 };
 
-const RandomAvatar = () => {
+interface IProps {
+  label: string;
+}
+const RandomAvatar = ({label}: any) => {
   const randomColor = getRandomColor();
 
   return (
     <View style={{alignItems: 'center', marginTop: 20}}>
       <Avatar.Text
-        size={130}
-        label="JD"
+        size={120}
+        label={label}
         style={{backgroundColor: randomColor}}
         labelStyle={{fontSize: 50}}
       />
