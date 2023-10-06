@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 import React from 'react';
 import {useProductContext} from '../../context/ProductContext';
 import {FlatList} from 'react-native-gesture-handler';
@@ -10,103 +10,119 @@ export default function CouponList() {
   const itemWidth = isOddLength ? '99%' : '49%';
 
   return (
-    <View
+    <ImageBackground
+      source={require('../../../assets/image/couponBg.jpg')}
       style={{
-        borderRadius: 10,
-        backgroundColor: '#fcf4d9',
-        alignItems: 'center',
-        padding: 5,
-        marginVertical: 4,
-        marginHorizontal: 4,
+        flex: 1,
+        paddingVertical: 20,
+        // resizeMode: 'cover',
       }}>
-      <Text
+      <View
         style={{
-          fontSize: 20,
-          fontWeight: 'bold',
-          lineHeight: 28,
-          paddingVertical: 20,
-          textAlign: 'center',
-          color: '#506574',
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
-        Special Offers
-      </Text>
-      <FlatList
-        data={couponData}
-        keyExtractor={(item: any) => item.id.toString()}
-        numColumns={2}
-        renderItem={({item}: any) => (
-          <View
-            style={{
-              width: itemWidth,
-              marginVertical: 4,
-              marginRight: 4,
-              elevation: 5,
-              borderRadius: 10,
-              backgroundColor: '#ffffff',
-            }}>
-            <View style={{flexDirection: 'row'}}>
-              <View
-                style={{
-                  flexDirection: 'column',
-                  width: '60%',
-                }}>
-                <Text
-                  style={{
-                    fontWeight: '600',
-                    fontSize: 18,
-                    padding: 10,
-                    paddingBottom: 0,
-                    marginTop: 15,
-                    textAlign: 'center',
-                    color: '#506574',
-                  }}>
-                  {item.amount}% Off
-                </Text>
-                <Text
-                  style={{
-                    fontWeight: '600',
-                    fontSize: 16,
-                    paddingBottom: 15,
-                    color: '#506574',
-                    opacity: 0.5,
-                    textAlign: 'center',
-                  }}>
-                  {item.code}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'column',
-                  justifyContent: 'flex-end',
-                }}>
-                <Image
-                  source={require('../../../assets/image/offer.png')}
-                  style={{
-                    width: 65,
-                    height: 65,
-                    justifyContent: 'center',
-                  }}
-                />
-              </View>
-            </View>
+        <View
+          style={{
+            borderRadius: 10,
 
-            <Text
-              style={{
-                fontSize: 13,
-                padding: 20,
-                marginTop: 5,
-                borderTopColor: '#e0e0e0',
-                borderTopWidth: 2,
-                borderStyle: 'dotted',
-                textAlign: 'center',
-                color: '#506574',
-              }}>
-              {item.description}
-            </Text>
-          </View>
-        )}
-      />
-    </View>
+            alignItems: 'center',
+            padding: 5,
+            marginVertical: 4,
+            marginHorizontal: 4,
+          }}>
+          <Text
+            style={{
+              fontSize: 24,
+              fontWeight: 'bold',
+              lineHeight: 28,
+              paddingVertical: 20,
+              textAlign: 'center',
+              color: '#fff',
+              // backgroundColor: 'rgba(255, 255, 255, 0.8)', // Add some opacity for better visibility of text
+            }}>
+            Special Offers
+          </Text>
+          <FlatList
+            data={couponData}
+            keyExtractor={(item: any) => item.id.toString()}
+            numColumns={2}
+            renderItem={({item}: any) => (
+              <View
+                style={{
+                  width: itemWidth,
+                  marginVertical: 4,
+                  marginRight: 4,
+                  elevation: 5,
+                  borderRadius: 10,
+                  backgroundColor: '#ffffff',
+                }}>
+                <View style={{flexDirection: 'row'}}>
+                  <View
+                    style={{
+                      flexDirection: 'column',
+                      width: '60%',
+                    }}>
+                    <Text
+                      style={{
+                        fontWeight: '600',
+                        fontSize: 18,
+                        padding: 10,
+                        paddingBottom: 0,
+                        marginTop: 15,
+                        textAlign: 'center',
+                        color: '#506574',
+                      }}>
+                      {item.amount % 100}% Off
+                    </Text>
+                    <Text
+                      style={{
+                        fontWeight: '600',
+                        fontSize: 16,
+                        paddingBottom: 15,
+                        color: '#506574',
+                        opacity: 0.5,
+                        textAlign: 'center',
+                      }}>
+                      {item.code}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'column',
+                      justifyContent: 'flex-end',
+                    }}>
+                    <Image
+                      source={require('../../../assets/image/offer.png')}
+                      style={{
+                        width: 65,
+                        height: 65,
+                        justifyContent: 'center',
+                      }}
+                    />
+                  </View>
+                </View>
+
+                <Text
+                  style={{
+                    fontSize: 13,
+                    padding: 20,
+                    marginTop: 5,
+                    borderTopColor: '#e0e0e0',
+                    borderTopWidth: 2,
+                    borderStyle: 'dotted',
+                    textAlign: 'center',
+                    color: '#506574',
+                  }}>
+                  {item.description}
+                </Text>
+              </View>
+            )}
+          />
+        </View>
+      </View>
+    </ImageBackground>
   );
 }
 const styles = StyleSheet.create({

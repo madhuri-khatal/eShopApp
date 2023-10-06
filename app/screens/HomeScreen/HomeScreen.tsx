@@ -9,7 +9,7 @@ import HomeWhyUs from '../../components/Product/HomeWhyUs';
 import CouponList from '../../components/Product/CouponList';
 import Festival from '../../components/Product/Festival';
 import Footer from '../../components/Product/Footer';
-import { ProductsScreen } from '../../screens/ProductScreen/ProductsScreen';
+import {ProductsScreen} from '../../screens/ProductScreen/ProductsScreen';
 import ProductList from '../../screens/ProductScreen/ProductList';
 import ListOFProducts from '../../screens/ProductScreen/ProductDetailsScreen/ListOFProducts';
 
@@ -29,9 +29,11 @@ export default function HomeScreen({navigation}: any) {
           <FeaturedCategories />
           <Festival />
           {/* <ProductsScreen/> */}
-          <ListOFProducts/>
-{/* <ProductList/> */}
-          <CouponList />
+          <ListOFProducts />
+          {/* <ProductList/> */}
+          <View style={{paddingVertical: 10}}>
+            <CouponList />
+          </View>
           <Text
             style={{
               fontSize: 20,
@@ -39,7 +41,7 @@ export default function HomeScreen({navigation}: any) {
               lineHeight: 28,
               padding: 10,
               textAlign: 'center',
-              color: '#506574',                               
+              color: '#506574',
             }}>
             Why SHG E Shop
           </Text>
