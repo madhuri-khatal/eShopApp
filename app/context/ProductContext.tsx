@@ -26,11 +26,11 @@ interface IProductContext {
   fetchMoreData: Function;
   isLoading?: boolean;
   refThreshold?: any;
-  getProductByFeatureCategory: Function;
+  // getProductByFeatureCategory: Function;
   couponData: any[];
   getfeaturecategory: Function;
   productByFeatureCategory: any[];
-  getHomeSlider: Function;
+  // getHomeSlider: Function;
   // productData: any[]
   // productlist: () => Promise<void>
 }
@@ -170,15 +170,18 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     setProductByFeatureCategory(data);
   };
 
-  const getProductByFeatureCategory = async () => {
-    const res = await ProductApi.getProductByFeatureCategory();
-  };
+  // const getProductByFeatureCategory = async () => {
+  //   const res = await ProductApi.getProductByFeatureCategory();
+  // };
 
-  // HomePage Slider
-  const getHomeSlider = async () => {
-    const res = await ProductApi.getHomeSliderImages();
-    // console.log('res====', res);
-  };
+
+
+  // // HomePage Slider
+  // const getHomeSlider = async () => {
+  //   const res = await ProductApi.getHomeSliderImages();
+  //   console.log('res====', res);
+  // };
+
 
   const value: IProductContext = {
     data,
@@ -195,11 +198,11 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     fetchMoreData,
     isLoading,
     refThreshold,
-    getProductByFeatureCategory,
+    // getProductByFeatureCategory,
     couponData,
     getfeaturecategory,
     productByFeatureCategory,
-    getHomeSlider,
+    // getHomeSlider,
     // productData,
     // productlist
   };
