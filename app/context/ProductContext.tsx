@@ -174,11 +174,14 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   //   const res = await ProductApi.getProductByFeatureCategory();
   // };
 
+
+
   // // HomePage Slider
   // const getHomeSlider = async () => {
   //   const res = await ProductApi.getHomeSliderImages();
   //   console.log('res====', res);
   // };
+
 
   const value: IProductContext = {
     data,
