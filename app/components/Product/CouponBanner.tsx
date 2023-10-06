@@ -19,7 +19,7 @@ const CouponBanner: React.FC<CouponBannerProps> = ({coupon}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f9a825', // Swiggy's coupon banner color
+    backgroundColor: '#f9a825',
     padding: 16,
   },
   bannerText: {
