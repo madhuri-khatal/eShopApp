@@ -1,4 +1,4 @@
-import {Get} from './AxiosRequester';
+import {Get,GetFeatuare} from './AxiosRequester';
 export const ProductApi = {
   getProductList: async () => {
     return await Get<any>(
@@ -33,7 +33,7 @@ export const ProductApi = {
   },
 
   getHomeSliderImages: async () => {
-    return await Get<any>('/wp-json/custom/v1/slider-images/12867');
+    return await GetFeatuare<any>('/wp-json/custom/v1/slider-images/12867');
   },
   // for feture categry
   // not working

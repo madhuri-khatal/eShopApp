@@ -30,7 +30,8 @@ interface IProductContext {
   couponData: any[];
   getfeaturecategory: Function;
   productByFeatureCategory: any[];
-  // getHomeSlider: Function;
+  getHomeSlider: Function;
+  sliderData: any;
   // productData: any[]
   // productlist: () => Promise<void>
 }
@@ -43,10 +44,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [subCategory, setSubCategory] = useState<any>([]);
   const [productById, setProductByID] = useState<any>(null);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
-  const [productByFeatureCategory, setProductByFeatureCategory] = useState<
-    any[]
-  >([]);
-  // const [productData,setProductData]=useState<any[]>([])
+  const [productByFeatureCategory, setProductByFeatureCategory] = useState<any[]>([]);
+  const [ sliderData, setSliderData]=useState<any>([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation: any = useNavigation();
@@ -174,11 +173,11 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   //   const res = await ProductApi.getProductByFeatureCategory();
   // };
 
-  // // HomePage Slider
-  // const getHomeSlider = async () => {
-  //   const res = await ProductApi.getHomeSliderImages();
-  //   console.log('res====', res);
-  // };
+  // HomePage Slider
+  const getHomeSlider = async () => {
+    const {result:{data}} = await ProductApi.getHomeSliderImages();
+    setSliderData(data)
+    };
 
   const value: IProductContext = {
     data,
@@ -199,7 +198,8 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     couponData,
     getfeaturecategory,
     productByFeatureCategory,
-    // getHomeSlider,
+    getHomeSlider,
+    sliderData,
     // productData,
     // productlist
   };

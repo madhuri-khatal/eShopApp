@@ -3,23 +3,18 @@ import React, {useState, useEffect} from 'react';
 import {View, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const images = [
-  'https://shgeshop.com/wp-content/uploads/2023/08/homepage-slider-image3.png',
-  'https://shgeshop.com/wp-content/uploads/2023/08/homepage-slider-image1.png',
-  'https://shgeshop.com/wp-content/uploads/2023/08/homepage-slider-image2.png',
-];
 
 const ImageCarousel = () => {
-  // const {getHomeSlider} = useProductContext();
+  const {getHomeSlider,sliderData} = useProductContext();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextImage = () => {
-    setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
+    setCurrentIndex(prevIndex => (prevIndex + 1) % sliderData.length);
   };
 
   const prevImage = () => {
     setCurrentIndex(
-      prevIndex => (prevIndex - 1 + images.length) % images.length,
+      prevIndex => (prevIndex - 1 + sliderData.length) % sliderData.length,
     );
   };
 
@@ -27,15 +22,16 @@ const ImageCarousel = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       nextImage();
-    }, 3000); // Change image every 3 seconds (adjust the duration as needed)
+    }, 3000); 
 
     // Clean up the interval on component unmount
     return () => clearInterval(interval);
   }, [currentIndex]);
 
-  // useEffect(() => {
-  //   getHomeSlider();
-  // });
+  useEffect(() => {
+    getHomeSlider();
+  });
+  
 
   return (
     <View style={styles.container}>
@@ -43,7 +39,7 @@ const ImageCarousel = () => {
         <AntDesign name="left" size={24} color="lightgray" />
       </TouchableOpacity>
       <View style={styles.carousel}>
-        {images.map((image, index) => (
+        {sliderData.map((image: any, index: React.Key | null | undefined) => (
           <Image
             key={index}
             source={{uri: image}}
