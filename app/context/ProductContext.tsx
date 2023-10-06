@@ -177,7 +177,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   // HomePage Slider
   const getHomeSlider = async () => {
     const res = await ProductApi.getHomeSliderImages();
-    console.log('res====', res);
+    // console.log('res====', res);
   };
 
   const value: IProductContext = {
