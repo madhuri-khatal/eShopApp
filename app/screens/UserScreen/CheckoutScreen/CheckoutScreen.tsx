@@ -22,7 +22,7 @@ export default function CheckoutScreen(props: any) {
 
   const onPressToSubmit = async (formData: any) => {
     // onCreateCustomer(formData);
-    // console.log("Foemdata===============",formData);
+    console.log("Formdata===============",formData);
 
     onCallToTheCustomerAndCheckout(formData, selectedMethod);
     // ,discountedTotalAmount)
@@ -111,7 +111,7 @@ export default function CheckoutScreen(props: any) {
 
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
-          {/* <View style={{flexDirection: 'row', padding: 10}}>
+          <View style={{flexDirection: 'row', padding: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
               Coupon Code
             </Text>
@@ -138,7 +138,7 @@ export default function CheckoutScreen(props: any) {
               style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
               Apply Coupon
             </Button>
-          </View>  */}
+          </View> 
           <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>
               Customer Information
