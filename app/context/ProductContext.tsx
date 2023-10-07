@@ -32,6 +32,8 @@ interface IProductContext {
   productByFeatureCategory: any[];
   getHomeSlider: Function;
   images: any;
+  festival: any;
+  getFestival: () => Promise<void>
   // productData: any[]
   // productlist: () => Promise<void>
 }
@@ -46,7 +48,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
   const [productByFeatureCategory, setProductByFeatureCategory] = useState<any[]>([]);
   const [ images, setimages]=useState<any>([]);
-
+const[festival,setFestival]=useState<any>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation: any = useNavigation();
   const refThreshold = useRef(null);
@@ -67,18 +69,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
       }
     })();
   }, []);
-  // productlist
-  // const productlist = async () => {
-  //   try {
-  //     const {
-  //       result: {data},
-  //       err,
-  //     } = await ProductApi.getProductList();
-  //     setProductData(data);
-  //   } catch (error: any) {
-  //     console.error(error);
-  //   }
-  // };
+ 
   // PAGINATION
   const fetchMoreData = async () => {
     try {
@@ -169,10 +160,6 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     setProductByFeatureCategory(data);
   };
 
-  // const getProductByFeatureCategory = async () => {
-  //   const res = await ProductApi.getProductByFeatureCategory();
-  // };
-
 
   // HomePage Slider
   const getHomeSlider = async () => {
@@ -180,6 +167,12 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     setimages(data)
     };
 
+    // festival
+    const getFestival=async()=>{
+      const {result:{data}}=await FilterApi.getFestival();
+      setFestival(data)
+      
+    }
 
 
   const value: IProductContext = {
@@ -197,12 +190,13 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     fetchMoreData,
     isLoading,
     refThreshold,
-    // getProductByFeatureCategory,
-    couponData,
+     couponData,
     getfeaturecategory,
     productByFeatureCategory,
     getHomeSlider,
     images,
+    festival,
+    getFestival
     // productData,
     // productlist
   };
