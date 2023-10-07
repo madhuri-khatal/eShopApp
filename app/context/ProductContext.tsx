@@ -31,7 +31,7 @@ interface IProductContext {
   getfeaturecategory: Function;
   productByFeatureCategory: any[];
   getHomeSlider: Function;
-  sliderData: any;
+  images: any;
   // productData: any[]
   // productlist: () => Promise<void>
 }
@@ -45,7 +45,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [productById, setProductByID] = useState<any>(null);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
   const [productByFeatureCategory, setProductByFeatureCategory] = useState<any[]>([]);
-  const [ sliderData, setSliderData]=useState<any>([]);
+  const [ images, setimages]=useState<any>([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation: any = useNavigation();
@@ -177,7 +177,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   // HomePage Slider
   const getHomeSlider = async () => {
     const {result:{data}} = await ProductApi.getHomeSliderImages();
-    setSliderData(data)
+    setimages(data)
     };
 
 
@@ -202,7 +202,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     getfeaturecategory,
     productByFeatureCategory,
     getHomeSlider,
-    sliderData,
+    images,
     // productData,
     // productlist
   };

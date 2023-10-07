@@ -8,17 +8,17 @@ const shippingData = (data: any) => {
   });
   return shipping;
 };
-const billingFormat = (data: any) => {
-  const bilingData: any = {};
-  Object.keys(data).forEach((key: string) => {
-    if (key === 'coupon_lines') {
-      return;
-    } else {
-      bilingData[key] = data[key];
-    }
-  });
-  return bilingData;
-};
+// const billingFormat = (data: any) => {
+//   const bilingData: any = {};
+//   Object.keys(data).forEach((key: string) => {
+//     if (key === 'coupon_lines') {
+//       return;
+//     } else {
+//       bilingData[key] = data[key];
+//     }
+//   });
+//   return bilingData;
+// };
 
 export const checkoutObject = (
   formData: any,
@@ -29,7 +29,7 @@ export const checkoutObject = (
   discountedTotalAmount?: number | string[],
 ) => {
   const shipping = shippingData(formData);
-  const biilingData = billingFormat(formData);
+  // const biilingData = billingFormat(formData);
   // const {coupon_lines} = formData;
   return {
     payment_method: selectedMethod || 'cod',
