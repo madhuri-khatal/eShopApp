@@ -22,7 +22,7 @@ export default function CheckoutScreen(props: any) {
 
   const onPressToSubmit = async (formData: any) => {
     // onCreateCustomer(formData);
-    console.log("Formdata===============",formData);
+    // console.log("Formdata===============",formData);
 
     onCallToTheCustomerAndCheckout(formData, selectedMethod);
     // ,discountedTotalAmount)
