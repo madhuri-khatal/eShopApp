@@ -93,12 +93,12 @@ const FeaturedCategories = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    paddingHorizontal: 10,
+    paddingHorizontal: 0,
     marginTop: 20,
   },
   categoryItem: {
     alignItems: 'center',
-    marginRight: 10, // Adjust this to your desired spacing between items
+    marginRight: 0,
   },
   categoryImage: {
     width: 80,

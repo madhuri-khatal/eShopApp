@@ -26,16 +26,13 @@ interface IProductContext {
   fetchMoreData: Function;
   isLoading?: boolean;
   refThreshold?: any;
-  // getProductByFeatureCategory: Function;
   couponData: any[];
   getfeaturecategory: Function;
   productByFeatureCategory: any[];
   getHomeSlider: Function;
   images: any;
   festival: any;
-  getFestival: () => Promise<void>
-  // productData: any[]
-  // productlist: () => Promise<void>
+  getFestival: () => Promise<void>;
 }
 const ProductContext = createContext<IProductContext | null>(null);
 type ProductContextType = {children: ReactNode};
@@ -46,9 +43,11 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
   const [subCategory, setSubCategory] = useState<any>([]);
   const [productById, setProductByID] = useState<any>(null);
   const [productByCategoryId, setProductByCategoryId] = useState<any[]>([]);
-  const [productByFeatureCategory, setProductByFeatureCategory] = useState<any[]>([]);
-  const [ images, setimages]=useState<any>([]);
-const[festival,setFestival]=useState<any>('');
+  const [productByFeatureCategory, setProductByFeatureCategory] = useState<
+    any[]
+  >([]);
+  const [images, setimages] = useState<any>([]);
+  const [festival, setFestival] = useState<any>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigation: any = useNavigation();
   const refThreshold = useRef(null);
@@ -69,7 +68,7 @@ const[festival,setFestival]=useState<any>('');
       }
     })();
   }, []);
- 
+
   // PAGINATION
   const fetchMoreData = async () => {
     try {
@@ -160,20 +159,22 @@ const[festival,setFestival]=useState<any>('');
     setProductByFeatureCategory(data);
   };
 
-
   // HomePage Slider
   const getHomeSlider = async () => {
-    const {result:{data}} = await ProductApi.getHomeSliderImages();
-    setimages(data)
-    };
+    const {
+      result: {data},
+    } = await ProductApi.getHomeSliderImages();
 
-    // festival
-    const getFestival=async()=>{
-      const {result:{data}}=await FilterApi.getFestival();
-      setFestival(data)
-      
-    }
+    setimages(data);
+  };
 
+  // festival
+  const getFestival = async () => {
+    const {
+      result: {data},
+    } = await FilterApi.getFestival();
+    setFestival(data);
+  };
 
   const value: IProductContext = {
     data,
@@ -190,15 +191,13 @@ const[festival,setFestival]=useState<any>('');
     fetchMoreData,
     isLoading,
     refThreshold,
-     couponData,
+    couponData,
     getfeaturecategory,
     productByFeatureCategory,
     getHomeSlider,
     images,
     festival,
-    getFestival
-    // productData,
-    // productlist
+    getFestival,
   };
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
