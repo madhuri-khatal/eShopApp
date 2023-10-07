@@ -11,4 +11,6 @@ export const FilterApi = {
 
   getfeaturecategory: async () =>
     await GetFeatuare<any>(`/wp-json/custom/v1/featured-category/12800`),
+
+    getFestival:async()=> await GetFeatuare<any>('/wp-json/custom/v1/festive-image/12873')
 };

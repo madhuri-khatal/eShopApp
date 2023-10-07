@@ -8,8 +8,7 @@ const ImageCarousel = () => {
 
   useEffect(() => {
     getHomeSlider();
-    console.log(images);
-  }, []);
+   }, []);
 
   const nextImage = () => {
     setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
