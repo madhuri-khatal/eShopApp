@@ -1,6 +1,6 @@
 import {View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Appbar, Text} from 'react-native-paper';
 import {DrawerActions} from '@react-navigation/native';
 import FeaturedCategories from '../../components/Product/FeaturedCategories';
@@ -12,9 +12,17 @@ import Footer from '../../components/Product/Footer';
 import {ProductsScreen} from '../../screens/ProductScreen/ProductsScreen';
 import ProductList from '../../screens/ProductScreen/ProductList';
 import ListOFProducts from '../../screens/ProductScreen/ProductDetailsScreen/ListOFProducts';
+import {Caraousel} from '../../components/ui/Caraousel';
+import {CaraouselContent} from '../../components/ui/CaraouselContent';
+import {useProductContext} from './../../context/ProductContext';
 
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
+  const {images, getHomeSlider} = useProductContext();
+
+  useEffect(() => {
+    getHomeSlider();
+  }, [images]);
 
   return (
     <>
@@ -25,7 +33,13 @@ export default function HomeScreen({navigation}: any) {
         </Appbar.Header>
 
         <ScrollView style={{marginBottom: 60}}>
-          <ImageCarousel />
+          {/* <ImageCarousel /> */}
+          <Caraousel
+            Component={CaraouselContent}
+            data={images}
+            autoPlay={true}
+            onSnapToItem={(i: number) => console.log('i', i)}
+          />
           <FeaturedCategories />
           <Festival />
           {/* <ProductsScreen/> */}
