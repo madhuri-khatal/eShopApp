@@ -241,7 +241,7 @@ export default function CheckoutScreen(props: any) {
                     selectedMethod === 'Cash on delivery' &&
                       styles.selectedMethodText,
                   ]}>
-                  Cash on Delivary
+                  Cash on Delivery
                 </Text>
               </TouchableOpacity>
             </View>
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   selectedMethod: {
-    backgroundColor: '#F7B492',
+    backgroundColor: '#F4f4f4',
     borderColor: '#F7B492',
   },
   selectedMethodText: {
