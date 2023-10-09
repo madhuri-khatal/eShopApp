@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
     marginRight: 0,
   },
   categoryImage: {
-    width: 80,
-    height: 80,
+    width: 103,
+    height: 103,
     // borderRadius: 40,
   },
   categoryTitle: {
