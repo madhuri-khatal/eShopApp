@@ -204,17 +204,21 @@ export const ProductDetailsScreen = (props: any) => {
                 </View>
               </View>
             </View>
-            <Button
-              onPress={shareProduct}
-              style={{alignItems: 'flex-end', paddingRight: 15}}>
-              <FontAwesome
-                name="share"
-                color="gray"
-                size={22}
-              />
-            </Button>
           </View>
-
+          <Button
+            onPress={shareProduct}
+            style={{
+              alignItems: 'flex-end',
+              paddingRight: 15,
+              marginTop: 1,
+            }}>
+            <FontAwesome
+              name="whatsapp"
+              color="green"
+              size={30}
+              style={{padding: 8}}
+            />
+          </Button>
           <Text
             style={{
               fontSize: 24,
@@ -225,7 +229,6 @@ export const ProductDetailsScreen = (props: any) => {
             }}>
             {productById?.name}
           </Text>
-
           <HTMLView value={shortDescriptionText} stylesheet={styles} />
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <View style={{flex: 1}}>
