@@ -7,11 +7,10 @@ export default function Festival() {
    useEffect(() => {
     getFestival()
    }, []);
-  const data=festival?.image_url
- 
+  const data=festival?.image_url 
   return (
-    <View style={{paddingTop:10,paddingBottom:10}}>
+     <View style={{paddingTop:10,paddingBottom:10}}>
         <Image source={{uri:data}} style={{height:100 }}/>
       </View>
-  )
+        )
 }
