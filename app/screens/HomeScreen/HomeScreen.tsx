@@ -38,11 +38,10 @@ export default function HomeScreen({navigation}: any) {
             Component={CaraouselContent}
             data={images}
             autoPlay={true}
-            onSnapToItem={(i: number) => console.log('i', i)}
+            onSnapToItem={(i: number) => console.log()}
           />
           <FeaturedCategories />
           <Festival />
-          {/* <ProductsScreen/> */}
           <ListOFProducts />
           {/* <ProductList/> */}
           <View style={{paddingVertical: 10}}>

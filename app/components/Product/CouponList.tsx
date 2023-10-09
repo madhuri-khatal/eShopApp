@@ -36,11 +36,13 @@ export default function CouponList() {
             style={{
               fontSize: 24,
               fontWeight: 'bold',
-              lineHeight: 28,
-              paddingVertical: 20,
+              lineHeight: 20,
+              paddingVertical: 13,
               textAlign: 'center',
               color: '#fff',
-              // backgroundColor: 'rgba(255, 255, 255, 0.8)', // Add some opacity for better visibility of text
+              borderRadius: 10,
+              paddingHorizontal: 15,
+              backgroundColor: 'rgba(255, 255, 255, 0.3)',
             }}>
             Special Offers
           </Text>
@@ -52,7 +54,7 @@ export default function CouponList() {
               <View
                 style={{
                   width: itemWidth,
-                  marginVertical: 4,
+                  marginVertical: 20,
                   marginRight: 4,
                   elevation: 5,
                   borderRadius: 10,
@@ -80,7 +82,6 @@ export default function CouponList() {
                       style={{
                         fontWeight: '600',
                         fontSize: 16,
-                        paddingBottom: 15,
                         color: '#506574',
                         opacity: 0.5,
                         textAlign: 'center',
@@ -107,8 +108,8 @@ export default function CouponList() {
                 <Text
                   style={{
                     fontSize: 13,
-                    padding: 20,
-                    marginTop: 5,
+                    padding: 7,
+                    marginTop: 15,
                     borderTopColor: '#e0e0e0',
                     borderTopWidth: 2,
                     borderStyle: 'dotted',

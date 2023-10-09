@@ -18,7 +18,7 @@ export const Caraousel = ({
   autoPlay,
   scrollAnimationDuration = 500,
   width = Dimensions.get('screen').width,
-  height = Dimensions.get('screen').width / 2,
+  height = Dimensions.get('screen').width / 2.8,
   onSnapToItem,
 }: ICarousel) => {
   return (
