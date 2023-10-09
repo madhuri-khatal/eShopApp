@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
     borderColor: '#F7B492',
   },
   selectedMethodText: {
-    color: '#ffffff',
+    color: '#000000',
   },
   methodDetails: {
     marginTop: 10,

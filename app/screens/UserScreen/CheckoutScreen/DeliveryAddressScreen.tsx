@@ -32,7 +32,7 @@ export default function DeliveryAddressScreen() {
             keyboardType={'default'}
             isRequiredValue
             mode="outlined"
-            defaultValue={shipping?.state}
+            // defaultValue={shipping?.state}
           />
 
           <TextInputController
@@ -44,7 +44,7 @@ export default function DeliveryAddressScreen() {
             keyboardType={'default'}
             isRequiredValue
             mode="outlined"
-            defaultValue={shipping?.city}
+            // defaultValue={shipping?.city}
           />
 
           <TextInputController
@@ -56,7 +56,7 @@ export default function DeliveryAddressScreen() {
             keyboardType={'default'}
             isRequiredValue
             mode="outlined"
-            defaultValue={shipping?.address_1}
+            // defaultValue={shipping?.address_1}
           />
 
           <TextInputController
@@ -67,7 +67,7 @@ export default function DeliveryAddressScreen() {
             keyboardType={'default'}
             isRequiredValue
             mode="outlined"
-            defaultValue={shipping?.address_2}
+            // defaultValue={shipping?.address_2}
           />
 
           <TextInputController
@@ -78,7 +78,7 @@ export default function DeliveryAddressScreen() {
             keyboardType={'default'}
             isRequiredValue
             mode="outlined"
-            defaultValue={shipping?.postcode}
+            // defaultValue={shipping?.postcode}
           />
         </View>
       </ScrollView>
