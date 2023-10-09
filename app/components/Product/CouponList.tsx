@@ -8,7 +8,6 @@ export default function CouponList() {
   const {couponData} = useProductContext();
   const isOddLength = couponData.length === 1;
   const itemWidth = isOddLength ? '99%' : '49%';
-console.log("couponData",couponData.length);
 
   return (
     <>
