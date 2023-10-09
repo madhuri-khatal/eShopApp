@@ -22,7 +22,7 @@ export const CaraouselContent = (props: any) => {
         }}>
         <Card>
           <Card.Cover
-            resizeMode="cover"
+            resizeMode="contain"
             resizeMethod="resize"
             source={{uri: src}}
           />
