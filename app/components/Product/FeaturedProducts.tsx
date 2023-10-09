@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 const FeaturedProducts = ({products}: any) => {
-  const {getProductByFeatureCategory}=useProductContext();
+  const {getProductByFeatureCategory}:any=useProductContext();
   useEffect(() => {
     (async () => {
       await getProductByFeatureCategory();
