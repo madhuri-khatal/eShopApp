@@ -4,13 +4,10 @@ import React, {useEffect} from 'react';
 import {Appbar, Text} from 'react-native-paper';
 import {DrawerActions} from '@react-navigation/native';
 import FeaturedCategories from '../../components/Product/FeaturedCategories';
-import ImageCarousel from '../../components/Product/ImageCarousel';
 import HomeWhyUs from '../../components/Product/HomeWhyUs';
 import CouponList from '../../components/Product/CouponList';
 import Festival from '../../components/Product/Festival';
 import Footer from '../../components/Product/Footer';
-import {ProductsScreen} from '../../screens/ProductScreen/ProductsScreen';
-import ProductList from '../../screens/ProductScreen/ProductList';
 import ListOFProducts from '../../screens/ProductScreen/ProductDetailsScreen/ListOFProducts';
 import {Caraousel} from '../../components/ui/Caraousel';
 import {CaraouselContent} from '../../components/ui/CaraouselContent';
@@ -33,8 +30,7 @@ export default function HomeScreen({navigation}: any) {
         </Appbar.Header>
 
         <ScrollView style={{marginBottom: 60}}>
-          {/* <ImageCarousel /> */}
-          <Caraousel
+                   <Caraousel
             Component={CaraouselContent}
             data={images}
             autoPlay={true}
@@ -43,8 +39,7 @@ export default function HomeScreen({navigation}: any) {
           <FeaturedCategories />
           <Festival />
           <ListOFProducts />
-          {/* <ProductList/> */}
-          <View style={{paddingVertical: 10}}>
+                  <View style={{paddingVertical: 10}}>
             <CouponList />
           </View>
           <Text

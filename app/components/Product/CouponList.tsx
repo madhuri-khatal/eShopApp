@@ -8,9 +8,11 @@ export default function CouponList() {
   const {couponData} = useProductContext();
   const isOddLength = couponData.length === 1;
   const itemWidth = isOddLength ? '99%' : '49%';
+console.log("couponData",couponData.length);
 
   return (
-    <ImageBackground
+    <>
+  {couponData.length==0?(<Text></Text>):(<ImageBackground
       source={require('../../../assets/image/couponBg.jpg')}
       style={{
         flex: 1,
@@ -123,7 +125,9 @@ export default function CouponList() {
           />
         </View>
       </View>
-    </ImageBackground>
+    </ImageBackground>)}
+    
+  </>
   );
 }
 const styles = StyleSheet.create({
