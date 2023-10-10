@@ -1,18 +1,12 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
-import {
-  CommonActions,
-  DrawerActions,
-  useNavigation,
-} from '@react-navigation/native';
-import {Avatar, Divider, Appbar, Button, List} from 'react-native-paper';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {Appbar, Button, List} from 'react-native-paper';
 import RandomAvatar from '../../components/ui/RandomAvtar';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useCartContext} from '../../context/CartContext';
 
 export default function ProfileScreen(props: any) {
-  // const {navigation} = props;
   const navigation: any = useNavigation();
   const _goBack = () => console.log('Went back');
   const _handleSearch = () => console.log('Searching');

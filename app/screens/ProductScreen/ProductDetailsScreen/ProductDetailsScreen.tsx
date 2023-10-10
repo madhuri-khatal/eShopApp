@@ -103,9 +103,10 @@ export const ProductDetailsScreen = (props: any) => {
         badgeCount={badgeCount}
       />
       <ScrollView>
-        <View style={{flex: 1, padding: 3}}>
+        <View style={{flex: 1}}>
           <View style={{flex: 1}}>
-            <View style={{flex: 1, position: 'relative'}}>
+            <View
+              style={{flex: 1, position: 'relative', backgroundColor: 'red'}}>
               {refWidth.current == 1 && (
                 <Button
                   style={{alignItems: 'flex-start'}}
