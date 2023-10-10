@@ -1,7 +1,7 @@
-import {View} from 'react-native';
+import {View, Image} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
-import {Appbar, Text} from 'react-native-paper';
+import {Appbar, FAB, Text} from 'react-native-paper';
 import {DrawerActions} from '@react-navigation/native';
 import FeaturedCategories from '../../components/Product/FeaturedCategories';
 import HomeWhyUs from '../../components/Product/HomeWhyUs';
@@ -12,6 +12,7 @@ import ListOFProducts from '../../screens/ProductScreen/ProductDetailsScreen/Lis
 import {Caraousel} from '../../components/ui/Caraousel';
 import {CaraouselContent} from '../../components/ui/CaraouselContent';
 import {useProductContext} from './../../context/ProductContext';
+import {Linking} from 'react-native';
 
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
@@ -21,16 +22,30 @@ export default function HomeScreen({navigation}: any) {
     getHomeSlider();
   }, [images]);
 
+  const handleWhatsAppLink = (id: number | string, message: string = '') => {
+    const whatsappLink = `https://wa.me/${id}?text=${encodeURIComponent(
+      message,
+    )}`;
+    Linking.openURL(whatsappLink);
+  };
+  const whatsappSupport = async () => {
+    // const defaultMessage = `Order ID:  - Hey,ShgeShop I Want To Cancel My Order.`;
+    await handleWhatsAppLink('7558566436');
+  };
   return (
     <>
       <View>
-        <Appbar.Header>
-          <Appbar.Content title="e-Shop" />
+        <Appbar.Header mode="small">
+          <Image
+            source={require('../../../assets/image/shgeshop_logo_O.png')}
+            style={{width: 90, height: 40, marginLeft: 15}}
+          />
+          <Appbar.Content title="" />
           <Appbar.Action icon="menu" onPress={_handleMore} />
         </Appbar.Header>
 
         <ScrollView style={{marginBottom: 60}}>
-                   <Caraousel
+          <Caraousel
             Component={CaraouselContent}
             data={images}
             autoPlay={true}
@@ -39,7 +54,7 @@ export default function HomeScreen({navigation}: any) {
           <FeaturedCategories />
           <Festival />
           <ListOFProducts />
-                  <View style={{paddingVertical: 10}}>
+          <View style={{paddingVertical: 10}}>
             <CouponList />
           </View>
           <Text
@@ -56,6 +71,18 @@ export default function HomeScreen({navigation}: any) {
           <HomeWhyUs />
           <Footer />
         </ScrollView>
+        <FAB
+          icon="whatsapp"
+          color="#ffffff"
+          style={{
+            position: 'absolute',
+            margin: 10,
+            right: 10,
+            bottom: 75,
+            backgroundColor: '#e95d2a',
+          }}
+          onPress={whatsappSupport}
+        />
       </View>
     </>
   );
