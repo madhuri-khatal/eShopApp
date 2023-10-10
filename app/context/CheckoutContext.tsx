@@ -2,7 +2,7 @@ import {CartApi} from '../api/CartApi';
 import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useCartContext} from './CartContext';
-import { checkoutObject } from '../screens/UserScreen/CheckoutScreen/checkoutObject';
+import {checkoutObject} from '../screens/UserScreen/CheckoutScreen/checkoutObject';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import OrderStackScreen from '../navigators/OrderStackScreen';
@@ -10,18 +10,35 @@ import {CustomerObject} from '../screens/UserScreen/CheckoutScreen/CustomerObjec
 import {CustomerApi} from '../api/CustomerApi';
 
 interface ICheckoutContext {
-  onSubmitCheckout: (formData: any, customer_id?: string) => Promise<void>;
+  // onSubmitCheckout: (formData: any, customer_id?: string) => Promise<void>;
   checkoutControl: any;
   checkoutHandleSubmit: Function;
-   onCreateCustomer: (formData: any, selectedMethod: string) => Promise<void>
+  //  onCreateCustomer: (formData: any, selectedMethod: string) => Promise<void>
   // onCreateCustomer: (formData: any, selectedMethod: string, discountedTotalAmount: number | string) => Promise<void>
   customerData: any;
   // onCallToTheCustomerAndCheckout: (formData: any) => void;
-  onCallToTheCustomerAndCheckout: (formData: any, selectedMethod: string
-    // ,discountedTotalAmount: number | string
-    ) => Promise<void>
-  customerId: string | number | undefined
-  checkoutData: any
+  // onCallToTheCustomerAndCheckout: (formData: any, selectedMethod: string
+  // ,discountedTotalAmount: number | string
+  // ) => Promise<void>
+  customerId: string | number | undefined;
+  checkoutData: any;
+  onSubmitCheckout: (
+    formData: any,
+    customerId?: number | string,
+    selectedMethod?: string,
+    discountedTotalAmount?: number | string,
+    CouponCode?: any,
+  ) => Promise<void>;
+  onCreateCustomer: (
+    formData: any,
+    selectedMethod: string,
+    CouponCode: any,
+  ) => Promise<void>;
+  onCallToTheCustomerAndCheckout: (
+    formData: any,
+    selectedMethod: string,
+    CouponCode: any,
+  ) => Promise<void>;
 }
 
 const CheckoutContext = createContext<ICheckoutContext | null>(null);
@@ -32,41 +49,57 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
   const {control: checkoutControl, handleSubmit: checkoutHandleSubmit} =
     useForm();
 
-  const {cartItems, getMyOrderData, deleteCartItem,myOrderItemsByid,getMyOrders} = useCartContext();
+  const {
+    cartItems,
+    getMyOrderData,
+    deleteCartItem,
+    myOrderItemsByid,
+    getMyOrders,
+  } = useCartContext();
   const [customerData, setCustomerData] = useState<any>();
   const [customerId, setCustomerId] = useState<number | string>();
-  const [checkoutData,setCheckoutData]=useState<any>()
+  const [checkoutData, setCheckoutData] = useState<any>();
   const navigation: any = useNavigation();
 
   // create customer
-  const onCreateCustomer = async (formData: any,selectedMethod:string
-    // ,discountedTotalAmount:number|string
-    ) => {
+  const onCreateCustomer = async (
+    formData: any,
+    selectedMethod: string,
+    CouponCode: string,
+  ) => {
     const jsonData = {
       ...formData,
     };
+    // console.log(
+    //   'CustomerObject(formData,CouponCode)',
+    //   CustomerObject(formData, CouponCode),
+    // );
+
     const {result} = await CustomerApi.onCreateCustomerApi(
-      CustomerObject(formData),
+      CustomerObject(formData
+        // ,CouponCode
+        ),
     );
         if (result?.data?.customer?.role === 'customer') {
       const customerId = result?.data?.customer?.id;
       setCustomerId(result?.data?.customer?.id);
       // onSubmitCheckout(formData, result?.data?.customer?.id);
     }
-    onSubmitCheckout(formData, result?.data?.customer?.id,selectedMethod)
+    onSubmitCheckout(formData, result?.data?.customer?.id,selectedMethod,CouponCode)
     // ,discountedTotalAmount);
     setCustomerData(result);
   };
-  
 
-  const onCallToTheCustomerAndCheckout = async(formData: any,selectedMethod:string
-    // ,discountedTotalAmount:number|string
-    ) => {
+  const onCallToTheCustomerAndCheckout = async (
+    formData: any,
+    selectedMethod: string,
+    CouponCode: string,
+  ) => {
     // if (customerData?.data?.customer?.role === 'customer') {
     //  await onSubmitCheckout(formData, customerId);
     // } else {
-      onCreateCustomer(formData,selectedMethod)
-      // ,discountedTotalAmount);
+    onCreateCustomer(formData, selectedMethod, CouponCode);
+    // ,discountedTotalAmount);
     //   onSubmitCheckout(formData, customerId);
     // }
   };
@@ -76,39 +109,57 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     formData: any,
     customerId?: number | string,
     selectedMethod?: string,
-    discountedTotalAmount?:number|string
+    CouponCode?: any,
   ) => {
     const linItem: any = cartItems?.items?.map((item: any) => ({
       product_id: item?.id,
       quantity: item?.quantity,
     }));
-       
-   const shippingRate: any = cartItems?.totals?.total_shipping / 100;
-    const shippinglines: any= [
-    {
-      method_id: 'flat_rate',
-      method_title: 'Flat Rate',
-      total:shippingRate.toFixed(2),   
-    },
-  ];
+    console.log(' from function==========', CouponCode);
+
+    const shippingRate: any = cartItems?.totals?.total_shipping / 100;
+    const shippinglines: any = [
+      {
+        method_id: 'flat_rate',
+        method_title: 'Flat Rate',
+        total: shippingRate.toFixed(2),
+      },
+    ];
 
     const jsonData = {
       ...formData,
     };
+    console.log(
+      'checkoutObject(formData,CouponCode)',
+      checkoutObject(  jsonData,
+            linItem,
+            shippinglines,
+            customerId,
+            selectedMethod,
+            CouponCode,),
+    );
 
     const {
       result: {data: responseData},
     } = await CartApi.onCreateOrderApi(
-      checkoutObject(jsonData,linItem,shippinglines,customerId,selectedMethod)
+      checkoutObject(
+        jsonData,
+        linItem,
+        shippinglines,
+        customerId,
+        selectedMethod,
+        CouponCode,
+      ),
       // ,discountedTotalAmount),
-      );
-      
-    setCheckoutData(responseData)
+    );
+    console.log('context=============', responseData);
+
+    setCheckoutData(responseData);
     const responseCustomerId = responseData?.customer_id;
     responseData.responseCustomerId = responseCustomerId;
     Alert.alert('Order Successfully placed');
-    
-    getMyOrders(responseCustomerId)
+
+    getMyOrders(responseCustomerId);
   };
 
   const value: ICheckoutContext = {
@@ -119,7 +170,7 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     customerData,
     onCallToTheCustomerAndCheckout,
     customerId,
-    checkoutData
+    checkoutData,
   };
 
   return (

@@ -11,6 +11,7 @@ const shippingData = (data: any) => {
   
   export const CustomerObject = (
     formData: any
+    // ,couponCode:any
      ) => {
     const shipping_address = shippingData(formData);
     return {
@@ -27,6 +28,7 @@ const shippingData = (data: any) => {
         ...shipping_address,
         country: 'IN',
       },
+      // coupon_lines:[couponCode]
     } 
 
     };
