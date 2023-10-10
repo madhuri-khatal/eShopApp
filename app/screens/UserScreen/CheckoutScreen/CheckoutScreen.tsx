@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
-import {Text, Button} from 'react-native-paper';
+import {Text, Button, TextInput} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import DeliveryAddressScreen from './DeliveryAddressScreen';
 import {useCartContext} from '../../../context/CartContext';
@@ -21,16 +21,12 @@ export default function CheckoutScreen(props: any) {
   } = useCheckoutContext();
 
   const onPressToSubmit = async (formData: any) => {
-    // onCreateCustomer(formData);
-    // console.log("Formdata===============",formData);
-
-    onCallToTheCustomerAndCheckout(formData, selectedMethod);
-    // ,discountedTotalAmount)
+    console.log('Formdata===============', formData, CouponCode);
+    onCallToTheCustomerAndCheckout(formData, selectedMethod, CouponCode);
   };
   const onPressToSubmitupipayment = async (formData: any) => {
     // onCreateCustomer(formData);
-    onCallToTheCustomerAndCheckout(formData, selectedMethod);
-    // ,discountedTotalAmount);
+    onCallToTheCustomerAndCheckout(formData, selectedMethod, CouponCode);
     paymentoptions();
   };
 
@@ -45,10 +41,14 @@ export default function CheckoutScreen(props: any) {
 
   const [selectedMethod, setSelectedMethod] = useState('');
   const [showCODDetails, setShowCODDetails] = useState(false);
-  const [couponCode, setCouponCode] = useState('');
+  const [CouponCode, setCouponCode] = useState(' ');
   const [discountedTotalAmount, setDiscountedTotalAmount] = useState(
     cartItems?.totals?.total_price / 100,
   );
+
+  const handleCouponCodeChange = (text: any) => {
+    setCouponCode(text);
+  };
 
   const handlePaymentMethodPress = (method: any) => {
     setSelectedMethod(prevMethod => {
@@ -100,14 +100,12 @@ export default function CheckoutScreen(props: any) {
       (cartItems?.totals?.total_price / 100) * (1 - discount);
     setDiscountedTotalAmount(newTotalAmount);
   };
+  // console.log(' applyCouponCode====', discountedTotalAmount);
+  console.log('code====', CouponCode);
 
   return (
     <>
-      <HeaderBar
-        title="Checkout"
-        backAction={() => navigation.goBack()}
-        icon1="menu"
-      />
+      <HeaderBar title="" backAction={() => navigation.goBack()} icon1="menu" />
 
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
@@ -124,12 +122,12 @@ export default function CheckoutScreen(props: any) {
                 margin: 8,
                 backgroundColor: 'white',
               }}
-              name={'coupon_lines'}
+              name={'CouponCode'}
               keyboardType={'default'}
               isRequiredValue
               mode="outlined"
               // defaultValue={billing?.phone}
-              // value={couponCode}
+              // value={CouponCode}
               // onChangeText={text => setCouponCode(text)}
             />
             <Button
@@ -138,7 +136,28 @@ export default function CheckoutScreen(props: any) {
               style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
               Apply Coupon
             </Button>
-          </View>  */}
+          </View> */}
+
+          <TextInput
+            placeholder="Enter coupon code"
+            style={{
+              margin: 8,
+              backgroundColor: 'white',
+            }}
+            // name={'CouponCode'}
+            keyboardType={'default'}
+            // isRequiredValue
+            mode="outlined"
+            // Step 3: Add onChangeText prop
+            onChangeText={handleCouponCodeChange}
+          />
+          <Button
+            mode="contained"
+            onPress={applyCouponCode}
+            style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
+            Apply Coupon
+          </Button>
+
           <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>
               Customer Information
