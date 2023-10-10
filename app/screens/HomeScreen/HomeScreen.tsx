@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {View, Image} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import React, {useEffect} from 'react';
 import {Appbar, FAB, Text} from 'react-native-paper';
@@ -35,8 +35,12 @@ export default function HomeScreen({navigation}: any) {
   return (
     <>
       <View>
-        <Appbar.Header>
-          <Appbar.Content title="e-Shop" />
+        <Appbar.Header mode="small">
+          <Image
+            source={require('../../../assets/image/shgeshop_logo_O.png')}
+            style={{width: 90, height: 40, marginLeft: 15}}
+          />
+          <Appbar.Content title="" />
           <Appbar.Action icon="menu" onPress={_handleMore} />
         </Appbar.Header>
 

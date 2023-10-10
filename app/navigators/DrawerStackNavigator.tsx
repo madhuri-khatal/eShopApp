@@ -31,14 +31,14 @@ export default function DrawerStackNavigator() {
         }}
         component={BottomTabStack}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="UserStack"
         options={{
           drawerLabel: 'Profile',
           title: 'Profile',
         }}
         component={UserStackScreen}
-      />
+      /> */}
       <Drawer.Screen
         name="Profile"
         options={{

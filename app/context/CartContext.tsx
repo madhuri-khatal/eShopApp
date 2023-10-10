@@ -3,7 +3,6 @@ import {CartApi} from '../api/CartApi';
 import {ToastAndroid} from 'react-native';
 import {useProductContext} from './ProductContext';
 import {OrderApi} from '../api/OrderApi';
-
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
@@ -38,6 +37,7 @@ interface ICartContext {
   isLoginLoading: boolean;
   isLogin: boolean;
   Login: any;
+  setcartItems: React.Dispatch<any>;
   onLogin: (data: any) => Promise<void>;
 }
 
@@ -85,7 +85,6 @@ export const CartContextProvider = ({children}: CartContextType) => {
         navigation.navigate('OrderScreen');
         setIsLogin(true);
       }
-  
     } catch (error) {
       console.error('Login error:', error);
     } finally {
@@ -103,17 +102,17 @@ export const CartContextProvider = ({children}: CartContextType) => {
       id: variation,
       quantity: quantity,
     });
-       if (result == undefined) {
+    if (result == undefined) {
       Alert.alert('please select weight first');
-    }else{
-    Alert.alert('Product sucessfully Added in Cart');
-    // navigation.navigate('CartScreen');
-    navigation.navigate('CartStack', {
-      screen: 'CartScreen',
-      initial: false,
-    });
-    getCartList();
-  }
+    } else {
+      Alert.alert('Product sucessfully Added in Cart');
+      // navigation.navigate('CartScreen');
+      navigation.navigate('CartStack', {
+        screen: 'CartScreen',
+        initial: false,
+      });
+      getCartList();
+    }
   }
   // CART ITEM LIST
   const getCartList = async () => {
@@ -182,14 +181,12 @@ export const CartContextProvider = ({children}: CartContextType) => {
     setMyOrderItemsByID(data);
   };
 
-
   const getOrderDetailById = async (id: number | string) => {
     const {result} = await OrderApi.getOrderDetailById(id);
     setOrderData(result);
   };
 
-  //  get wishlist 
-  
+  //  get wishlist
 
   const value: ICartContext = {
     cartItems,
@@ -219,7 +216,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
     isLogin,
     Login,
     onLogin,
-
+    setcartItems,
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
