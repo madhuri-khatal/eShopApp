@@ -103,7 +103,7 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     //   onSubmitCheckout(formData, customerId);
     // }
   };
-
+// Apply coupon
   // place order
   const onSubmitCheckout = async (
     formData: any,

@@ -11,6 +11,7 @@ import RNUpiPayment from 'react-native-upi-payment';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {HeaderBar} from '../../../components/ui/HeaderBar';
+import { useProductContext } from '../../../context/ProductContext';
 export default function CheckoutScreen(props: any) {
   const navigation: any = useNavigation();
   const {cartItems} = useCartContext();
@@ -19,6 +20,14 @@ export default function CheckoutScreen(props: any) {
     checkoutHandleSubmit,
     onCallToTheCustomerAndCheckout,
   } = useCheckoutContext();
+const {couponData}=useProductContext();
+
+const couponCodes = couponData.map(coupon => coupon.code);
+const amount=couponData.map(coupon=>coupon.amount )
+const discount_type =couponData.map(coupon=>coupon.discount_type)
+const discount=amount || discount_type
+console.log(couponCodes);
+
 
   const onPressToSubmit = async (formData: any) => {
     console.log('Formdata===============', formData, CouponCode);
@@ -94,12 +103,71 @@ export default function CheckoutScreen(props: any) {
     console.log('faild', data);
   }
 
+  // const applyCouponCode = () => {
+  //   const discount = 0.1;
+  //   const newTotalAmount =
+  //     (cartItems?.totals?.total_price / 100) * (1 - discount);
+  //   setDiscountedTotalAmount(newTotalAmount);
+  // };
+
   const applyCouponCode = () => {
-    const discount = 0.1; // 10% discount
-    const newTotalAmount =
-      (cartItems?.totals?.total_price / 100) * (1 - discount);
-    setDiscountedTotalAmount(newTotalAmount);
+    if (!CouponCode.trim()) {
+      Alert.alert('Please enter a valid coupon code');
+      return;
+    }
+  
+    // Find the coupon data that matches the entered CouponCode
+    const matchingCoupon = couponData.find(coupon => coupon.code === CouponCode);
+  
+    if (matchingCoupon) {
+      const { amount, discount_type } = matchingCoupon;
+      const totalAmount = cartItems?.totals?.total_price / 100;
+  
+      if (discount_type === 'percent') {
+        // Apply percentage discount
+        const discountPercentage = amount / 100;
+        const discountAmount = totalAmount * discountPercentage;
+        const newTotalAmount = totalAmount - discountAmount;
+        console.log("newTotalAmount========",newTotalAmount);
+        
+        setDiscountedTotalAmount(newTotalAmount);
+  
+        // Show alert with new total amount
+        Alert.alert('Coupon applied successfully', `New Total Amount: ${newTotalAmount}`);
+      } else if (discount_type === 'rupee') {
+        // Apply rupee discount
+        const newTotalAmount = totalAmount - amount;
+        setDiscountedTotalAmount(newTotalAmount);
+  
+        // Show alert with new total amount
+        Alert.alert('Coupon applied successfully', `New Total Amount: ${newTotalAmount}`);
+      } else {
+        Alert.alert('Invalid discount type');
+      }
+    } else {
+      Alert.alert('Invalid coupon code');
+    }
   };
+  
+  
+  // const applyCouponCode = () => {
+  //       if (!CouponCode.trim()) {
+  //     Alert.alert('Please enter a valid coupon code');
+  //     return;
+  //   }
+  
+  //      if (couponCodes.includes(CouponCode)) {
+  //         const discount = 0.1;
+  //     const newTotalAmount =
+  //       (cartItems?.totals?.total_price / 100) * (1 - discount);
+  //     setDiscountedTotalAmount(newTotalAmount);
+  
+  //     Alert.alert('Coupon applied successfully');
+  //   } else {
+  //     Alert.alert('Invalid coupon code');
+  //   }
+  // };
+  
   // console.log(' applyCouponCode====', discountedTotalAmount);
   console.log('code====', CouponCode);
 
@@ -109,34 +177,7 @@ export default function CheckoutScreen(props: any) {
 
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
-          {/* <View style={{flexDirection: 'row', padding: 10}}>
-            <Text style={{fontSize: 20, fontWeight: 'bold', width: '90%'}}>
-              Coupon Code
-            </Text>
-          </View>
-          <View style={{padding: 8}}>
-            <TextInputController
-              placeholder="Enter coupon code"
-              control={checkoutControl}
-              style={{
-                margin: 8,
-                backgroundColor: 'white',
-              }}
-              name={'CouponCode'}
-              keyboardType={'default'}
-              isRequiredValue
-              mode="outlined"
-              // defaultValue={billing?.phone}
-              // value={CouponCode}
-              // onChangeText={text => setCouponCode(text)}
-            />
-            <Button
-              mode="contained"
-              onPress={applyCouponCode}
-              style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
-              Apply Coupon
-            </Button>
-          </View> */}
+         
 
           <TextInput
             placeholder="Enter coupon code"
@@ -144,12 +185,9 @@ export default function CheckoutScreen(props: any) {
               margin: 8,
               backgroundColor: 'white',
             }}
-            // name={'CouponCode'}
-            keyboardType={'default'}
-            // isRequiredValue
-            mode="outlined"
-            // Step 3: Add onChangeText prop
-            onChangeText={handleCouponCodeChange}
+                      keyboardType={'default'}
+                       mode="outlined"
+                  onChangeText={handleCouponCodeChange}
           />
           <Button
             mode="contained"
