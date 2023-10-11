@@ -11,7 +11,7 @@ import RNUpiPayment from 'react-native-upi-payment';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {HeaderBar} from '../../../components/ui/HeaderBar';
-import { useProductContext } from '../../../context/ProductContext';
+import {useProductContext} from '../../../context/ProductContext';
 export default function CheckoutScreen(props: any) {
   const navigation: any = useNavigation();
   const {cartItems} = useCartContext();
@@ -21,10 +21,7 @@ export default function CheckoutScreen(props: any) {
     onCallToTheCustomerAndCheckout,
     // applycoupon_lines
   } = useCheckoutContext();
-const {couponData}=useProductContext();
-
-
-
+  const {couponData} = useProductContext();
 
   const onPressToSubmit = async (formData: any) => {
     console.log('Formdata===============', formData, coupon_lines);
@@ -47,7 +44,7 @@ const {couponData}=useProductContext();
 
   const [selectedMethod, setSelectedMethod] = useState('');
   const [showCODDetails, setShowCODDetails] = useState(false);
-  const [coupon_lines , setcoupon_lines] = useState(' ');
+  const [coupon_lines, setcoupon_lines] = useState(' ');
   const [discountedTotalAmount, setDiscountedTotalAmount] = useState(
     cartItems?.totals?.total_price / 100,
   );
@@ -69,15 +66,15 @@ const {couponData}=useProductContext();
   };
 
   const billing = cartItems?.address;
-
+  const paymentAmount = discountedTotalAmount
+    ? discountedTotalAmount
+    : totalAmount;
   const paymentoptions = () => {
     RNUpiPayment.initializePayment(
       {
         vpa: '50627101@ubin',
-        // vpa: 'madhuribkhatal@okicici',
-        // vpa: 'bhidepurva123@okicici',
         payeeName: 'ShgeShop',
-        amount: totalAmount,
+        amount: paymentAmount,
         transactionRef: 'aasf-332-aoei-fn',
       },
       (data: any) => {
@@ -93,7 +90,6 @@ const {couponData}=useProductContext();
 
   function successCallback(data: any) {
     Alert.alert('Order Successfully placed');
-    console.log('sucessfully', data);
   }
   function failureCallback(data: any) {
     Alert.alert('Order failed');
@@ -105,22 +101,30 @@ const {couponData}=useProductContext();
       Alert.alert('Please enter a valid coupon code');
       return;
     }
-      const matchingCoupon = couponData.find(coupon => coupon.code === coupon_lines);
-  
+    const matchingCoupon = couponData.find(
+      coupon => coupon.code === coupon_lines,
+    );
+
     if (matchingCoupon) {
-      const { amount, discount_type } = matchingCoupon;
+      const {amount, discount_type} = matchingCoupon;
       const totalAmount = cartItems?.totals?.total_price / 100;
-        if (discount_type === 'percent') {
-            const discountPercentage = amount / 100;
+      if (discount_type === 'percent') {
+        const discountPercentage = amount / 100;
         const discountAmount = totalAmount * discountPercentage;
         const newTotalAmount = totalAmount - discountAmount;
-        console.log("newTotalAmount========",newTotalAmount);
+        console.log('newTotalAmount========', newTotalAmount);
         setDiscountedTotalAmount(newTotalAmount);
-       Alert.alert('Coupon applied successfully', `New Total Amount: ${newTotalAmount}`);
+        Alert.alert(
+          'Coupon applied successfully',
+          `New Total Amount: ${newTotalAmount}`,
+        );
       } else if (discount_type === 'fixed_cart') {
-         const newTotalAmount = totalAmount - amount;
+        const newTotalAmount = totalAmount - amount;
         setDiscountedTotalAmount(newTotalAmount);
-          Alert.alert('Coupon applied successfully', `New Total Amount: ${newTotalAmount}`);
+        Alert.alert(
+          'Coupon applied successfully',
+          `New Total Amount: ${newTotalAmount}`,
+        );
       } else {
         Alert.alert('Invalid discount type');
       }
@@ -129,24 +133,21 @@ const {couponData}=useProductContext();
     }
   };
 
-
   return (
     <>
       <HeaderBar title="" backAction={() => navigation.goBack()} icon1="menu" />
 
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
-         
-
           <TextInput
             placeholder="Enter coupon code"
             style={{
               margin: 8,
               backgroundColor: 'white',
             }}
-                      keyboardType={'default'}
-                       mode="outlined"
-                  onChangeText={handlecoupon_linesChange}
+            keyboardType={'default'}
+            mode="outlined"
+            onChangeText={handlecoupon_linesChange}
           />
           <Button
             mode="contained"
