@@ -19,23 +19,20 @@ export default function CheckoutScreen(props: any) {
     checkoutControl,
     checkoutHandleSubmit,
     onCallToTheCustomerAndCheckout,
+    // applycoupon_lines
   } = useCheckoutContext();
 const {couponData}=useProductContext();
 
-const couponCodes = couponData.map(coupon => coupon.code);
-const amount=couponData.map(coupon=>coupon.amount )
-const discount_type =couponData.map(coupon=>coupon.discount_type)
-const discount=amount || discount_type
-console.log(couponCodes);
+
 
 
   const onPressToSubmit = async (formData: any) => {
-    console.log('Formdata===============', formData, CouponCode);
-    onCallToTheCustomerAndCheckout(formData, selectedMethod, CouponCode);
+    console.log('Formdata===============', formData, coupon_lines);
+    onCallToTheCustomerAndCheckout(formData, selectedMethod, coupon_lines);
   };
   const onPressToSubmitupipayment = async (formData: any) => {
     // onCreateCustomer(formData);
-    onCallToTheCustomerAndCheckout(formData, selectedMethod, CouponCode);
+    onCallToTheCustomerAndCheckout(formData, selectedMethod, coupon_lines);
     paymentoptions();
   };
 
@@ -50,13 +47,13 @@ console.log(couponCodes);
 
   const [selectedMethod, setSelectedMethod] = useState('');
   const [showCODDetails, setShowCODDetails] = useState(false);
-  const [CouponCode, setCouponCode] = useState(' ');
+  const [coupon_lines , setcoupon_lines] = useState(' ');
   const [discountedTotalAmount, setDiscountedTotalAmount] = useState(
     cartItems?.totals?.total_price / 100,
   );
 
-  const handleCouponCodeChange = (text: any) => {
-    setCouponCode(text);
+  const handlecoupon_linesChange = (text: any) => {
+    setcoupon_lines(text);
   };
 
   const handlePaymentMethodPress = (method: any) => {
@@ -103,44 +100,27 @@ console.log(couponCodes);
     console.log('faild', data);
   }
 
-  // const applyCouponCode = () => {
-  //   const discount = 0.1;
-  //   const newTotalAmount =
-  //     (cartItems?.totals?.total_price / 100) * (1 - discount);
-  //   setDiscountedTotalAmount(newTotalAmount);
-  // };
-
-  const applyCouponCode = () => {
-    if (!CouponCode.trim()) {
+  const applycoupon_lines = () => {
+    if (!coupon_lines.trim()) {
       Alert.alert('Please enter a valid coupon code');
       return;
     }
-  
-    // Find the coupon data that matches the entered CouponCode
-    const matchingCoupon = couponData.find(coupon => coupon.code === CouponCode);
+      const matchingCoupon = couponData.find(coupon => coupon.code === coupon_lines);
   
     if (matchingCoupon) {
       const { amount, discount_type } = matchingCoupon;
       const totalAmount = cartItems?.totals?.total_price / 100;
-  
-      if (discount_type === 'percent') {
-        // Apply percentage discount
-        const discountPercentage = amount / 100;
+        if (discount_type === 'percent') {
+            const discountPercentage = amount / 100;
         const discountAmount = totalAmount * discountPercentage;
         const newTotalAmount = totalAmount - discountAmount;
         console.log("newTotalAmount========",newTotalAmount);
-        
         setDiscountedTotalAmount(newTotalAmount);
-  
-        // Show alert with new total amount
-        Alert.alert('Coupon applied successfully', `New Total Amount: ${newTotalAmount}`);
-      } else if (discount_type === 'rupee') {
-        // Apply rupee discount
-        const newTotalAmount = totalAmount - amount;
+       Alert.alert('Coupon applied successfully', `New Total Amount: ${newTotalAmount}`);
+      } else if (discount_type === 'fixed_cart') {
+         const newTotalAmount = totalAmount - amount;
         setDiscountedTotalAmount(newTotalAmount);
-  
-        // Show alert with new total amount
-        Alert.alert('Coupon applied successfully', `New Total Amount: ${newTotalAmount}`);
+          Alert.alert('Coupon applied successfully', `New Total Amount: ${newTotalAmount}`);
       } else {
         Alert.alert('Invalid discount type');
       }
@@ -148,28 +128,7 @@ console.log(couponCodes);
       Alert.alert('Invalid coupon code');
     }
   };
-  
-  
-  // const applyCouponCode = () => {
-  //       if (!CouponCode.trim()) {
-  //     Alert.alert('Please enter a valid coupon code');
-  //     return;
-  //   }
-  
-  //      if (couponCodes.includes(CouponCode)) {
-  //         const discount = 0.1;
-  //     const newTotalAmount =
-  //       (cartItems?.totals?.total_price / 100) * (1 - discount);
-  //     setDiscountedTotalAmount(newTotalAmount);
-  
-  //     Alert.alert('Coupon applied successfully');
-  //   } else {
-  //     Alert.alert('Invalid coupon code');
-  //   }
-  // };
-  
-  // console.log(' applyCouponCode====', discountedTotalAmount);
-  console.log('code====', CouponCode);
+
 
   return (
     <>
@@ -187,11 +146,11 @@ console.log(couponCodes);
             }}
                       keyboardType={'default'}
                        mode="outlined"
-                  onChangeText={handleCouponCodeChange}
+                  onChangeText={handlecoupon_linesChange}
           />
           <Button
             mode="contained"
-            onPress={applyCouponCode}
+            onPress={applycoupon_lines}
             style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
             Apply Coupon
           </Button>
