@@ -11,7 +11,7 @@ const shippingData = (data: any) => {
 // const billingFormat = (data: any) => {
 //   const bilingData: any = {};
 //   Object.keys(data).forEach((key: string) => {
-//     if (key === 'coupon_lines') {
+//     if (key === 'CouponCode') {
 //       return;
 //     } else {
 //       bilingData[key] = data[key];
@@ -26,19 +26,19 @@ export const checkoutObject = (
   shipping_lines: any[],
   customerId?: number | string,
   selectedMethod?: string,
-  discountedTotalAmount?: number | string[],
+  CouponCode?:string
 ) => {
   const shipping = shippingData(formData);
   // const biilingData = billingFormat(formData);
-  // const {coupon_lines} = formData;
+  // const {CouponCode} = formData;
   return {
     payment_method: selectedMethod || 'cod',
     payment_method_title: selectedMethod || 'cod',
     status: 'processing',
     customer_id: customerId,
     set_paid: true,
-    // coupon_lines: coupon_lines,
-    // coupon_lines: [`SHGPurvaMadhuri`],
+    // coupons: [CouponCode],
+    // CouponCode: [`SHGPurvaMadhuri`],
     billing: {
       // ...biilingData,
       ...formData,
@@ -51,5 +51,7 @@ export const checkoutObject = (
     },
     line_items: line_items,
     shipping_lines: shipping_lines,
+    CouponCode
+    // CouponCode: [CouponCode],
   };
 };
