@@ -127,8 +127,10 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
           </ScrollView>
           <TouchableOpacity
             style={{
-              backgroundColor: '#e95d2a',
+              backgroundColor: '#efa31d',
               padding: 15,
+              marginBottom: 25,
+              width: '90%',
             }}
             onPress={handleButtonPress}>
             <Text

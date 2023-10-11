@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 4,
     overflow: 'hidden',
     width: 110,
   },
