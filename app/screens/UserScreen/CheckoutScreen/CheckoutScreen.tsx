@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
-import {Text, Button, TextInput} from 'react-native-paper';
+import {Text, Button, TextInput, Divider} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import DeliveryAddressScreen from './DeliveryAddressScreen';
 import {useCartContext} from '../../../context/CartContext';
@@ -24,7 +24,7 @@ export default function CheckoutScreen(props: any) {
   const {couponData} = useProductContext();
 
   const onPressToSubmit = async (formData: any) => {
-       onCallToTheCustomerAndCheckout(formData, selectedMethod, coupon_lines);
+    onCallToTheCustomerAndCheckout(formData, selectedMethod, coupon_lines);
   };
   const onPressToSubmitupipayment = async (formData: any) => {
     // onCreateCustomer(formData);
@@ -44,6 +44,8 @@ export default function CheckoutScreen(props: any) {
   const [selectedMethod, setSelectedMethod] = useState('');
   const [showCODDetails, setShowCODDetails] = useState(false);
   const [coupon_lines, setcoupon_lines] = useState(' ');
+  const [showCouponInput, setShowCouponInput] = useState(false);
+
   const [discountedTotalAmount, setDiscountedTotalAmount] = useState(
     cartItems?.totals?.total_price / 100,
   );
@@ -115,14 +117,14 @@ export default function CheckoutScreen(props: any) {
         setDiscountedTotalAmount(newTotalAmount);
         Alert.alert(
           'Coupon applied successfully',
-          `New Total Amount: ${newTotalAmount}`,
+          `Total Amount: ${newTotalAmount}`,
         );
       } else if (discount_type === 'fixed_cart') {
         const newTotalAmount = totalAmount - amount;
         setDiscountedTotalAmount(newTotalAmount);
         Alert.alert(
           'Coupon applied successfully',
-          `New Total Amount: ${newTotalAmount}`,
+          `Total Amount: ${newTotalAmount}`,
         );
       } else {
         Alert.alert('Invalid discount type');
@@ -138,22 +140,37 @@ export default function CheckoutScreen(props: any) {
 
       <ScrollView>
         <View style={{marginVertical: 20, padding: 7}}>
-          <TextInput
-            placeholder="Enter coupon code"
-            style={{
-              margin: 8,
-              backgroundColor: 'white',
-            }}
-            keyboardType={'default'}
-            mode="outlined"
-            onChangeText={handlecoupon_linesChange}
-          />
-          <Button
-            mode="contained"
-            onPress={applycoupon_lines}
-            style={{margin: 8, backgroundColor: '#f25616', borderRadius: 10}}>
-            Apply Coupon
-          </Button>
+          <Text
+            style={{fontSize: 18, padding: 11, color: '#00ff'}}
+            onPress={() => setShowCouponInput(!showCouponInput)}>
+            Do you have a coupon?
+          </Text>
+          {showCouponInput && (
+            <>
+              <TextInput
+                placeholder="Enter coupon code"
+                style={{
+                  margin: 8,
+                  backgroundColor: 'white',
+                }}
+                keyboardType={'default'}
+                mode="outlined"
+                onChangeText={handlecoupon_linesChange}
+              />
+              <Button
+                mode="contained"
+                onPress={applycoupon_lines}
+                style={{
+                  margin: 8,
+                  backgroundColor: '#f25616',
+                  borderRadius: 10,
+                }}>
+                Apply Coupon
+              </Button>
+            </>
+          )}
+
+          {/* </View> */}
 
           <View style={{flexDirection: 'row', paddingHorizontal: 10}}>
             <Text style={{fontSize: 20, fontWeight: 'bold'}}>
@@ -261,15 +278,15 @@ export default function CheckoutScreen(props: any) {
                 </Text>
               </TouchableOpacity>
             </View>
-
+            <Divider />
             <View style={{marginTop: 14}}>
               <Button
                 style={{
-                  width: '97%',
-                  height: 50,
+                  width: '100%',
+                  height: 40,
                   backgroundColor: '#f25616',
-                  borderRadius: 10,
-                  padding: 3,
+                  borderRadius: 3,
+                  // padding: 3,
                   justifyContent: 'center',
                 }}
                 mode="contained"
@@ -302,30 +319,34 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   methodContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: 'gray',
+      alignItems: 'center',
+    padding: 10,
+    borderRadius: 3,
+    justifyContent: 'center',
+    backgroundColor: '#f2f2f2',
+    borderColor:'#54616c',
+
+    borderWidth:0.8,
     marginBottom: 10,
   },
   methodText: {
-    fontSize: 16,
+    fontSize: 17,
+    fontWeight: '700',
     marginLeft: 10,
+    color: '#54616c',
+    textAlign: 'center',
   },
   selectedMethod: {
-    backgroundColor: '#F4f4f4',
-    borderColor: '#F7B492',
-  },
+    backgroundColor: '#007c00',
+    },
   selectedMethodText: {
-    color: '#000000',
+    color: '#ffffff',
   },
   methodDetails: {
     marginTop: 10,
     padding: 10,
     backgroundColor: '#f4f4f4',
-    borderRadius: 5,
+    borderRadius: 3,
   },
   methodDetailsText: {
     fontSize: 16,
