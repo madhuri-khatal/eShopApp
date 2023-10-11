@@ -86,7 +86,7 @@ export const ProductDetailsScreen = (props: any) => {
   return (
     <>
       <HeaderBar
-        title=""
+        title={productById?.name}
         titleStyle={{fontSize: 18}}
         backAction={() => navigation.goBack()}
         right2Action={() => {
@@ -105,8 +105,7 @@ export const ProductDetailsScreen = (props: any) => {
       <ScrollView>
         <View style={{flex: 1}}>
           <View style={{flex: 1}}>
-            <View
-              style={{flex: 1, position: 'relative', backgroundColor: 'red'}}>
+            <View style={{flex: 1, position: 'relative'}}>
               {refWidth.current == 1 && (
                 <Button
                   style={{alignItems: 'flex-start'}}
@@ -206,23 +205,10 @@ export const ProductDetailsScreen = (props: any) => {
               </View>
             </View>
           </View>
-          <Button
-            onPress={shareProduct}
-            style={{
-              alignItems: 'flex-end',
-              paddingRight: 15,
-              marginTop: 1,
-            }}>
-            <FontAwesome
-              name="whatsapp"
-              color="green"
-              size={30}
-              style={{padding: 8}}
-            />
-          </Button>
+
           <Text
             style={{
-              fontSize: 24,
+              fontSize: 20,
               fontWeight: 'bold',
               paddingLeft: 10,
               textTransform: 'capitalize',
@@ -233,24 +219,43 @@ export const ProductDetailsScreen = (props: any) => {
           <HTMLView value={shortDescriptionText} stylesheet={styles} />
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <View style={{flex: 1}}>
-              <Text
-                style={{
-                  fontSize: 22,
-                  marginLeft: 15,
-                  color: '#b1b1b1',
-                }}>
-                ₹{firstPrice} - ₹{secondPrice}
-              </Text>
-              <CurrencyComponent
-                value={price || productById?.price}
-                style={{
-                  alignSelf: 'flex-bottom',
-                  fontSize: 28,
-                  fontWeight: 'bold',
-                  paddingTop: 13,
-                  marginLeft: 15,
-                }}
-              />
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flex: 8}}>
+                  <Text
+                    style={{
+                      fontSize: 22,
+                      marginLeft: 15,
+                      color: '#b1b1b1',
+                    }}>
+                    ₹{firstPrice} - ₹{secondPrice}
+                  </Text>
+                  <CurrencyComponent
+                    value={price || productById?.price}
+                    style={{
+                      fontSize: 24,
+                      fontWeight: 'bold',
+                      marginLeft: 15,
+                    }}
+                  />
+                </View>
+
+                <View style={{flex: 2}}>
+                  <Button
+                    onPress={shareProduct}
+                    style={{
+                      alignItems: 'flex-end',
+                      // paddingRight: 10,
+                      // marginTop: 1,
+                    }}>
+                    <FontAwesome
+                      name="whatsapp"
+                      color="green"
+                      size={30}
+                      style={{padding: 8}}
+                    />
+                  </Button>
+                </View>
+              </View>
             </View>
           </View>
           <WeightList />

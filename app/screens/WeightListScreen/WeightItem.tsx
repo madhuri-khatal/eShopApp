@@ -5,7 +5,7 @@ import {View, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import CurrencyComponent from '../../components/ui/Currencycomponent';
 
-interface IProps { 
+interface IProps {
   icon?: any;
   title?: any;
   options2: string;
@@ -28,9 +28,8 @@ export default function WeightItem({
 
   return (
     <>
-      
-        <TouchableOpacity
-           onPress={() => onselectVariationOrWeight(options2, id,price)}>
+      <TouchableOpacity
+        onPress={() => onselectVariationOrWeight(options2, id, price)}>
         <View
           style={{
             margin: 6,
@@ -61,9 +60,7 @@ export default function WeightItem({
             </>
           )}
 
-
           <Text style={{color: '#595555'}}>{options2}</Text>
-
         </View>
       </TouchableOpacity>
     </>

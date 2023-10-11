@@ -28,7 +28,10 @@ const FilterMenu = () => {
           borderRadius: 10,
         }}>
         <View style={{flex: 1, flexDirection: 'row'}}>
-          <Ionicons name="filter" style={{fontSize: 25, marginRight: 10}} />
+          <Ionicons
+            name="filter"
+            style={{fontSize: 25, marginRight: 10, color: 'gray'}}
+          />
           <Text
             style={{fontSize: 18, fontWeight: 'bold', color: 'gray'}}
             onPress={toggleFilterMenu}>

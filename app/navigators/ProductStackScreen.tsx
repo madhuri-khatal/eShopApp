@@ -5,6 +5,7 @@ import {ProductDetailsScreen} from '../screens/ProductScreen/ProductDetailsScree
 import CheckoutScreen from '../screens/UserScreen/CheckoutScreen/CheckoutScreen';
 import {CartScreen} from '../screens/UserScreen/CartScreen/CartScreen';
 import {CartContextProvider} from '../context/CartContext';
+import {CategoriesScreen} from '../screens/CategoriesScreen/CategoriesScreen';
 
 const Stack = createStackNavigator();
 export default function ProductStackScreen() {
@@ -22,6 +23,7 @@ export default function ProductStackScreen() {
             component={ProductDetailsScreen}
           />
           <Stack.Screen name="CartScreen" component={CartScreen} />
+          <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
         </Stack.Navigator>
       </CartContextProvider>
     </>
