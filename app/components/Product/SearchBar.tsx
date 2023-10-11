@@ -11,7 +11,7 @@ const CustomSearchBar = ({placeholder, onChangeText}: any) => {
   };
 
   return (
-    <View style={{paddingHorizontal: 20}}>
+    <View style={{paddingHorizontal: 5}}>
       <Searchbar
         placeholder={placeholder || 'Search Product'}
         onChangeText={handleSearch}

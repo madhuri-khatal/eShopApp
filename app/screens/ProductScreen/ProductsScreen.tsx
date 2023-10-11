@@ -52,21 +52,23 @@ export const ProductsScreen = (props: any) => {
         icon2="cart"
         badgeCount={badgeCount}
       />
-      <CustomSearchBar onChangeText={handleSearchChange} />
-      <View
-        style={{
-          position: 'absolute',
-          top: 118,
-          left: 0,
-          zIndex: 9000,
-          borderRadius: 10,
-          backgroundColor: 'white',
-          width: '100%',
-        }}>
-        <FilterMenu />
+      <View style={{flexDirection: 'row', height: '6%'}}>
+        <View
+          style={{
+            flexDirection: 'column',
+            width: '15%',
+            justifyContent: 'center',
+            backgroundColor: '#e95d2a',
+            borderRadius: 8,
+          }}>
+          <FilterMenu />
+        </View>
+        <View
+          style={{flexDirection: 'column', width: '85%', paddingHorizontal: 4}}>
+          <CustomSearchBar onChangeText={handleSearchChange} />
+        </View>
       </View>
-      <View style={{marginTop: 40}}>
-        {/* <ListOFProducts/> */}
+      <View>
         <ProductList filteredProducts={filteredProducts} />
       </View>
     </>
