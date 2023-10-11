@@ -37,7 +37,7 @@ export const ProductsScreen = (props: any) => {
     <>
       <HeaderBar
         title="Product Screen"
-        titleStyle={{fontSize: 18}}
+        titleStyle={{fontSize: 18, fontWeight: 'bold', color: '#506574'}}
         backAction={() => navigation.goBack()}
         right2Action={() => {
           navigation.navigate('CartStack', {
@@ -66,9 +66,8 @@ export const ProductsScreen = (props: any) => {
         <FilterMenu />
       </View>
       <View style={{marginTop: 40}}>
-      {/* <ListOFProducts/> */}
-      <ProductList filteredProducts={filteredProducts} />
-      
+        {/* <ListOFProducts/> */}
+        <ProductList filteredProducts={filteredProducts} />
       </View>
     </>
   );

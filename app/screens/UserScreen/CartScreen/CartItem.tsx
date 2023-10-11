@@ -22,7 +22,6 @@ const CartItem = ({item, onRemove}: any) => {
   const handleQuantityChange = (newQuantity: any) => {
     if (newQuantity >= 1) {
       setQuantity(newQuantity);
-      
     }
   };
   const subTotal = sale_price * item?.quantity;
@@ -37,7 +36,7 @@ const CartItem = ({item, onRemove}: any) => {
         borderBottomColor: '#ddd',
         paddingVertical: 10,
         backgroundColor: 'white',
-        elevation:2
+        elevation: 2,
       }}>
       {item.images && item.images.length > 0 && (
         <View>
@@ -45,17 +44,16 @@ const CartItem = ({item, onRemove}: any) => {
             source={{uri: item.images[0].src}}
             style={{width: 100, height: 100, marginRight: 16}}
           />
-        
         </View>
       )}
       <View style={{flex: 1, marginLeft: 15}}>
         <Text
-          style={{fontSize: 16, fontWeight: 'bold',color:"#b1b1b1"}}
+          style={{fontSize: 16, fontWeight: 'bold', color: '#506574'}}
           numberOfLines={1}
           ellipsizeMode="tail">
           {item.name}
         </Text>
-{/* 
+        {/* 
         <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
           Price :
           <Text style={{fontSize: 14, color: '#888', marginBottom: 8}}>
@@ -80,13 +78,19 @@ const CartItem = ({item, onRemove}: any) => {
             <Text style={styles.buttonText}>+</Text>
           </TouchableOpacity>
         </View> */}
-         <Text style={{fontSize: 14, color: '#888', marginTop: 8}}>Price:  {sale_price} X {item?.quantity} = ₹{subTotal}</Text>
-             <Text style={{fontSize: 14, color: '#888', marginTop: 8}}>Number of Packs: {item?.quantity} </Text>
-        <Text style={{fontSize: 14, color: '#888', marginTop: 8}}>Quantity: {weight}</Text>
+        <Text style={{fontSize: 14, color: '#506574', marginTop: 8}}>
+          Price: {sale_price} X {item?.quantity} = ₹{subTotal}
+        </Text>
+        <Text style={{fontSize: 14, color: '#506574', marginTop: 8}}>
+          Number of Packs: {item?.quantity}{' '}
+        </Text>
+        <Text style={{fontSize: 14, color: '#506574', marginTop: 8}}>
+          Quantity: {weight}
+        </Text>
       </View>
       <View style={{marginRight: 15}}>
         <TouchableOpacity onPress={() => onDeletehowDialog(item.key)}>
-          <FontAwesome5 name="trash" size={23} color="#e95d2a" />
+          <FontAwesome5 name="trash" size={22} color="#e95d2a" />
         </TouchableOpacity>
       </View>
     </View>

@@ -19,13 +19,14 @@ export const HeaderBar = ({
   icon1 = '',
   icon2 = '',
   titleStyle = {},
-  badgeCount = 0, 
+  badgeCount = 0,
 }: IHeaderBar) => {
   return (
     <>
       <Appbar.Header>
         {backAction && (
           <Appbar.BackAction
+            color="#506574"
             onPress={() => {
               backAction();
             }}
@@ -41,10 +42,11 @@ export const HeaderBar = ({
           />
         )} */}
 
-{right2Action && (
-          <View style={{ position: 'relative' }}>
+        {right2Action && (
+          <View style={{position: 'relative'}}>
             <Appbar.Action
               icon={icon2}
+              color="#506574"
               onPress={() => {
                 right2Action();
               }}
@@ -59,6 +61,7 @@ export const HeaderBar = ({
         {right1Action && (
           <Appbar.Action
             icon={icon1}
+            color="#506574"
             onPress={() => {
               right1Action();
             }}

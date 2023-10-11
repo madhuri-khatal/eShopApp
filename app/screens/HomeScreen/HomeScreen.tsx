@@ -41,7 +41,7 @@ export default function HomeScreen({navigation}: any) {
             style={{width: 90, height: 40, marginLeft: 15}}
           />
           <Appbar.Content title="" />
-          <Appbar.Action icon="menu" onPress={_handleMore} />
+          <Appbar.Action icon="menu" color="#506574" onPress={_handleMore} />
         </Appbar.Header>
 
         <ScrollView style={{marginBottom: 60}}>

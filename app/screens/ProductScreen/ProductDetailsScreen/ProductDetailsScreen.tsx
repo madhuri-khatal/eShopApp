@@ -87,7 +87,7 @@ export const ProductDetailsScreen = (props: any) => {
     <>
       <HeaderBar
         title={productById?.name}
-        titleStyle={{fontSize: 18}}
+        titleStyle={{fontSize: 18, fontWeight: 'bold', color: '#506574'}}
         backAction={() => navigation.goBack()}
         right2Action={() => {
           navigation.navigate('CartStack', {

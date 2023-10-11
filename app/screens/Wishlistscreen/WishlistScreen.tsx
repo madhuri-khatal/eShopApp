@@ -14,7 +14,7 @@ export const WishlistScreen = (props: NativeStackScreenProps<any>) => {
     <>
       <HeaderBar
         title="My Wishlist"
-        titleStyle={{fontSize: 18}}
+        titleStyle={{fontSize: 18, fontWeight: 'bold', color: '#506574'}}
         backAction={() => navigation.goBack()}
         right1Action={() =>
           navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())

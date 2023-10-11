@@ -33,7 +33,7 @@ const FilterMenu = () => {
             style={{fontSize: 25, marginRight: 10, color: 'gray'}}
           />
           <Text
-            style={{fontSize: 18, fontWeight: 'bold', color: 'gray'}}
+            style={{fontSize: 18, fontWeight: 'bold', color: '#506574'}}
             onPress={toggleFilterMenu}>
             Categories
           </Text>
