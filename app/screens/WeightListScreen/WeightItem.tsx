@@ -35,8 +35,8 @@ export default function WeightItem({
             margin: 6,
             padding: 10,
             marginTop: 15,
-            paddingRight: 10,
-            paddingLeft: 10,
+            paddingRight: 20,
+            paddingLeft: 20,
             marginBottom: 15,
             marginRight: 7,
             borderWidth: 0.5,
@@ -62,7 +62,7 @@ export default function WeightItem({
             </>
           )}
 
-          <Text style={{color: '#506574', fontWeight: '600'}}>{options2}</Text>
+          <Text style={{color: '#506574', fontWeight: '700'}}>{options2}</Text>
         </View>
       </TouchableOpacity>
     </>

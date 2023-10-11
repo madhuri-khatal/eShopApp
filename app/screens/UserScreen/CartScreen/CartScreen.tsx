@@ -40,12 +40,12 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
     <>
       <HeaderBar
         title="My Cart"
-        titleStyle={{fontSize: 18}}
+        titleStyle={{fontSize: 18, fontWeight: 'bold', color: '#506574'}}
         backAction={() => navigation.goBack()}
         right1Action={() =>
           navigation.getParent('main').dispatch(DrawerActions.toggleDrawer())
         }
-        icon1="menu"
+        icon1="menu" 
       />
       {cartItems?.items.length === 0 ? (
         <Image
@@ -82,15 +82,15 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                     }}>
                     <Text
                       style={{
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: 'bold',
                         color: '#506574',
                       }}>
-                      Shipping Price:
+                      Shipping Price :
                     </Text>
                     <Text
                       style={{
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: 'bold',
                         color: '#506574',
                       }}>
@@ -106,15 +106,15 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                     }}>
                     <Text
                       style={{
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: 'bold',
                         color: '#506574',
                       }}>
-                      Total:
+                      Total :
                     </Text>
                     <Text
                       style={{
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: 'bold',
                         color: '#506574',
                       }}>
@@ -128,9 +128,11 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
           <TouchableOpacity
             style={{
               backgroundColor: '#efa31d',
-              padding: 15,
+              padding: 10,
               marginBottom: 25,
-              width: '90%',
+              width: '95%',
+              alignSelf: 'center',
+              borderRadius: 2,
             }}
             onPress={handleButtonPress}>
             <Text
@@ -139,6 +141,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                 textAlign: 'center',
                 fontSize: 18,
                 justifyContent: 'center',
+                fontWeight: '700',
               }}>
               Proceed to Checkout
             </Text>
