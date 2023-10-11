@@ -152,7 +152,7 @@ export default function ProfileScreen(props: any) {
               descriptionNumberOfLines={10}
             />
           </List.Accordion>
-          <View style={{alignItems: 'center', marginRight: 5}}>
+          {/* <View style={{alignItems: 'center', marginRight: 5}}>
             <Button
               style={{
                 width: 190,
@@ -174,7 +174,7 @@ export default function ProfileScreen(props: any) {
                 Log Out
               </Text>
             </Button>
-          </View>
+          </View> */}
         </View>
       </View>
     </ScrollView>

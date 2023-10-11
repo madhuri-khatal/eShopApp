@@ -143,6 +143,8 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     );
    
     setCheckoutData(responseData);
+    console.log(responseData, 'responseDataresponseData');
+
     const responseCustomerId = responseData?.customer_id;
     responseData.responseCustomerId = responseCustomerId;
     Alert.alert('Order Successfully placed');
