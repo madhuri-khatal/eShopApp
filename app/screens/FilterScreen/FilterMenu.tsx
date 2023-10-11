@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
-
 const FilterMenu = () => {
   const [isFilterMenuVisible, setIsFilterMenuVisible] = useState(false);
   const navigation: any = useNavigation();
@@ -13,33 +12,18 @@ const FilterMenu = () => {
   };
 
   return (
-    <View
+    <TouchableOpacity
+      onPress={toggleFilterMenu}
       style={{
-        flex: 1,
-        zIndex: 9000,
-        paddingHorizontal: 3,
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
       }}>
-      <TouchableOpacity
-        onPress={toggleFilterMenu}
-        style={{
-          padding: 10,
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-          borderRadius: 10,
-        }}>
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <Ionicons
-            name="filter"
-            style={{fontSize: 25, marginRight: 10, color: 'gray'}}
-          />
-          <Text
-            style={{fontSize: 18, fontWeight: 'bold', color: '#506574'}}
-            onPress={toggleFilterMenu}>
-            Categories
-          </Text>
-        </View>
-      </TouchableOpacity>
-    </View>
+      <View style={{flexDirection: 'row'}}>
+        <FontAwesome5 name="filter" color="#ffffff" size={18} />
+      </View>
+    </TouchableOpacity>
   );
 };
 
