@@ -134,7 +134,7 @@ export const ProductDetailsScreen = (props: any) => {
                     <TouchableOpacity
                       style={{}}
                       onPress={() => (refWidth.current = 1)}
-                      onPressOut={() => (refWidth.current = 0.6)}>
+                      onPressOut={() => (refWidth.current = 0.5)}>
                       <ImageComponent
                         src={{uri: item.src}}
                         alt={item.alt}
@@ -145,8 +145,7 @@ export const ProductDetailsScreen = (props: any) => {
                   </View>
                 )}
               />
-
-              <View
+              {/* <View
                 style={{
                   position: 'absolute',
                   bottom: 80,
@@ -202,7 +201,7 @@ export const ProductDetailsScreen = (props: any) => {
                     ]}
                   />
                 </View>
-              </View>
+              </View> */}
             </View>
           </View>
 
@@ -228,16 +227,17 @@ export const ProductDetailsScreen = (props: any) => {
                       color: '#b1b1b1',
                       marginVertical: 5,
                     }}>
-                    ₹{firstPrice} - ₹{secondPrice}
+                    ₹ {firstPrice} - ₹ {secondPrice}
                   </Text>
-                  <CurrencyComponent
-                    value={price || productById?.price}
+                  <Text
                     style={{
                       fontSize: 24,
                       fontWeight: 'bold',
-                      marginLeft: 15, 
-                    }}
-                  />
+                      marginLeft: 15,
+                      color: '#506574',
+                    }}>
+                    ₹ {price || productById?.price}
+                  </Text>
                 </View>
 
                 <View style={{flex: 2}}>

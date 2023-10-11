@@ -33,14 +33,16 @@ export default function WeightItem({
         <View
           style={{
             margin: 6,
-            padding: 5,
+            padding: 10,
             marginTop: 15,
+            paddingRight: 10,
+            paddingLeft: 10,
             marginBottom: 15,
+            marginRight: 7,
             borderWidth: 0.5,
             borderTopWidth: 7,
-            // borderColor: '#59a30e',
             borderColor: variation == id ? '#e95d2a' : '#b1b1b1',
-            borderRadius: 5,
+            borderRadius: 3,
           }}>
           {regularPrice > 0 && regularPrice !== price ? (
             <>
@@ -56,11 +58,11 @@ export default function WeightItem({
             </>
           ) : (
             <>
-              <CurrencyComponent value={price} style={{color: '#595555'}} />
+              <CurrencyComponent value={price} style={{color: '#506574'}} />
             </>
           )}
 
-          <Text style={{color: '#595555', fontWeight: '800'}}>{options2}</Text>
+          <Text style={{color: '#506574', fontWeight: '600'}}>{options2}</Text>
         </View>
       </TouchableOpacity>
     </>
