@@ -212,7 +212,7 @@ export const ProductDetailsScreen = (props: any) => {
               fontWeight: 'bold',
               paddingLeft: 10,
               textTransform: 'capitalize',
-              color: '#595555',
+              color: '#506574',
             }}>
             {productById?.name}
           </Text>
@@ -223,9 +223,10 @@ export const ProductDetailsScreen = (props: any) => {
                 <View style={{flex: 8}}>
                   <Text
                     style={{
-                      fontSize: 22,
+                      fontSize: 20,
                       marginLeft: 15,
                       color: '#b1b1b1',
+                      marginVertical: 5,
                     }}>
                     ₹{firstPrice} - ₹{secondPrice}
                   </Text>
@@ -234,7 +235,7 @@ export const ProductDetailsScreen = (props: any) => {
                     style={{
                       fontSize: 24,
                       fontWeight: 'bold',
-                      marginLeft: 15,
+                      marginLeft: 15, 
                     }}
                   />
                 </View>
@@ -266,7 +267,7 @@ export const ProductDetailsScreen = (props: any) => {
               paddingLeft: 15,
               fontWeight: 'bold',
               textAlign: 'justify',
-              color: '#595555',
+              color: '#506574',
             }}>
             Product Details
           </Text>
@@ -277,20 +278,19 @@ export const ProductDetailsScreen = (props: any) => {
         style={{
           display: 'flex',
           flexDirection: 'row',
-          marginTop: 15,
-          marginBottom: 10,
+          marginTop: 6,
           justifyContent: 'center',
         }}>
         <View style={{flex: 1, alignItems: 'flex-start', marginLeft: 15}}>
           <QuantityComponent />
         </View>
-        <View style={{flex: 1, alignItems: 'flex-end', marginRight: 10}}>
+        <View style={{alignItems: 'center', marginRight: 10}}>
           <Button
             style={{
               width: 220,
               height: 45,
               backgroundColor: '#e95d2a',
-              borderRadius: 10,
+              borderRadius: 0,
               justifyContent: 'center',
             }}
             mode="contained"
@@ -316,6 +316,6 @@ const styles = {
     fontSize: 16,
     margin: 8,
     textAlign: 'justify',
-    color: '#595555',
+    color: '#506574',
   },
 };
