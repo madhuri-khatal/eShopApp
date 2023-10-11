@@ -15,19 +15,20 @@ export const checkoutObject = (
   shipping_lines: any[],
   customerId?: number | string,
   selectedMethod?: string,
-  coupon_lines?: string | string[]
+  coupon_lines?: string,
 ) => {
   const shipping = shippingData(formData);
-  // const couponLinesArray = Array.isArray(coupon_lines) ? coupon_lines : [coupon_lines];
-  return {
+   let couponLinesArray: {code?: string}[] = [];
+    couponLinesArray = coupon_lines?.trim() ? [{code: coupon_lines}] : [];
+  
+  const checkOutData: any = {
     payment_method: selectedMethod || 'cod',
     payment_method_title: selectedMethod || 'cod',
     status: 'processing',
-    // customer_id: 0,
     customer_id: customerId,
     set_paid: true,
-        billing: {
-        ...formData,
+    billing: {
+      ...formData,
       country: 'IN',
     },
 
@@ -37,7 +38,8 @@ export const checkoutObject = (
     },
     line_items: line_items,
     shipping_lines: shipping_lines,
-    coupon_lines:[{code:coupon_lines}]
-    
+    coupon_lines: couponLinesArray,
       };
+
+  return checkOutData;
 };

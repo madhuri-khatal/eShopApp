@@ -27,8 +27,7 @@ const {couponData}=useProductContext();
 
 
   const onPressToSubmit = async (formData: any) => {
-    console.log('Formdata===============', formData, coupon_lines);
-    onCallToTheCustomerAndCheckout(formData, selectedMethod, coupon_lines);
+       onCallToTheCustomerAndCheckout(formData, selectedMethod, coupon_lines);
   };
   const onPressToSubmitupipayment = async (formData: any) => {
     // onCreateCustomer(formData);

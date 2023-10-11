@@ -8,7 +8,7 @@ import {useNavigation} from '@react-navigation/native';
 import OrderStackScreen from '../navigators/OrderStackScreen';
 import {CustomerObject} from '../screens/UserScreen/CheckoutScreen/CustomerObject';
 import {CustomerApi} from '../api/CustomerApi';
-import { useProductContext } from './ProductContext';
+import {useProductContext} from './ProductContext';
 
 interface ICheckoutContext {
   // onSubmitCheckout: (formData: any, customer_id?: string) => Promise<void>;
@@ -22,7 +22,7 @@ interface ICheckoutContext {
   // ,discountedTotalAmount: number | string
   // ) => Promise<void>
   customerId: string | number | undefined;
-  
+
   // applycoupon_lines: () => void
   checkoutData: any;
   onSubmitCheckout: (
@@ -41,7 +41,6 @@ interface ICheckoutContext {
     formData: any,
     selectedMethod: string,
     coupon_lines: any,
-    
   ) => Promise<void>;
 }
 
@@ -52,7 +51,7 @@ type CheckoutContextType = {children: ReactNode};
 export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
   const {control: checkoutControl, handleSubmit: checkoutHandleSubmit} =
     useForm();
-  
+
   const {
     cartItems,
     getMyOrderData,
@@ -74,18 +73,24 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     const jsonData = {
       ...formData,
     };
-    
+
     const {result} = await CustomerApi.onCreateCustomerApi(
-      CustomerObject(formData
+      CustomerObject(
+        formData,
         // ,coupon_lines
-        ),
+      ),
     );
-        if (result?.data?.customer?.role === 'customer') {
+    if (result?.data?.customer?.role === 'customer') {
       const customerId = result?.data?.customer?.id;
       setCustomerId(result?.data?.customer?.id);
       // onSubmitCheckout(formData, result?.data?.customer?.id);
     }
-    onSubmitCheckout(formData, result?.data?.customer?.id,selectedMethod,coupon_lines)
+    onSubmitCheckout(
+      formData,
+      result?.data?.customer?.id,
+      selectedMethod,
+      coupon_lines,
+    );
     // ,discountedTotalAmount);
     setCustomerData(result);
   };
@@ -115,7 +120,7 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
       product_id: item?.id,
       quantity: item?.quantity,
     }));
-   
+
     const shippingRate: any = cartItems?.totals?.total_shipping / 100;
     const shippinglines: any = [
       {
@@ -128,7 +133,8 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     const jsonData = {
       ...formData,
     };
-       const {
+    
+    const {
       result: {data: responseData},
     } = await CartApi.onCreateOrderApi(
       checkoutObject(
@@ -139,16 +145,11 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
         selectedMethod,
         coupon_lines,
       ),
-      // ,discountedTotalAmount),
-    );
-   
-    setCheckoutData(responseData);
-    console.log(responseData, 'responseDataresponseData');
-
+        );
+       setCheckoutData(responseData);
     const responseCustomerId = responseData?.customer_id;
     responseData.responseCustomerId = responseCustomerId;
     Alert.alert('Order Successfully placed');
-
     getMyOrders(responseCustomerId);
   };
 
