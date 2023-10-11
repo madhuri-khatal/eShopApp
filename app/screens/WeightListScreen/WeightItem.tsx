@@ -39,7 +39,7 @@ export default function WeightItem({
             borderWidth: 0.5,
             borderTopWidth: 7,
             // borderColor: '#59a30e',
-            borderColor: variation == id ? '#e95d2a' : '#f7ab8f',
+            borderColor: variation == id ? '#e95d2a' : '#b1b1b1',
             borderRadius: 5,
           }}>
           {regularPrice > 0 && regularPrice !== price ? (
@@ -47,11 +47,11 @@ export default function WeightItem({
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <CurrencyComponent
                   value={regularPrice}
-                  style={{textDecorationLine: 'line-through', color: '#b1b1b1'}}
+                  style={{textDecorationLine: 'line-through', color: '#506574'}}
                 />
               </View>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <CurrencyComponent value={price} style={{color: '#595555'}} />
+                <CurrencyComponent value={price} style={{color: '#506574'}} />
               </View>
             </>
           ) : (
@@ -59,8 +59,7 @@ export default function WeightItem({
               <CurrencyComponent value={price} style={{color: '#595555'}} />
             </>
           )}
-
-          <Text style={{color: '#595555'}}>{options2}</Text>
+          <Text style={{color: '#595555', fontWeight: '800'}}>{options2}</Text>
         </View>
       </TouchableOpacity>
     </>
