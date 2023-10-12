@@ -1,15 +1,9 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import UserStackScreen from './UserStackScreen';
-import BottomTabNavigator from './BottomTabNavigator';
-import ProductStackScreen from './ProductStackScreen';
 import {ProductFilterDrawer} from './../screens/ProductScreen/ProductDetailsScreen/ProductFilterDrawer';
 import {useTheme} from 'react-native-paper';
-import {OrderScreen} from './../screens/MyOrderScreen/OrderScreen';
 import OrderStackScreen from './OrderStackScreen';
 import BottomTabStack from './BottomTabStack';
-import {WishlistScreen} from './../screens/Wishlistscreen/WishlistScreen';
 
 const Drawer = createDrawerNavigator();
 export default function DrawerStackNavigator() {
@@ -58,13 +52,13 @@ export default function DrawerStackNavigator() {
         component={OrderStackScreen}
       />
       {/* <Drawer.Screen
-        name="WishlistStack"
+        name="TrackOrder"
         options={{
-          drawerLabel: 'Wishlist',
-          title: 'My Wishlist',
+          drawerLabel: 'Track Order',
+          title: 'Track Order',
           drawerContentStyle: {backgroundColor: colors.background},
         }}
-        component={WishlistScreen}
+        component={TrackOrderStackScreen}
       /> */}
     </Drawer.Navigator>
   );
