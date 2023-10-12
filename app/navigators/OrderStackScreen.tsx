@@ -4,8 +4,7 @@ import {OrderScreen} from '../screens/MyOrderScreen/OrderScreen';
 import {OrderDetailScreen} from '../screens/MyOrderScreen/OrderDetailScreen';
 import {CartContextProvider} from '../context/CartContext';
 import {ProductContextProvider} from '../context/ProductContext';
-import { LoginScreen } from '../screens/MyOrderScreen/LoginScreen';
-
+import {LoginScreen} from '../screens/MyOrderScreen/LoginScreen';
 const Stack: any = createStackNavigator();
 export default function OrderStackScreen({navigation}: any) {
   return (
@@ -16,7 +15,7 @@ export default function OrderStackScreen({navigation}: any) {
             screenOptions={{
               headerShown: false,
             }}
-            initialRouteName="LoginScreen">
+            initialRouteName="OrderScreen">
             <Stack.Screen name="LoginScreen" component={LoginScreen} />
             <Stack.Screen name="OrderScreen" component={OrderScreen} />
             <Stack.Screen

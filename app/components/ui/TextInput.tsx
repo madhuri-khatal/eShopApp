@@ -3,7 +3,7 @@ import {Control, Controller, FieldValues, useForm} from 'react-hook-form';
 import {KeyboardTypeOptions, StyleProp, TextStyle} from 'react-native';
 import {Text, TextInput, useTheme} from 'react-native-paper';
 interface ITextInputController {
-  control: Control<FieldValues, any>;
+  control?: Control<FieldValues, any>;
   label?: string;
   style?: StyleProp<TextStyle>;
   name?: string;
