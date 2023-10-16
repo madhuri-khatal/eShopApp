@@ -82,7 +82,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
         setIsLogin(false);
       } else {
         setLogin(result);
-        navigation.navigate('OrderScreen');
+        navigation.navigate('HomeScreen');
         setIsLogin(true);
       }
     } catch (error) {

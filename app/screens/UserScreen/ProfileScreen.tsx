@@ -1,25 +1,33 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
-import {Appbar, Button, List} from 'react-native-paper';
+import {Appbar, Avatar, List} from 'react-native-paper';
 import RandomAvatar from '../../components/ui/RandomAvtar';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useCartContext} from '../../context/CartContext';
 
 export default function ProfileScreen(props: any) {
   const navigation: any = useNavigation();
-  const _goBack = () => console.log('Went back');
-  const _handleSearch = () => console.log('Searching');
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
 
-  const {cartItems} = useCartContext();
-  const shipping = cartItems?.shipping_address;
+  const {Login} = useCartContext();
+  useEffect(() => {
+    async () => {
+      await Login();
+    };
+  });
+  const userData = Login?.data?.data;
+  // Function to get initials from a string
+  const getInitials = (name: string) => {
+    if (!name) return '';
 
-  const firstNameInitial = shipping?.first_name?.charAt(0);
-  const lastNameInitial =
-    shipping?.last_name?.charAt(0) ||
-    cartItems?.billing_address?.last_name?.charAt(0);
-  const initials = `${firstNameInitial}${lastNameInitial}`;
+    const words = name.split(' ');
+    const initials = words
+      .filter(word => word.length > 0)
+      .map(word => word[0].toUpperCase())
+      .join('');
+    return initials;
+  };
 
   const [myProfileOpen, setMyProfileOpen] = useState(false);
   const [aboutUsOpen, setAboutUsOpen] = useState(false);
@@ -51,31 +59,35 @@ export default function ProfileScreen(props: any) {
 
         <View style={{marginVertical: 15}}>
           <View style={{alignItems: 'center', marginBottom: 30}}>
-            <RandomAvatar label={initials} />
-            <Text style={styles.userName}>
-              {shipping?.first_name}{' '}
-              {shipping?.last_name || cartItems?.billing_address?.last_name}
-            </Text>
+            {Login ? (
+              <>
+                <RandomAvatar label={getInitials(userData?.display_name)} />
+                <Text style={styles.userName}>{userData?.display_name}</Text>
+              </>
+            ) : (
+              <Avatar.Icon size={100} icon="account" color="#ffffff" />
+            )}
           </View>
 
-          <List.Accordion
-            title="My Profile"
-            expanded={myProfileOpen}
-            onPress={toggleMyProfile}
-            left={props => <List.Icon {...props} icon="account" />}>
-            <List.Item
+          {Login ? (
+            <List.Accordion
+              title="My Profile"
+              expanded={myProfileOpen}
+              onPress={toggleMyProfile}
+              left={props => <List.Icon {...props} icon="account" />}>
+              {/* <List.Item
               title="Current Address"
               description={shipping?.address_1}
-            />
-            <List.Item
-              title="Email Id"
-              description={cartItems?.billing_address?.email}
-            />
-            <List.Item
+            /> */}
+              <List.Item title="Email Id" description={userData?.user_email} />
+              {/* <List.Item
               title="Contact Number"
               description={cartItems?.billing_address?.phone}
-            />
-          </List.Accordion>
+            /> */}
+            </List.Accordion>
+          ) : (
+            <View></View>
+          )}
 
           <List.Accordion
             title="About Us"
@@ -152,29 +164,6 @@ export default function ProfileScreen(props: any) {
               descriptionNumberOfLines={10}
             />
           </List.Accordion>
-          {/* <View style={{alignItems: 'center', marginRight: 5}}>
-            <Button
-              style={{
-                width: 190,
-                height: 50,
-                margin: 8,
-                backgroundColor: '#efa31d',
-                borderRadius: 10,
-              }}
-              mode="contained"
-              onPress={() => navigation.navigate('LoginScreen')}>
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  justifyContent: 'center',
-                  fontSize: 17,
-                  textTransform: 'capitalize',
-                  color: '#ffffff',
-                }}>
-                Log Out
-              </Text>
-            </Button>
-          </View> */}
         </View>
       </View>
     </ScrollView>
@@ -191,10 +180,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: '#506574',
   },
-  editProfileText: {
-    color: 'blue',
-    marginTop: 5,
-  },
   divider: {
     marginVertical: 15,
   },
@@ -206,19 +191,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#506574',
   },
-  addressSection: {
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-  },
   addressText: {
     fontSize: 16,
     marginTop: 10,
     color: '#506574',
-  },
-  editProfileButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 10,
   },
 });
