@@ -23,11 +23,12 @@ export default function ProductList({filteredProducts}: any) {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <ActivityIndicator
+<Text style={{fontSize:30,color:"#506574",marginTop:-90,fontWeight:'bold'}}>Product's Not Avialable</Text>
+            {/* <ActivityIndicator
               size="large"
               color="#e95d2a"
               style={{backgroundColor: 'white'}}
-            />
+            /> */}
           </View>
         </>
       ) : (

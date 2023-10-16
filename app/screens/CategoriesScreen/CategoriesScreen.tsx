@@ -1,15 +1,10 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
-import {Button, List, useTheme} from 'react-native-paper';
-import {DrawerContentScrollView} from '@react-navigation/drawer';
-import {DrawerActions} from '@react-navigation/native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {ScrollView} from 'react-native';
+import {List, useTheme} from 'react-native-paper';
+
 import {useProductContext} from '../../context/ProductContext';
 
 export const CategoriesScreen = (props: any) => {
-  //   const {navigation} = props;
-  // const{mainCategory}=useProductContext();
-  // console.log("mainCategory=======",mainCategory[0].name);
   const [active, setActive] = useState<string>('');
   const [expanded, setExpanded] = React.useState(true);
   const {
@@ -18,11 +13,11 @@ export const CategoriesScreen = (props: any) => {
     subCategory,
     setSubCategory,
     getProductByCategoryId,
-  } = useProductContext();
+      } = useProductContext();
   const {navigation} = props;
   const handlePress = () => setExpanded(!expanded);
   const theme = useTheme();
-  return (
+   return (
     <>
       <ScrollView
         style={{backgroundColor: '#e95d2a'}}>
@@ -32,33 +27,34 @@ export const CategoriesScreen = (props: any) => {
               key={index}
               // theme={theme}
               titleStyle={{
-                color: '#ffffff',
+                color:'#ffffff',
                 fontSize: 21,
-                fontWeight: 'normal',
+                fontWeight:expanded && active === categoery?.id ? 'bold': 'normal',
                 textAlign: 'center',
-                // backgroundColor: '#000000',
+               
               }}
-              style={{backgroundColor: '#e95d2a', width: '110%'}}
+                style={{backgroundColor: '#e95d2a', width: '110%'}}
               title={categoery?.name}
               expanded={active == categoery?.id ? true : false}
               onPress={() => {
                 setSubCategory([]);
+                const id = categoery?.id;
                 getSubCategoery(categoery?.id);
                 setActive(categoery?.id);
               }}>
               {subCategory.map((data: any) => (
                 <List.Item
                   titleStyle={{
-                    color: '#ffffff',
+                    color: '#e95d2a',
                     fontSize: 18,
                     textAlign: 'center',
                   }}
-                  style={{marginLeft: 40, padding: 0}}
+                  style={{marginLeft:40,marginRight:40, padding: 0,backgroundColor:'#ffffff',borderRadius:2}}
                   title={data?.name}
                   onPress={async () => {
                     await getProductByCategoryId(data?.id);
                     const id = data?.id;
-                    navigation.navigate('ProductsListScreen', {id});
+               navigation.navigate('ProductsListScreen', {id});
                    
                   }}
                 />
