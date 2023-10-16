@@ -20,18 +20,14 @@ export const ProductsScreen = (props: any) => {
   }, []);
   const badgeCount = cartItems?.items.length || 0;
   const handleSearchChange = (query: string) => {
-    console.log('Search query:', query);
-    if (query.trim() === '') {
-      // If the query is empty, show all products
-      setFilteredProducts(productByCategoryId);
+     if (query.trim() === '') {
+          setFilteredProducts(productByCategoryId);
     } else {
-      // Filter products based on the query
-      const filteredProducts = productByCategoryId.filter(product =>
+          const filteredProducts = productByCategoryId.filter(product =>
         product.name.toLowerCase().includes(query.toLowerCase()),
       );
-      console.log('Filtered products:', filteredProducts);
-      setFilteredProducts(filteredProducts); // Update the state with filtered products
-    }
+          setFilteredProducts(filteredProducts); 
+            }
   };
   return (
     <>
@@ -52,7 +48,7 @@ export const ProductsScreen = (props: any) => {
         icon2="cart"
         badgeCount={badgeCount}
       />
-      <View style={{flexDirection: 'row', height: '6%'}}>
+      <View style={{flexDirection: 'row',height:55}}>
         <View
           style={{
             flexDirection: 'column',
@@ -60,11 +56,12 @@ export const ProductsScreen = (props: any) => {
             justifyContent: 'center',
             backgroundColor: '#e95d2a',
             borderRadius: 8,
+            // zIndex:100
           }}>
           <FilterMenu />
         </View>
         <View
-          style={{flexDirection: 'column', width: '85%', paddingHorizontal: 4}}>
+          style={{flexDirection: 'column', width: '85%',height:55, paddingHorizontal: 4}}>
           <CustomSearchBar onChangeText={handleSearchChange} />
         </View>
       </View>

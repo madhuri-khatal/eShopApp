@@ -59,7 +59,7 @@ export const CategoriesScreen = (props: any) => {
                     await getProductByCategoryId(data?.id);
                     const id = data?.id;
                     navigation.navigate('ProductsListScreen', {id});
-                    // navigation.getParent('LeftDrawer').dispatch(DrawerActions.closeDrawer());
+                   
                   }}
                 />
               ))}

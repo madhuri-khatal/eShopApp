@@ -19,6 +19,7 @@ const FilterMenu = () => {
         alignSelf: 'center',
         justifyContent: 'center',
         borderRadius: 10,
+        
       }}>
       <View style={{flexDirection: 'row'}}>
         <FontAwesome5 name="filter" color="#ffffff" size={18} />
