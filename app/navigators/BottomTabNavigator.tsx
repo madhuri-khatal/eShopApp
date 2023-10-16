@@ -26,12 +26,13 @@ export default function BottomTabNavigator() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      labeled={false}
+      // labeled={false}
       barStyle={{
         backgroundColor: '#e95d2a',
-        height: '5%',
-        justifyContent: 'center',
+        height: '8%',
+        // justifyContent: 'center',
         alignItems: 'center',
+        // marginBottom: 1,
       }}
       activeColor="#e3e1e1"
       inactiveColor="#fff">
@@ -63,7 +64,7 @@ export default function BottomTabNavigator() {
       <Tab.Screen
         name="Categories"
         options={{
-          tabBarLabel: 'Categories',
+          tabBarLabel: 'Categories', 
           tabBarIcon: ({color}) => (
             <MaterialIcons name="category" color={color} size={32} />
           ),

@@ -1,7 +1,7 @@
 import {ScrollView} from 'react-native-gesture-handler';
 import {HeaderBar} from '../../components/ui/HeaderBar';
 import {DrawerActions} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import OrderList from './OrderList';
 import {View, Text, Image, StyleSheet, Alert} from 'react-native';
 import {Button, Card, Divider, TextInput} from 'react-native-paper';
@@ -11,10 +11,15 @@ export const OrderScreen = (props: any) => {
   const [showOrderDetail, setShowOrderDetail] = useState(false);
   const [orderData, setOrderData] = useState<any>();
   const getOrderDetailById = async (id: number | string) => {
-    const {result} = await OrderApi.getOrderDetailById(id);
-    setShowOrderDetail(true);
-    setOrderData(result);
-    // const billingData = result.data.billing;
+    try {
+      const {result} = await OrderApi.getOrderDetailById(id);
+      setOrderData(result);
+      setShowOrderDetail(true);
+    } catch (error) {
+      console.error('Error fetching order details', error);
+      setOrderData(null);
+      setShowOrderDetail(true);
+    }
   };
 
   const itemList = orderData?.data?.line_items;
@@ -42,23 +47,12 @@ export const OrderScreen = (props: any) => {
 
   const [orderID, setOrderID] = useState('');
   const [userEmail, setUserEmail] = useState('');
+
   const handleTrackOrder = async () => {
     if (!orderID) {
       Alert.alert('Error', 'Please enter a valid Order ID');
     } else {
-      try {
-        await getOrderDetailById(orderID);
-        if (!orderData) {
-          // Order ID not found or request failed
-          Alert.alert(
-            'Error',
-            'Order ID not found. Please enter a valid Order ID.',
-          );
-        }
-      } catch (error) {
-        console.error('Error fetching order details', error);
-        Alert.alert('Error', 'An error occurred while fetching order details.');
-      }
+      await getOrderDetailById(orderID);
     }
   };
 
@@ -154,11 +148,6 @@ export const OrderScreen = (props: any) => {
           <View style={{marginBottom: 20, backgroundColor: '#ffffff'}}>
             <Card.Content>
               <View style={{flexDirection: 'row', paddingVertical: 15}}>
-                {/* <AntDesign
-                  name="checkcircle"
-                  style={{fontSize: 22, color: '#fa5f11', margin: 3}}
-                /> */}
-
                 <Text
                   style={{color: '#506574', fontSize: 20, fontWeight: 'bold'}}>
                   Order Summery
@@ -252,7 +241,7 @@ export const OrderScreen = (props: any) => {
               {itemList &&
                 itemList.map((item: any) => (
                   <>
-                    <View style={styles.leftColumn} key={item.id}>
+                    <View style={{flex: 1, flexDirection: 'row'}} key={item.id}>
                       <View>
                         <Image
                           source={{uri: item?.image?.src}}
@@ -382,24 +371,9 @@ export const OrderScreen = (props: any) => {
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F7F7F7',
-  },
-  shipmentItem: {
-    flexDirection: 'row',
-  },
-  leftColumn: {
-    flex: 1,
-    flexDirection: 'row',
-  },
   paymentItem: {
     flexDirection: 'row',
     marginBottom: 10,
     width: '100%',
-  },
-
-  paymentValue: {
-    flex: 1,
   },
 });
