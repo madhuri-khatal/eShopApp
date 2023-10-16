@@ -68,6 +68,7 @@ export default function ProductItem({product}: IProps) {
               flex: 1,
               marginTop: 8,
               fontWeight: '600',
+              color: '#506574'
             }}
             numberOfLines={1}
             ellipsizeMode="tail">
@@ -95,7 +96,7 @@ export default function ProductItem({product}: IProps) {
     </Text>
     <CurrencyComponent
       value={product.price}
-      style={{ fontSize: 18, fontWeight: 'bold' }}
+      style={{ fontSize: 18, fontWeight: 'bold',color: '#506574' }}
     />
   </View>
 )}

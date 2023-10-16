@@ -16,12 +16,12 @@ const CustomSearchBar = ({placeholder, onChangeText}: any) => {
         placeholder={placeholder || 'Search Product'}
         onChangeText={handleSearch}
         value={searchQuery}
-        placeholderTextColor={'#54616c'}
+        placeholderTextColor={'#506574'}
         iconColor="#54616c"
         style={{
           backgroundColor: '#f2f2f2',
-          fontSize: 6, // Font size (adjust as needed)
-          borderRadius: 8, // Border radius (adjust as needed)
+          fontSize: 6, 
+          borderRadius: 8, 
         }}
       />
     </View>

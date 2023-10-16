@@ -278,7 +278,7 @@ export const ProductDetailsScreen = (props: any) => {
         style={{
           display: 'flex',
           flexDirection: 'row',
-          marginTop: 6,
+          margin: 6,
           justifyContent: 'center',
         }}>
         <View style={{flex: 1, alignItems: 'flex-start', marginLeft: 15}}>
