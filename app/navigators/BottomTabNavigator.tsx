@@ -32,8 +32,8 @@ export default function BottomTabNavigator() {
         height: '8%',
         // justifyContent: 'center',
         alignItems: 'center',
-        // marginBottom: 1,
-      }}
+        marginBottom: "2%",
+             }}
       activeColor="#e3e1e1"
       inactiveColor="#fff">
       <Tab.Screen
@@ -44,11 +44,11 @@ export default function BottomTabNavigator() {
               name="home"
               color={color}
               size={32}
-              // style={{marginBottomBottom: 10}}
-            />
+             />
           ),
         }}
         component={HomeStackScreen}
+        
       />
       <Tab.Screen
         name="CartStack"
