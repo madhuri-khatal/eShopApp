@@ -151,8 +151,10 @@ export const CheckoutContextProvider = ({children}: CheckoutContextType) => {
     responseData.responseCustomerId = responseCustomerId;
     Alert.alert('Order Successfully placed');
     getMyOrders(responseCustomerId);
+
   };
 
+  
   const value: ICheckoutContext = {
     onSubmitCheckout,
     checkoutControl,
