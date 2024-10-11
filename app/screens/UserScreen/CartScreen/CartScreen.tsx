@@ -7,7 +7,7 @@ import CartList from './CartList';
 import {Text} from 'react-native-paper';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import BottomSheet from '@gorhom/bottom-sheet';
-import CheckoutScreen from '../CheckoutScreen/CheckoutScreen';
+// import CheckoutScreen from '../CheckoutScreen/CheckoutScreen';
 import {DialogComponent} from '../../../components/ui/DialogComponent';
 import {useCommanContext} from '../../../context/CommanContext';
 import {useCartContext} from '../../../context/CartContext';
@@ -164,7 +164,7 @@ export const CartScreen = (props: NativeStackScreenProps<any>) => {
                 onPress={handleClose}>
                 X
               </Text>
-              <CheckoutScreen />
+              {/* <CheckoutScreen /> */}
             </View>
           </BottomSheet>
           <BottomSheet

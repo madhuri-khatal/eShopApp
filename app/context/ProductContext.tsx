@@ -166,7 +166,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     const {
       result: {data},
     } = await ProductApi.getHomeSliderImages();
-
+console.log("image data",data);
     setimages(data);
   };
 

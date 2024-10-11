@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {CartScreen} from './../screens/UserScreen/CartScreen/CartScreen';
-import CheckoutScreen from './../screens/UserScreen/CheckoutScreen/CheckoutScreen';
+// import CheckoutScreen from './../screens/UserScreen/CheckoutScreen/CheckoutScreen';
 import BottomTabNavigator from './BottomTabNavigator';
 import {CartContextProvider} from './../context/CartContext';
 import {ProductContextProvider} from './../context/ProductContext';
