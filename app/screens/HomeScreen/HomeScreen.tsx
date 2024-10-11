@@ -45,7 +45,7 @@ export default function HomeScreen({navigation}: any) {
         </Appbar.Header>
 
         <ScrollView style={{marginBottom: 60}}>
-          <Caraousel
+                   <Caraousel
             Component={CaraouselContent}
             data={images}
             autoPlay={true}
