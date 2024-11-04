@@ -31,7 +31,7 @@ const FeaturedCategories = () => {
               <View key={index} style={{alignItems: 'center', flex: 1}}>
                 <MaterialCommunityIcons
                   name={category.icon}
-                  size={30}
+                  size={40}
                   color={category.color}
                   style={{
                     borderColor: '#E5E5E5',

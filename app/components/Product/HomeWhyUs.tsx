@@ -5,7 +5,11 @@ import {Card} from 'react-native-paper';
 export default function HomeWhyUs() {
   return (
     <View style={{paddingTop:10,paddingBottom:10}}>
-    <Image source={require("../../../assets/image/HomeMade.png")}  style={{height:100,width:"100%" }} />
+    {/* <Image source={require("../../../assets/image/HomeMade.png")}  */}
+    <Image
+  source={{ uri: 'https://shgeshop.com/wp-content/uploads/2024/06/Why-SHGeshop.jpg' }}
+     style={{height:130,width:"100%" }} />
+    
     </View>
     // <View style={{backgroundColor: '#fae8e7'}}>
 

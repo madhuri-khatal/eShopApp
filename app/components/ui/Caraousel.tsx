@@ -19,7 +19,7 @@ const images = [
 
 export const Caraousel = ({
   autoPlay = true,
-  scrollAnimationDuration = 500,
+  scrollAnimationDuration = 3000,
   width = Dimensions.get('screen').width,
   height = Dimensions.get('screen').width / 2.8,
   onSnapToItem,
