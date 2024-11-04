@@ -128,7 +128,7 @@ export default function CouponList() {
    <View>
    <Image
   source={{ uri: 'https://shgeshop.com/wp-content/uploads/2024/08/DiscountCode.png' }}
-  style={{ width:"100%", height:20 }}
+  style={{width: '100%', height: 45}}
 />
    </View>
     

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Dimensions, Image, View } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {Dimensions, Image, View} from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import Carousel from 'react-native-reanimated-carousel';
 
 interface ICarousel {
@@ -25,7 +25,7 @@ export const Caraousel = ({
   onSnapToItem,
 }: ICarousel) => {
   return (
-    <View style={{ width: '100%', alignItems: 'center'}}>
+    <View style={{width: '100%', alignItems: 'center'}}>
       <GestureHandlerRootView>
         <Carousel
           loop
@@ -33,17 +33,18 @@ export const Caraousel = ({
           style={{
             alignItems: 'center',
             justifyContent: 'center',
+            borderRadius: 15,
           }}
           width={width}
           height={height}
           data={images}
           scrollAnimationDuration={scrollAnimationDuration}
-          onSnapToItem={(index) => onSnapToItem && onSnapToItem(index)}
-          renderItem={({ index, item }: { index: number; item: string }) => (
+          onSnapToItem={index => onSnapToItem && onSnapToItem(index)}
+          renderItem={({index, item}: {index: number; item: string}) => (
             <Image
               key={index}
-              source={{ uri: item }}
-              style={{ width, height, resizeMode: 'cover' }}
+              source={{uri: item}}
+              style={{width, height, resizeMode: 'cover', borderRadius: 15}}
             />
           )}
         />
@@ -51,7 +52,6 @@ export const Caraousel = ({
     </View>
   );
 };
-
 
 
 
