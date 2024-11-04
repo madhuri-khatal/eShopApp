@@ -11,7 +11,7 @@ export default function CouponList() {
 
   return (
     <>
-  {couponData.length==0?(<Text></Text>):(<ImageBackground
+  {/* {couponData.length==0?(<Text></Text>):(<ImageBackground
       source={require('../../../assets/image/couponBg.jpg')}
       style={{
         flex: 1,
@@ -124,7 +124,13 @@ export default function CouponList() {
           />
         </View>
       </View>
-    </ImageBackground>)}
+    </ImageBackground>)} */}
+   <View>
+   <Image
+  source={{ uri: 'https://shgeshop.com/wp-content/uploads/2024/08/DiscountCode.png' }}
+  style={{ width:"100%", height:20 }}
+/>
+   </View>
     
   </>
   );
