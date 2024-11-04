@@ -95,16 +95,17 @@ export default function HomeScreen({navigation}: any) {
             {deliveryAddress}
           </Text>
         </View>
-<FeaturedCategories/>
+
         <ScrollView style={{margin: 5}}>
           <Caraousel
             autoPlay={true}
             onSnapToItem={(i: number) => console.log()}
           />
+          <FeaturedCategories/>
           <View style={{paddingVertical: 10}}>
             <CouponList />
           </View>
-          <Text
+          {/* <Text
             style={{
               fontSize: 20,
               fontWeight: 'bold',
@@ -114,7 +115,7 @@ export default function HomeScreen({navigation}: any) {
               color: '#506574',
             }}>
             Why SHG E Shop
-          </Text>
+          </Text> */}
           <HomeWhyUs />
           <Footer />
         </ScrollView>
