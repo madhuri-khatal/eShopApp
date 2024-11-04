@@ -43,19 +43,19 @@ export default function HomeScreen({navigation}: any) {
           <Appbar.Content title="" />
           <Appbar.Action icon="menu" color="#506574" onPress={_handleMore} />
         </Appbar.Header>
-
+      
         <ScrollView style={{marginBottom: 60}}>
                    <Caraousel
-            Component={CaraouselContent}
-            data={images}
+            // Component={CaraouselContent}
+            // data={images}
             autoPlay={true}
             onSnapToItem={(i: number) => console.log()}
           />
-          <FeaturedCategories />
-          <Festival />
-          <ListOFProducts />
+          {/* <FeaturedCategories /> */}
+          {/* <Festival /> */}
+          {/* <ListOFProducts /> */}
           <View style={{paddingVertical: 10}}>
-            <CouponList />
+                      <CouponList />
           </View>
           <Text
             style={{
