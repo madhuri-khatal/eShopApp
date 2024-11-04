@@ -4,14 +4,14 @@ import { Text } from 'react-native-paper'
 import { useProductContext } from '../../context/ProductContext'; 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const categories = [
-  {name: 'Bags', icon: 'shopping', color: '#FF5733'},
-  {name: 'Foods', icon: 'food', color: '#04C426'},
-  {name: 'Devine Things', icon: 'tshirt-crew', color: '#3357FF'},
+  {name: 'Bags', icon: 'shopping', color: '#3357FF'},
+  {name: 'Foods', icon: 'food', color: '#A533FF'},
+  {name: 'Devine Things', icon: 'om', color: '#FF5733'},
   {name: 'Home Decor', icon: 'sofa', color: '#04C4B4'},
   {name: 'Spice', icon: 'chili-mild', color: 'red'},
-  {name: 'Beauty and Health Care', icon: 'lipstick', color: '#FF33A8'},
-  {name: 'Gardening', icon: 'flower-tulip', color: '#A533FF'},
-  {name: 'Jewellery', icon: 'necklace', color: '#FF5733'},
+  {name: 'Beauty/ Health', icon: 'lipstick', color: '#FF33A8'},
+  {name: 'Gardening', icon: 'flower-tulip', color: '#04C426'},
+  {name: 'Jewellery', icon: 'necklace', color: '#E9AD01'},
 ];
 const FeaturedCategories = () => {
   // const{ mainCategory}=useProductContext();
@@ -40,7 +40,7 @@ const FeaturedCategories = () => {
                     borderRadius: 50,
                   }}
                 />
-                <Text style={{marginTop: 5, color: '#506574'}}>
+                <Text style={{marginTop: 5, color: '#506574',fontWeight:"bold"}}>
                   {category.name}
                 </Text>
               </View>
@@ -61,7 +61,7 @@ const FeaturedCategories = () => {
                     borderRadius: 50,
                   }}
                 />
-                <Text style={{marginTop: 5, color: '#506574'}}>
+                <Text style={{marginTop: 5, color: '#506574',fontWeight:"bold"}}>
                   {category.name}
                 </Text>
               </View>
