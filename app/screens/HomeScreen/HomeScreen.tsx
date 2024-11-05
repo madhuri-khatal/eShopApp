@@ -101,11 +101,11 @@ export default function HomeScreen({navigation}: any) {
             autoPlay={true}
             // onSnapToItem={(i: number) => console.log()}
           />
-          <FeaturedCategories/>
+          <FeaturedCategories />
           <View style={{paddingVertical: 10}}>
             <CouponList />
           </View>
-          <ListOFProducts/>
+          <ListOFProducts />
           {/* <Text
             style={{
               fontSize: 20,
@@ -138,8 +138,6 @@ export default function HomeScreen({navigation}: any) {
   );
 }
 
-
-
 // import {View, Image} from 'react-native';
 // import {ScrollView} from 'react-native-gesture-handler';
 // import React, {useEffect, useState} from 'react';
@@ -160,7 +158,6 @@ export default function HomeScreen({navigation}: any) {
 //   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
 //   const {images, getHomeSlider} = useProductContext();
 //   const [searchText, setSearchText] = useState('');
-  
 
 //   useEffect(() => {
 //     getHomeSlider();
@@ -241,7 +238,7 @@ export default function HomeScreen({navigation}: any) {
 //           {/* <FeaturedCategories/> */}
 //           {/* <Festival /> */}
 //           {/* <ListOFProducts /> */}
-         
+
 //           <Text
 //             style={{
 //               fontSize: 20,

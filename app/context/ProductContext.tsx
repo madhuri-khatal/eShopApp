@@ -145,9 +145,9 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     try {
       const {result: {data = []} = {}, err} =
         await ProductApi.getProductByCategoryId(id);
-        // console.log("getProductByCategoryId",productByCategoryId);
-        
-              setProductByCategoryId(data);
+      console.log('getProductByCategoryId', productByCategoryId);
+
+      setProductByCategoryId(data);
     } catch (err: any) {
       console.log('Error in Product By Cateory Id', err);
     }
@@ -166,7 +166,7 @@ export const ProductContextProvider = ({children}: ProductContextType) => {
     const {
       result: {data},
     } = await ProductApi.getHomeSliderImages();
-console.log("image data",data);
+    console.log('image data', data);
     setimages(data);
   };
 
