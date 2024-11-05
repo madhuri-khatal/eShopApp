@@ -78,21 +78,46 @@
 // //   );
 // // }
 
-
 import React from 'react';
-import { Image, ScrollView, View, FlatList } from 'react-native';
-import { ActivityIndicator, Text } from 'react-native-paper';
+import {Image, ScrollView, View, FlatList} from 'react-native';
+import {ActivityIndicator, Text} from 'react-native-paper';
 import ProductItem from '../ProductItem';
-import { useProductContext } from '../../../context/ProductContext';
+import {useProductContext} from '../../../context/ProductContext';
 
 export default function ListOFProducts() {
-  const { productByCategoryId, isLoading, fetchMoreData, refThreshold } = useProductContext();
-  const Product = ["Resin Art Pooja Thali","Masala Banana Chips", "Pudina Banana Chips","Tomato Banana Chips","Nagli/Ragi Biscuit","Rajgira Ladoo",
-  "Shevga/Moringa Powder","Beet Powder","Organic jaggery powder", "Kalna flour (कळणं पीठ)","Batti Flour", "Moong Dal Chilla/Edani (मुगाची ऐडणी)","Millet Flour","Murmure"];
-     const filteredData = productByCategoryId.filter(item => Product.includes(item.name));
-    
+  const {productByCategoryId, isLoading, fetchMoreData, refThreshold} =
+    useProductContext();
+  const Product = [
+    'Resin Art Pooja Thali',
+    'Masala Banana Chips',
+    'Pudina Banana Chips',
+    'Tomato Banana Chips',
+    'Nagli/Ragi Biscuit',
+    'Rajgira Ladoo',
+    'Shevga/Moringa Powder',
+    'Beet Powder',
+    'Organic jaggery powder',
+    'Kalna flour (कळणं पीठ)',
+    'Batti Flour',
+    'Moong Dal Chilla/Edani (मुगाची ऐडणी)',
+    'Millet Flour',
+    'Murmure',
+  ];
+  const filteredData = productByCategoryId.filter(item =>
+    Product.includes(item.name),
+  );
+
   return (
     <>
+      <Text
+        style={{
+          color: '#506574',
+          fontSize: 20,
+          margin: 5,
+          backgroundColor: '#fff',
+        }}>
+        Recommended for You :
+      </Text>
       {filteredData.length === 0 ? (
         <>
           <View
@@ -104,7 +129,7 @@ export default function ListOFProducts() {
             <ActivityIndicator
               size="large"
               color="#e95d2a"
-              style={{ backgroundColor: 'white' }}
+              style={{backgroundColor: 'white'}}
             />
           </View>
         </>
@@ -116,18 +141,18 @@ export default function ListOFProducts() {
           ItemSeparatorComponent={() => (
             <View
               style={{
-                width: '100%',
-                backgroundColor: '#f7f7f7',
+                width: '80%',
+                padding: 5,
               }}
             />
           )}
-          data={filteredData} 
+          data={filteredData}
           onEndReached={async () => {
             await fetchMoreData();
           }}
           ref={refThreshold}
           onEndReachedThreshold={10}
-          renderItem={({ item }) => <ProductItem product={item} />}
+          renderItem={({item}) => <ProductItem product={item} />}
           keyExtractor={(item, i) => i.toString()}
           scrollEnabled
         />
