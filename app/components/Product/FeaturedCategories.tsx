@@ -1,23 +1,13 @@
 import React from 'react'
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, StyleSheet, Touchable, View } from 'react-native'
 import { Text } from 'react-native-paper'
 import { useProductContext } from '../../context/ProductContext'; 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-const categories = [
-  {name: 'Bags', icon: 'shopping', color: '#3357FF'},
-  {name: 'Foods', icon: 'food', color: '#A533FF'},
-  {name: 'Devine Things', icon: 'om', color: '#FF5733'},
-  {name: 'Home Decor', icon: 'sofa', color: '#04C4B4'},
-  {name: 'Spice', icon: 'chili-mild', color: 'red'},
-  {name: 'Beauty/ Health', icon: 'lipstick', color: '#FF33A8'},
-  {name: 'Gardening', icon: 'flower-tulip', color: '#04C426'},
-  {name: 'Jewellery', icon: 'necklace', color: '#E9AD01'},
-];
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 const FeaturedCategories = () => {
-  // const{ mainCategory}=useProductContext();
-  // console.log(mainCategory[0].src)
- 
-  return (
+  const{ mainCategory}=useProductContext();
+   return (
     <>
      <View style={{padding: 10}}>
           {/* First Row */}
@@ -27,20 +17,14 @@ const FeaturedCategories = () => {
               justifyContent: 'space-between',
               marginBottom: 10,
             }}>
-            {categories.slice(0, 4).map((category, index) => (
+            {mainCategory.slice(0, 4).map((category, index) => (
+              
               <View key={index} style={{alignItems: 'center', flex: 1}}>
-                <MaterialCommunityIcons
-                  name={category.icon}
-                  size={40}
-                  color={category.color}
-                  style={{
-                    borderColor: '#E5E5E5',
-                    borderWidth: 1,
-                    padding: 10,
-                    borderRadius: 50,
-                  }}
-                />
-                <Text style={{marginTop: 5, color: '#506574',fontWeight:"bold"}}>
+                                 <Image
+                      source={{ uri: category?.image?.src? category?.image?.src:"" }}
+                      style={{height:70, width:70,borderRadius:50}}
+                    />
+                              <Text style={{marginTop: 5, color: '#506574',fontWeight:"bold"}}>
                   {category.name}
                 </Text>
               </View>
@@ -48,35 +32,27 @@ const FeaturedCategories = () => {
           </View>
           {/* Second Row */}
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            {categories.slice(4, 8).map((category, index) => (
+            {mainCategory.slice(5, 9).map((category, index) => (
               <View key={index} style={{alignItems: 'center', flex: 1}}>
-                <MaterialCommunityIcons
-                  name={category.icon}
-                  size={30}
-                  color={category.color}
-                  style={{
-                    borderColor: '#E5E5E5',
-                    borderWidth: 1,
-                    padding: 10,
-                    borderRadius: 50,
-                  }}
-                />
+              <TouchableOpacity onPress={()=>console.log("categoryid",category.id)}> 
+
+              
+                <Image
+                        source={{ uri: category?.image?.src? category?.image?.src:"" }}
+                        style={{height:70, width:70,borderRadius:50}}
+                      />
                 <Text style={{marginTop: 5, color: '#506574',fontWeight:"bold"}}>
                   {category.name}
                 </Text>
+                </TouchableOpacity>
               </View>
-            ))}
+             
+              
+              ))}
           </View>
+         
         </View>
-     {/* {mainCategory.map((item,index)=>
-          <View key={index}>
-            <Image
-        source={{ uri: item.src }}
-        // style={styles.categoryImage}
-      />
-      <Text>{item.name}</Text>
-      </View>
-    )} */}
+  
     </>
    
   )
@@ -90,11 +66,117 @@ const styles = StyleSheet.create({
       paddingHorizontal: 0,
       marginTop: 20,
     },
-//     categoryImage:{
-// height:60,
-// width:40
-//     }
   })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react'
+// import { Image, StyleSheet, View } from 'react-native'
+// import { Text } from 'react-native-paper'
+// import { useProductContext } from '../../context/ProductContext'; 
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// const categories = [
+//   {name: 'Bags', icon: 'shopping', color: '#3357FF'},
+//   {name: 'Foods', icon: 'food', color: '#A533FF'},
+//   {name: 'Devine Things', icon: 'om', color: '#FF5733'},
+//   {name: 'Home Decor', icon: 'sofa', color: '#04C4B4'},
+//   {name: 'Spice', icon: 'chili-mild', color: 'red'},
+//   {name: 'Beauty/ Health', icon: 'lipstick', color: '#FF33A8'},
+//   {name: 'Gardening', icon: 'flower-tulip', color: '#04C426'},
+//   {name: 'Jewellery', icon: 'necklace', color: '#E9AD01'},
+// ];
+// const FeaturedCategories = () => {
+//   // const{ mainCategory}=useProductContext();
+//   // console.log(mainCategory[0].src)
+ 
+//   return (
+//     <>
+//      <View style={{padding: 10}}>
+//           {/* First Row */}
+//           <View
+//             style={{
+//               flexDirection: 'row',
+//               justifyContent: 'space-between',
+//               marginBottom: 10,
+//             }}>
+//             {categories.slice(0, 4).map((category, index) => (
+//               <View key={index} style={{alignItems: 'center', flex: 1}}>
+//                 <MaterialCommunityIcons
+//                   name={category.icon}
+//                   size={40}
+//                   color={category.color}
+//                   style={{
+//                     borderColor: '#E5E5E5',
+//                     borderWidth: 1,
+//                     padding: 10,
+//                     borderRadius: 50,
+//                   }}
+//                 />
+//                 <Text style={{marginTop: 5, color: '#506574',fontWeight:"bold"}}>
+//                   {category.name}
+//                 </Text>
+//               </View>
+//             ))}
+//           </View>
+//           {/* Second Row */}
+//           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+//             {categories.slice(4, 8).map((category, index) => (
+//               <View key={index} style={{alignItems: 'center', flex: 1}}>
+//                 <MaterialCommunityIcons
+//                   name={category.icon}
+//                   size={30}
+//                   color={category.color}
+//                   style={{
+//                     borderColor: '#E5E5E5',
+//                     borderWidth: 1,
+//                     padding: 10,
+//                     borderRadius: 50,
+//                   }}
+//                 />
+//                 <Text style={{marginTop: 5, color: '#506574',fontWeight:"bold"}}>
+//                   {category.name}
+//                 </Text>
+//               </View>
+//             ))}
+//           </View>
+//         </View>
+//      {/* {mainCategory.map((item,index)=>
+//           <View key={index}>
+//             <Image
+//         source={{ uri: item.src }}
+//         // style={styles.categoryImage}
+//       />
+//       <Text>{item.name}</Text>
+//       </View>
+//     )} */}
+//     </>
+   
+//   )
+// }
+
+// export default FeaturedCategories
+
+// const styles = StyleSheet.create({
+//     container: {
+//       flexDirection: 'row',
+//       paddingHorizontal: 0,
+//       marginTop: 20,
+//     },
+//   })
 
 
 

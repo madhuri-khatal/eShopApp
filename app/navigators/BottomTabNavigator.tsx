@@ -1,16 +1,11 @@
-import {View, Text} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {View} from 'react-native';
+import React, {useEffect} from 'react';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import HomeScreen from '../screens/HomeScreen/HomeScreen';
-import ProfileScreen from '../screens/UserScreen/ProfileScreen';
-import DrawerStackNavigator from './DrawerStackNavigator';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {CartScreen} from '../screens/UserScreen/CartScreen/CartScreen';
-import CartStackScreen from './CartStackScreen';
-import HomeStackScreen from './HomeStackScreen';
-import {CartApi} from '../api/CartApi';
 import {useCartContext} from './../context/CartContext';
+import HomeStackScreen from './HomeStackScreen';
+import CartStackScreen from './CartStackScreen';
 import UserStackScreen from './UserStackScreen';
 import {CategoriesScreen} from '../screens/CategoriesScreen/CategoriesScreen';
 const Tab = createMaterialBottomTabNavigator();
@@ -24,20 +19,20 @@ export default function BottomTabNavigator() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      // labeled={false}
       barStyle={{
         backgroundColor: '#fff',
         height: '8%',
-        // justifyContent: 'center',
         alignItems: 'center',
         marginBottom: '2%',
-        // Shadow properties
+        // Shadow at the top
         shadowColor: '#000',
         shadowOffset: {width: 0, height: 3},
         shadowOpacity: 0.3,
         shadowRadius: 5,
-        // Elevation for Android shadow
         elevation: 8,
+        // Border at the top for better definition
+        borderTopWidth: 1,
+        borderTopColor: '#E0E0E0',
       }}
       activeColor="#E95D2A"
       inactiveColor="#A0A1A7">

@@ -99,12 +99,13 @@ export default function HomeScreen({navigation}: any) {
         <ScrollView style={{margin: 5}}>
           <Caraousel
             autoPlay={true}
-            onSnapToItem={(i: number) => console.log()}
+            // onSnapToItem={(i: number) => console.log()}
           />
           <FeaturedCategories/>
           <View style={{paddingVertical: 10}}>
             <CouponList />
           </View>
+          <ListOFProducts/>
           {/* <Text
             style={{
               fontSize: 20,
