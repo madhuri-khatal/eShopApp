@@ -87,9 +87,10 @@ import { useProductContext } from '../../../context/ProductContext';
 
 export default function ListOFProducts() {
   const { productByCategoryId, isLoading, fetchMoreData, refThreshold } = useProductContext();
-  const Product = ["Masala Banana Chips", "Pudina Banana Chips","Tomato Banana Chips","Nagli/Ragi Biscuit","Rajgira Ladoo",
+  const Product = ["Resin Art Pooja Thali","Masala Banana Chips", "Pudina Banana Chips","Tomato Banana Chips","Nagli/Ragi Biscuit","Rajgira Ladoo",
   "Shevga/Moringa Powder","Beet Powder","Organic jaggery powder", "Kalna flour (कळणं पीठ)","Batti Flour", "Moong Dal Chilla/Edani (मुगाची ऐडणी)","Millet Flour","Murmure"];
      const filteredData = productByCategoryId.filter(item => Product.includes(item.name));
+    
   return (
     <>
       {filteredData.length === 0 ? (
