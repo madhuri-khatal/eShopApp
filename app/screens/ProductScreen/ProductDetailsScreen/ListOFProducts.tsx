@@ -88,6 +88,7 @@ export default function ListOFProducts() {
   const {productByCategoryId, isLoading, fetchMoreData, refThreshold} =
     useProductContext();
   const Product = [
+    'Laptop Sleeve Bag',
     'Resin Art Pooja Thali',
     'Masala Banana Chips',
     'Pudina Banana Chips',
