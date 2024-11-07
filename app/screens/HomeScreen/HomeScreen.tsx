@@ -13,6 +13,23 @@ import {Caraousel} from '../../components/ui/Caraousel';
 import {useProductContext} from './../../context/ProductContext';
 import {Linking} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; // Importing MaterialCommunityIcons
+
+import LocationScreen from '../LocationScreen/LocationScreen';
+
+
+
+
+interface LocationData {
+  accuracy: number;
+  altitude: number;
+  bearing: number;
+  latitude: number;
+  longitude: number;
+  provider: string;
+  speed: number;
+  time: number;
+  location:any;
+}
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
   const {images, getHomeSlider} = useProductContext();
@@ -35,16 +52,17 @@ export default function HomeScreen({navigation}: any) {
   const whatsappSupport = async () => {
     await handleWhatsAppLink('7558566436');
   };
-  const categories = [
-    {name: 'Category 1', icon: 'shopping', color: '#FF5733'},
-    {name: 'Category 2', icon: 'food', color: '#04c426'},
-    {name: 'Category 3', icon: 'tshirt-crew', color: '#3357FF'},
-    {name: 'Category 4', icon: 'sofa', color: '#FF33A8'},
-    {name: 'Category 5', icon: 'car', color: '#FFA533'},
-    {name: 'Category 6', icon: 'book', color: '#04c4b4'},
-    {name: 'Category 7', icon: 'cellphone', color: '#A533FF'},
-    {name: 'Category 8', icon: 'necklace', color: '#FF5733'},
-  ];
+//   GetLocation.getCurrentPosition({
+//     enableHighAccuracy: true,
+//     timeout: 60000,
+// })
+// .then(location => {
+//     console.log(location,"location");
+// })
+// .catch(error => {
+//     const { code, message } = error;
+//     console.warn(code, message);
+// })
   return (
     <>
       <ScrollView>
@@ -78,8 +96,9 @@ export default function HomeScreen({navigation}: any) {
             onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
           />
         </Appbar.Header>
+        {/* <LocationScreen /> */}
 
-        {/* Location Icon and Delivery Address */}
+       
         <View
           style={{
             flexDirection: 'row',
