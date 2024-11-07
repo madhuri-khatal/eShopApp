@@ -28,6 +28,7 @@ const FeaturedCategories = () => {
     <>
      <View style={{padding: 10}}>
           {/* First Row */}
+        
           <View
             style={{
               flexDirection: 'row',
