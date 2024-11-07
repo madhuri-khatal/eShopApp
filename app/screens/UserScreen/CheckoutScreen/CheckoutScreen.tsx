@@ -27,7 +27,7 @@ export default function CheckoutScreen() {
     onCallToTheCustomerAndCheckout,
   } = useCheckoutContext();
   const { couponData } = useProductContext();
-  
+
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState('');
   const [coupon_lines, setcoupon_lines] = useState('');
@@ -37,14 +37,11 @@ export default function CheckoutScreen() {
   const [discountedTotalAmount, setDiscountedTotalAmount] = useState(
     cartItems?.totals?.total_price / 100,
   );
-
+  const [shippingcharges, setShippingcharges] = useState(
+    cartItems?.totals?.total_shipping / 100,
+  );
   const billing = cartItems?.address;
 
-  useEffect(() => {
-    console.log('Cart Items:', cartItems);
-    console.log('Initial Total Amount:', discountedTotalAmount);
-    console.log('Razorpay Key:', RAZORPAY_KEY_ID);
-  }, []);
 
   const handlePayment = async (formData: any) => {
     if (Platform.OS !== 'android') {
@@ -53,22 +50,23 @@ export default function CheckoutScreen() {
     }
 
     setIsProcessingPayment(true);
-    
+
     try {
       if (!RAZORPAY_KEY_ID) {
         throw new Error('Razorpay key is not configured');
       }
-
-      if (!discountedTotalAmount || discountedTotalAmount <= 0) {
+      const subtotal = discountedTotalAmount || 0;
+      const shippingCharges = cartItems?.totals?.total_shipping / 100 || 0;
+     
+      const totalAmount = subtotal + shippingCharges;
+     
+      if (!totalAmount || totalAmount <= 0) {
         throw new Error('Invalid payment amount');
       }
+      const amountInPaisa = Math.round(totalAmount * 100);
+     
       const productNames = cartItems?.items?.map((item: { name: any; }) => item.name).join(', ') || 'Order';
       const paymentDescription = `Payment of your ${productNames} Products`;
-
-      // const productDescription = `Payment for ${productNames}`;
-  
-      const amountInPaisa = Math.round(discountedTotalAmount * 100);
-      console.log('Amount in paisa:', amountInPaisa);
 
       const customerName = `${formData.first_name} ${formData.last_name}`.trim();
       const options = {
@@ -96,12 +94,9 @@ export default function CheckoutScreen() {
         // }
       };
 
-      console.log('Opening Razorpay with options:', JSON.stringify(options, null, 2));
 
       const paymentResponse = await RazorpayCheckout.open(options);
-      console.log('Payment response:', paymentResponse);
-
-      if (paymentResponse.razorpay_payment_id) {
+         if (paymentResponse.razorpay_payment_id) {
         await onCallToTheCustomerAndCheckout(
           formData,
           coupon_lines,
@@ -161,7 +156,7 @@ export default function CheckoutScreen() {
 
   const confirmAndProcessOrder = async () => {
     setShowConfirmationModal(false);
-    
+
     try {
       if (selectedMethod === 'upi') {
         await handlePayment(formDataToConfirm);
@@ -214,14 +209,14 @@ export default function CheckoutScreen() {
     );
 
     if (matchingCoupon) {
-      const {amount, discount_type} = matchingCoupon;
+      const { amount, discount_type } = matchingCoupon;
       const totalAmount = cartItems?.totals?.total_price / 100;
-      
+
       if (discount_type === 'percent') {
         const discountPercentage = amount / 100;
         const discountAmount = totalAmount * discountPercentage;
         const newTotalAmount = totalAmount - discountAmount;
-        console.log('newTotalAmount:', newTotalAmount);
+     
         setDiscountedTotalAmount(newTotalAmount);
         Alert.alert(
           'Coupon applied successfully',
@@ -260,42 +255,37 @@ export default function CheckoutScreen() {
               <Text>Email: {formDataToConfirm?.email}</Text>
 
               <Divider style={styles.modalDivider} />
-              
+
               <Text style={styles.modalSectionTitle}>Payment Details:</Text>
               <Text>Method: {selectedMethod}</Text>
               <Text>Total Amount: ₹{discountedTotalAmount}</Text>
               <Text>Coupon: {coupon_lines || 'No coupon applied'}</Text>
-
+              <Text>Shipping Charges: ₹{shippingcharges}</Text>
               {selectedMethod === 'upi' && (
                 <>
                   <Divider style={styles.modalDivider} />
                   <Text style={styles.modalSectionTitle}>UPI Payment Details:</Text>
                   <Text>Payment Gateway: Razorpay</Text>
                   <Text>Amount: ₹{discountedTotalAmount}</Text>
+                  <Text>Shipping Charges: ₹{shippingcharges}</Text>
+                  <Text>Sub Total Amount: ₹{discountedTotalAmount + shippingcharges}</Text>
                   {/* <Text>Amount in Paisa: {Math.round(discountedTotalAmount * 100)}</Text> */}
                 </>
               )}
 
               <View style={styles.modalButtonContainer}>
-                {/* <Button
+                <Button
                   mode="contained"
-                  onPress={() => setShowConfirmationModal(false)}
+                  onPress={() => {
+                    setShowConfirmationModal(false);
+                    navigation.navigate('CartStack', {
+                      screen: 'CartScreen',
+                    });
+                  }}
                   style={[styles.modalButton, styles.cancelButton]}
                 >
                   Edit Order
-                </Button> */}
-                <Button
-                mode="contained"
-                onPress={() => {
-                  setShowConfirmationModal(false);
-                  navigation.navigate('CartStack', {
-                    screen: 'CartScreen',
-                  });
-                }}
-                style={[styles.modalButton, styles.cancelButton]}
-              >
-                Edit Order
-              </Button>
+                </Button>
                 <Button
                   mode="contained"
                   onPress={confirmAndProcessOrder}
@@ -321,7 +311,7 @@ export default function CheckoutScreen() {
             onPress={() => setShowCouponInput(!showCouponInput)}>
             Do you have a coupon?
           </Text>
-          
+
           {showCouponInput && (
             <View style={styles.couponContainer}>
               <TextInput
@@ -570,7 +560,7 @@ const styles = StyleSheet.create({
     padding: 15,
     elevation: 5,
   },
- 
+
   modalSectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
