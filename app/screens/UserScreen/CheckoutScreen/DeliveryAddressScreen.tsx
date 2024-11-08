@@ -26,7 +26,7 @@ export default function DeliveryAddressScreen() {
           <TextInputController
             control={checkoutControl}
             name={'state'}
-            placeholder="State"
+            placeholder="State *"
             style={{margin: 8, backgroundColor: 'white'}}
             // errors={errors}
             keyboardType={'default'}
@@ -38,7 +38,7 @@ export default function DeliveryAddressScreen() {
           <TextInputController
             control={checkoutControl}
             name={'city'}
-            placeholder="Town / City"
+            placeholder="Town / City *"
             style={{margin: 8, backgroundColor: 'white'}}
             // errors={errors}
             keyboardType={'default'}
@@ -50,7 +50,7 @@ export default function DeliveryAddressScreen() {
           <TextInputController
             control={checkoutControl}
             name={'address_1'}
-            placeholder="Address line 1"
+            placeholder="Address line 1 *"
             style={{margin: 8, backgroundColor: 'white'}}
             // errors={errors}
             keyboardType={'default'}
@@ -72,7 +72,7 @@ export default function DeliveryAddressScreen() {
 
           <TextInputController
             control={checkoutControl}
-            name={'postcode'}
+            name={'postcode *'}
             placeholder="Zip / PinCode"
             style={{margin: 8, backgroundColor: 'white'}}
             keyboardType={'default'}

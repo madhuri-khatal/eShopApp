@@ -9,6 +9,7 @@ import { TextInputController } from '../../../components/ui/TextInput';
 import { useNavigation } from '@react-navigation/native';
 import { HeaderBar } from '../../../components/ui/HeaderBar';
 import { useProductContext } from '../../../context/ProductContext';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RazorpayCheckout from 'react-native-razorpay';
 import { RAZORPAY_KEY_ID } from '@env';
 
@@ -303,14 +304,32 @@ export default function CheckoutScreen() {
 
   return (
     <>
-      <HeaderBar title="" backAction={() => navigation.goBack()} icon1="menu" />
-      <ScrollView>
+      <HeaderBar title="Checkout" backAction={() => navigation.goBack()} icon1="menu" />
+        <View style={{height:300,backgroundColor:'#fcaa6f',padding:15,borderBottomRightRadius:80,borderBottomLeftRadius:80}}/> 
+      <ScrollView style={{marginTop:-270,padding:20,marginBottom:30}}>
         <View style={styles.container}>
-          <Text
+         
+         
+          {/* <Text
             style={styles.couponText}
             onPress={() => setShowCouponInput(!showCouponInput)}>
-            Do you have a coupon?
-          </Text>
+           Apply Coupon <MaterialCommunityIcons name="chevron-down-circle" color="#FC9114" size={28} />  
+          </Text> */}
+                  <TouchableOpacity
+        style={styles.button}
+        onPress={() => setShowCouponInput(!showCouponInput)}
+        activeOpacity={0.7}
+      >
+        <View style={styles.contentContainer}>
+          <Text style={styles.text}>Apply Coupon</Text>
+          <MaterialCommunityIcons
+            name={showCouponInput ? "chevron-up-circle" : "chevron-down-circle"}
+            color="#FC9114"
+            size={28}
+                      />
+        </View>
+      </TouchableOpacity>
+
 
           {showCouponInput && (
             <View style={styles.couponContainer}>
@@ -340,10 +359,10 @@ export default function CheckoutScreen() {
             <TextInputController
               control={checkoutControl}
               name="phone"
-              placeholder="Phone Number"
+              placeholder="Phone Number *"
               style={styles.input}
               keyboardType="numeric"
-              isRequiredValue
+              isRequiredValue            
               mode="outlined"
               defaultValue={billing?.phone}
             />
@@ -351,7 +370,7 @@ export default function CheckoutScreen() {
             <TextInputController
               control={checkoutControl}
               name="first_name"
-              placeholder="First Name"
+              placeholder="First Name *"
               style={styles.input}
               keyboardType="default"
               isRequiredValue
@@ -362,7 +381,7 @@ export default function CheckoutScreen() {
             <TextInputController
               control={checkoutControl}
               name="last_name"
-              placeholder="Last Name"
+              placeholder="Last Name *"
               style={styles.input}
               keyboardType="default"
               isRequiredValue
@@ -373,7 +392,7 @@ export default function CheckoutScreen() {
             <TextInputController
               control={checkoutControl}
               name="email"
-              placeholder="Email"
+              placeholder="Email *"
               style={styles.input}
               keyboardType="email-address"
               isRequiredValue
@@ -440,20 +459,43 @@ export default function CheckoutScreen() {
         </View>
       </ScrollView>
       <ConfirmationModal />
+     
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
+    // marginVertical: 20,
+    // zIndex:1,
+    // marginTop:-10,
     padding: 7,
     backgroundColor: '#ffffff',
+    borderRadius:40,
+    marginBottom:60
   },
   couponText: {
     fontSize: 18,
-    padding: 11,
-    color: '#00ff',
+    padding: 16,
+    color: '#FC9114',
+    fontWeight:'bold'
+  },
+  button: {
+    padding: 10,
+    borderRadius: 15,
+    backgroundColor: '#fff',
+    
+  },
+  contentContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 18,
+    color: '#FC9114',
+    fontWeight: '500',
+    marginRight: 8,
   },
   couponContainer: {
     marginBottom: 10,
@@ -480,7 +522,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     padding: 10,
-    color: '#333333',
+    color: '#FC9114',
   },
   formContainer: {
     padding: 8,
@@ -631,9 +673,9 @@ const styles = StyleSheet.create({
     color: '#333333',
   },
   // Additional container styles
-  contentContainer: {
-    paddingBottom: 20,
-  },
+  // contentContainer: {
+  //   paddingBottom: 20,
+  // },
   addressContainer: {
     marginTop: 10,
     marginBottom: 15,
