@@ -20,7 +20,7 @@ export default function CheckoutAsRole(props: any) {
                 justifyContent: 'center',
               }}
               mode="contained"
-              // onPress={() => navigation.navigate('CheckoutScreen')}
+              onPress={() => navigation.navigate('CheckoutScreen')}
               >
               <Text
                 style={{

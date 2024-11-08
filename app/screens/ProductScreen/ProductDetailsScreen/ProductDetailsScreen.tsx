@@ -35,6 +35,7 @@ export const ProductDetailsScreen = (props: any) => {
   const {productById} = useProductContext();
   const addCart = async () => {
     const id = productById?.variations[0];
+    console.log(id, quantity,"id, quantity")
     addToCart(id, quantity);
   };
   // CODE FOR REMOVE <P>DESCRIPTION</P> TAG
