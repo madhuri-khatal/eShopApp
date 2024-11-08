@@ -266,6 +266,7 @@ export default function ProductItem({product}: IProps) {
             <Image
               source={{uri: productImageSrc}}
               style={{height: 180, borderRadius: 10}}
+              alt={product?.image?.src}
             />
           )}
         </TouchableOpacity>
