@@ -77,6 +77,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
     setIsLoginLoading(true);
     try {
       const {result} = await OrderApi.Login(data);
+      console.log(result,"login result")
       if (result == undefined) {
         Alert.alert('Please Enter Valid Email and Password');
         setIsLogin(false);
