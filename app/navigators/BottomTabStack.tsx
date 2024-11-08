@@ -14,7 +14,7 @@ export default function BottomTabStack() {
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
-          }} 
+          }}
           initialRouteName="BottomTabStack">
           <Stack.Screen name="BottomTabStack" component={BottomTabNavigator} />
         </Stack.Navigator>
