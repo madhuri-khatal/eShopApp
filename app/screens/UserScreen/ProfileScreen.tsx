@@ -17,6 +17,8 @@ export default function ProfileScreen(props: any) {
     };
   });
   const userData = Login?.data?.data;
+  console.log(userData, 'userData');
+
   // Function to get initials from a string
   const getInitials = (name: string) => {
     if (!name) return '';

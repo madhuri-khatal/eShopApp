@@ -12,16 +12,18 @@ interface ICarousel {
 }
 
 const images = [
-  'https://shgeshop.com/wp-content/uploads/2024/10/homepage-banner-image1.jpg',
-  'https://shgeshop.com/wp-content/uploads/2024/10/homepage-banner-image3-shgeshop.jpg',
-  'https://shgeshop.com/wp-content/uploads/2024/10/homepage-banner-image2-shgeshop.jpg',
+  'https://kitintellect.tech/bmccompetition/banner-1.jpg_20241108064914',
+  'https://kitintellect.tech/bmccompetition/banner-2.jpg_20241108065525',
+  'https://kitintellect.tech/bmccompetition/banner-3.jpg_20241108065546',
+  'https://kitintellect.tech/bmccompetition/banner-4.jpg_20241108065626',
+  'https://kitintellect.tech/bmccompetition/banner-5.jpg_20241108065652',
 ];
 
 export const Caraousel = ({
   autoPlay = true,
   scrollAnimationDuration = 3000,
   width = Dimensions.get('screen').width,
-  height = Dimensions.get('screen').width / 2.8,
+  height = Dimensions.get('screen').width / 2.1,
   onSnapToItem,
 }: ICarousel) => {
   return (
@@ -33,7 +35,7 @@ export const Caraousel = ({
           style={{
             alignItems: 'center',
             justifyContent: 'center',
-            borderRadius: 15,
+            borderRadius: 10,
           }}
           width={width}
           height={height}
@@ -44,7 +46,7 @@ export const Caraousel = ({
             <Image
               key={index}
               source={{uri: item}}
-              style={{width, height, resizeMode: 'cover', borderRadius: 15}}
+              style={{width, height, resizeMode: 'cover', borderRadius: 10}}
             />
           )}
         />
@@ -52,8 +54,6 @@ export const Caraousel = ({
     </View>
   );
 };
-
-
 
 // import * as React from 'react';
 // import {Dimensions, Text, View} from 'react-native';
@@ -80,7 +80,7 @@ export const Caraousel = ({
 // }: ICarousel) => {
 //   return (
 //     <View style={{width: '100%', alignContent: 'center'}}>
-     
+
 //       <GestureHandlerRootView>
 //         <Carousel
 //           loop={true}
@@ -125,5 +125,3 @@ export const Caraousel = ({
 //   }}
 // /> */
 // }
-
-

@@ -16,9 +16,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import LocationScreen from '../LocationScreen/LocationScreen';
 
-
-
-
 interface LocationData {
   accuracy: number;
   altitude: number;
@@ -28,7 +25,7 @@ interface LocationData {
   provider: string;
   speed: number;
   time: number;
-  location:any;
+  location: any;
 }
 export default function HomeScreen({navigation}: any) {
   const _handleMore = () => navigation.dispatch(DrawerActions.toggleDrawer());
@@ -52,17 +49,17 @@ export default function HomeScreen({navigation}: any) {
   const whatsappSupport = async () => {
     await handleWhatsAppLink('7558566436');
   };
-//   GetLocation.getCurrentPosition({
-//     enableHighAccuracy: true,
-//     timeout: 60000,
-// })
-// .then(location => {
-//     console.log(location,"location");
-// })
-// .catch(error => {
-//     const { code, message } = error;
-//     console.warn(code, message);
-// })
+  //   GetLocation.getCurrentPosition({
+  //     enableHighAccuracy: true,
+  //     timeout: 60000,
+  // })
+  // .then(location => {
+  //     console.log(location,"location");
+  // })
+  // .catch(error => {
+  //     const { code, message } = error;
+  //     console.warn(code, message);
+  // })
   return (
     <>
       <ScrollView>
@@ -98,12 +95,11 @@ export default function HomeScreen({navigation}: any) {
         </Appbar.Header>
         {/* <LocationScreen /> */}
 
-       
         <View
           style={{
             flexDirection: 'row',
             alignItems: 'flex-start',
-            padding: 5,
+            // padding: 3,
             paddingRight: 15,
           }}>
           <MaterialCommunityIcons name="map-marker" color="#e95d2a" size={24} />
@@ -115,7 +111,7 @@ export default function HomeScreen({navigation}: any) {
           </Text>
         </View>
 
-        <ScrollView style={{margin: 5}}>
+        <ScrollView style={{marginTop: 2}}>
           <Caraousel
             autoPlay={true}
             // onSnapToItem={(i: number) => console.log()}
