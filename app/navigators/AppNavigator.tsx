@@ -18,7 +18,7 @@ import DrawerStackNavigator from './DrawerStackNavigator'; // Assuming this has 
 import AuthStackNavigator from './AuthStackNavigator';
 
 export default function AppNavigator({theme}: any) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Replace with actual auth logic
+  const [isAuthenticated, setIsAuthenticated] = useState(true); // Replace with actual auth logic
 
   return (
     <NavigationContainer theme={theme}>
