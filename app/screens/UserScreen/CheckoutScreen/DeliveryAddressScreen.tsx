@@ -17,7 +17,7 @@ export default function DeliveryAddressScreen() {
         <View>
           <TextInput
             placeholder={'India'}
-            style={{margin: 7}}
+            style={{margin: 8, backgroundColor: 'white', marginLeft:-10,width:900}}
             mode="outlined"
             defaultValue={'India'}
             disabled
@@ -27,7 +27,7 @@ export default function DeliveryAddressScreen() {
             control={checkoutControl}
             name={'state'}
             placeholder="State *"
-            style={{margin: 8, backgroundColor: 'white'}}
+            style={{margin: 8, backgroundColor: 'white', marginLeft:-10,width:900}}
             // errors={errors}
             keyboardType={'default'}
             isRequiredValue
@@ -39,8 +39,7 @@ export default function DeliveryAddressScreen() {
             control={checkoutControl}
             name={'city'}
             placeholder="Town / City *"
-            style={{margin: 8, backgroundColor: 'white'}}
-            // errors={errors}
+            style={{margin: 8, backgroundColor: 'white', marginLeft:-10,width:900}}     // errors={errors}
             keyboardType={'default'}
             isRequiredValue
             mode="outlined"
@@ -51,8 +50,7 @@ export default function DeliveryAddressScreen() {
             control={checkoutControl}
             name={'address_1'}
             placeholder="Address line 1 *"
-            style={{margin: 8, backgroundColor: 'white'}}
-            // errors={errors}
+            style={{margin: 8, backgroundColor: 'white', marginLeft:-10,width:900}}   // errors={errors}
             keyboardType={'default'}
             isRequiredValue
             mode="outlined"
@@ -63,8 +61,7 @@ export default function DeliveryAddressScreen() {
             control={checkoutControl}
             name={'address_2'}
             placeholder="Address line 2"
-            style={{margin: 8, backgroundColor: 'white'}}
-            keyboardType={'default'}
+            style={{margin: 8, backgroundColor: 'white', marginLeft:-10,width:900}}   keyboardType={'default'}
             isRequiredValue
             mode="outlined"
             // defaultValue={shipping?.address_2}
@@ -74,8 +71,7 @@ export default function DeliveryAddressScreen() {
             control={checkoutControl}
             name={'postcode *'}
             placeholder="Zip / PinCode"
-            style={{margin: 8, backgroundColor: 'white'}}
-            keyboardType={'default'}
+            style={{margin: 8, backgroundColor: 'white', marginLeft:-10,width:900}}    keyboardType={'default'}
             isRequiredValue
             mode="outlined"
             // defaultValue={shipping?.postcode}

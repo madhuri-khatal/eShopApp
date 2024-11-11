@@ -84,7 +84,7 @@ export const TextInputController = ({
             multiline={multiline}
             defaultValue={defaultValue}
             placeholder={placeholder}
-            label={label}
+                       label={label}
             numberOfLines={numberOfLines}
             onBlur={onBlur}
             onChangeText={value => onChange(value)}
