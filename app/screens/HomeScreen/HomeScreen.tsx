@@ -15,6 +15,7 @@ import {Linking} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; // Importing MaterialCommunityIcons
 
 import LocationScreen from '../LocationScreen/LocationScreen';
+import BrandCarousel from './BrandCarousel';
 
 interface LocationData {
   accuracy: number;
@@ -112,6 +113,7 @@ export default function HomeScreen({navigation}: any) {
         </View>
 
         <ScrollView style={{marginTop: 2}}>
+                 
           <Caraousel
             autoPlay={true}
             // onSnapToItem={(i: number) => console.log()}
@@ -133,6 +135,7 @@ export default function HomeScreen({navigation}: any) {
             Why SHG E Shop
           </Text> */}
           <HomeWhyUs />
+          <BrandCarousel/>
           <Footer />
         </ScrollView>
 
