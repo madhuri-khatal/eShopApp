@@ -42,7 +42,7 @@ const FeaturedCategories = () => {
                 onPress={() => handleCategoryPress(category?.id)}>
                                  <Image
                       source={{ uri: category?.image?.src? category?.image?.src:"" }}
-                      style={{height:70, width:70,borderRadius:50}}
+                      style={{height:90, width:90}}
                     />
                <Text style={{marginTop: 5, color: '#506574',fontWeight:"bold",textAlign:"center"}}>
                   {category.name}
@@ -60,7 +60,7 @@ const FeaturedCategories = () => {
               
                 <Image
                         source={{ uri: category?.image?.src? category?.image?.src:"" }}
-                        style={{height:70, width:70,borderRadius:50}}
+                        style={{height:90, width:90}}
                       />
                 <Text style={{marginTop: 5, color: '#506574',fontWeight:"bold",textAlign:"center"}}>
                   {category.name}

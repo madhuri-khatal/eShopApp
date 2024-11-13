@@ -100,13 +100,16 @@ export default function HomeScreen({navigation}: any) {
           style={{
             flexDirection: 'row',
             alignItems: 'flex-start',
-            // padding: 3,
+            // padding: 4,
+            // margin:10
             paddingRight: 15,
+            marginBottom:10,
+              // backgroundColor:'#F2F2F2'
           }}>
-          <MaterialCommunityIcons name="map-marker" color="#e95d2a" size={24} />
-          <Text style={{color: '#506574', fontSize: 16, marginLeft: 5}}>
-            <Text style={{color: '#a0a1a7', fontSize: 16, marginLeft: 5}}>
-              Deliver to :
+          <MaterialCommunityIcons name="map-marker" color="#e95d2a" size={40} />
+          <Text style={{color: '#a0a1a7', fontSize: 19, marginLeft: 5}}>
+            <Text style={{color: '#506574', fontSize: 18, marginLeft: 5,fontWeight:'bold'}}>
+             Your Location : 
             </Text>{' '}
             {deliveryAddress}
           </Text>
