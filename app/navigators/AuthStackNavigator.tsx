@@ -6,12 +6,15 @@ import HomeStackScreen from './HomeStackScreen';
 
 const AuthStack = createStackNavigator();
 
-export default function AuthStackNavigator() {
+export default function AuthStackNavigator({ setIsAuthenticated }:any) {
   return (
     <AuthStack.Navigator screenOptions={{headerShown: false}}>
-      <AuthStack.Screen name="LoginScreen" component={LoginScreen} />
+      <AuthStack.Screen name="LoginScreen" > 
+           {(props:any) => <LoginScreen {...props} setIsAuthenticated={setIsAuthenticated} />}
+           </AuthStack.Screen>
       <AuthStack.Screen name="SignupScreen" component={SignupScreen} />
      
     </AuthStack.Navigator>
   );
 }
+ {/* <AuthStack.Screen name="LoginScreen" component={LoginScreen} /> */}
