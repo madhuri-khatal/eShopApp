@@ -17,19 +17,22 @@ interface BrandLogo {
   name: string;
   imageUrl: string;
   backgroundColor: string;
+  alt:string;
 }
 
 const BrandCarousel = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
   const brands: BrandLogo[] = [
-    { id: 1, name: "Umed", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxCwor662eBdJBDBfGMVkwfI7bwbJhPHFvEA&s", backgroundColor: '#ffffff' },
-    { id: 2, name: "Muktai", imageUrl: "https://yt3.googleusercontent.com/7ttQ9TPfdU640l244KfGxNSINhwSPGB4K8gr5IoG8THTsAx_oozJxYPjIWtMc-uRkUrS5VEr=s900-c-k-c0x00ffffff-no-rj", backgroundColor: '#ffffff' },
-    { id: 3, name: "BMC", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/BMC_MUMBAI_LOGO.png/640px-BMC_MUMBAI_LOGO.png", backgroundColor: '#ffffff' },
-    { id: 4, name: "Symbiosis", imageUrl: "https://e7.pngegg.com/pngimages/338/388/png-clipart-symbiosis-law-school-symbiosis-institute-of-business-management-savitribai-phule-pune-university-fergusson-college-university-miscellaneous-text.png", backgroundColor: '#ffffff' },
-    { id: 5, name: "Mavim", imageUrl: "https://media.licdn.com/dms/image/v2/C510BAQHHXz3fiugHbA/company-logo_200_200/company-logo_200_200/0/1630587221309?e=2147483647&v=beta&t=XkpFbQYCGYKDJOw87ov6f1T_aw9dyANwXXQ7mUhv1TA", backgroundColor: '#ffffff' },
-    { id: 6, name: "BGMF", imageUrl: "https://lessonresearch.net/wp-content/uploads/2018/08/bill-melinda-gates-foundation-logo-png-transparent.png", backgroundColor: '#ffffff' },
-    { id: 7, name: "M&S", imageUrl: "https://shgeshop.com/wp-content/uploads/2024/09/marksandspencer.jpg", backgroundColor: '#ffffff' },
+    { id: 1, name: "Umed", alt:"UmedLogo",imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxCwor662eBdJBDBfGMVkwfI7bwbJhPHFvEA&s", backgroundColor: '#ffffff' },
+    { id: 2, name: "Muktai",alt:"Muktai Logo", imageUrl: "https://yt3.googleusercontent.com/7ttQ9TPfdU640l244KfGxNSINhwSPGB4K8gr5IoG8THTsAx_oozJxYPjIWtMc-uRkUrS5VEr=s900-c-k-c0x00ffffff-no-rj", backgroundColor: '#ffffff' },
+    { id: 3, name: "BMC", alt:"BMC Logo", imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/BMC_MUMBAI_LOGO.png/640px-BMC_MUMBAI_LOGO.png", backgroundColor: '#ffffff' },
+    { id: 4, name: "Symbiosis",alt:"SymbiosisLogo", imageUrl: "https://shgeshop.com/wp-content/uploads/2024/06/1.png", backgroundColor: '#ffffff' },
+    { id: 5, name: "Mavim", alt:"MAvimLogo",imageUrl: "https://media.licdn.com/dms/image/v2/C510BAQHHXz3fiugHbA/company-logo_200_200/company-logo_200_200/0/1630587221309?e=2147483647&v=beta&t=XkpFbQYCGYKDJOw87ov6f1T_aw9dyANwXXQ7mUhv1TA", backgroundColor: '#ffffff' },
+    { id: 6, name: "BGMF", alt:"BFMFLogo",imageUrl: "https://lessonresearch.net/wp-content/uploads/2018/08/bill-melinda-gates-foundation-logo-png-transparent.png", backgroundColor: '#ffffff' },
+    { id: 7, name: "M&S", alt:"M&SLogo",imageUrl: "https://shgeshop.com/wp-content/uploads/2024/09/marksandspencer.jpg", backgroundColor: '#ffffff' },
+    { id: 8, name: "DHL", alt:"DHLLogo",imageUrl: "https://shgbazaar.com/cdn/shop/files/dhl_medium.png?v=1731403828", backgroundColor: '#ffffff' },
+    { id: 9, name: "HDFC", alt:"HDFCLogo",imageUrl: "https://shgbazaar.com/cdn/shop/files/hdfc_medium.png?v=1731404017", backgroundColor: '#ffffff' },
   ];
 
   // Calculate total width for animation
@@ -86,6 +89,7 @@ const BrandCarousel = () => {
           >
             <Image
               source={{ uri: brand.imageUrl }}
+              alt={brand.alt}
               style={styles.brandLogo}
               resizeMode="contain"
             />
