@@ -104,7 +104,7 @@ const BrandCarousel = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.title}>Trusted by Leading Brands</Text>
+          <Text style={styles.title}>Trusted By Leading Brands</Text>
         </View>
 
         <View style={styles.carouselContainer}>
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     // color: '#262626',
     color:'#5C5C5C',
-    marginBottom: 8,
+    // marginBottom: 8,
   },
   name: {
     fontSize: 14,
