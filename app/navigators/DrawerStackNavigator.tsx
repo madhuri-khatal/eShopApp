@@ -6,7 +6,7 @@ import OrderStackScreen from './OrderStackScreen';
 import BottomTabStack from './BottomTabStack';
 
 const Drawer = createDrawerNavigator();
-export default function DrawerStackNavigator() {
+export default function DrawerStackNavigator(onLogout:any) {
   const {colors} = useTheme();
   return (
     <Drawer.Navigator
