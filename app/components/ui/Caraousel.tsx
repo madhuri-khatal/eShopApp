@@ -12,18 +12,22 @@ interface ICarousel {
 }
 
 const images = [
-  'https://kitintellect.tech/bmccompetition/banner-1.jpg_20241108064914',
-  'https://kitintellect.tech/bmccompetition/banner-2.jpg_20241108065525',
-  'https://kitintellect.tech/bmccompetition/banner-3.jpg_20241108065546',
-  'https://kitintellect.tech/bmccompetition/banner-4.jpg_20241108065626',
-  'https://kitintellect.tech/bmccompetition/banner-5.jpg_20241108065652',
+  'https://kitintellect.tech/bmccompetition/banner%20img%20ES-2.1.jpg_20241121074722',
+    'https://kitintellect.tech/bmccompetition/banner%20img%20ES-1.jpg_20241121075034',
+    'https://kitintellect.tech/bmccompetition/banner%20img%20ES-3.jpg_20241121075101',
+ 
+  // 'https://kitintellect.tech/bmccompetition/banner-1.jpg_20241108064914',
+  // 'https://kitintellect.tech/bmccompetition/banner-2.jpg_20241108065525',
+  // 'https://kitintellect.tech/bmccompetition/banner-3.jpg_20241108065546',
+  // 'https://kitintellect.tech/bmccompetition/banner-4.jpg_20241108065626',
+  // 'https://kitintellect.tech/bmccompetition/banner-5.jpg_20241108065652',
 ];
 
 export const Caraousel = ({
   autoPlay = true,
   scrollAnimationDuration = 3000,
   width = Dimensions.get('screen').width,
-  height = Dimensions.get('screen').width / 2,
+  height = Dimensions.get('screen').width / 1.6,
   onSnapToItem,
 }: ICarousel) => {
   return (
