@@ -16,7 +16,7 @@ const FeaturedCategories = () => {
     .filter(category => category.name !== "Home decor")
     .filter(category => category.name !== "Egg Curry Masala")
     .map(category => {
-      if (category.name === "Daily Household Needs") return { ...category, name: "Household Needs" };
+      if (category.name === "Daily Household Needs") return { ...category, name: "Household" };
       // if (category.name === "Egg Curry Masala") return { ...category, name: "Masala" };
       if (category.name === "Bags and Luggage") return { ...category, name: "Bags" };
       if (category.name === "Home Decor and Improve") return { ...category, name: "Home Decor" };

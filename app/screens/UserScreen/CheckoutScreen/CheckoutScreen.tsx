@@ -1147,7 +1147,7 @@ export default function CheckoutScreen() {
           padding:15}}/>  */}
        
       <ImageBackground
-      source={require('../../../../assets/image/checkoutbg.jpg')} // Replace with your image path
+      source={require('../../../../assets/image/login.jpg')} // Replace with your image path
       style={styles.background}
       // resizeMode="cover" // Adjust the image to cover the whole screen
     >
