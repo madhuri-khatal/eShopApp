@@ -54,10 +54,14 @@ console.log(data,"data");
       resizeMode="cover"
     >
       <View style={styles.container}>
+        {/* <View style={styles.subcontainer}> */}
+
+        
         <TextInput
           style={styles.input}
           placeholder="username"
-          placeholderTextColor="#ccc"
+          // placeholderTextColor="#ccc"
+             placeholderTextColor="#A49794"
           keyboardType="default"
           value={username}
           onChangeText={setUsername}
@@ -65,7 +69,8 @@ console.log(data,"data");
         <TextInput
           style={styles.input}
           placeholder="password"
-          placeholderTextColor="#ccc"
+          // placeholderTextColor="#ccc"
+             placeholderTextColor="#A49794"
           secureTextEntry
           value={password}
           onChangeText={setPassword}
@@ -74,17 +79,19 @@ console.log(data,"data");
         <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
-
+        {/* </View> */}
         <TouchableOpacity
           style={styles.signupContainer}
           onPress={() => navigation.navigate('SignupScreen')}
         >
+          
           <Text style={styles.signupText}>
             Don’t have an account? <Text style={styles.signupLink}>Sign Up</Text>
           </Text>
         </TouchableOpacity>
+       
       </View>
-    </ImageBackground>
+     </ImageBackground>
   );
 }
 
@@ -93,6 +100,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  // subcontainer:{
+  //   backgroundColor:'#ccc',
+  //       width:400,
+  //   padding:20,
+  //   height:400,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   borderRadius:50
+  // },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -114,8 +130,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '90%',
     borderRadius: 8,
-    position: 'absolute',
-    bottom: 120,
+    position:'relative',
+    bottom: -20,
   },
   loginButtonText: {
     color: 'black',
@@ -123,7 +139,7 @@ const styles = StyleSheet.create({
   },
   signupContainer: {
     position: 'absolute',
-    bottom: 40,
+    bottom: 100,
   },
   signupText: {
     color: '#fff',
