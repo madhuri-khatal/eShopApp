@@ -12,18 +12,21 @@ export default function DrawerStackNavigator({onLogout}: any) {
 
   // Custom Drawer Content to Add Logout Option
   const CustomDrawerContent = (props: any) => (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...props} style={{backgroundColor:'white'}}>
       <DrawerItem
         label="Home"
         onPress={() => props.navigation.navigate('BottomTab')}
+        // style={{backgroundColor:'#e95d2a'}}
       />
       <DrawerItem
         label="Product"
         onPress={() => props.navigation.navigate('Profile')}
+        // style={{backgroundColor:'#e95d2a'}}
       />
       <DrawerItem
         label="My Order"
         onPress={() => props.navigation.navigate('OrderStack')}
+        // style={{backgroundColor:'#e95d2a'}}
       />
       <DrawerItem
         label="Logout"
@@ -31,6 +34,7 @@ export default function DrawerStackNavigator({onLogout}: any) {
           onLogout(); // Call the logout function
           props.navigation.navigate('Auth'); // Navigate to the login screen
         }}
+        // style={{backgroundColor:'#e95d2a'}}
       />
     </DrawerContentScrollView>
   );
