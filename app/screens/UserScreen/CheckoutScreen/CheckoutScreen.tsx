@@ -83,7 +83,8 @@ export default function CheckoutScreen() {
           contact: formData.phone || '',
           name: customerName || 'Customer',
         },
-        theme: { color: '#53a20e' },
+        theme:{color:'#e95d2a'},
+        // theme: { color: '#53a20e' },
         // retry: {
         //   enabled: true,
         //   max_count: 1,
