@@ -88,8 +88,18 @@ export default function ListOFProducts() {
   const {productByCategoryId, isLoading, fetchMoreData, refThreshold} =
     useProductContext();
   const Product = [
+    'Papiha Earring Hand Made(Bird shape)',
     'Laptop Sleeve Bag',
-    'Resin Art Pooja Thali',
+    'Cowdung Diwali Decor - Rangoli',
+    'Flower Pattern Rangoli',
+    'Resin Alphabet Initial Letter Keychain',
+    'Solar Dried Red Gram',
+    'Kamal Hangings Latkans Wall Decor',
+    'Kitchen King Masala',
+    'Handcraft Laptop Bag',
+    'Jeera Powder',
+    'Orange Butterfly Print Tote Bag With Pocket',
+    // 'Resin Art Pooja Thali',
     'Masala Banana Chips',
     'Pudina Banana Chips',
     'Tomato Banana Chips',
@@ -107,7 +117,7 @@ export default function ListOFProducts() {
   const filteredData = productByCategoryId.filter(item =>
     Product.includes(item.name),
   );
-
+ console.log(productByCategoryId,"filteredData");
   return (
     <>
       <Text
