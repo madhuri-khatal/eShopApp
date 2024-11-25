@@ -88,6 +88,8 @@ export default function ListOFProducts() {
   const {productByCategoryId, isLoading, fetchMoreData, refThreshold} =
     useProductContext();
   const Product = [
+    'Eco Friendly Corporate Gift',
+    'Kids Study table Decor - Ganesha',
     'Papiha Earring Hand Made(Bird shape)',
     'Laptop Sleeve Bag',
     'Cowdung Diwali Decor - Rangoli',
@@ -99,7 +101,7 @@ export default function ListOFProducts() {
     'Handcraft Laptop Bag',
     'Jeera Powder',
     'Orange Butterfly Print Tote Bag With Pocket',
-    // 'Resin Art Pooja Thali',
+    'Resin Art Pooja Thali',
     'Masala Banana Chips',
     'Pudina Banana Chips',
     'Tomato Banana Chips',
@@ -117,7 +119,7 @@ export default function ListOFProducts() {
   const filteredData = productByCategoryId.filter(item =>
     Product.includes(item.name),
   );
- console.log(productByCategoryId,"filteredData");
+//  console.log(productByCategoryId,"filteredData");
   return (
     <>
       <Text
