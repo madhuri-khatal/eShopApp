@@ -80,7 +80,7 @@ export default function ProductItem({product}: IProps) {
   };
 
   return (
-    <View style={{padding: 1, width: '50%', paddingHorizontal: 5}}>
+    <View style={{padding: 10, width: '50%', paddingHorizontal: 5}}>
       <View
         style={{
           backgroundColor: '#ffffff',
