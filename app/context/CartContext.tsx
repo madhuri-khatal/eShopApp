@@ -103,6 +103,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
       id: variation,
       quantity: quantity,
     });
+    console.log(result,"result");
     if (result == undefined) {
       Alert.alert('please select weight first');
     } else {

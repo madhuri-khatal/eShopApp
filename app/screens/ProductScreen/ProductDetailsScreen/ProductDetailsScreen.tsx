@@ -1,4 +1,4 @@
-import {Dimensions, TouchableOpacity, View} from 'react-native';
+import {Alert, Dimensions, TouchableOpacity, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Text, Button} from 'react-native-paper';
 import {HeaderBar} from '../../../components/ui/HeaderBar';
@@ -26,6 +26,7 @@ export const ProductDetailsScreen = (props: any) => {
     setIndex(index);
   };
   const {addToCart, quantity, price, cartItems, getCartList} = useCartContext();
+  // console.log(quantity,"quantity")
   useEffect(() => {
     (async () => {
       await getCartList();
@@ -33,11 +34,31 @@ export const ProductDetailsScreen = (props: any) => {
   }, []);
   const badgeCount = cartItems?.items.length || 0;
   const {productById} = useProductContext();
+  // const addCart = async () => {
+  //   const id = productById?.variations[0];
+  //   console.log(id, quantity,"id, quantity")
+  //   // addToCart(id, quantity);
+  //   addToCart(id, quantity ? quantity : 1);
+  // };
   const addCart = async () => {
-    const id = productById?.variations[0];
-    console.log(id, quantity,"id, quantity")
-    addToCart(id, quantity);
+    try {
+      const id = productById?.id?productById?.id:productById?.variations?.[0] ; // Use product ID if variations are unavailable
+      const finalQuantity = quantity || 1; // Default to 1 if quantity is undefined
+  console.log("id",id)
+      if (!id) {
+        Alert.alert("Product ID or variation is missing.");
+        return;
+      }
+  
+      console.log("Adding to cart:", id, finalQuantity);
+  
+      await addToCart(id, finalQuantity);
+    } catch (error) {
+      // console.error("Error adding to cart:", error.message);
+      Alert.alert("Failed to add product to the cart. Please try again.");
+    }
   };
+  
   // CODE FOR REMOVE <P>DESCRIPTION</P> TAG
   const [descriptionText, setDescriptionText] = useState<string>('');
   const [shortDescriptionText, setShortDescriptionText] = useState<string>('');
