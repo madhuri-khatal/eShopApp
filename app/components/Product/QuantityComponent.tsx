@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     overflow: 'hidden',
     width: 110,
+    
   },
   quantityButton: {
     flex: 1,

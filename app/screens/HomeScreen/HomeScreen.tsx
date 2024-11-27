@@ -16,6 +16,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import LocationScreen from '../LocationScreen/LocationScreen';
 import BrandCarousel from './BrandCarousel';
+import Usp from './Usp';
 
 interface LocationData {
   accuracy: number;
@@ -122,6 +123,7 @@ export default function HomeScreen({navigation}: any) {
             // onSnapToItem={(i: number) => console.log()}
           />
           <FeaturedCategories />
+          <Usp/>
           <View style={{paddingVertical: 10}}>
             <CouponList />
           </View>

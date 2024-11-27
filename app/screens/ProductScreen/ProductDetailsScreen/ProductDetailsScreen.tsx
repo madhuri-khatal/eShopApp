@@ -62,6 +62,7 @@ export const ProductDetailsScreen = (props: any) => {
   // CODE FOR REMOVE <P>DESCRIPTION</P> TAG
   const [descriptionText, setDescriptionText] = useState<string>('');
   const [shortDescriptionText, setShortDescriptionText] = useState<string>('');
+  
   useEffect(() => {
     if (productById?.description || productById?.short_description) {
       setDescriptionText(productById.description);
@@ -83,12 +84,13 @@ export const ProductDetailsScreen = (props: any) => {
   if (prices.length === 2) {
     const firstPrice = prices[0];
     const secondPrice = prices[1];
-  } else {
-    console.log('Prices not found');
-  }
+  } 
+  // else {
+  //   console.log('Prices not found');
+  // }
   const firstPrice = prices[0];
   const secondPrice = prices[1];
-
+ 
   const handleWhatsAppLink = (
     id: number | string,
     message: string = '',
@@ -105,6 +107,7 @@ export const ProductDetailsScreen = (props: any) => {
     const defaultMessage = ` ${productById?.permalink} \n \n ${productById?.name}`;
     await handleWhatsAppLink('', defaultMessage, imageSrc);
   };
+  
   return (
     <>
       <HeaderBar
@@ -234,6 +237,7 @@ export const ProductDetailsScreen = (props: any) => {
               paddingLeft: 10,
               textTransform: 'capitalize',
               color: '#506574',
+              // marginTop:-90
             }}>
             {productById?.name}
           </Text>
@@ -242,7 +246,8 @@ export const ProductDetailsScreen = (props: any) => {
             <View style={{flex: 1}}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <View style={{flex: 8}}>
-                  <Text
+                  
+                  {/* <Text
                     style={{
                       fontSize: 20,
                       marginLeft: 15,
@@ -250,7 +255,19 @@ export const ProductDetailsScreen = (props: any) => {
                       marginVertical: 5,
                     }}>
                     ₹ {firstPrice} - ₹ {secondPrice}
-                  </Text>
+                  </Text> */}
+                  {firstPrice !== undefined && secondPrice !== undefined ? (
+  <Text
+    style={{
+      fontSize: 20,
+      marginLeft: 15,
+      color: '#b1b1b1',
+      marginVertical: 5,
+    }}>
+    ₹ {firstPrice} - ₹ {secondPrice}
+  </Text>
+) : null}
+
                   <Text
                     style={{
                       fontSize: 24,
@@ -286,7 +303,7 @@ export const ProductDetailsScreen = (props: any) => {
           <Text
             style={{
               fontSize: 20,
-              paddingLeft: 15,
+              paddingLeft: 10,
               fontWeight: 'bold',
               textAlign: 'justify',
               color: '#506574',
@@ -337,7 +354,18 @@ const styles = {
   p: {
     fontSize: 16,
     margin: 8,
+    
     textAlign: 'justify',
     color: '#506574',
   },
+  ul:{
+    marginTop:-80,  
+    margin: 8,
+    
+    textAlign: 'justify',},
+    strong:{color:'#212121',fontsize:20},
+    li:{
+      color:'#8E91A4',
+      fontweight:'bold'
+    }
 };

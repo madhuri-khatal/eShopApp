@@ -116,6 +116,7 @@ export const CartContextProvider = ({children}: CartContextType) => {
       getCartList();
     }
   }
+  
   // CART ITEM LIST
   const getCartList = async () => {
     const {
